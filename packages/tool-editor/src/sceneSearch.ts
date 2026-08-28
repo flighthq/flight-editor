@@ -46,6 +46,27 @@ export function countMatchingNodes(scene: Readonly<Scene2D>, criteria: Readonly<
   return findNodes(scene, criteria).length;
 }
 
+export function findNodeByPath(scene: Readonly<Scene2D>, path: string): Node2D | null {
+  const segments = path.split('/');
+  let current: Node2D = scene.root;
+
+  for (const segment of segments) {
+    const childCount = getNodeChildCount(current);
+    let found: Node2D | null = null;
+    for (let i = 0; i < childCount; i++) {
+      const child = getNodeChildAt(current, i) as Node2D | null;
+      if (child && child.name === segment) {
+        found = child;
+        break;
+      }
+    }
+    if (!found) return null;
+    current = found;
+  }
+
+  return current;
+}
+
 export function findNodesByName(scene: Readonly<Scene2D>, name: string): Node2D[] {
   return findNodes(scene, { name });
 }

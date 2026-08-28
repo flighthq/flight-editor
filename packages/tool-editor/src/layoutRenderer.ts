@@ -4,7 +4,7 @@ import type { LayoutConfig, LayoutRegion } from './editorLayout';
 
 import { createEditorLayoutDef, getLayoutRegions } from './editorLayout';
 import { buildScene } from './sceneBuilder';
-import { findNodeByPath } from './sceneSerializer';
+import { findNodeByPath } from './sceneSearch';
 
 export interface LayoutScene {
   readonly scene: Scene2D;

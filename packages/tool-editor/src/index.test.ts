@@ -44,6 +44,7 @@ import {
   getLayoutRegions,
   findNodes,
   findFirstNode,
+  findNodeByPath,
   countMatchingNodes,
   createLayoutScene,
   getLayoutNode,
@@ -156,6 +157,7 @@ describe('tool-editor', () => {
   it('exports scene search utilities', () => {
     expect(findNodes).toBeTypeOf('function');
     expect(findFirstNode).toBeTypeOf('function');
+    expect(findNodeByPath).toBeTypeOf('function');
     expect(countMatchingNodes).toBeTypeOf('function');
   });
 

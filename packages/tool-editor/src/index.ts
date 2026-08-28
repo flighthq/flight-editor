@@ -356,7 +356,7 @@ export {
 export { expandBounds, getSceneBounds, getSelectionBounds, isNodeInBounds } from './boundsUtils';
 export { buildNode, buildScene, countNodes } from './sceneBuilder';
 export { createEditorLayoutDef, getLayoutRegion, getLayoutRegions } from './editorLayout';
-export { countMatchingNodes, findFirstNode, findNodes } from './sceneSearch';
+export { countMatchingNodes, findFirstNode, findNodeByPath, findNodes } from './sceneSearch';
 export {
   createLayoutScene,
   getLayoutChildNode,

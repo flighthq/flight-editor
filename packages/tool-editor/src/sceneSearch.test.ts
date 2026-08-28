@@ -2,7 +2,14 @@ import { DisplayObjectKind, SpriteKind } from '@flighthq/types';
 import { describe, expect, it } from 'vitest';
 
 import { buildScene } from './sceneBuilder';
-import { countMatchingNodes, findFirstNode, findNodes, findNodesByKind, findNodesByName } from './sceneSearch';
+import {
+  countMatchingNodes,
+  findFirstNode,
+  findNodeByPath,
+  findNodes,
+  findNodesByKind,
+  findNodesByName,
+} from './sceneSearch';
 
 function testScene() {
   return buildScene({
@@ -115,6 +122,32 @@ describe('countMatchingNodes', () => {
   it('returns 0 for no matches', () => {
     const scene = testScene();
     expect(countMatchingNodes(scene, { name: 'nope' })).toBe(0);
+  });
+});
+
+describe('findNodeByPath', () => {
+  it('finds a direct child by name', () => {
+    const scene = testScene();
+    const node = findNodeByPath(scene, 'menuBar');
+    expect(node).not.toBeNull();
+    expect(node!.name).toBe('menuBar');
+  });
+
+  it('finds a nested node by path', () => {
+    const scene = testScene();
+    const node = findNodeByPath(scene, 'content/sidebar/tree');
+    expect(node).not.toBeNull();
+    expect(node!.name).toBe('tree');
+  });
+
+  it('returns null for missing path', () => {
+    const scene = testScene();
+    expect(findNodeByPath(scene, 'missing/path')).toBeNull();
+  });
+
+  it('returns null for partial path match', () => {
+    const scene = testScene();
+    expect(findNodeByPath(scene, 'content/missing')).toBeNull();
   });
 });
 
