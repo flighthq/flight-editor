@@ -75,6 +75,10 @@ import {
   getApplicationEditorState,
   getApplicationLayout,
   getApplicationTheme,
+  cloneNode,
+  deepCloneNode,
+  cloneNodeWithOffset,
+  cloneNodes,
   executeNamedCommand,
   deserializeScene,
   getSerializerFormats,
@@ -201,5 +205,12 @@ describe('tool-editor', () => {
     expect(getApplicationEditorState).toBeTypeOf('function');
     expect(getApplicationLayout).toBeTypeOf('function');
     expect(getApplicationTheme).toBeTypeOf('function');
+  });
+
+  it('exports node clone utilities', () => {
+    expect(cloneNode).toBeTypeOf('function');
+    expect(deepCloneNode).toBeTypeOf('function');
+    expect(cloneNodeWithOffset).toBeTypeOf('function');
+    expect(cloneNodes).toBeTypeOf('function');
   });
 });

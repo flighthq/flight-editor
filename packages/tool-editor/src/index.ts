@@ -390,6 +390,7 @@ export {
   getApplicationLayout,
   getApplicationTheme,
 } from './editorApplication';
+export { cloneNode, cloneNodeWithOffset, cloneNodes, deepCloneNode } from './nodeClone';
 export { sceneToScreen, sceneToScreenDistance, screenToScene, screenToSceneDistance } from './coordinateUtils';
 export {
   filterUnlockedNodes,
