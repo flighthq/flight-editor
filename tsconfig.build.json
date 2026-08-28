@@ -17,6 +17,7 @@
     { "path": "./packages/editor-node-factory" },
     { "path": "./packages/editor-panel" },
     { "path": "./packages/editor-page" },
+    { "path": "./packages/editor-preferences" },
     { "path": "./packages/editor-rulers" },
     { "path": "./packages/editor-scene-state" },
     { "path": "./packages/editor-snap" },
