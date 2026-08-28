@@ -93,6 +93,7 @@ export {
   getSelectedNodes,
   isAncestorSelected,
 } from './selectionQueries';
+export { formatWindowTitle, updateWindowTitle } from './windowTitle';
 export {
   composeTransform,
   decomposeTransform,
@@ -137,3 +138,4 @@ export type { BoundsRectangle } from './boundsUtils';
 export type { CoordinatePoint } from './coordinateUtils';
 export type { GuideSnapResult, SnapPoint } from './snapUtils';
 export type { DecomposedTransform, TransformPoint } from './transformUtils';
+export type { WindowTitleOptions } from './windowTitle';
