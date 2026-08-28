@@ -11,6 +11,7 @@
     { "path": "./packages/editor-file" },
     { "path": "./packages/editor-guides" },
     { "path": "./packages/editor-history-state" },
+    { "path": "./packages/editor-host" },
     { "path": "./packages/editor-lock" },
     { "path": "./packages/editor-menu" },
     { "path": "./packages/editor-selection" },

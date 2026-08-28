@@ -52,6 +52,8 @@
       "@flighthq/editor-clipboard/*": ["./packages/editor-clipboard/src/*"],
       "@flighthq/editor-hierarchy": ["./packages/editor-hierarchy/src/index.ts"],
       "@flighthq/editor-hierarchy/*": ["./packages/editor-hierarchy/src/*"],
+      "@flighthq/editor-host": ["./packages/editor-host/src/index.ts"],
+      "@flighthq/editor-host/*": ["./packages/editor-host/src/*"],
       "@flighthq/editor-history-state": ["./packages/editor-history-state/src/index.ts"],
       "@flighthq/editor-history-state/*": ["./packages/editor-history-state/src/*"],
       "@flighthq/editor-keyboard": ["./packages/editor-keyboard/src/index.ts"],

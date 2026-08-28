@@ -42,6 +42,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-file` — file state: current file path, recent files, dirty tracking, save state
 - `editor-guides` — guide state: horizontal/vertical ruler guides with add/remove/lock/move and snap positions
 - `editor-hierarchy` — hierarchy tree state: expand/collapse tracking, flattened visible rows for tree views
+- `editor-host` — host adapter interface: abstract contract between editor core and GUI embedding layer
 - `editor-history-state` — user-facing history panel checkpoints: labeled snapshot data, browsing, removal, version tracking
 - `editor-keyboard` — keyboard shortcut registry: action bindings, modifier matching, version tracking
 - `editor-lock` — lock state: tracks which nodes are locked to prevent editing
