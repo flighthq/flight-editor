@@ -14,10 +14,12 @@ export { createDuplicateSelectionCommand } from './commands/duplicateSelectionCo
 export { createDistributeNodesCommand } from './commands/distributeNodesCommand';
 export { createGroupNodesCommand } from './commands/groupNodesCommand';
 export { createLockSelectionCommand } from './commands/lockSelectionCommand';
+export { createMoveToPageCommand } from './commands/moveToPageCommand';
 export { createPasteNodesCommand } from './commands/pasteNodesCommand';
 export { createRemoveNodeCommand } from './commands/removeNodeCommand';
 export { createResetTransformCommand } from './commands/resetTransformCommand';
 export { createReparentNodeCommand } from './commands/reparentNodeCommand';
+export { createReorderNodesCommand } from './commands/reorderNodesCommand';
 export { createUngroupNodesCommand } from './commands/ungroupNodesCommand';
 export { createSetNodeNameCommand } from './commands/setNodeNameCommand';
 export { createSetNodeSizeCommand } from './commands/setNodeSizeCommand';
@@ -30,6 +32,7 @@ export { createSetSceneColorCommand } from './commands/setSceneColorCommand';
 export { createSetSceneNameCommand } from './commands/setSceneNameCommand';
 export { createSetSceneSizeCommand } from './commands/setSceneSizeCommand';
 export { createSetTransform2DCommand } from './commands/setTransform2DCommand';
+export { createFromShapeCommand } from './commands/createFromShapeCommand';
 export {
   createBringForwardCommand,
   createBringToFrontCommand,

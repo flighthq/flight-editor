@@ -11,6 +11,7 @@ import {
   createFlipNodeCommand,
   createDistributeNodesCommand,
   createLockSelectionCommand,
+  createMoveToPageCommand,
   createMarqueeTool,
   createPasteNodesCommand,
   createSendBackwardCommand,
@@ -32,6 +33,8 @@ import {
   getSelectedNodes,
   registerDefaultNodeKinds,
   createResetTransformCommand,
+  createReorderNodesCommand,
+  createFromShapeCommand,
 } from './index';
 
 describe('tool-editor', () => {
@@ -59,6 +62,9 @@ describe('tool-editor', () => {
     expect(createSetColorAdjustmentCommand).toBeTypeOf('function');
     expect(createResetTransformCommand).toBeTypeOf('function');
     expect(createSetNodeSizeCommand).toBeTypeOf('function');
+    expect(createMoveToPageCommand).toBeTypeOf('function');
+    expect(createFromShapeCommand).toBeTypeOf('function');
+    expect(createReorderNodesCommand).toBeTypeOf('function');
   });
 
   it('exports coordinate, node-query, and bounds utilities', () => {
