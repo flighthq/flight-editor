@@ -56,6 +56,7 @@ export { getDefaultMenuCount, registerDefaultMenus } from './defaultMenus';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
 export { executeNamedCommand, registerDefaultCommands } from './commandRegistry';
 export { createEyedropperTool } from './eyedropperTool';
+export { canSave, canSaveAs, hasFilePath, needsSave, openFile, saveFile, saveFileAs } from './fileOperations';
 export {
   getActiveEditorToolId,
   handleKeyDown,
@@ -160,3 +161,4 @@ export type { CoordinatePoint } from './coordinateUtils';
 export type { GuideSnapResult, SnapPoint } from './snapUtils';
 export type { DecomposedTransform, TransformPoint } from './transformUtils';
 export type { WindowTitleOptions } from './windowTitle';
+export type { SaveResult } from './fileOperations';
