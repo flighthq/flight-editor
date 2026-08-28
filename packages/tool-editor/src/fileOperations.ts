@@ -58,7 +58,7 @@ export async function openFile(
     deserialize(data);
     setCurrentFilePath(editor.file, result.path);
     setDocumentTitle(editor.document, result.name);
-    addRecentFile(editor.file, result.path, result.name);
+    addRecentFile(editor.file, result.path, result.name, Date.now());
     markEditorClean(editor);
     setDocumentLifecycle(editor.document, 'ready');
     return { opened: true, path: result.path };
@@ -100,7 +100,7 @@ async function saveToPath(editor: EditorState, path: string, serialize: () => Ar
     const lastSlash = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
     const fileName = lastSlash >= 0 ? path.slice(lastSlash + 1) : path;
     setDocumentTitle(editor.document, fileName);
-    addRecentFile(editor.file, path, fileName);
+    addRecentFile(editor.file, path, fileName, Date.now());
 
     markEditorClean(editor);
     setDocumentLifecycle(editor.document, 'ready');

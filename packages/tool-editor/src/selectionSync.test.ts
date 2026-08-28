@@ -7,9 +7,8 @@ import { createEditorState } from './editorState';
 import { formatSelectionLabel, getSelectionSummary, syncSelectionToStatusBar } from './selectionSync';
 
 function makeNode(name: string) {
-  const node = createNode2D();
+  const node = createNode2D(DisplayObjectKind);
   node.name = name;
-  node.kind = DisplayObjectKind;
   return node;
 }
 

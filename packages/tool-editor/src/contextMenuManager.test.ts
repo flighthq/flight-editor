@@ -1,4 +1,6 @@
 import { addToSelection, clearSelection } from '@flighthq/editor-selection';
+import { createNode2D } from '@flighthq/scene2d';
+import { DisplayObjectKind } from '@flighthq/types';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -57,7 +59,7 @@ describe('openEditorContextMenu', () => {
   it('shows full menu when nodes are selected', () => {
     const editor = createEditorState();
     registerDefaultContextMenuItems(editor);
-    addToSelection(editor.selection, 'node-1');
+    addToSelection(editor.selection, createNode2D(DisplayObjectKind));
     openEditorContextMenu(editor, 10, 20);
     const items = getEditorContextMenuItems(editor);
     expect(items.length).toBeGreaterThan(1);
@@ -66,7 +68,7 @@ describe('openEditorContextMenu', () => {
   it('enables selection items when nodes are selected', () => {
     const editor = createEditorState();
     registerDefaultContextMenuItems(editor);
-    addToSelection(editor.selection, 'node-1');
+    addToSelection(editor.selection, createNode2D(DisplayObjectKind));
     openEditorContextMenu(editor, 10, 20);
     const items = getEditorContextMenuItems(editor);
     const cut = items.find((i) => i.id === 'ctx-cut');
@@ -77,7 +79,7 @@ describe('openEditorContextMenu', () => {
   it('disables selection items when nothing selected', () => {
     const editor = createEditorState();
     registerDefaultContextMenuItems(editor);
-    addToSelection(editor.selection, 'node-1');
+    addToSelection(editor.selection, createNode2D(DisplayObjectKind));
     openEditorContextMenu(editor, 10, 20);
     closeEditorContextMenu(editor);
 
