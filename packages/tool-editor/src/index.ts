@@ -465,6 +465,9 @@ export type { AlignMode } from './commands/alignNodesCommand';
 export type { TransformEntry } from './commands/batchTransformCommand';
 export type { DistributeMode } from './commands/distributeNodesCommand';
 export type { FlipAxis } from './commands/flipNodeCommand';
+export { createDesktopEditor, isDesktopEditorModified } from './desktopEditor';
+
+export type { DesktopEditor, DesktopEditorOptions } from './desktopEditor';
 export type { EditorState } from './editorState';
 export type { HeadlessEditor, HeadlessEditorOptions } from './headlessEditor';
 export type { NamedCommandArguments, NamedCommandFactory } from './commandRegistry';
