@@ -61,14 +61,14 @@ describe('createSetBlendModeCommand', () => {
 
   it('setting same blend mode is a valid identity operation', () => {
     const node = createNode2D(DisplayObjectKind);
-    node.blendMode = BlendMode.Overlay;
-    const cmd = createSetBlendModeCommand(node, BlendMode.Overlay);
+    node.blendMode = BlendMode.Normal;
+    const cmd = createSetBlendModeCommand(node, BlendMode.Normal);
 
     cmd.execute();
-    expect(node.blendMode).toBe(BlendMode.Overlay);
+    expect(node.blendMode).toBe(BlendMode.Normal);
 
     cmd.undo();
-    expect(node.blendMode).toBe(BlendMode.Overlay);
+    expect(node.blendMode).toBe(BlendMode.Normal);
   });
 
   it('multiple undo/redo cycles are stable', () => {
