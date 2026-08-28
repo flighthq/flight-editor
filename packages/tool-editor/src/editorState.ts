@@ -1,11 +1,13 @@
 import type { ClipboardState } from '@flighthq/editor-clipboard';
 import type { CommandHistory } from '@flighthq/editor-command';
 import type { ContextMenuState } from '@flighthq/editor-context-menu';
+import type { DocumentState } from '@flighthq/editor-document';
 import type { DragDropState } from '@flighthq/editor-drag-drop';
 import type { ExportSettingsState } from '@flighthq/editor-export-settings';
 import type { FileState } from '@flighthq/editor-file';
 import type { GuidesState } from '@flighthq/editor-guides';
 import type { HierarchyState } from '@flighthq/editor-hierarchy';
+import type { HostAdapterState } from '@flighthq/editor-host';
 import type { KeyboardMap } from '@flighthq/editor-keyboard';
 import type { LockState } from '@flighthq/editor-lock';
 import type { MenuBarState } from '@flighthq/editor-menu';
@@ -29,11 +31,13 @@ import type { NamedCommandFactory } from './commandRegistry';
 import { createClipboardState } from '@flighthq/editor-clipboard';
 import { createCommandHistory } from '@flighthq/editor-command';
 import { createContextMenuState } from '@flighthq/editor-context-menu';
+import { createDocumentState } from '@flighthq/editor-document';
 import { createDragDropState } from '@flighthq/editor-drag-drop';
 import { createExportSettingsState } from '@flighthq/editor-export-settings';
 import { createFileState } from '@flighthq/editor-file';
 import { createGuidesState } from '@flighthq/editor-guides';
 import { createHierarchyState } from '@flighthq/editor-hierarchy';
+import { createHostAdapterState } from '@flighthq/editor-host';
 import { createKeyboardMap } from '@flighthq/editor-keyboard';
 import { createLockState } from '@flighthq/editor-lock';
 import { createMenuBarState } from '@flighthq/editor-menu';
@@ -56,11 +60,13 @@ export interface EditorState {
   readonly commandRegistry: Map<string, NamedCommandFactory>;
   readonly commandHistory: CommandHistory;
   readonly contextMenu: ContextMenuState;
+  readonly document: DocumentState;
   readonly dragDrop: DragDropState;
   readonly exportSettings: ExportSettingsState;
   readonly file: FileState;
   readonly guides: GuidesState;
   readonly hierarchy: HierarchyState;
+  readonly host: HostAdapterState;
   readonly keyboard: KeyboardMap;
   readonly locks: LockState;
   readonly menuBar: MenuBarState;
@@ -86,11 +92,13 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
     commandRegistry: new Map(),
     commandHistory: createCommandHistory(),
     contextMenu: createContextMenuState(),
+    document: createDocumentState(),
     dragDrop: createDragDropState(),
     exportSettings: createExportSettingsState(),
     file: createFileState(),
     guides: createGuidesState(),
     hierarchy: createHierarchyState(),
+    host: createHostAdapterState(),
     keyboard: createKeyboardMap(),
     locks: createLockState(),
     menuBar: createMenuBarState(),

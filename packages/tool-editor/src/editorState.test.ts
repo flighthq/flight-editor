@@ -74,6 +74,22 @@ describe('createEditorState', () => {
     expect(state.statusBar.zoomPercent).toBe(100);
     expect(state.statusBar.activeToolName).toBe('');
   });
+
+  it('initializes document state in empty lifecycle', () => {
+    const state = createEditorState();
+    expect(state.document.lifecycle).toBe('empty');
+    expect(state.document.metadata.title).toBe('Untitled');
+    expect(state.document.metadata.format).toBe('flight');
+    expect(state.document.errorMessage).toBeNull();
+  });
+
+  it('initializes host adapter in headless mode', () => {
+    const state = createEditorState();
+    expect(state.host.adapter.capabilities.hasFileSystem).toBe(false);
+    expect(state.host.adapter.capabilities.hasNativeMenus).toBe(false);
+    expect(state.host.callbacks).toEqual({});
+    expect(state.host.version).toBe(0);
+  });
 });
 
 describe('getEditorScene', () => {

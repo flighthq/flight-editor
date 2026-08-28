@@ -39,6 +39,8 @@ export {
   createSendBackwardCommand,
   createSendToBackCommand,
 } from './commands/zOrderCommands';
+export { getDefaultShortcutLabel, registerDefaultShortcuts } from './defaultShortcuts';
+export { getDefaultMenuCount, registerDefaultMenus } from './defaultMenus';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
 export { executeNamedCommand, registerDefaultCommands } from './commandRegistry';
 export { createEyedropperTool } from './eyedropperTool';
