@@ -26,6 +26,15 @@ export { createSelectTool } from './selectTool';
 export type { EditorState } from './editorState';
 export type { InspectorSnapshot } from './inspectorState';
 export type { MoveTool } from './moveTool';
-export type { HandleHitTestFn, PointerHitTestFn, PointerTool, ScaleHandle, ScaleHandleHit } from './pointerTool';
+export type {
+  HandleHitTestFn,
+  PointerHitTestFn,
+  PointerTool,
+  PointerToolConfig,
+  RotationHandleHit,
+  RotationHitTestFn,
+  ScaleHandle,
+  ScaleHandleHit,
+} from './pointerTool';
 export type { ScaleTool } from './scaleTool';
 export type { HitTestFn, SelectTool } from './selectTool';

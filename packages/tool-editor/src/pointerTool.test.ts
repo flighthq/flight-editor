@@ -11,7 +11,7 @@ import type { Transform2DLike } from '@flighthq/types';
 import { createEditorState } from './editorState';
 import { createPointerTool } from './pointerTool';
 
-import type { HandleHitTestFn, PointerHitTestFn, ScaleHandleHit } from './pointerTool';
+import type { HandleHitTestFn, PointerHitTestFn, RotationHitTestFn, ScaleHandleHit } from './pointerTool';
 
 function makeEvent(overrides: Partial<EditorPointerEvent> = {}): EditorPointerEvent {
   return {
@@ -155,5 +155,58 @@ describe('pointerTool', () => {
     tool.pointerUp(makeEvent({ x: 50, y: 50 }));
 
     expect(editor.commandHistory.undoStack).toHaveLength(0);
+  });
+
+  it('rotates via rotation handle drag', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+
+    const hitTest: PointerHitTestFn = () => node;
+    const rotHitTest: RotationHitTestFn = () => ({ node, centerX: 50, centerY: 50 });
+    const tool = createPointerTool(editor, hitTest, noHandles, rotHitTest);
+
+    tool.pointerDown(makeEvent({ x: 100, y: 50 }));
+    tool.pointerUp(makeEvent({ x: 50, y: 100 }));
+
+    const t = readTransform(node);
+    expect(t.rotation).toBeCloseTo(Math.PI / 2);
+  });
+
+  it('rotation is undoable', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+
+    const hitTest: PointerHitTestFn = () => node;
+    const rotHitTest: RotationHitTestFn = () => ({ node, centerX: 50, centerY: 50 });
+    const tool = createPointerTool(editor, hitTest, noHandles, rotHitTest);
+
+    tool.pointerDown(makeEvent({ x: 100, y: 50 }));
+    tool.pointerUp(makeEvent({ x: 50, y: 100 }));
+
+    expect(readTransform(node).rotation).toBeCloseTo(Math.PI / 2);
+
+    undo(editor.commandHistory);
+    expect(readTransform(node).rotation).toBe(0);
+  });
+
+  it('rotation takes priority over scale handle', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+
+    const hitTest: PointerHitTestFn = () => node;
+    const handleHit: ScaleHandleHit = { node, handle: 'bottom-right' };
+    const handleHitTest: HandleHitTestFn = () => handleHit;
+    const rotHitTest: RotationHitTestFn = () => ({ node, centerX: 50, centerY: 50 });
+    const tool = createPointerTool(editor, hitTest, handleHitTest, rotHitTest);
+
+    tool.pointerDown(makeEvent({ x: 100, y: 50 }));
+    tool.pointerUp(makeEvent({ x: 50, y: 100 }));
+
+    const t = readTransform(node);
+    expect(t.rotation).toBeCloseTo(Math.PI / 2);
+    expect(t.scaleX).toBe(1);
   });
 });

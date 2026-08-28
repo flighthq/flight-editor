@@ -20,10 +20,25 @@ export interface ScaleHandleHit {
 
 export type HandleHitTestFn = (x: number, y: number) => ScaleHandleHit | null;
 
+export interface RotationHandleHit {
+  readonly node: NodeAny;
+  readonly centerX: number;
+  readonly centerY: number;
+}
+
+export type RotationHitTestFn = (x: number, y: number) => RotationHandleHit | null;
+
+export interface PointerToolConfig {
+  hitTest: PointerHitTestFn;
+  handleHitTest: HandleHitTestFn;
+  rotationHitTest?: RotationHitTestFn;
+}
+
 export interface PointerTool {
   readonly id: string;
   hitTest: PointerHitTestFn;
   handleHitTest: HandleHitTestFn;
+  rotationHitTest: RotationHitTestFn;
   activate(): void;
   deactivate(): void;
   pointerDown(event: Readonly<EditorPointerEvent>): void;
@@ -31,7 +46,7 @@ export interface PointerTool {
   pointerUp(event: Readonly<EditorPointerEvent>): void;
 }
 
-type DragMode = 'move' | 'scale';
+type DragMode = 'move' | 'scale' | 'rotate';
 
 interface DragState {
   mode: DragMode;
@@ -39,6 +54,8 @@ interface DragState {
   startY: number;
   snapshots: Array<{ node: Node2D; transform: Transform2DLike }>;
   scaleHandle: ScaleHandle | null;
+  rotationCenter: { x: number; y: number } | null;
+  startAngle: number;
 }
 
 const SCALE_SENSITIVITY = 0.01;
@@ -81,29 +98,46 @@ function computeScaleFromHandle(
   return { scaleX: rawX, scaleY: rawY };
 }
 
+function angleFromCenter(cx: number, cy: number, px: number, py: number): number {
+  return Math.atan2(py - cy, px - cx);
+}
+
+function computeNewTransform(drag: DragState, event: Readonly<EditorPointerEvent>, zoom: number): Transform2DLike[] {
+  const dx = event.x - drag.startX;
+  const dy = event.y - drag.startY;
+
+  return drag.snapshots.map(({ transform }) => {
+    if (drag.mode === 'move') {
+      return { ...transform, x: transform.x + dx / zoom, y: transform.y + dy / zoom };
+    }
+    if (drag.mode === 'scale' && drag.scaleHandle) {
+      const { scaleX, scaleY } = computeScaleFromHandle(transform, dx, dy, drag.scaleHandle, event.shiftKey);
+      return { ...transform, scaleX, scaleY };
+    }
+    if (drag.mode === 'rotate' && drag.rotationCenter) {
+      const currentAngle = angleFromCenter(drag.rotationCenter.x, drag.rotationCenter.y, event.x, event.y);
+      const deltaAngle = currentAngle - drag.startAngle;
+      return { ...transform, rotation: transform.rotation + deltaAngle };
+    }
+    return transform;
+  });
+}
+
+const noRotationHit: RotationHitTestFn = () => null;
+
 export function createPointerTool(
   editor: EditorState,
   hitTest: PointerHitTestFn,
   handleHitTest: HandleHitTestFn,
+  rotationHitTest?: RotationHitTestFn,
 ): PointerTool {
   let drag: DragState | null = null;
 
   function applyDrag(event: Readonly<EditorPointerEvent>): void {
     if (!drag) return;
-
-    const dx = event.x - drag.startX;
-    const dy = event.y - drag.startY;
-
-    if (drag.mode === 'move') {
-      const zoom = editor.viewport.camera.zoom;
-      for (const { node, transform } of drag.snapshots) {
-        setNodeTransform2D(node, { ...transform, x: transform.x + dx / zoom, y: transform.y + dy / zoom });
-      }
-    } else if (drag.scaleHandle) {
-      for (const { node, transform } of drag.snapshots) {
-        const { scaleX, scaleY } = computeScaleFromHandle(transform, dx, dy, drag.scaleHandle, event.shiftKey);
-        setNodeTransform2D(node, { ...transform, scaleX, scaleY });
-      }
+    const transforms = computeNewTransform(drag, event, editor.viewport.camera.zoom);
+    for (let i = 0; i < drag.snapshots.length; i++) {
+      setNodeTransform2D(drag.snapshots[i].node, transforms[i]);
     }
   }
 
@@ -112,25 +146,18 @@ export function createPointerTool(
 
     const dx = event.x - drag.startX;
     const dy = event.y - drag.startY;
+    const hasRotationDelta = drag.mode === 'rotate' && drag.rotationCenter !== null && (dx !== 0 || dy !== 0);
 
-    if (dx === 0 && dy === 0) {
+    if (dx === 0 && dy === 0 && !hasRotationDelta) {
       drag = null;
       return;
     }
 
-    for (const { node, transform } of drag.snapshots) {
-      let newTransform: Transform2DLike;
-
-      if (drag.mode === 'move') {
-        const zoom = editor.viewport.camera.zoom;
-        newTransform = { ...transform, x: transform.x + dx / zoom, y: transform.y + dy / zoom };
-      } else {
-        const { scaleX, scaleY } = computeScaleFromHandle(transform, dx, dy, drag.scaleHandle!, event.shiftKey);
-        newTransform = { ...transform, scaleX, scaleY };
-      }
-
+    const transforms = computeNewTransform(drag, event, editor.viewport.camera.zoom);
+    for (let i = 0; i < drag.snapshots.length; i++) {
+      const { node, transform } = drag.snapshots[i];
       setNodeTransform2D(node, transform);
-      const cmd = createSetTransform2DCommand(node, newTransform);
+      const cmd = createSetTransform2DCommand(node, transforms[i]);
       executeCommand(editor.commandHistory, cmd);
     }
 
@@ -141,6 +168,7 @@ export function createPointerTool(
     id: 'pointer',
     hitTest,
     handleHitTest,
+    rotationHitTest: rotationHitTest ?? noRotationHit,
 
     activate() {},
 
@@ -149,8 +177,22 @@ export function createPointerTool(
     },
 
     pointerDown(event: Readonly<EditorPointerEvent>) {
-      const handleHit = this.handleHitTest(event.x, event.y);
+      const rotHit = this.rotationHitTest(event.x, event.y);
+      if (rotHit && isSelected(editor.selection, rotHit.node)) {
+        const nodes = getSelectedNodes(editor.selection) as readonly Node2D[];
+        drag = {
+          mode: 'rotate',
+          startX: event.x,
+          startY: event.y,
+          snapshots: nodes.map((node) => ({ node, transform: snapshotTransform(node) })),
+          scaleHandle: null,
+          rotationCenter: { x: rotHit.centerX, y: rotHit.centerY },
+          startAngle: angleFromCenter(rotHit.centerX, rotHit.centerY, event.x, event.y),
+        };
+        return;
+      }
 
+      const handleHit = this.handleHitTest(event.x, event.y);
       if (handleHit && isSelected(editor.selection, handleHit.node)) {
         const nodes = getSelectedNodes(editor.selection) as readonly Node2D[];
         drag = {
@@ -159,6 +201,8 @@ export function createPointerTool(
           startY: event.y,
           snapshots: nodes.map((node) => ({ node, transform: snapshotTransform(node) })),
           scaleHandle: handleHit.handle,
+          rotationCenter: null,
+          startAngle: 0,
         };
         return;
       }
@@ -186,6 +230,8 @@ export function createPointerTool(
           startY: event.y,
           snapshots: nodes.map((node) => ({ node, transform: snapshotTransform(node) })),
           scaleHandle: null,
+          rotationCenter: null,
+          startAngle: 0,
         };
       }
     },
