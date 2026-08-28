@@ -9,8 +9,10 @@ describe('createEditorState', () => {
     expect(state.clipboard.entries).toHaveLength(0);
     expect(state.commandHistory.undoStack).toHaveLength(0);
     expect(state.contextMenu.registeredItems.size).toBe(0);
+    expect(state.exportSettings.slices.size).toBe(0);
     expect(state.hierarchy.expanded.size).toBe(0);
     expect(state.nodeFactory.entries.size).toBe(0);
+    expect(state.pages.pages).toHaveLength(0);
     expect(state.selection.nodes).toHaveLength(0);
     expect(state.rulers.visible).toBe(true);
     expect(state.textStyle.fontSize).toBe(16);

@@ -2,11 +2,13 @@ import type { ClipboardState } from '@flighthq/editor-clipboard';
 import type { CommandHistory } from '@flighthq/editor-command';
 import type { ContextMenuState } from '@flighthq/editor-context-menu';
 import type { DragDropState } from '@flighthq/editor-drag-drop';
+import type { ExportSettingsState } from '@flighthq/editor-export-settings';
 import type { GuidesState } from '@flighthq/editor-guides';
 import type { HierarchyState } from '@flighthq/editor-hierarchy';
 import type { KeyboardMap } from '@flighthq/editor-keyboard';
 import type { LockState } from '@flighthq/editor-lock';
 import type { NodeFactory } from '@flighthq/editor-node-factory';
+import type { PageState } from '@flighthq/editor-page';
 import type { RulerState } from '@flighthq/editor-rulers';
 import type { SceneState } from '@flighthq/editor-scene-state';
 import type { SelectionState } from '@flighthq/editor-selection';
@@ -22,11 +24,13 @@ import { createClipboardState } from '@flighthq/editor-clipboard';
 import { createCommandHistory } from '@flighthq/editor-command';
 import { createContextMenuState } from '@flighthq/editor-context-menu';
 import { createDragDropState } from '@flighthq/editor-drag-drop';
+import { createExportSettingsState } from '@flighthq/editor-export-settings';
 import { createGuidesState } from '@flighthq/editor-guides';
 import { createHierarchyState } from '@flighthq/editor-hierarchy';
 import { createKeyboardMap } from '@flighthq/editor-keyboard';
 import { createLockState } from '@flighthq/editor-lock';
 import { createNodeFactory } from '@flighthq/editor-node-factory';
+import { createPageState } from '@flighthq/editor-page';
 import { createRulerState } from '@flighthq/editor-rulers';
 import { createSceneState } from '@flighthq/editor-scene-state';
 import { createSelectionState } from '@flighthq/editor-selection';
@@ -42,11 +46,13 @@ export interface EditorState {
   readonly commandHistory: CommandHistory;
   readonly contextMenu: ContextMenuState;
   readonly dragDrop: DragDropState;
+  readonly exportSettings: ExportSettingsState;
   readonly guides: GuidesState;
   readonly hierarchy: HierarchyState;
   readonly keyboard: KeyboardMap;
   readonly locks: LockState;
   readonly nodeFactory: NodeFactory;
+  readonly pages: PageState;
   readonly rulers: RulerState;
   readonly sceneState: SceneState;
   readonly selection: SelectionState;
@@ -65,11 +71,13 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
     commandHistory: createCommandHistory(),
     contextMenu: createContextMenuState(),
     dragDrop: createDragDropState(),
+    exportSettings: createExportSettingsState(),
     guides: createGuidesState(),
     hierarchy: createHierarchyState(),
     keyboard: createKeyboardMap(),
     locks: createLockState(),
     nodeFactory: createNodeFactory(),
+    pages: createPageState(),
     rulers: createRulerState(),
     sceneState: createSceneState(),
     selection: createSelectionState(),
