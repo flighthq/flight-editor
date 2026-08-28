@@ -199,7 +199,19 @@ export { closeScene, createNewScene, getSceneName, getSceneSize, hasScene } from
 export { deserializeScene, getSerializerFormats, serializeScene } from './sceneSerializer';
 export { createSelectTool } from './selectTool';
 export { createZoomTool } from './zoomTool';
-export { batchCommands, executeCommand, getRedoLabel, getUndoLabel } from './historyUtils';
+export {
+  batchCommands,
+  canRedo,
+  canUndo,
+  clearHistory,
+  executeCommand,
+  getRedoCount,
+  getRedoLabel,
+  getUndoCount,
+  getUndoLabel,
+  redoCommand,
+  undoCommand,
+} from './historyUtils';
 export { expandBounds, getSceneBounds, getSelectionBounds, isNodeInBounds } from './boundsUtils';
 export { sceneToScreen, sceneToScreenDistance, screenToScene, screenToSceneDistance } from './coordinateUtils';
 export {
