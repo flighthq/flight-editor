@@ -62,6 +62,7 @@ export { createPointerTool } from './pointerTool';
 export { createRotateTool } from './rotateTool';
 export { createRectangleTool } from './rectangleTool';
 export { createScaleTool } from './scaleTool';
+export { closeScene, createNewScene, getSceneName, getSceneSize, hasScene } from './sceneManager';
 export { createSelectTool } from './selectTool';
 export { createZoomTool } from './zoomTool';
 export { batchCommands, executeCommand, getRedoLabel, getUndoLabel } from './historyUtils';
