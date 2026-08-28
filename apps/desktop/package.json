@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@flighthq/editor-host": "0.1.0",
-    "@flighthq/tool-editor": "0.1.0"
+    "@flighthq/tool-editor": "0.1.0",
+    "@tauri-apps/api": "^2"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

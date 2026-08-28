@@ -1,17 +1,21 @@
+import { invoke } from '@tauri-apps/api/core';
+import { listen } from '@tauri-apps/api/event';
+
 import { createTauriApp } from './main';
+
+import type { TauriIpc } from '@flighthq/tool-editor';
 
 const canvas = document.getElementById('editor-canvas') as HTMLCanvasElement;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const ipc = (window as unknown as { __TAURI_INTERNALS__: { invoke: (...args: unknown[]) => Promise<unknown> } })
-  .__TAURI_INTERNALS__;
+const ipc: TauriIpc = {
+  invoke: (command, args) => invoke(command, args),
+  listen: (event, handler) => listen(event, (e) => handler(e.payload as never)),
+};
 
 const app = createTauriApp({
-  ipc: {
-    invoke: (command, args) => ipc.invoke(command, args),
-    listen: () => Promise.resolve(() => {}),
-  },
+  ipc,
   canvas,
   width: canvas.width,
   height: canvas.height,
