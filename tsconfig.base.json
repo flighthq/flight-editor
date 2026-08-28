@@ -28,6 +28,8 @@
       "@flighthq/editor-guides/*": ["./packages/editor-guides/src/*"],
       "@flighthq/editor-node-factory": ["./packages/editor-node-factory/src/index.ts"],
       "@flighthq/editor-node-factory/*": ["./packages/editor-node-factory/src/*"],
+      "@flighthq/editor-panel": ["./packages/editor-panel/src/index.ts"],
+      "@flighthq/editor-panel/*": ["./packages/editor-panel/src/*"],
       "@flighthq/editor-page": ["./packages/editor-page/src/index.ts"],
       "@flighthq/editor-page/*": ["./packages/editor-page/src/*"],
       "@flighthq/editor-rulers": ["./packages/editor-rulers/src/index.ts"],
