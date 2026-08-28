@@ -78,6 +78,16 @@ export {
   isCopyOperation,
   isCutOperation,
 } from './clipboardManager';
+export {
+  addEditorSwatch,
+  clearEditorSwatches,
+  getEditorActiveColor,
+  getEditorRecentColors,
+  getEditorSwatches,
+  removeEditorSwatch,
+  saveActiveAsSwatch,
+  setEditorActiveColor,
+} from './colorManager';
 export { createEditorLoopState, forceUpdateTitle, tickEditor } from './editorLoop';
 export {
   addExportForNode,
@@ -136,6 +146,22 @@ export {
   initEditor,
 } from './initEditor';
 export { registerDefaultNodeKinds } from './factoryPresets';
+export {
+  areEditorRulersVisible,
+  getEditorRulerOrigin,
+  getEditorRulerSubdivisions,
+  getEditorRulerTickSpacing,
+  getEditorRulerUnit,
+  getEditorSubdivisionSpacing,
+  hideEditorRulers,
+  resetEditorRulerOrigin,
+  setEditorRulerOrigin,
+  setEditorRulerSubdivisions,
+  setEditorRulerTickSpacing,
+  setEditorRulerUnit,
+  showEditorRulers,
+  toggleEditorRulers,
+} from './rulerManager';
 export {
   addNode,
   alignSelection,

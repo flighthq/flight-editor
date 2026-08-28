@@ -35,6 +35,7 @@
     "@flighthq/clip": "*",
     "@flighthq/editor-canvas": "*",
     "@flighthq/editor-clipboard": "*",
+    "@flighthq/editor-color": "*",
     "@flighthq/editor-command": "*",
     "@flighthq/editor-context-menu": "*",
     "@flighthq/editor-document": "*",

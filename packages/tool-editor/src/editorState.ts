@@ -1,5 +1,6 @@
 import type { CanvasState } from '@flighthq/editor-canvas';
 import type { ClipboardState } from '@flighthq/editor-clipboard';
+import type { ColorState } from '@flighthq/editor-color';
 import type { CommandHistory } from '@flighthq/editor-command';
 import type { ContextMenuState } from '@flighthq/editor-context-menu';
 import type { DocumentState } from '@flighthq/editor-document';
@@ -34,6 +35,7 @@ import type { NamedCommandFactory } from './commandRegistry';
 
 import { createCanvasState } from '@flighthq/editor-canvas';
 import { createClipboardState } from '@flighthq/editor-clipboard';
+import { createColorState } from '@flighthq/editor-color';
 import { createCommandHistory } from '@flighthq/editor-command';
 import { createContextMenuState } from '@flighthq/editor-context-menu';
 import { createDocumentState } from '@flighthq/editor-document';
@@ -66,6 +68,7 @@ import { createZoomPresetState } from '@flighthq/editor-zoom-presets';
 export interface EditorState {
   readonly canvas: CanvasState;
   readonly clipboard: ClipboardState;
+  readonly color: ColorState;
   readonly commandRegistry: Map<string, NamedCommandFactory>;
   readonly commandHistory: CommandHistory;
   readonly contextMenu: ContextMenuState;
@@ -102,6 +105,7 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
   return {
     canvas: createCanvasState(),
     clipboard: createClipboardState(),
+    color: createColorState(),
     commandRegistry: new Map(),
     commandHistory: createCommandHistory(),
     contextMenu: createContextMenuState(),

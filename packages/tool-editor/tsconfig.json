@@ -11,6 +11,7 @@
   "references": [
     { "path": "../editor-canvas" },
     { "path": "../editor-clipboard" },
+    { "path": "../editor-color" },
     { "path": "../editor-command" },
     { "path": "../editor-context-menu" },
     { "path": "../editor-document" },
