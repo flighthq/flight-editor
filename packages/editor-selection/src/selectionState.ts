@@ -23,8 +23,8 @@ export function getPrimarySelection(state: Readonly<SelectionState>): NodeAny | 
   return state.nodes.length > 0 ? state.nodes[0] : null;
 }
 
-export function isSelected(state: Readonly<SelectionState>, node: Readonly<NodeAny>): boolean {
-  return state.nodes.indexOf(node as NodeAny) !== -1;
+export function isSelected(state: Readonly<SelectionState>, node: NodeAny): boolean {
+  return state.nodes.indexOf(node) !== -1;
 }
 
 export function setSelection(state: SelectionState, nodes: ReadonlyArray<NodeAny>, filter?: SelectionFilter): void {
