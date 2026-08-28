@@ -6,7 +6,7 @@ import type { EditorPointerEvent } from '@flighthq/editor-tool';
 import type { Node2D, Transform2DLike } from '@flighthq/types';
 import type { EditorState } from './editorState';
 
-import { createSetTransform2DCommand } from './commands/setTransform2DCommand';
+import { createBatchTransformCommand } from './commands/batchTransformCommand';
 
 export interface ScaleTool {
   readonly id: string;
@@ -94,12 +94,14 @@ export function createScaleTool(editor: EditorState): ScaleTool {
 
       if (dx !== 0 || dy !== 0) {
         for (const { node, transform } of drag.snapshots) {
-          const { scaleX, scaleY } = computeScale(transform, dx, dy, event.shiftKey);
-          const newTransform = { ...transform, scaleX, scaleY };
           setNodeTransform2D(node, transform);
-          const cmd = createSetTransform2DCommand(node, newTransform);
-          executeCommand(editor.commandHistory, cmd);
         }
+        const entries = drag.snapshots.map(({ node, transform }) => {
+          const { scaleX, scaleY } = computeScale(transform, dx, dy, event.shiftKey);
+          return { node, transform: { ...transform, scaleX, scaleY } };
+        });
+        const cmd = createBatchTransformCommand(entries);
+        executeCommand(editor.commandHistory, cmd);
       }
 
       drag = null;

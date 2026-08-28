@@ -6,7 +6,7 @@ import type { EditorPointerEvent } from '@flighthq/editor-tool';
 import type { Node2D, Transform2DLike } from '@flighthq/types';
 import type { EditorState } from './editorState';
 
-import { createSetTransform2DCommand } from './commands/setTransform2DCommand';
+import { createBatchTransformCommand } from './commands/batchTransformCommand';
 
 export interface MoveTool {
   readonly id: string;
@@ -77,11 +77,14 @@ export function createMoveTool(editor: EditorState): MoveTool {
       if (dx !== 0 || dy !== 0) {
         const zoom = editor.viewport.camera.zoom;
         for (const { node, transform } of drag.snapshots) {
-          const newTransform = { ...transform, x: transform.x + dx / zoom, y: transform.y + dy / zoom };
           setNodeTransform2D(node, transform);
-          const cmd = createSetTransform2DCommand(node, newTransform);
-          executeCommand(editor.commandHistory, cmd);
         }
+        const entries = drag.snapshots.map(({ node, transform }) => ({
+          node,
+          transform: { ...transform, x: transform.x + dx / zoom, y: transform.y + dy / zoom },
+        }));
+        const cmd = createBatchTransformCommand(entries);
+        executeCommand(editor.commandHistory, cmd);
       }
 
       drag = null;

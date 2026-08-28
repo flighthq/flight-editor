@@ -7,7 +7,7 @@ import type { EditorPointerEvent } from '@flighthq/editor-tool';
 import type { Node2D, NodeAny, Transform2DLike } from '@flighthq/types';
 import type { EditorState } from './editorState';
 
-import { createSetTransform2DCommand } from './commands/setTransform2DCommand';
+import { createBatchTransformCommand } from './commands/batchTransformCommand';
 
 export type PointerHitTestFn = (x: number, y: number) => NodeAny | null;
 
@@ -154,12 +154,12 @@ export function createPointerTool(
     }
 
     const transforms = computeNewTransform(drag, event, editor.viewport.camera.zoom);
-    for (let i = 0; i < drag.snapshots.length; i++) {
-      const { node, transform } = drag.snapshots[i];
+    for (const { node, transform } of drag.snapshots) {
       setNodeTransform2D(node, transform);
-      const cmd = createSetTransform2DCommand(node, transforms[i]);
-      executeCommand(editor.commandHistory, cmd);
     }
+    const entries = drag.snapshots.map(({ node }, i) => ({ node, transform: transforms[i] }));
+    const cmd = createBatchTransformCommand(entries);
+    executeCommand(editor.commandHistory, cmd);
 
     drag = null;
   }

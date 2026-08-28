@@ -1,3 +1,4 @@
+export { createBatchTransformCommand } from './commands/batchTransformCommand';
 export { createAddFromFactoryCommand } from './commands/addFromFactoryCommand';
 export { createAddNodeCommand } from './commands/addNodeCommand';
 export { createAlignNodesCommand } from './commands/alignNodesCommand';
@@ -26,6 +27,7 @@ export { createScaleTool } from './scaleTool';
 export { createSelectTool } from './selectTool';
 
 export type { AlignMode } from './commands/alignNodesCommand';
+export type { TransformEntry } from './commands/batchTransformCommand';
 export type { DistributeMode } from './commands/distributeNodesCommand';
 export type { EditorState } from './editorState';
 export type { InspectorSnapshot } from './inspectorState';
