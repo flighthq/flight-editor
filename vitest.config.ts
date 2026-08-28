@@ -9,7 +9,7 @@ export default defineConfig({
     exclude: ['.claude', 'node_modules'],
     server: {
       deps: {
-        inline: ['@flighthq'],
+        inline: [/@flighthq\//],
       },
     },
   },

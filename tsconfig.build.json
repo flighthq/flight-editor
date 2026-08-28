@@ -4,6 +4,7 @@
     { "path": "./packages/editor-command" },
     { "path": "./packages/editor-selection" },
     { "path": "./packages/editor-tool" },
+    { "path": "./packages/editor-viewport" },
     { "path": "./packages/tool-editor" }
   ]
 }

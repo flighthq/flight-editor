@@ -20,6 +20,8 @@
       "@flighthq/editor-selection/*": ["./packages/editor-selection/src/*"],
       "@flighthq/editor-tool": ["./packages/editor-tool/src/index.ts"],
       "@flighthq/editor-tool/*": ["./packages/editor-tool/src/*"],
+      "@flighthq/editor-viewport": ["./packages/editor-viewport/src/index.ts"],
+      "@flighthq/editor-viewport/*": ["./packages/editor-viewport/src/*"],
       "@flighthq/tool-editor": ["./packages/tool-editor/src/index.ts"],
       "@flighthq/tool-editor/*": ["./packages/tool-editor/src/*"]
     },
