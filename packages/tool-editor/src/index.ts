@@ -1,3 +1,4 @@
+export { dispatchAction, dispatchKeyEvent, dispatchMenuItem, getMenuItemsForAction } from './commandDispatch';
 export { createBatchTransformCommand } from './commands/batchTransformCommand';
 export { createAddFromFactoryCommand } from './commands/addFromFactoryCommand';
 export { createAddNodeCommand } from './commands/addNodeCommand';
@@ -91,6 +92,7 @@ export {
   getWorldPosition,
 } from './transformUtils';
 
+export type { KeyEventLike } from './commandDispatch';
 export type { AlignMode } from './commands/alignNodesCommand';
 export type { TransformEntry } from './commands/batchTransformCommand';
 export type { DistributeMode } from './commands/distributeNodesCommand';
