@@ -105,6 +105,7 @@ export {
   getSelectedNodes,
   isAncestorSelected,
 } from './selectionQueries';
+export { formatSelectionLabel, getSelectionSummary, syncSelectionToStatusBar } from './selectionSync';
 export { formatWindowTitle, updateWindowTitle } from './windowTitle';
 export {
   getZoomLevel,
