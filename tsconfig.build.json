@@ -1,6 +1,7 @@
 {
   "files": [],
   "references": [
+    { "path": "./packages/editor-canvas" },
     { "path": "./packages/editor-clipboard" },
     { "path": "./packages/editor-color" },
     { "path": "./packages/editor-command" },

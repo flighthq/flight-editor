@@ -14,6 +14,8 @@
     "composite": true,
     "noEmitOnError": true,
     "paths": {
+      "@flighthq/editor-canvas": ["./packages/editor-canvas/src/index.ts"],
+      "@flighthq/editor-canvas/*": ["./packages/editor-canvas/src/*"],
       "@flighthq/editor-command": ["./packages/editor-command/src/index.ts"],
       "@flighthq/editor-command/*": ["./packages/editor-command/src/*"],
       "@flighthq/editor-context-menu": ["./packages/editor-context-menu/src/index.ts"],
