@@ -198,6 +198,7 @@ export {
 } from './lockManager';
 export { registerDefaultTools } from './registerDefaultTools';
 export { createHandTool } from './handTool';
+export { createHeadlessEditor, isHeadlessEditorReady } from './headlessEditor';
 export { captureBridgeSnapshot, hasBridgeChanges, notifyHostChanges } from './hostCallbackBridge';
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMarqueeTool } from './marqueeTool';
@@ -298,6 +299,7 @@ export type { TransformEntry } from './commands/batchTransformCommand';
 export type { DistributeMode } from './commands/distributeNodesCommand';
 export type { FlipAxis } from './commands/flipNodeCommand';
 export type { EditorState } from './editorState';
+export type { HeadlessEditor, HeadlessEditorOptions } from './headlessEditor';
 export type { NamedCommandArguments, NamedCommandFactory } from './commandRegistry';
 export type { ColorAtPoint, ColorPickCallback, EyedropperTool, EyedropperToolOptions } from './eyedropperTool';
 export type { HandTool } from './handTool';
