@@ -499,6 +499,30 @@ export type { CoordinatePoint } from './coordinateUtils';
 export type { GuideSnapResult, SnapPoint } from './snapUtils';
 export type { DecomposedTransform, TransformPoint } from './transformUtils';
 export type { WindowTitleOptions } from './windowTitle';
+export {
+  canSaveDocument,
+  canSaveDocumentAs,
+  closeDocument,
+  hasDocumentPath,
+  hasOpenDocument,
+  isDocumentModified,
+  newDocument,
+  openDocument,
+  saveDocument,
+  saveDocumentAs,
+} from './sessionController';
+export {
+  centerOnPoint,
+  fitToScene,
+  frameNode,
+  frameSelection,
+  getVisibleSceneBounds,
+  panViewport,
+  resizeViewport,
+  zoomAtPoint,
+} from './viewportOps';
+
+export type { ConfirmResult, SessionCallbacks } from './sessionController';
 export type { SaveResult } from './fileOperations';
 export type { CursorPosition, MessageSeverity } from '@flighthq/editor-status';
 export type { DocumentFormat, DocumentLifecycle, DocumentMetadata } from '@flighthq/editor-document';
