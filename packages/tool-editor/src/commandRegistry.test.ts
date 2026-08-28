@@ -176,4 +176,21 @@ describe('executeNamedCommand', () => {
     undo(editor.commandHistory);
     expect(value).toBe(0);
   });
+
+  it('returns false when scene commands have no scene set', () => {
+    const editor = createEditorState();
+    registerDefaultCommands(editor);
+
+    expect(executeNamedCommand(editor, 'clearScene')).toBe(false);
+    expect(executeNamedCommand(editor, 'setSceneSize', { width: 100, height: 100 })).toBe(false);
+    expect(executeNamedCommand(editor, 'setSceneColor', { color: 0xff0000 })).toBe(false);
+  });
+
+  it('returns false when node commands have no selection and no explicit node', () => {
+    const editor = createEditorState();
+    registerDefaultCommands(editor);
+
+    expect(executeNamedCommand(editor, 'setAlpha', { alpha: 0.5 })).toBe(false);
+    expect(executeNamedCommand(editor, 'flipHorizontal')).toBe(false);
+  });
 });
