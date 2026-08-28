@@ -59,6 +59,7 @@
     "@flighthq/types": "*"
   },
   "devDependencies": {
+    "@flighthq/adjustments": "*",
     "@flighthq/scene2d": "*",
     "typescript": "^5.9.3"
   },

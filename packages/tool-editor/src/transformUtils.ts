@@ -20,7 +20,7 @@ export interface DecomposedTransform {
 export function decomposeTransform(node: Readonly<Node2D>): DecomposedTransform {
   return {
     position: { x: node.x, y: node.y },
-    rotation: (node.rotation * 180) / Math.PI,
+    rotation: node.rotation,
     scale: { x: node.scaleX, y: node.scaleY },
     skew: { x: node.skewX, y: node.skewY },
     pivot: { x: node.pivotX, y: node.pivotY },
@@ -31,7 +31,7 @@ export function composeTransform(decomposed: Readonly<DecomposedTransform>): Tra
   return {
     x: decomposed.position.x,
     y: decomposed.position.y,
-    rotation: (decomposed.rotation * Math.PI) / 180,
+    rotation: decomposed.rotation,
     scaleX: decomposed.scale.x,
     scaleY: decomposed.scale.y,
     skewX: decomposed.skew.x,

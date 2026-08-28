@@ -17,6 +17,8 @@ import {
   createSendToBackCommand,
   createSetPivotCommand,
   createSetClipCommand,
+  createSetColorAdjustmentCommand,
+  createSetNodeSizeCommand,
   createSetScaleModeCommand,
   createSetSceneAlignCommand,
   createSetSceneBackgroundColorCommand,
@@ -29,6 +31,7 @@ import {
   screenToScene,
   getSelectedNodes,
   registerDefaultNodeKinds,
+  createResetTransformCommand,
 } from './index';
 
 describe('tool-editor', () => {
@@ -53,6 +56,9 @@ describe('tool-editor', () => {
     expect(createSetScaleModeCommand).toBeTypeOf('function');
     expect(createSetClipCommand).toBeTypeOf('function');
     expect(createFlipNodeCommand).toBeTypeOf('function');
+    expect(createSetColorAdjustmentCommand).toBeTypeOf('function');
+    expect(createResetTransformCommand).toBeTypeOf('function');
+    expect(createSetNodeSizeCommand).toBeTypeOf('function');
   });
 
   it('exports coordinate, node-query, and bounds utilities', () => {

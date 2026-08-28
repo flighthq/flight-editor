@@ -11,11 +11,11 @@ import {
 } from './transformUtils';
 
 describe('decomposeTransform', () => {
-  it('reads all local transform components and converts rotation to degrees', () => {
+  it('reads all local transform components in Flight degree units', () => {
     const node = createDisplayObject({
       x: 12,
       y: -4,
-      rotation: Math.PI / 2,
+      rotation: 90,
       scaleX: 2,
       scaleY: -3,
       skewX: 0.1,
@@ -34,7 +34,7 @@ describe('decomposeTransform', () => {
 });
 
 describe('composeTransform', () => {
-  it('creates a Flight transform and converts degrees to radians', () => {
+  it('creates a Flight transform with rotation in degrees', () => {
     expect(
       composeTransform({
         position: { x: 1, y: 2 },
@@ -46,7 +46,7 @@ describe('composeTransform', () => {
     ).toEqual({
       x: 1,
       y: 2,
-      rotation: Math.PI / 4,
+      rotation: 45,
       scaleX: 3,
       scaleY: 4,
       skewX: 0.2,
