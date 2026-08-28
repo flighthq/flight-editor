@@ -65,6 +65,21 @@ export {
   isCutOperation,
 } from './clipboardManager';
 export { createEditorLoopState, forceUpdateTitle, tickEditor } from './editorLoop';
+export {
+  addExportForNode,
+  addExportForSelection,
+  clearAllExports,
+  getAllExports,
+  getEnabledExportCount,
+  getEnabledExports,
+  getExportCount,
+  getExportForNode,
+  removeExportForNode,
+  setExportNodeEnabled,
+  setExportNodeFormat,
+  setExportNodeScale,
+  setExportNodeSuffix,
+} from './exportManager';
 export { createEyedropperTool } from './eyedropperTool';
 export {
   addEditorGuide,
