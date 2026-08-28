@@ -6,8 +6,10 @@
   "description": "Flight Editor desktop application (Tauri)",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -p tsconfig.json && vite build",
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "build:frontend": "tsc -p tsconfig.json && vite build",
+    "dev:frontend": "vite",
     "test": "vitest run --config ../../vitest.config.ts src"
   },
   "dependencies": {
@@ -16,6 +18,7 @@
     "@tauri-apps/api": "^2"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2",
     "typescript": "^5.9.3",
     "vitest": "^4.0.17"
   }
