@@ -12,6 +12,7 @@
     { "path": "./packages/editor-hierarchy" },
     { "path": "./packages/editor-keyboard" },
     { "path": "./packages/editor-node-factory" },
+    { "path": "./packages/editor-rulers" },
     { "path": "./packages/editor-scene-state" },
     { "path": "./packages/editor-snap" },
     { "path": "./packages/editor-tool" },
