@@ -3,9 +3,11 @@ export { createAddNodeCommand } from './commands/addNodeCommand';
 export { createCopySelectionCommand } from './commands/copySelectionCommand';
 export { createDeleteSelectionCommand } from './commands/deleteSelectionCommand';
 export { createDuplicateSelectionCommand } from './commands/duplicateSelectionCommand';
+export { createGroupNodesCommand } from './commands/groupNodesCommand';
 export { createPasteNodesCommand } from './commands/pasteNodesCommand';
 export { createRemoveNodeCommand } from './commands/removeNodeCommand';
 export { createReparentNodeCommand } from './commands/reparentNodeCommand';
+export { createUngroupNodesCommand } from './commands/ungroupNodesCommand';
 export { createSetNodeNameCommand } from './commands/setNodeNameCommand';
 export { createSetTransform2DCommand } from './commands/setTransform2DCommand';
 export {
