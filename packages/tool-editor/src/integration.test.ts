@@ -1,9 +1,10 @@
 import { executeCommand, redo, undo } from '@flighthq/editor-command';
-import { expandHierarchyNode, getHierarchyRows, isHierarchyNodeExpanded } from '@flighthq/editor-hierarchy';
-import { createNodeFactory, registerNodeKind } from '@flighthq/editor-node-factory';
-import { getSelectedNodes, getSelectionCount, isSelected } from '@flighthq/editor-selection';
+import { expandHierarchyNode, getHierarchyRows } from '@flighthq/editor-hierarchy';
+import { registerNodeKind } from '@flighthq/editor-node-factory';
+import { hideRulers, isRulerVisible, showRulers } from '@flighthq/editor-rulers';
+import { getSelectionCount, isSelected, setSelection } from '@flighthq/editor-selection';
 import { activateTool, registerTool } from '@flighthq/editor-tool';
-import { getNodeTransform2D } from '@flighthq/node';
+import { addNodeChild, getNodeChildCount, getNodeTransform2D } from '@flighthq/node';
 import { createNode2D, createScene2D } from '@flighthq/scene2d';
 import { DisplayObjectKind } from '@flighthq/types';
 import { describe, expect, it } from 'vitest';
@@ -11,8 +12,12 @@ import { describe, expect, it } from 'vitest';
 import type { Transform2DLike } from '@flighthq/types';
 
 import { createAddNodeCommand } from './commands/addNodeCommand';
+import { createClearSceneCommand } from './commands/clearSceneCommand';
+import { createDeleteSelectionCommand } from './commands/deleteSelectionCommand';
 import { createSetNodeNameCommand } from './commands/setNodeNameCommand';
+import { createSetSceneColorCommand } from './commands/setSceneColorCommand';
 import { createEditorState, setEditorScene } from './editorState';
+import { createHandTool } from './handTool';
 import { createMoveTool } from './moveTool';
 import { createScaleTool } from './scaleTool';
 import { createSelectTool } from './selectTool';
@@ -132,5 +137,97 @@ describe('editor integration', () => {
 
     undo(editor.commandHistory);
     expect(getHierarchyRows(editor.hierarchy, root)).toHaveLength(1);
+  });
+
+  it('delete selection with undo restores full scene state', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    const c = createNode2D(DisplayObjectKind);
+    for (const child of [a, b, c]) addNodeChild(root, child);
+
+    setSelection(editor.selection, [a, c]);
+    const deleteCmd = createDeleteSelectionCommand(editor);
+    executeCommand(editor.commandHistory, deleteCmd);
+
+    expect(getNodeChildCount(root)).toBe(1);
+    expect(getSelectionCount(editor.selection)).toBe(0);
+
+    undo(editor.commandHistory);
+
+    expect(getNodeChildCount(root)).toBe(3);
+    expect(getSelectionCount(editor.selection)).toBe(2);
+    expect(isSelected(editor.selection, a)).toBe(true);
+    expect(isSelected(editor.selection, c)).toBe(true);
+  });
+
+  it('scene color change with undo', () => {
+    const editor = createEditorState();
+    const scene = createScene2D({ color: 0xff0000ff });
+    setEditorScene(editor, scene);
+
+    const cmd = createSetSceneColorCommand(scene, 0x00ff00ff);
+    executeCommand(editor.commandHistory, cmd);
+    expect(scene.color).toBe(0x00ff00ff);
+
+    undo(editor.commandHistory);
+    expect(scene.color).toBe(0xff0000ff);
+
+    redo(editor.commandHistory);
+    expect(scene.color).toBe(0x00ff00ff);
+  });
+
+  it('clear scene with undo restores all children', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    for (const child of [a, b]) addNodeChild(root, child);
+
+    const cmd = createClearSceneCommand(root);
+    executeCommand(editor.commandHistory, cmd);
+    expect(getNodeChildCount(root)).toBe(0);
+
+    undo(editor.commandHistory);
+    expect(getNodeChildCount(root)).toBe(2);
+  });
+
+  it('hand tool pans viewport without affecting scene', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+    const node = createNode2D(DisplayObjectKind);
+    addNodeChild(root, node);
+
+    const startCamX = editor.viewport.camera.x;
+    const handTool = createHandTool(editor);
+    registerTool(editor.toolRegistry, handTool);
+    activateTool(editor.toolRegistry, 'hand');
+
+    handTool.pointerDown({ x: 0, y: 0, button: 0, shiftKey: false, ctrlKey: false, altKey: false, metaKey: false });
+    handTool.pointerMove({ x: 50, y: 0, button: 0, shiftKey: false, ctrlKey: false, altKey: false, metaKey: false });
+    handTool.pointerUp({ x: 50, y: 0, button: 0, shiftKey: false, ctrlKey: false, altKey: false, metaKey: false });
+
+    expect(editor.viewport.camera.x).not.toBe(startCamX);
+    expect(readTransform(node).x).toBe(0);
+  });
+
+  it('rulers state integrates with editor', () => {
+    const editor = createEditorState();
+    expect(isRulerVisible(editor.rulers)).toBe(true);
+
+    hideRulers(editor.rulers);
+    expect(isRulerVisible(editor.rulers)).toBe(false);
+
+    showRulers(editor.rulers);
+    expect(isRulerVisible(editor.rulers)).toBe(true);
   });
 });
