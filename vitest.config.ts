@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     globals: true,
-    include: ['packages/*/src/**/*.test.ts'],
+    include: ['packages/*/src/**/*.test.ts', 'scripts/**/*.test.ts'],
     exclude: ['.claude', 'node_modules'],
     server: {
       deps: {

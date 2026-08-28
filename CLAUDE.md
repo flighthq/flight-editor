@@ -44,4 +44,4 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 
 - **After any edit session, before committing** — `npm run fix`.
 - **While iterating** — run the narrowest meaningful test (`npm run test --workspace=packages/<name>`).
-- **Before handoff** — `npm run typecheck && npm run test`.
+- **Before handoff** — `npm run check` (package metadata, license provenance, build-output hygiene, types, tests, lint, and formatting).
