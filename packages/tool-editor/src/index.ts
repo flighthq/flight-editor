@@ -55,6 +55,15 @@ export { getDefaultShortcutLabel, registerDefaultShortcuts } from './defaultShor
 export { getDefaultMenuCount, registerDefaultMenus } from './defaultMenus';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
 export { executeNamedCommand, registerDefaultCommands } from './commandRegistry';
+export {
+  canPaste,
+  copySelection,
+  cutSelection,
+  getClipboardCount,
+  getClipboardNodes,
+  isCopyOperation,
+  isCutOperation,
+} from './clipboardManager';
 export { createEditorLoopState, forceUpdateTitle, tickEditor } from './editorLoop';
 export { createEyedropperTool } from './eyedropperTool';
 export { canSave, canSaveAs, hasFilePath, needsSave, openFile, saveFile, saveFileAs } from './fileOperations';
@@ -78,6 +87,19 @@ export { createHandTool } from './handTool';
 export { captureBridgeSnapshot, hasBridgeChanges, notifyHostChanges } from './hostCallbackBridge';
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMarqueeTool } from './marqueeTool';
+export {
+  createPage,
+  deleteCurrentPage,
+  getCurrentPage,
+  getPageList,
+  getTotalPageCount,
+  movePageToIndex,
+  navigateToNextPage,
+  navigateToPage,
+  navigateToPreviousPage,
+  renameCurrentPage,
+  resizeCurrentPage,
+} from './pageManager';
 export { createMeasureTool } from './measureTool';
 export { createLineTool } from './lineTool';
 export { createMoveTool } from './moveTool';
