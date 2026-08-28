@@ -17,6 +17,9 @@ import {
   createSetPivotCommand,
   createSetSceneBackgroundColorCommand,
   createSetSceneNameCommand,
+  expandBounds,
+  findNodesByName,
+  screenToScene,
 } from './index';
 
 describe('tool-editor', () => {
@@ -37,5 +40,11 @@ describe('tool-editor', () => {
     expect(createSetPivotCommand).toBeTypeOf('function');
     expect(createSetSceneBackgroundColorCommand).toBeTypeOf('function');
     expect(createSetSceneNameCommand).toBeTypeOf('function');
+  });
+
+  it('exports coordinate, node-query, and bounds utilities', () => {
+    expect(screenToScene).toBeTypeOf('function');
+    expect(findNodesByName).toBeTypeOf('function');
+    expect(expandBounds).toBeTypeOf('function');
   });
 });

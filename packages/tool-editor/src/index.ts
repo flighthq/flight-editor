@@ -39,6 +39,16 @@ export { createRotateTool } from './rotateTool';
 export { createScaleTool } from './scaleTool';
 export { createSelectTool } from './selectTool';
 export { createZoomTool } from './zoomTool';
+export { expandBounds, getSceneBounds, getSelectionBounds, isNodeInBounds } from './boundsUtils';
+export { sceneToScreen, sceneToScreenDistance, screenToScene, screenToSceneDistance } from './coordinateUtils';
+export {
+  filterUnlockedNodes,
+  filterVisibleNodes,
+  findNodesByKind,
+  findNodesByName,
+  getCommonAncestor,
+  getNodePath,
+} from './nodeQueries';
 
 export type { AlignMode } from './commands/alignNodesCommand';
 export type { TransformEntry } from './commands/batchTransformCommand';
@@ -62,3 +72,5 @@ export type { RotateTool, RotateToolConfig } from './rotateTool';
 export type { ScaleTool } from './scaleTool';
 export type { HitTestFn, SelectTool } from './selectTool';
 export type { ZoomTool } from './zoomTool';
+export type { BoundsRectangle } from './boundsUtils';
+export type { CoordinatePoint } from './coordinateUtils';
