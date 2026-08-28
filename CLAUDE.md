@@ -46,6 +46,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-host` — host adapter interface: abstract contract between editor core and GUI embedding layer
 - `editor-history-state` — user-facing history panel checkpoints: labeled snapshot data, browsing, removal, version tracking
 - `editor-keyboard` — keyboard shortcut registry: action bindings, modifier matching, version tracking
+- `editor-layout` — desktop window arrangement for hierarchy, properties, toolbar, and status panels
 - `editor-lock` — lock state: tracks which nodes are locked to prevent editing
 - `editor-menu` — menu bar state: hierarchical menu definitions with command bindings and shortcut display
 - `editor-node-factory` — node kind registry: register creation functions by category, create nodes from registered kinds
