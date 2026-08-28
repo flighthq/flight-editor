@@ -42,6 +42,14 @@ import {
   createEditorLayoutDef,
   getLayoutRegion,
   getLayoutRegions,
+  findNodes,
+  findFirstNode,
+  countMatchingNodes,
+  createLayoutScene,
+  getLayoutNode,
+  getLayoutChildNode,
+  getLayoutNodeNames,
+  resizeLayout,
   executeNamedCommand,
   deserializeScene,
   getSerializerFormats,
@@ -114,5 +122,19 @@ describe('tool-editor', () => {
     expect(createEditorLayoutDef).toBeTypeOf('function');
     expect(getLayoutRegion).toBeTypeOf('function');
     expect(getLayoutRegions).toBeTypeOf('function');
+  });
+
+  it('exports scene search utilities', () => {
+    expect(findNodes).toBeTypeOf('function');
+    expect(findFirstNode).toBeTypeOf('function');
+    expect(countMatchingNodes).toBeTypeOf('function');
+  });
+
+  it('exports layout renderer utilities', () => {
+    expect(createLayoutScene).toBeTypeOf('function');
+    expect(getLayoutNode).toBeTypeOf('function');
+    expect(getLayoutChildNode).toBeTypeOf('function');
+    expect(getLayoutNodeNames).toBeTypeOf('function');
+    expect(resizeLayout).toBeTypeOf('function');
   });
 });
