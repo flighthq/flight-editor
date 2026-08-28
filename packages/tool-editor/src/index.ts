@@ -90,6 +90,16 @@ export {
   setEditorDropTarget,
   updateEditorDragPosition,
 } from './dragDropManager';
+export {
+  alignBottom,
+  alignCenterH,
+  alignCenterV,
+  alignLeft,
+  alignRight,
+  alignTop,
+  distributeHorizontal,
+  distributeVertical,
+} from './alignmentOps';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
 export { executeNamedCommand, registerDefaultCommands } from './commandRegistry';
 export {
@@ -371,6 +381,18 @@ export {
   isAncestorSelected,
 } from './selectionQueries';
 export { formatSelectionLabel, getSelectionSummary, syncSelectionToStatusBar } from './selectionSync';
+export {
+  deselectAll,
+  deselectNode,
+  getEditorSelectedNodes,
+  getEditorSelectionCount,
+  getSelectableCount,
+  hasSelection,
+  invertSelection,
+  isNodeSelected,
+  selectAll,
+  selectNode,
+} from './selectionOps';
 export {
   activateEditorTool,
   deactivateEditorTool,
