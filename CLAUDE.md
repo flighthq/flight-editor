@@ -31,10 +31,12 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 **Bedrock cells:**
 
 - `editor-clipboard` — clipboard state: copy/cut entries, paste-ready node references
+- `editor-color` — color picker state: active packed color, saved swatches, bounded recent-color history
 - `editor-command` — command history: `Command` interface, execute/undo/redo, clean tracking
 - `editor-drag-drop` — drag-and-drop state: tracks drag operations from library/hierarchy/external into the scene
 - `editor-guides` — guide state: horizontal/vertical ruler guides with add/remove/lock/move and snap positions
 - `editor-hierarchy` — hierarchy tree state: expand/collapse tracking, flattened visible rows for tree views
+- `editor-history-state` — user-facing history panel checkpoints: labeled snapshot data, browsing, removal, version tracking
 - `editor-keyboard` — keyboard shortcut registry: action bindings, modifier matching, version tracking
 - `editor-lock` — lock state: tracks which nodes are locked to prevent editing
 - `editor-node-factory` — node kind registry: register creation functions by category, create nodes from registered kinds
