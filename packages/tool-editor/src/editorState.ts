@@ -20,6 +20,8 @@ import type { EditorViewport } from '@flighthq/editor-viewport';
 import type { ZoomPresetState } from '@flighthq/editor-zoom-presets';
 import type { Scene2D } from '@flighthq/types';
 
+import type { NamedCommandFactory } from './commandRegistry';
+
 import { createClipboardState } from '@flighthq/editor-clipboard';
 import { createCommandHistory } from '@flighthq/editor-command';
 import { createContextMenuState } from '@flighthq/editor-context-menu';
@@ -43,6 +45,7 @@ import { createZoomPresetState } from '@flighthq/editor-zoom-presets';
 
 export interface EditorState {
   readonly clipboard: ClipboardState;
+  readonly commandRegistry: Map<string, NamedCommandFactory>;
   readonly commandHistory: CommandHistory;
   readonly contextMenu: ContextMenuState;
   readonly dragDrop: DragDropState;
@@ -68,6 +71,7 @@ export interface EditorState {
 export function createEditorState(viewportWidth = 800, viewportHeight = 600): EditorState {
   return {
     clipboard: createClipboardState(),
+    commandRegistry: new Map(),
     commandHistory: createCommandHistory(),
     contextMenu: createContextMenuState(),
     dragDrop: createDragDropState(),

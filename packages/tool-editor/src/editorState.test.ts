@@ -7,6 +7,7 @@ describe('createEditorState', () => {
     const state = createEditorState();
     expect(getEditorScene(state)).toBeNull();
     expect(state.clipboard.entries).toHaveLength(0);
+    expect(state.commandRegistry.size).toBe(0);
     expect(state.commandHistory.undoStack).toHaveLength(0);
     expect(state.contextMenu.registeredItems.size).toBe(0);
     expect(state.exportSettings.slices.size).toBe(0);

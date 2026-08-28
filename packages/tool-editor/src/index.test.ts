@@ -39,6 +39,9 @@ import {
   createMeasureTool,
   createLineTool,
   createRectangleTool,
+  executeNamedCommand,
+  registerDefaultCommands,
+  registerDefaultTools,
 } from './index';
 
 describe('tool-editor', () => {
@@ -73,6 +76,9 @@ describe('tool-editor', () => {
     expect(createMeasureTool).toBeTypeOf('function');
     expect(createLineTool).toBeTypeOf('function');
     expect(createRectangleTool).toBeTypeOf('function');
+    expect(executeNamedCommand).toBeTypeOf('function');
+    expect(registerDefaultCommands).toBeTypeOf('function');
+    expect(registerDefaultTools).toBeTypeOf('function');
   });
 
   it('exports coordinate, node-query, and bounds utilities', () => {

@@ -1,6 +1,11 @@
 import { setSelection } from '@flighthq/editor-selection';
+import { addExportSlice } from '@flighthq/editor-export-settings';
+import { addPage } from '@flighthq/editor-page';
+import { setTextColor, setTextFontSize } from '@flighthq/editor-text-style';
+import { setTransformOriginMode } from '@flighthq/editor-transform-origin';
 import { setNodeTransform2D } from '@flighthq/node';
 import { createNode2D } from '@flighthq/scene2d';
+import { createTextLabel } from '@flighthq/text';
 import { DisplayObjectKind } from '@flighthq/types';
 import { describe, expect, it } from 'vitest';
 
@@ -20,6 +25,12 @@ describe('getInspectorSnapshot', () => {
     expect(snapshot.name).toBeNull();
     expect(snapshot.transform).toBeNull();
     expect(snapshot.node).toBeNull();
+    expect(snapshot.textStyle).toBeNull();
+    expect(snapshot.transformOriginMode).toBe('center');
+    expect(snapshot.exportSlices).toEqual([]);
+    expect(snapshot.activePage).toBeNull();
+    expect(snapshot.zoom).toBe(1);
+    expect(snapshot.zoomPreset?.id).toBe('100%');
   });
 
   it('returns primary node properties when selected', () => {
@@ -64,6 +75,42 @@ describe('getInspectorSnapshot', () => {
     expect(snapshot.count).toBe(2);
     expect(snapshot.name).toBe('A');
     expect(snapshot.node).toBe(a);
+  });
+
+  it('includes text, origin, export, page, and zoom context', () => {
+    const editor = createEditorState();
+    const text = createTextLabel({ name: 'headline' });
+    const graphic = createNode2D(DisplayObjectKind, { name: 'graphic' });
+    setSelection(editor.selection, [text, graphic]);
+    setTextFontSize(editor.textStyle, 32);
+    setTextColor(editor.textStyle, 0x336699);
+    setTransformOriginMode(editor.transformOrigin, 'bottomRight');
+    addExportSlice(editor.exportSettings, {
+      nodeId: 'headline',
+      format: 'svg',
+      scale: 2,
+      suffix: '@2x',
+      enabled: true,
+    });
+    addPage(editor.pages, { id: 'page-a', name: 'Page A', width: 800, height: 600, color: null });
+    editor.viewport.camera.zoom = 1.8;
+
+    const snapshot = getInspectorSnapshot(editor);
+    expect(snapshot.textStyle).toMatchObject({ fontSize: 32, color: 0x336699 });
+    expect(snapshot.textStyle).not.toBe(editor.textStyle);
+    expect(snapshot.transformOriginMode).toBe('bottomRight');
+    expect(snapshot.exportSlices).toEqual([
+      { nodeId: 'headline', format: 'svg', scale: 2, suffix: '@2x', enabled: true },
+    ]);
+    expect(snapshot.activePage).toEqual({ id: 'page-a', name: 'Page A', width: 800, height: 600, color: null });
+    expect(snapshot.zoom).toBe(1.8);
+    expect(snapshot.zoomPreset).toEqual({ id: '200%', label: '200%', zoom: 2 });
+  });
+
+  it('omits text style when no selected node is text-capable', () => {
+    const editor = createEditorState();
+    setSelection(editor.selection, [createNode2D(DisplayObjectKind)]);
+    expect(getInspectorSnapshot(editor).textStyle).toBeNull();
   });
 
   it('returns selected names list', () => {
