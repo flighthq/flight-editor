@@ -3,16 +3,20 @@ import type { CommandHistory } from '@flighthq/editor-command';
 import type { ContextMenuState } from '@flighthq/editor-context-menu';
 import type { DragDropState } from '@flighthq/editor-drag-drop';
 import type { ExportSettingsState } from '@flighthq/editor-export-settings';
+import type { FileState } from '@flighthq/editor-file';
 import type { GuidesState } from '@flighthq/editor-guides';
 import type { HierarchyState } from '@flighthq/editor-hierarchy';
 import type { KeyboardMap } from '@flighthq/editor-keyboard';
 import type { LockState } from '@flighthq/editor-lock';
+import type { MenuBarState } from '@flighthq/editor-menu';
 import type { NodeFactory } from '@flighthq/editor-node-factory';
 import type { PageState } from '@flighthq/editor-page';
+import type { PropertyPanelState } from '@flighthq/editor-properties';
 import type { RulerState } from '@flighthq/editor-rulers';
 import type { SceneState } from '@flighthq/editor-scene-state';
 import type { SelectionState } from '@flighthq/editor-selection';
 import type { SnapConfig } from '@flighthq/editor-snap';
+import type { StatusBarState } from '@flighthq/editor-status';
 import type { TextStyleState } from '@flighthq/editor-text-style';
 import type { ToolRegistry } from '@flighthq/editor-tool';
 import type { TransformOriginState } from '@flighthq/editor-transform-origin';
@@ -27,16 +31,20 @@ import { createCommandHistory } from '@flighthq/editor-command';
 import { createContextMenuState } from '@flighthq/editor-context-menu';
 import { createDragDropState } from '@flighthq/editor-drag-drop';
 import { createExportSettingsState } from '@flighthq/editor-export-settings';
+import { createFileState } from '@flighthq/editor-file';
 import { createGuidesState } from '@flighthq/editor-guides';
 import { createHierarchyState } from '@flighthq/editor-hierarchy';
 import { createKeyboardMap } from '@flighthq/editor-keyboard';
 import { createLockState } from '@flighthq/editor-lock';
+import { createMenuBarState } from '@flighthq/editor-menu';
 import { createNodeFactory } from '@flighthq/editor-node-factory';
 import { createPageState } from '@flighthq/editor-page';
+import { createPropertyPanelState } from '@flighthq/editor-properties';
 import { createRulerState } from '@flighthq/editor-rulers';
 import { createSceneState } from '@flighthq/editor-scene-state';
 import { createSelectionState } from '@flighthq/editor-selection';
 import { createSnapConfig } from '@flighthq/editor-snap';
+import { createStatusBarState } from '@flighthq/editor-status';
 import { createTextStyleState } from '@flighthq/editor-text-style';
 import { createToolRegistry } from '@flighthq/editor-tool';
 import { createTransformOriginState } from '@flighthq/editor-transform-origin';
@@ -50,16 +58,20 @@ export interface EditorState {
   readonly contextMenu: ContextMenuState;
   readonly dragDrop: DragDropState;
   readonly exportSettings: ExportSettingsState;
+  readonly file: FileState;
   readonly guides: GuidesState;
   readonly hierarchy: HierarchyState;
   readonly keyboard: KeyboardMap;
   readonly locks: LockState;
+  readonly menuBar: MenuBarState;
   readonly nodeFactory: NodeFactory;
   readonly pages: PageState;
+  readonly properties: PropertyPanelState;
   readonly rulers: RulerState;
   readonly sceneState: SceneState;
   readonly selection: SelectionState;
   readonly snap: SnapConfig;
+  readonly statusBar: StatusBarState;
   readonly textStyle: TextStyleState;
   readonly toolRegistry: ToolRegistry;
   readonly transformOrigin: TransformOriginState;
@@ -76,16 +88,20 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
     contextMenu: createContextMenuState(),
     dragDrop: createDragDropState(),
     exportSettings: createExportSettingsState(),
+    file: createFileState(),
     guides: createGuidesState(),
     hierarchy: createHierarchyState(),
     keyboard: createKeyboardMap(),
     locks: createLockState(),
+    menuBar: createMenuBarState(),
     nodeFactory: createNodeFactory(),
     pages: createPageState(),
+    properties: createPropertyPanelState(),
     rulers: createRulerState(),
     sceneState: createSceneState(),
     selection: createSelectionState(),
     snap: createSnapConfig(),
+    statusBar: createStatusBarState(),
     textStyle: createTextStyleState(),
     toolRegistry: createToolRegistry(),
     transformOrigin: createTransformOriginState(),

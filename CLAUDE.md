@@ -39,17 +39,21 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-context-menu` — hierarchical context-menu registry with enabled state, open position, and active item selection
 - `editor-drag-drop` — drag-and-drop state: tracks drag operations from library/hierarchy/external into the scene
 - `editor-export-settings` — per-node export format, scale, suffix, and enabled state
+- `editor-file` — file state: current file path, recent files, dirty tracking, save state
 - `editor-guides` — guide state: horizontal/vertical ruler guides with add/remove/lock/move and snap positions
 - `editor-hierarchy` — hierarchy tree state: expand/collapse tracking, flattened visible rows for tree views
 - `editor-history-state` — user-facing history panel checkpoints: labeled snapshot data, browsing, removal, version tracking
 - `editor-keyboard` — keyboard shortcut registry: action bindings, modifier matching, version tracking
 - `editor-lock` — lock state: tracks which nodes are locked to prevent editing
+- `editor-menu` — menu bar state: hierarchical menu definitions with command bindings and shortcut display
 - `editor-node-factory` — node kind registry: register creation functions by category, create nodes from registered kinds
 - `editor-page` — ordered page/artboard definitions with active-page tracking
+- `editor-properties` — property panel state: property definitions, categories, edit state, mixed-value detection
 - `editor-rulers` — ruler display state: visibility, units (pixels/inches/cm), origin, tick spacing, subdivisions
 - `editor-scene-state` — scene metadata: name, dimensions, background color, dirty/version tracking
 - `editor-selection` — selection state: multi-select, filters by kind/hierarchy, version tracking
 - `editor-snap` — snap configuration: grid and guide management, position snapping
+- `editor-status` — status bar state: messages, zoom display, selection info, cursor position, active tool
 - `editor-text-style` — active text formatting state for host property panels and Flight text formats
 - `editor-tool` — tool registry: register/activate/deactivate tools, pointer dispatch lifecycle
 - `editor-transform-origin` — transform-origin mode and scene-space origin computation for node bounds

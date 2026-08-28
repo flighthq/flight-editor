@@ -47,6 +47,33 @@ describe('createEditorState', () => {
     expect(state.snap.guides).toEqual([]);
     expect(state.snap.version).toBe(0);
   });
+
+  it('initializes file state with no current file', () => {
+    const state = createEditorState();
+    expect(state.file.currentPath).toBeNull();
+    expect(state.file.dirty).toBe(false);
+    expect(state.file.saveStatus).toBe('idle');
+    expect(state.file.recentFiles).toHaveLength(0);
+  });
+
+  it('initializes empty menu bar', () => {
+    const state = createEditorState();
+    expect(state.menuBar.menus).toHaveLength(0);
+    expect(state.menuBar.version).toBe(0);
+  });
+
+  it('initializes empty property panel', () => {
+    const state = createEditorState();
+    expect(state.properties.definitions.size).toBe(0);
+    expect(state.properties.categories).toHaveLength(0);
+  });
+
+  it('initializes status bar with defaults', () => {
+    const state = createEditorState();
+    expect(state.statusBar.message).toBeNull();
+    expect(state.statusBar.zoomPercent).toBe(100);
+    expect(state.statusBar.activeToolName).toBe('');
+  });
 });
 
 describe('getEditorScene', () => {
