@@ -1,4 +1,9 @@
 {
   "files": [],
-  "references": [{ "path": "./packages/tool-editor" }]
+  "references": [
+    { "path": "./packages/editor-command" },
+    { "path": "./packages/editor-selection" },
+    { "path": "./packages/editor-tool" },
+    { "path": "./packages/tool-editor" }
+  ]
 }

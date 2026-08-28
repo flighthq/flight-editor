@@ -14,6 +14,12 @@
     "composite": true,
     "noEmitOnError": true,
     "paths": {
+      "@flighthq/editor-command": ["./packages/editor-command/src/index.ts"],
+      "@flighthq/editor-command/*": ["./packages/editor-command/src/*"],
+      "@flighthq/editor-selection": ["./packages/editor-selection/src/index.ts"],
+      "@flighthq/editor-selection/*": ["./packages/editor-selection/src/*"],
+      "@flighthq/editor-tool": ["./packages/editor-tool/src/index.ts"],
+      "@flighthq/editor-tool/*": ["./packages/editor-tool/src/*"],
       "@flighthq/tool-editor": ["./packages/tool-editor/src/index.ts"],
       "@flighthq/tool-editor/*": ["./packages/tool-editor/src/*"]
     },
