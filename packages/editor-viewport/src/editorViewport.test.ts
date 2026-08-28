@@ -150,4 +150,80 @@ describe('zoomEditorViewportAtPoint', () => {
     zoomEditorViewportAtPoint(vp, 400, 300, 10);
     expect(getEditorViewportZoom(vp)).toBeLessThanOrEqual(3);
   });
+
+  it('clamps zoom to min limit', () => {
+    const vp = createEditorViewport(800, 600, { minZoom: 0.5 });
+    zoomEditorViewportAtPoint(vp, 400, 300, 0.01);
+    expect(getEditorViewportZoom(vp)).toBeGreaterThanOrEqual(0.5);
+  });
+});
+
+describe('editorViewportScreenToWorld — round-trip', () => {
+  it('screen-to-world then world-to-screen is identity at center', () => {
+    const vp = createEditorViewport(800, 600);
+    const world = { x: 0, y: 0 };
+    editorViewportScreenToWorld(vp, 400, 300, world);
+    const screen = { x: 0, y: 0 };
+    editorViewportWorldToScreen(vp, world.x, world.y, screen);
+    expect(screen.x).toBeCloseTo(400, 1);
+    expect(screen.y).toBeCloseTo(300, 1);
+  });
+
+  it('round-trips after pan', () => {
+    const vp = createEditorViewport(800, 600);
+    panEditorViewport(vp, 200, -100);
+    const world = { x: 0, y: 0 };
+    editorViewportScreenToWorld(vp, 100, 200, world);
+    const screen = { x: 0, y: 0 };
+    editorViewportWorldToScreen(vp, world.x, world.y, screen);
+    expect(screen.x).toBeCloseTo(100, 1);
+    expect(screen.y).toBeCloseTo(200, 1);
+  });
+
+  it('round-trips after zoom', () => {
+    const vp = createEditorViewport(800, 600);
+    setEditorViewportZoom(vp, 4);
+    const world = { x: 0, y: 0 };
+    editorViewportScreenToWorld(vp, 200, 150, world);
+    const screen = { x: 0, y: 0 };
+    editorViewportWorldToScreen(vp, world.x, world.y, screen);
+    expect(screen.x).toBeCloseTo(200, 1);
+    expect(screen.y).toBeCloseTo(150, 1);
+  });
+});
+
+describe('getEditorViewportVisibleBounds', () => {
+  it('returns bounds matching viewport size at zoom 1', () => {
+    const vp = createEditorViewport(800, 600);
+    const bounds = { x: 0, y: 0, width: 0, height: 0 };
+    getEditorViewportVisibleBounds(vp, bounds);
+    expect(bounds.width).toBeCloseTo(800, 1);
+    expect(bounds.height).toBeCloseTo(600, 1);
+  });
+
+  it('visible bounds shrink when zoomed in', () => {
+    const vp = createEditorViewport(800, 600);
+    setEditorViewportZoom(vp, 2);
+    const bounds = { x: 0, y: 0, width: 0, height: 0 };
+    getEditorViewportVisibleBounds(vp, bounds);
+    expect(bounds.width).toBeCloseTo(400, 1);
+    expect(bounds.height).toBeCloseTo(300, 1);
+  });
+});
+
+describe('fitEditorViewportToRect — with padding', () => {
+  it('accounts for padding in zoom calculation', () => {
+    const vp = createEditorViewport(800, 600);
+    fitEditorViewportToRect(vp, { x: 0, y: 0, width: 400, height: 300 }, 50);
+    expect(getEditorViewportZoom(vp)).toBeCloseTo(1.5, 2);
+  });
+});
+
+describe('centerEditorViewportOnPoint', () => {
+  it('preserves zoom level', () => {
+    const vp = createEditorViewport(800, 600);
+    setEditorViewportZoom(vp, 3);
+    centerEditorViewportOnPoint(vp, 50, 75);
+    expect(getEditorViewportZoom(vp)).toBe(3);
+  });
 });

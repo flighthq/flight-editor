@@ -110,6 +110,17 @@ describe('registerTool', () => {
     registerTool(registry, tool);
     expect(getRegisteredToolIds(registry)).toContain('select');
   });
+
+  it('replaces an existing tool with the same id', () => {
+    const registry = createToolRegistry();
+    const first = createMockTool('select');
+    const second = createMockTool('select');
+    registerTool(registry, first);
+    registerTool(registry, second);
+    expect(getRegisteredToolIds(registry)).toHaveLength(1);
+    activateTool(registry, 'select');
+    expect(getActiveTool(registry)).toBe(second);
+  });
 });
 
 describe('unregisterTool', () => {
@@ -126,5 +137,51 @@ describe('unregisterTool', () => {
     expect(tool.deactivate).toHaveBeenCalledOnce();
     expect(getActiveToolId(registry)).toBeNull();
     expect(getRegisteredToolIds(registry)).not.toContain('select');
+  });
+
+  it('removes inactive tool without calling deactivate', () => {
+    const registry = createToolRegistry();
+    const tool = createMockTool('select');
+    registerTool(registry, tool);
+    expect(unregisterTool(registry, 'select')).toBe(true);
+    expect(tool.deactivate).not.toHaveBeenCalled();
+  });
+});
+
+describe('activateTool — lifecycle', () => {
+  it('getActiveTool returns the tool instance', () => {
+    const registry = createToolRegistry();
+    const tool = createMockTool('select');
+    registerTool(registry, tool);
+    activateTool(registry, 'select');
+    expect(getActiveTool(registry)).toBe(tool);
+  });
+
+  it('isToolActive returns false for inactive after deactivation', () => {
+    const registry = createToolRegistry();
+    const tool = createMockTool('select');
+    registerTool(registry, tool);
+    activateTool(registry, 'select');
+    deactivateTool(registry);
+    expect(isToolActive(registry, 'select')).toBe(false);
+  });
+
+  it('activating same tool twice calls deactivate then activate', () => {
+    const registry = createToolRegistry();
+    const tool = createMockTool('select');
+    registerTool(registry, tool);
+    activateTool(registry, 'select');
+    activateTool(registry, 'select');
+    expect(tool.deactivate).toHaveBeenCalledOnce();
+    expect(tool.activate).toHaveBeenCalledTimes(2);
+  });
+
+  it('handles tool without activate/deactivate callbacks', () => {
+    const registry = createToolRegistry();
+    const tool: EditorTool = { id: 'bare' };
+    registerTool(registry, tool);
+    expect(() => activateTool(registry, 'bare')).not.toThrow();
+    expect(() => deactivateTool(registry)).not.toThrow();
+    expect(getActiveToolId(registry)).toBeNull();
   });
 });

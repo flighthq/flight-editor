@@ -106,3 +106,47 @@ describe('createNodeFromKind', () => {
     expect(a).not.toBe(b);
   });
 });
+
+describe('getNodeKindEntry', () => {
+  it('returns undefined for unregistered kind', () => {
+    const factory = createNodeFactory();
+    expect(getNodeKindEntry(factory, 'missing')).toBeUndefined();
+  });
+
+  it('returns correct entry with all fields', () => {
+    const factory = createNodeFactory();
+    const creator = () => createNode2D(DisplayObjectKind);
+    registerNodeKind(factory, 'box', 'Box', 'shapes', creator);
+    const entry = getNodeKindEntry(factory, 'box');
+    expect(entry?.id).toBe('box');
+    expect(entry?.label).toBe('Box');
+    expect(entry?.category).toBe('shapes');
+    expect(entry?.create).toBe(creator);
+  });
+});
+
+describe('registerNodeKind — overwrite', () => {
+  it('replaces a kind with the same id', () => {
+    const factory = createNodeFactory();
+    registerNodeKind(factory, 'a', 'First', 'cat1', () => createNode2D(DisplayObjectKind));
+    registerNodeKind(factory, 'a', 'Second', 'cat2', () => createSprite());
+    expect(getNodeKindIds(factory)).toHaveLength(1);
+    expect(getNodeKindEntry(factory, 'a')?.label).toBe('Second');
+    expect(getNodeKindEntry(factory, 'a')?.category).toBe('cat2');
+  });
+});
+
+describe('getNodeKindsByCategory', () => {
+  it('returns empty for unknown category', () => {
+    const factory = createNodeFactory();
+    registerNodeKind(factory, 'a', 'A', 'core', () => createNode2D(DisplayObjectKind));
+    expect(getNodeKindsByCategory(factory, 'unknown')).toEqual([]);
+  });
+});
+
+describe('getNodeKindCategories', () => {
+  it('returns empty for empty factory', () => {
+    const factory = createNodeFactory();
+    expect(getNodeKindCategories(factory)).toEqual([]);
+  });
+});

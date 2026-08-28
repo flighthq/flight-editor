@@ -101,4 +101,59 @@ describe('clearClipboard', () => {
     clearClipboard(state);
     expect(getClipboardVersion(state)).toBe(0);
   });
+
+  it('double clear does not bump version twice', () => {
+    const state = createClipboardState();
+    const a = createNode2D(DisplayObjectKind);
+    setClipboardEntries(state, [a], 'copy');
+    clearClipboard(state);
+    const v = getClipboardVersion(state);
+    clearClipboard(state);
+    expect(getClipboardVersion(state)).toBe(v);
+  });
+});
+
+describe('setClipboardEntries — operation types', () => {
+  it('tracks cut operation', () => {
+    const state = createClipboardState();
+    const a = createNode2D(DisplayObjectKind);
+    setClipboardEntries(state, [a], 'cut');
+    expect(getClipboardOperation(state)).toBe('cut');
+  });
+
+  it('switching between copy and cut updates operation', () => {
+    const state = createClipboardState();
+    const a = createNode2D(DisplayObjectKind);
+    setClipboardEntries(state, [a], 'copy');
+    expect(getClipboardOperation(state)).toBe('copy');
+    setClipboardEntries(state, [a], 'cut');
+    expect(getClipboardOperation(state)).toBe('cut');
+  });
+
+  it('increments version on each set', () => {
+    const state = createClipboardState();
+    const a = createNode2D(DisplayObjectKind);
+    setClipboardEntries(state, [a], 'copy');
+    setClipboardEntries(state, [a], 'copy');
+    setClipboardEntries(state, [a], 'copy');
+    expect(getClipboardVersion(state)).toBe(3);
+  });
+});
+
+describe('getClipboardEntries — accessors', () => {
+  it('returns empty array for fresh state', () => {
+    const state = createClipboardState();
+    expect(getClipboardEntries(state)).toEqual([]);
+  });
+
+  it('returns correct entries after multiple sets', () => {
+    const state = createClipboardState();
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    const c = createNode2D(DisplayObjectKind);
+    setClipboardEntries(state, [a, b], 'copy');
+    setClipboardEntries(state, [c], 'cut');
+    expect(getClipboardEntries(state)).toEqual([c]);
+    expect(getClipboardEntryCount(state)).toBe(1);
+  });
 });

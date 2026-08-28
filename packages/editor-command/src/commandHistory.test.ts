@@ -177,3 +177,54 @@ describe('undo', () => {
     expect(state.value).toBe(1);
   });
 });
+
+describe('isCommandHistoryClean — advanced', () => {
+  it('returns clean after undo back to clean point then redo', () => {
+    const history = createCommandHistory();
+    const state = { value: 0 };
+    executeCommand(history, createTestCommand('a', state, 1));
+    markCommandHistoryClean(history);
+    undo(history);
+    redo(history);
+    expect(isCommandHistoryClean(history)).toBe(true);
+  });
+
+  it('becomes dirty after redo past clean point', () => {
+    const history = createCommandHistory();
+    const state = { value: 0 };
+    markCommandHistoryClean(history);
+    executeCommand(history, createTestCommand('a', state, 1));
+    undo(history);
+    expect(isCommandHistoryClean(history)).toBe(true);
+    redo(history);
+    expect(isCommandHistoryClean(history)).toBe(false);
+  });
+});
+
+describe('clearCommandHistory — clean tracking', () => {
+  it('resets to clean after clear', () => {
+    const history = createCommandHistory();
+    const state = { value: 0 };
+    executeCommand(history, createTestCommand('a', state, 1));
+    markCommandHistoryClean(history);
+    executeCommand(history, createTestCommand('b', state, 2));
+    clearCommandHistory(history);
+    expect(isCommandHistoryClean(history)).toBe(true);
+  });
+});
+
+describe('getCommandHistoryUndoLabel / getCommandHistoryRedoLabel — transitions', () => {
+  it('labels shift through undo/redo', () => {
+    const history = createCommandHistory();
+    const state = { value: 0 };
+    executeCommand(history, createTestCommand('first', state, 1));
+    executeCommand(history, createTestCommand('second', state, 2));
+    expect(getCommandHistoryUndoLabel(history)).toBe('second');
+    undo(history);
+    expect(getCommandHistoryUndoLabel(history)).toBe('first');
+    expect(getCommandHistoryRedoLabel(history)).toBe('second');
+    undo(history);
+    expect(getCommandHistoryUndoLabel(history)).toBeNull();
+    expect(getCommandHistoryRedoLabel(history)).toBe('first');
+  });
+});
