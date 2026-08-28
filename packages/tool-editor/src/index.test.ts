@@ -71,6 +71,10 @@ import {
   formatShortcut,
   parseShortcutString,
   shortcutMatchesEvent,
+  createEditorApplication,
+  getApplicationEditorState,
+  getApplicationLayout,
+  getApplicationTheme,
   executeNamedCommand,
   deserializeScene,
   getSerializerFormats,
@@ -190,5 +194,12 @@ describe('tool-editor', () => {
     expect(formatShortcut).toBeTypeOf('function');
     expect(parseShortcutString).toBeTypeOf('function');
     expect(shortcutMatchesEvent).toBeTypeOf('function');
+  });
+
+  it('exports editor application utilities', () => {
+    expect(createEditorApplication).toBeTypeOf('function');
+    expect(getApplicationEditorState).toBeTypeOf('function');
+    expect(getApplicationLayout).toBeTypeOf('function');
+    expect(getApplicationTheme).toBeTypeOf('function');
   });
 });

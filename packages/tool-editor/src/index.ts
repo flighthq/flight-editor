@@ -384,6 +384,12 @@ export {
   unregisterPanel,
 } from './panelDefinition';
 export { formatShortcut, parseShortcutString, shortcutMatchesEvent } from './shortcutDisplay';
+export {
+  createEditorApplication,
+  getApplicationEditorState,
+  getApplicationLayout,
+  getApplicationTheme,
+} from './editorApplication';
 export { sceneToScreen, sceneToScreenDistance, screenToScene, screenToSceneDistance } from './coordinateUtils';
 export {
   filterUnlockedNodes,
@@ -557,6 +563,7 @@ export type { LayoutScene } from './layoutRenderer';
 export type { EditorTheme, ThemeColors, ThemeSizes, ThemeSpacing } from './themeDefinition';
 export type { EditorPreferences } from './editorPreferences';
 export type { PanelDefinition, PanelRegistry } from './panelDefinition';
+export type { EditorApplication, EditorApplicationOptions } from './editorApplication';
 export type { Platform, ShortcutParts } from './shortcutDisplay';
 export type { CoordinatePoint } from './coordinateUtils';
 export type { GuideSnapResult, SnapPoint } from './snapUtils';
