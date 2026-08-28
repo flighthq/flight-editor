@@ -542,10 +542,23 @@ export {
   stopRenderLoop,
 } from './renderLoop';
 export { createDefaultFileFilters, createTauriHostAdapter, createTauriHostCapabilities } from './tauriHost';
+export {
+  createDesktopBootstrap,
+  disposeDesktopBootstrap,
+  getDesktopEditor,
+  getDesktopLayout,
+  getDesktopPanels,
+  getDesktopTheme,
+  resizeDesktop,
+  startDesktopLoop,
+  stepDesktopLoop,
+  stopDesktopLoop,
+} from './desktopBootstrap';
 
 export type { ThemeMapping } from './themeRenderer';
 export type { RenderLoopConfig, RenderLoopState } from './renderLoop';
 export type { TauriFileFilter, TauriHostConfig, TauriIpc } from './tauriHost';
+export type { DesktopBootstrap, DesktopBootstrapConfig } from './desktopBootstrap';
 
 export type { KeyEventLike } from './commandDispatch';
 export type { AlignMode } from './commands/alignNodesCommand';

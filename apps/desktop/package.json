@@ -1,0 +1,20 @@
+{
+  "name": "@flighthq/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Flight Editor desktop application (Tauri)",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --config ../../vitest.config.ts src"
+  },
+  "dependencies": {
+    "@flighthq/editor-host": "0.1.0",
+    "@flighthq/tool-editor": "0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.17"
+  }
+}

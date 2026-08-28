@@ -107,6 +107,16 @@ import {
   createTauriHostAdapter,
   createTauriHostCapabilities,
   createDefaultFileFilters,
+  createDesktopBootstrap,
+  disposeDesktopBootstrap,
+  getDesktopEditor,
+  getDesktopLayout,
+  getDesktopPanels,
+  getDesktopTheme,
+  resizeDesktop,
+  startDesktopLoop,
+  stepDesktopLoop,
+  stopDesktopLoop,
 } from './index';
 
 describe('tool-editor', () => {
@@ -265,5 +275,18 @@ describe('tool-editor', () => {
     expect(createTauriHostAdapter).toBeTypeOf('function');
     expect(createTauriHostCapabilities).toBeTypeOf('function');
     expect(createDefaultFileFilters).toBeTypeOf('function');
+  });
+
+  it('exports desktop bootstrap utilities', () => {
+    expect(createDesktopBootstrap).toBeTypeOf('function');
+    expect(disposeDesktopBootstrap).toBeTypeOf('function');
+    expect(getDesktopEditor).toBeTypeOf('function');
+    expect(getDesktopLayout).toBeTypeOf('function');
+    expect(getDesktopPanels).toBeTypeOf('function');
+    expect(getDesktopTheme).toBeTypeOf('function');
+    expect(resizeDesktop).toBeTypeOf('function');
+    expect(startDesktopLoop).toBeTypeOf('function');
+    expect(stepDesktopLoop).toBeTypeOf('function');
+    expect(stopDesktopLoop).toBeTypeOf('function');
   });
 });

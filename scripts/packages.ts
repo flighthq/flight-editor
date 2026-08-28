@@ -284,7 +284,7 @@ export function checkRepositoryPackages(root: string): PackageCheckReport {
     violations.push({ path: 'package.json', ...violation });
   }
   addExpectedValue(violations, 'package.json', 'repository is private', true, rootManifest.private);
-  addExpectedValue(violations, 'package.json', 'workspace layout', ['packages/**'], rootManifest.workspaces);
+  addExpectedValue(violations, 'package.json', 'workspace layout', ['packages/**', 'apps/**'], rootManifest.workspaces);
 
   const manifests = new Map<string, PackageManifest>();
   for (const directory of directories) {
