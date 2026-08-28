@@ -1,5 +1,6 @@
 import type { ClipboardState } from '@flighthq/editor-clipboard';
 import type { CommandHistory } from '@flighthq/editor-command';
+import type { ContextMenuState } from '@flighthq/editor-context-menu';
 import type { DragDropState } from '@flighthq/editor-drag-drop';
 import type { GuidesState } from '@flighthq/editor-guides';
 import type { HierarchyState } from '@flighthq/editor-hierarchy';
@@ -12,12 +13,14 @@ import type { SelectionState } from '@flighthq/editor-selection';
 import type { SnapConfig } from '@flighthq/editor-snap';
 import type { TextStyleState } from '@flighthq/editor-text-style';
 import type { ToolRegistry } from '@flighthq/editor-tool';
+import type { TransformOriginState } from '@flighthq/editor-transform-origin';
 import type { EditorViewport } from '@flighthq/editor-viewport';
 import type { ZoomPresetState } from '@flighthq/editor-zoom-presets';
 import type { Scene2D } from '@flighthq/types';
 
 import { createClipboardState } from '@flighthq/editor-clipboard';
 import { createCommandHistory } from '@flighthq/editor-command';
+import { createContextMenuState } from '@flighthq/editor-context-menu';
 import { createDragDropState } from '@flighthq/editor-drag-drop';
 import { createGuidesState } from '@flighthq/editor-guides';
 import { createHierarchyState } from '@flighthq/editor-hierarchy';
@@ -30,12 +33,14 @@ import { createSelectionState } from '@flighthq/editor-selection';
 import { createSnapConfig } from '@flighthq/editor-snap';
 import { createTextStyleState } from '@flighthq/editor-text-style';
 import { createToolRegistry } from '@flighthq/editor-tool';
+import { createTransformOriginState } from '@flighthq/editor-transform-origin';
 import { createEditorViewport } from '@flighthq/editor-viewport';
 import { createZoomPresetState } from '@flighthq/editor-zoom-presets';
 
 export interface EditorState {
   readonly clipboard: ClipboardState;
   readonly commandHistory: CommandHistory;
+  readonly contextMenu: ContextMenuState;
   readonly dragDrop: DragDropState;
   readonly guides: GuidesState;
   readonly hierarchy: HierarchyState;
@@ -48,6 +53,7 @@ export interface EditorState {
   readonly snap: SnapConfig;
   readonly textStyle: TextStyleState;
   readonly toolRegistry: ToolRegistry;
+  readonly transformOrigin: TransformOriginState;
   readonly viewport: EditorViewport;
   readonly zoomPresets: ZoomPresetState;
   scene: Scene2D | null;
@@ -57,6 +63,7 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
   return {
     clipboard: createClipboardState(),
     commandHistory: createCommandHistory(),
+    contextMenu: createContextMenuState(),
     dragDrop: createDragDropState(),
     guides: createGuidesState(),
     hierarchy: createHierarchyState(),
@@ -69,6 +76,7 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
     snap: createSnapConfig(),
     textStyle: createTextStyleState(),
     toolRegistry: createToolRegistry(),
+    transformOrigin: createTransformOriginState(),
     viewport: createEditorViewport(viewportWidth, viewportHeight),
     zoomPresets: createZoomPresetState(),
     scene: null,

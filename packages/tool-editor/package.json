@@ -34,6 +34,7 @@
   "dependencies": {
     "@flighthq/editor-clipboard": "*",
     "@flighthq/editor-command": "*",
+    "@flighthq/editor-context-menu": "*",
     "@flighthq/editor-drag-drop": "*",
     "@flighthq/editor-guides": "*",
     "@flighthq/editor-hierarchy": "*",
@@ -46,6 +47,7 @@
     "@flighthq/editor-snap": "*",
     "@flighthq/editor-text-style": "*",
     "@flighthq/editor-tool": "*",
+    "@flighthq/editor-transform-origin": "*",
     "@flighthq/editor-viewport": "*",
     "@flighthq/editor-zoom-presets": "*",
     "@flighthq/node": "*",

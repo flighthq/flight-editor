@@ -16,6 +16,8 @@
     "paths": {
       "@flighthq/editor-command": ["./packages/editor-command/src/index.ts"],
       "@flighthq/editor-command/*": ["./packages/editor-command/src/*"],
+      "@flighthq/editor-context-menu": ["./packages/editor-context-menu/src/index.ts"],
+      "@flighthq/editor-context-menu/*": ["./packages/editor-context-menu/src/*"],
       "@flighthq/editor-color": ["./packages/editor-color/src/index.ts"],
       "@flighthq/editor-color/*": ["./packages/editor-color/src/*"],
       "@flighthq/editor-drag-drop": ["./packages/editor-drag-drop/src/index.ts"],
@@ -30,6 +32,8 @@
       "@flighthq/editor-selection/*": ["./packages/editor-selection/src/*"],
       "@flighthq/editor-tool": ["./packages/editor-tool/src/index.ts"],
       "@flighthq/editor-tool/*": ["./packages/editor-tool/src/*"],
+      "@flighthq/editor-transform-origin": ["./packages/editor-transform-origin/src/index.ts"],
+      "@flighthq/editor-transform-origin/*": ["./packages/editor-transform-origin/src/*"],
       "@flighthq/editor-clipboard": ["./packages/editor-clipboard/src/index.ts"],
       "@flighthq/editor-clipboard/*": ["./packages/editor-clipboard/src/*"],
       "@flighthq/editor-hierarchy": ["./packages/editor-hierarchy/src/index.ts"],

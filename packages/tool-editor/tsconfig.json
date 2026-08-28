@@ -11,6 +11,7 @@
   "references": [
     { "path": "../editor-clipboard" },
     { "path": "../editor-command" },
+    { "path": "../editor-context-menu" },
     { "path": "../editor-drag-drop" },
     { "path": "../editor-guides" },
     { "path": "../editor-hierarchy" },
@@ -23,6 +24,7 @@
     { "path": "../editor-snap" },
     { "path": "../editor-text-style" },
     { "path": "../editor-tool" },
+    { "path": "../editor-transform-origin" },
     { "path": "../editor-viewport" },
     { "path": "../editor-zoom-presets" }
   ],

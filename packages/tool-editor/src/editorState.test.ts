@@ -8,12 +8,14 @@ describe('createEditorState', () => {
     expect(getEditorScene(state)).toBeNull();
     expect(state.clipboard.entries).toHaveLength(0);
     expect(state.commandHistory.undoStack).toHaveLength(0);
+    expect(state.contextMenu.registeredItems.size).toBe(0);
     expect(state.hierarchy.expanded.size).toBe(0);
     expect(state.nodeFactory.entries.size).toBe(0);
     expect(state.selection.nodes).toHaveLength(0);
     expect(state.rulers.visible).toBe(true);
     expect(state.textStyle.fontSize).toBe(16);
     expect(state.toolRegistry.activeToolId).toBeNull();
+    expect(state.transformOrigin.mode).toBe('center');
     expect(state.viewport.config.minZoom).toBe(0.05);
     expect(state.zoomPresets.presets.map((preset) => preset.id)).toEqual(['fit', '50%', '100%', '200%', '400%']);
   });
