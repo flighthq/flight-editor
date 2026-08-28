@@ -31,4 +31,39 @@ describe('createCopySelectionCommand', () => {
     expect(isClipboardEmpty(editor.clipboard)).toBe(true);
     expect(getClipboardOperation(editor.clipboard)).toBeNull();
   });
+
+  it('copies with empty selection', () => {
+    const editor = createEditorState();
+    const command = createCopySelectionCommand(editor, 'copy');
+
+    command.execute();
+
+    expect(getClipboardEntries(editor.clipboard)).toEqual([]);
+    expect(getClipboardOperation(editor.clipboard)).toBe('copy');
+  });
+
+  it('copies a single node', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+    const command = createCopySelectionCommand(editor, 'copy');
+
+    command.execute();
+
+    expect(getClipboardEntries(editor.clipboard)).toEqual([node]);
+  });
+
+  it('supports re-execute after undo', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+    const command = createCopySelectionCommand(editor, 'cut');
+
+    command.execute();
+    command.undo();
+    command.execute();
+
+    expect(getClipboardEntries(editor.clipboard)).toEqual([node]);
+    expect(getClipboardOperation(editor.clipboard)).toBe('cut');
+  });
 });

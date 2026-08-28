@@ -28,4 +28,34 @@ describe('createSetBlendModeCommand', () => {
     cmd.undo();
     expect(node.blendMode).toBe(BlendMode.Screen);
   });
+
+  it('changes between two non-null blend modes', () => {
+    const node = createNode2D(DisplayObjectKind);
+    node.blendMode = BlendMode.Add;
+
+    const cmd = createSetBlendModeCommand(node, BlendMode.Darken);
+    cmd.execute();
+    expect(node.blendMode).toBe(BlendMode.Darken);
+
+    cmd.undo();
+    expect(node.blendMode).toBe(BlendMode.Add);
+  });
+
+  it('has the correct label', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const cmd = createSetBlendModeCommand(node, BlendMode.Normal);
+
+    expect(cmd.label).toBe('Set Blend Mode');
+  });
+
+  it('supports re-execute after undo', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const cmd = createSetBlendModeCommand(node, BlendMode.Lighten);
+
+    cmd.execute();
+    cmd.undo();
+    cmd.execute();
+
+    expect(node.blendMode).toBe(BlendMode.Lighten);
+  });
 });

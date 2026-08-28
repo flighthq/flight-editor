@@ -83,4 +83,63 @@ describe('createDuplicateSelectionCommand', () => {
     expect(getNodeParent(firstClone)).toBeNull();
     expect(getNodeParent(secondClone)).toBeNull();
   });
+
+  it('names clones "Copy" when the source has no name', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const node = createNode2D(DisplayObjectKind);
+    node.name = null;
+    addNodeChild(parent, node);
+    setSelection(editor.selection, [node]);
+    const command = createDuplicateSelectionCommand(editor);
+
+    command.execute();
+
+    const clone = getNodeChildAt(parent, 1) as Node2D;
+    expect(clone.name).toBe('Copy');
+  });
+
+  it('handles empty selection without error', () => {
+    const editor = createEditorState();
+    const command = createDuplicateSelectionCommand(editor);
+
+    command.execute();
+    command.undo();
+  });
+
+  it('inserts the clone directly after its source', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    const c = createNode2D(DisplayObjectKind);
+    for (const child of [a, b, c]) addNodeChild(parent, child);
+    setSelection(editor.selection, [b]);
+    const command = createDuplicateSelectionCommand(editor);
+
+    command.execute();
+
+    expect(getNodeChildCount(parent)).toBe(4);
+    expect(getNodeChildAt(parent, 0)).toBe(a);
+    expect(getNodeChildAt(parent, 1)).toBe(b);
+    expect(getNodeChildAt(parent, 3)).toBe(c);
+  });
+
+  it('supports re-execute after undo', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const node = createNode2D(DisplayObjectKind);
+    node.name = 'Node';
+    addNodeChild(parent, node);
+    setSelection(editor.selection, [node]);
+    const command = createDuplicateSelectionCommand(editor);
+
+    command.execute();
+    command.undo();
+    command.execute();
+
+    expect(getNodeChildCount(parent)).toBe(2);
+    const clone = getNodeChildAt(parent, 1) as Node2D;
+    expect(clone.name).toBe('Node Copy');
+  });
 });

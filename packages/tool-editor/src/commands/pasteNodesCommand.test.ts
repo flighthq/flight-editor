@@ -1,5 +1,5 @@
 import { setClipboardEntries } from '@flighthq/editor-clipboard';
-import { getNodeChildAt, getNodeChildCount, getNodeParent } from '@flighthq/node';
+import { addNodeChild, getNodeChildAt, getNodeChildCount, getNodeParent } from '@flighthq/node';
 import { createNode2D } from '@flighthq/scene2d';
 import { createEditorState } from '@flighthq/tool-editor';
 import { DisplayObjectKind } from '@flighthq/types';
@@ -31,5 +31,48 @@ describe('createPasteNodesCommand', () => {
     expect(getNodeChildCount(parent)).toBe(0);
     expect(getNodeParent(first)).toBeNull();
     expect(getNodeParent(second)).toBeNull();
+  });
+
+  it('handles empty clipboard without error', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const command = createPasteNodesCommand(editor, parent);
+
+    command.execute();
+
+    expect(getNodeChildCount(parent)).toBe(0);
+
+    command.undo();
+  });
+
+  it('appends pasted nodes after existing children', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const existing = createNode2D(DisplayObjectKind);
+    addNodeChild(parent, existing);
+    const pasted = createNode2D(DisplayObjectKind);
+    setClipboardEntries(editor.clipboard, [pasted], 'copy');
+    const command = createPasteNodesCommand(editor, parent);
+
+    command.execute();
+
+    expect(getNodeChildCount(parent)).toBe(2);
+    expect(getNodeChildAt(parent, 0)).toBe(existing);
+    expect(getNodeChildAt(parent, 1)).toBe(pasted);
+  });
+
+  it('supports re-execute after undo', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const node = createNode2D(DisplayObjectKind);
+    setClipboardEntries(editor.clipboard, [node], 'copy');
+    const command = createPasteNodesCommand(editor, parent);
+
+    command.execute();
+    command.undo();
+    command.execute();
+
+    expect(getNodeChildCount(parent)).toBe(1);
+    expect(getNodeChildAt(parent, 0)).toBe(node);
   });
 });

@@ -61,17 +61,44 @@ describe('createAlignNodesCommand', () => {
     expect(nodes.map(readTransform)).toEqual(originals);
   });
 
-  it('keeps a single node unchanged and accepts an empty node list', () => {
-    const node = createPositionedNode(17, 29);
-    const original = readTransform(node);
-    const single = createAlignNodesCommand([node], 'bottom');
-    const empty = createAlignNodesCommand([], 'left');
+  it('handles empty node array without error', () => {
+    const command = createAlignNodesCommand([], 'left');
 
-    expect(() => empty.execute()).not.toThrow();
-    expect(() => empty.undo()).not.toThrow();
-    single.execute();
-    single.undo();
+    command.execute();
+    command.undo();
+  });
+
+  it('handles single node (aligns to itself)', () => {
+    const node = createPositionedNode(42, 99);
+    const original = readTransform(node);
+    const command = createAlignNodesCommand([node], 'left');
+
+    command.execute();
 
     expect(readTransform(node)).toEqual(original);
+  });
+
+  it('preserves non-position transform fields', () => {
+    const nodes = [createPositionedNode(10, 20), createPositionedNode(50, 20)];
+    const command = createAlignNodesCommand(nodes, 'left');
+
+    command.execute();
+
+    expect(readTransform(nodes[1]).pivotX).toBe(1);
+    expect(readTransform(nodes[1]).rotation).toBe(3);
+    expect(readTransform(nodes[1]).scaleX).toBe(4);
+  });
+
+  it.each<[AlignMode, string]>([
+    ['left', 'Align Left'],
+    ['right', 'Align Right'],
+    ['top', 'Align Top'],
+    ['bottom', 'Align Bottom'],
+    ['center-h', 'Align Horizontal Centers'],
+    ['center-v', 'Align Vertical Centers'],
+  ])('has label "%s" for mode %s', (mode, expectedLabel) => {
+    const command = createAlignNodesCommand([], mode);
+
+    expect(command.label).toBe(expectedLabel);
   });
 });
