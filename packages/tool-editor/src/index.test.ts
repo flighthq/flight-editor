@@ -60,6 +60,17 @@ import {
   applyPreferences,
   capturePreferences,
   mergePreferences,
+  createPanelRegistry,
+  registerPanel,
+  unregisterPanel,
+  getPanel,
+  getPanelsByRegion,
+  getPanelCount,
+  getAllPanelIds,
+  registerDefaultPanels,
+  formatShortcut,
+  parseShortcutString,
+  shortcutMatchesEvent,
   executeNamedCommand,
   deserializeScene,
   getSerializerFormats,
@@ -162,5 +173,22 @@ describe('tool-editor', () => {
     expect(applyPreferences).toBeTypeOf('function');
     expect(capturePreferences).toBeTypeOf('function');
     expect(mergePreferences).toBeTypeOf('function');
+  });
+
+  it('exports panel definition utilities', () => {
+    expect(createPanelRegistry).toBeTypeOf('function');
+    expect(registerPanel).toBeTypeOf('function');
+    expect(unregisterPanel).toBeTypeOf('function');
+    expect(getPanel).toBeTypeOf('function');
+    expect(getPanelsByRegion).toBeTypeOf('function');
+    expect(getPanelCount).toBeTypeOf('function');
+    expect(getAllPanelIds).toBeTypeOf('function');
+    expect(registerDefaultPanels).toBeTypeOf('function');
+  });
+
+  it('exports shortcut display utilities', () => {
+    expect(formatShortcut).toBeTypeOf('function');
+    expect(parseShortcutString).toBeTypeOf('function');
+    expect(shortcutMatchesEvent).toBeTypeOf('function');
   });
 });

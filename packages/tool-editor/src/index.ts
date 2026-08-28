@@ -373,6 +373,17 @@ export {
   mergePreferences,
   serializePreferences,
 } from './editorPreferences';
+export {
+  createPanelRegistry,
+  getAllPanelIds,
+  getPanel,
+  getPanelCount,
+  getPanelsByRegion,
+  registerDefaultPanels,
+  registerPanel,
+  unregisterPanel,
+} from './panelDefinition';
+export { formatShortcut, parseShortcutString, shortcutMatchesEvent } from './shortcutDisplay';
 export { sceneToScreen, sceneToScreenDistance, screenToScene, screenToSceneDistance } from './coordinateUtils';
 export {
   filterUnlockedNodes,
@@ -545,6 +556,8 @@ export type { SceneSearchCriteria } from './sceneSearch';
 export type { LayoutScene } from './layoutRenderer';
 export type { EditorTheme, ThemeColors, ThemeSizes, ThemeSpacing } from './themeDefinition';
 export type { EditorPreferences } from './editorPreferences';
+export type { PanelDefinition, PanelRegistry } from './panelDefinition';
+export type { Platform, ShortcutParts } from './shortcutDisplay';
 export type { CoordinatePoint } from './coordinateUtils';
 export type { GuideSnapResult, SnapPoint } from './snapUtils';
 export type { DecomposedTransform, TransformPoint } from './transformUtils';
