@@ -1,8 +1,10 @@
 export { createAddFromFactoryCommand } from './commands/addFromFactoryCommand';
 export { createAddNodeCommand } from './commands/addNodeCommand';
+export { createAlignNodesCommand } from './commands/alignNodesCommand';
 export { createCopySelectionCommand } from './commands/copySelectionCommand';
 export { createDeleteSelectionCommand } from './commands/deleteSelectionCommand';
 export { createDuplicateSelectionCommand } from './commands/duplicateSelectionCommand';
+export { createDistributeNodesCommand } from './commands/distributeNodesCommand';
 export { createGroupNodesCommand } from './commands/groupNodesCommand';
 export { createPasteNodesCommand } from './commands/pasteNodesCommand';
 export { createRemoveNodeCommand } from './commands/removeNodeCommand';
@@ -23,6 +25,8 @@ export { createPointerTool } from './pointerTool';
 export { createScaleTool } from './scaleTool';
 export { createSelectTool } from './selectTool';
 
+export type { AlignMode } from './commands/alignNodesCommand';
+export type { DistributeMode } from './commands/distributeNodesCommand';
 export type { EditorState } from './editorState';
 export type { InspectorSnapshot } from './inspectorState';
 export type { MoveTool } from './moveTool';
