@@ -96,6 +96,18 @@ export {
 } from './guideManager';
 export { canSave, canSaveAs, hasFilePath, needsSave, openFile, saveFile, saveFileAs } from './fileOperations';
 export {
+  collapseAll,
+  collapseNode,
+  expandAll,
+  expandNode,
+  getHierarchyTreeRows,
+  isNodeExpanded,
+  revealNode,
+  revealSelectedNodes,
+  selectAndRevealNode,
+  toggleNode,
+} from './hierarchyManager';
+export {
   getActiveEditorToolId,
   handleKeyDown,
   handlePointerDown,
