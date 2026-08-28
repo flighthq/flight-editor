@@ -19,6 +19,7 @@ export { createUngroupNodesCommand } from './commands/ungroupNodesCommand';
 export { createSetNodeNameCommand } from './commands/setNodeNameCommand';
 export { createSetPivotCommand } from './commands/setPivotCommand';
 export { createSetSceneBackgroundColorCommand } from './commands/setSceneBackgroundColorCommand';
+export { createSetSceneColorCommand } from './commands/setSceneColorCommand';
 export { createSetSceneNameCommand } from './commands/setSceneNameCommand';
 export { createSetSceneSizeCommand } from './commands/setSceneSizeCommand';
 export { createSetTransform2DCommand } from './commands/setTransform2DCommand';

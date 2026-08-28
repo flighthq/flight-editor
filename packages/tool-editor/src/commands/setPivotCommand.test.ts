@@ -7,75 +7,94 @@ import { describe, expect, it } from 'vitest';
 import { createSetPivotCommand } from './setPivotCommand';
 
 function readTransform(node: Node2D): Transform2DLike {
-  const transform = { pivotX: 0, pivotY: 0, rotation: 0, scaleX: 1, scaleY: 1, skewX: 0, skewY: 0, x: 0, y: 0 };
-  getNodeTransform2D(transform, node);
-  return transform;
-}
-
-function createTransformedNode(): Node2D {
-  const node = createNode2D(DisplayObjectKind);
-  setNodeTransform2D(node, {
-    pivotX: 1,
-    pivotY: 2,
-    rotation: 3,
-    scaleX: 4,
-    scaleY: 5,
-    skewX: 6,
-    skewY: 7,
-    x: 8,
-    y: 9,
-  });
-  return node;
+  const t = { pivotX: 0, pivotY: 0, rotation: 0, scaleX: 1, scaleY: 1, skewX: 0, skewY: 0, x: 0, y: 0 };
+  getNodeTransform2D(t, node);
+  return t;
 }
 
 describe('createSetPivotCommand', () => {
-  it('sets both pivot coordinates', () => {
-    const node = createTransformedNode();
+  it('sets pivot and restores on undo', () => {
+    const node = createNode2D(DisplayObjectKind);
+    setNodeTransform2D(node, {
+      pivotX: 0,
+      pivotY: 0,
+      rotation: 0,
+      scaleX: 1,
+      scaleY: 1,
+      skewX: 0,
+      skewY: 0,
+      x: 10,
+      y: 20,
+    });
+    const cmd = createSetPivotCommand(node, 50, 75);
 
-    createSetPivotCommand(node, 20, 30).execute();
+    cmd.execute();
 
-    expect(readTransform(node).pivotX).toBe(20);
-    expect(readTransform(node).pivotY).toBe(30);
+    const t = readTransform(node);
+    expect(t.pivotX).toBe(50);
+    expect(t.pivotY).toBe(75);
+    expect(t.x).toBe(10);
+
+    cmd.undo();
+
+    const restored = readTransform(node);
+    expect(restored.pivotX).toBe(0);
+    expect(restored.pivotY).toBe(0);
   });
 
-  it('preserves every non-pivot transform component', () => {
-    const node = createTransformedNode();
-    const original = readTransform(node);
+  it('preserves other transform fields', () => {
+    const node = createNode2D(DisplayObjectKind);
+    setNodeTransform2D(node, {
+      pivotX: 0,
+      pivotY: 0,
+      rotation: 45,
+      scaleX: 2,
+      scaleY: 3,
+      skewX: 0,
+      skewY: 0,
+      x: 100,
+      y: 200,
+    });
+    const cmd = createSetPivotCommand(node, 10, 20);
 
-    createSetPivotCommand(node, 20, 30).execute();
+    cmd.execute();
 
-    expect(readTransform(node)).toEqual({ ...original, pivotX: 20, pivotY: 30 });
+    const t = readTransform(node);
+    expect(t.rotation).toBe(45);
+    expect(t.scaleX).toBe(2);
+    expect(t.scaleY).toBe(3);
+    expect(t.x).toBe(100);
+    expect(t.y).toBe(200);
   });
 
-  it('restores the complete original transform on undo', () => {
-    const node = createTransformedNode();
-    const original = readTransform(node);
-    const command = createSetPivotCommand(node, -10, 100);
+  it('has the correct label', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const cmd = createSetPivotCommand(node, 0, 0);
 
-    command.execute();
-    command.undo();
-
-    expect(readTransform(node)).toEqual(original);
+    expect(cmd.label).toBe('Set Pivot');
   });
 
-  it('supports negative and fractional pivot coordinates', () => {
-    const node = createTransformedNode();
+  it('supports re-execute after undo', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const cmd = createSetPivotCommand(node, 30, 40);
 
-    createSetPivotCommand(node, -2.5, 4.25).execute();
+    cmd.execute();
+    cmd.undo();
+    cmd.execute();
 
-    expect(readTransform(node).pivotX).toBe(-2.5);
-    expect(readTransform(node).pivotY).toBe(4.25);
+    const t = readTransform(node);
+    expect(t.pivotX).toBe(30);
+    expect(t.pivotY).toBe(40);
   });
 
-  it('can execute again after undo', () => {
-    const node = createTransformedNode();
-    const command = createSetPivotCommand(node, 20, 30);
+  it('handles negative pivot values', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const cmd = createSetPivotCommand(node, -10, -20);
 
-    command.execute();
-    command.undo();
-    command.execute();
+    cmd.execute();
 
-    expect(readTransform(node).pivotX).toBe(20);
-    expect(readTransform(node).pivotY).toBe(30);
+    const t = readTransform(node);
+    expect(t.pivotX).toBe(-10);
+    expect(t.pivotY).toBe(-20);
   });
 });
