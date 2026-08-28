@@ -10,8 +10,10 @@ import type { RulerState } from '@flighthq/editor-rulers';
 import type { SceneState } from '@flighthq/editor-scene-state';
 import type { SelectionState } from '@flighthq/editor-selection';
 import type { SnapConfig } from '@flighthq/editor-snap';
+import type { TextStyleState } from '@flighthq/editor-text-style';
 import type { ToolRegistry } from '@flighthq/editor-tool';
 import type { EditorViewport } from '@flighthq/editor-viewport';
+import type { ZoomPresetState } from '@flighthq/editor-zoom-presets';
 import type { Scene2D } from '@flighthq/types';
 
 import { createClipboardState } from '@flighthq/editor-clipboard';
@@ -26,8 +28,10 @@ import { createRulerState } from '@flighthq/editor-rulers';
 import { createSceneState } from '@flighthq/editor-scene-state';
 import { createSelectionState } from '@flighthq/editor-selection';
 import { createSnapConfig } from '@flighthq/editor-snap';
+import { createTextStyleState } from '@flighthq/editor-text-style';
 import { createToolRegistry } from '@flighthq/editor-tool';
 import { createEditorViewport } from '@flighthq/editor-viewport';
+import { createZoomPresetState } from '@flighthq/editor-zoom-presets';
 
 export interface EditorState {
   readonly clipboard: ClipboardState;
@@ -42,8 +46,10 @@ export interface EditorState {
   readonly sceneState: SceneState;
   readonly selection: SelectionState;
   readonly snap: SnapConfig;
+  readonly textStyle: TextStyleState;
   readonly toolRegistry: ToolRegistry;
   readonly viewport: EditorViewport;
+  readonly zoomPresets: ZoomPresetState;
   scene: Scene2D | null;
 }
 
@@ -61,8 +67,10 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
     sceneState: createSceneState(),
     selection: createSelectionState(),
     snap: createSnapConfig(),
+    textStyle: createTextStyleState(),
     toolRegistry: createToolRegistry(),
     viewport: createEditorViewport(viewportWidth, viewportHeight),
+    zoomPresets: createZoomPresetState(),
     scene: null,
   };
 }

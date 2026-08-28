@@ -44,8 +44,10 @@
     "@flighthq/editor-scene-state": "*",
     "@flighthq/editor-selection": "*",
     "@flighthq/editor-snap": "*",
+    "@flighthq/editor-text-style": "*",
     "@flighthq/editor-tool": "*",
     "@flighthq/editor-viewport": "*",
+    "@flighthq/editor-zoom-presets": "*",
     "@flighthq/node": "*",
     "@flighthq/types": "*"
   },

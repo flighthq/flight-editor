@@ -15,8 +15,10 @@
     { "path": "./packages/editor-rulers" },
     { "path": "./packages/editor-scene-state" },
     { "path": "./packages/editor-snap" },
+    { "path": "./packages/editor-text-style" },
     { "path": "./packages/editor-tool" },
     { "path": "./packages/editor-viewport" },
+    { "path": "./packages/editor-zoom-presets" },
     { "path": "./packages/tool-editor" }
   ]
 }

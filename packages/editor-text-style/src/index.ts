@@ -1,0 +1,28 @@
+export {
+  applyTextStyleToFormat,
+  createTextStyleState,
+  getTextAlign,
+  getTextColor,
+  getTextFontFamily,
+  getTextFontSize,
+  getTextFontStyle,
+  getTextFontWeight,
+  getTextLetterSpacing,
+  getTextLineHeight,
+  getTextStyleVersion,
+  isTextStrikethrough,
+  isTextUnderline,
+  readTextStyleFromFormat,
+  setTextAlign,
+  setTextColor,
+  setTextFontFamily,
+  setTextFontSize,
+  setTextFontStyle,
+  setTextFontWeight,
+  setTextLetterSpacing,
+  setTextLineHeight,
+  setTextStrikethrough,
+  setTextUnderline,
+} from './textStyleState';
+
+export type { TextAlign, TextFontStyle, TextFontWeight, TextStyleState } from './textStyleState';

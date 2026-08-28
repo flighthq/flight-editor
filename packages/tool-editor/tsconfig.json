@@ -21,8 +21,10 @@
     { "path": "../editor-scene-state" },
     { "path": "../editor-selection" },
     { "path": "../editor-snap" },
+    { "path": "../editor-text-style" },
     { "path": "../editor-tool" },
-    { "path": "../editor-viewport" }
+    { "path": "../editor-viewport" },
+    { "path": "../editor-zoom-presets" }
   ],
   "include": ["src"]
 }
