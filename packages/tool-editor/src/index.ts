@@ -8,8 +8,10 @@ export { createSetNodeNameCommand } from './commands/setNodeNameCommand';
 export { createSetTransform2DCommand } from './commands/setTransform2DCommand';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
 export { createMoveTool } from './moveTool';
+export { createScaleTool } from './scaleTool';
 export { createSelectTool } from './selectTool';
 
 export type { EditorState } from './editorState';
 export type { MoveTool } from './moveTool';
+export type { ScaleTool } from './scaleTool';
 export type { HitTestFn, SelectTool } from './selectTool';
