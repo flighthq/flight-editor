@@ -48,7 +48,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 
 **Composition:**
 
-- `tool-editor` — editor application core: `EditorState` (composes command history + selection + clipboard + drag-drop + guides + hierarchy + locks + node factory + tool registry + viewport + scene), concrete commands (add/remove/reparent node, set transform/alpha/visible/blend-mode, batch transform, rename, copy/paste, add-from-factory, group/ungroup, delete/duplicate selection, z-order, align/distribute, clear scene, set scene size), concrete tools (select, move, scale, rotate, pointer — combined arrow tool with rotation), inspector snapshot for host property panels
+- `tool-editor` — editor application core: `EditorState` (composes command history + selection + clipboard + drag-drop + guides + hierarchy + keyboard + locks + node factory + scene metadata + snapping + tool registry + viewport + scene), concrete commands (add/remove/reparent node, set transform/pivot/alpha/visible/blend-mode, batch transform, rename node/scene, copy/paste, add-from-factory, group/ungroup, delete/duplicate/lock selection, z-order, align/distribute, clear scene, set scene size/background), concrete tools (select, marquee, move, scale, rotate, pointer — combined arrow tool with rotation), inspector snapshot for host property panels
 
 **Flight SDK** (`@flighthq/sdk`) — provides `Scene2D`, `Node2D`, `Sprite`, renderers, interaction, picking, scene-formats, and the full graphics substrate.
 

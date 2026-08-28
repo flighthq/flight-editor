@@ -14,6 +14,31 @@ describe('createEditorState', () => {
     expect(state.toolRegistry.activeToolId).toBeNull();
     expect(state.viewport.config.minZoom).toBe(0.05);
   });
+
+  it('initializes an empty keyboard map', () => {
+    const state = createEditorState();
+
+    expect(state.keyboard.bindings.size).toBe(0);
+    expect(state.keyboard.version).toBe(0);
+  });
+
+  it('initializes default scene metadata', () => {
+    const state = createEditorState();
+
+    expect(state.sceneState.name).toBe('Untitled');
+    expect(state.sceneState.width).toBe(800);
+    expect(state.sceneState.height).toBe(600);
+    expect(state.sceneState.dirty).toBe(false);
+  });
+
+  it('initializes disabled snapping with an empty guide list', () => {
+    const state = createEditorState();
+
+    expect(state.snap.gridEnabled).toBe(false);
+    expect(state.snap.guidesEnabled).toBe(false);
+    expect(state.snap.guides).toEqual([]);
+    expect(state.snap.version).toBe(0);
+  });
 });
 
 describe('getEditorScene', () => {

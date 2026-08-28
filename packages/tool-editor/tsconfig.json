@@ -14,9 +14,12 @@
     { "path": "../editor-drag-drop" },
     { "path": "../editor-guides" },
     { "path": "../editor-hierarchy" },
+    { "path": "../editor-keyboard" },
     { "path": "../editor-lock" },
     { "path": "../editor-node-factory" },
+    { "path": "../editor-scene-state" },
     { "path": "../editor-selection" },
+    { "path": "../editor-snap" },
     { "path": "../editor-tool" },
     { "path": "../editor-viewport" }
   ],

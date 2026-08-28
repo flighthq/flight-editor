@@ -11,11 +11,15 @@ export { createDeleteSelectionCommand } from './commands/deleteSelectionCommand'
 export { createDuplicateSelectionCommand } from './commands/duplicateSelectionCommand';
 export { createDistributeNodesCommand } from './commands/distributeNodesCommand';
 export { createGroupNodesCommand } from './commands/groupNodesCommand';
+export { createLockSelectionCommand } from './commands/lockSelectionCommand';
 export { createPasteNodesCommand } from './commands/pasteNodesCommand';
 export { createRemoveNodeCommand } from './commands/removeNodeCommand';
 export { createReparentNodeCommand } from './commands/reparentNodeCommand';
 export { createUngroupNodesCommand } from './commands/ungroupNodesCommand';
 export { createSetNodeNameCommand } from './commands/setNodeNameCommand';
+export { createSetPivotCommand } from './commands/setPivotCommand';
+export { createSetSceneBackgroundColorCommand } from './commands/setSceneBackgroundColorCommand';
+export { createSetSceneNameCommand } from './commands/setSceneNameCommand';
 export { createSetSceneSizeCommand } from './commands/setSceneSizeCommand';
 export { createSetTransform2DCommand } from './commands/setTransform2DCommand';
 export {
@@ -26,6 +30,7 @@ export {
 } from './commands/zOrderCommands';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
+export { createMarqueeTool } from './marqueeTool';
 export { createMoveTool } from './moveTool';
 export { createPointerTool } from './pointerTool';
 export { createRotateTool } from './rotateTool';
@@ -37,6 +42,7 @@ export type { TransformEntry } from './commands/batchTransformCommand';
 export type { DistributeMode } from './commands/distributeNodesCommand';
 export type { EditorState } from './editorState';
 export type { InspectorSnapshot } from './inspectorState';
+export type { MarqueeHitTestFn, MarqueeRect, MarqueeTool } from './marqueeTool';
 export type { MoveTool } from './moveTool';
 export type {
   HandleHitTestFn,

@@ -9,9 +9,14 @@ import {
   createDeleteSelectionCommand,
   createDuplicateSelectionCommand,
   createDistributeNodesCommand,
+  createLockSelectionCommand,
+  createMarqueeTool,
   createPasteNodesCommand,
   createSendBackwardCommand,
   createSendToBackCommand,
+  createSetPivotCommand,
+  createSetSceneBackgroundColorCommand,
+  createSetSceneNameCommand,
 } from './index';
 
 describe('tool-editor', () => {
@@ -24,8 +29,13 @@ describe('tool-editor', () => {
     expect(createDeleteSelectionCommand).toBeTypeOf('function');
     expect(createDuplicateSelectionCommand).toBeTypeOf('function');
     expect(createDistributeNodesCommand).toBeTypeOf('function');
+    expect(createLockSelectionCommand).toBeTypeOf('function');
+    expect(createMarqueeTool).toBeTypeOf('function');
     expect(createPasteNodesCommand).toBeTypeOf('function');
     expect(createSendBackwardCommand).toBeTypeOf('function');
     expect(createSendToBackCommand).toBeTypeOf('function');
+    expect(createSetPivotCommand).toBeTypeOf('function');
+    expect(createSetSceneBackgroundColorCommand).toBeTypeOf('function');
+    expect(createSetSceneNameCommand).toBeTypeOf('function');
   });
 });
