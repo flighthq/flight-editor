@@ -1,9 +1,9 @@
-import type { Node } from '@flighthq/types';
+import type { NodeAny } from '@flighthq/types';
 
-export type SelectionFilter = (node: Readonly<Node>) => boolean;
+export type SelectionFilter = (node: Readonly<NodeAny>) => boolean;
 
 export interface SelectionState {
-  nodes: Node[];
+  nodes: NodeAny[];
   version: number;
 }
 
@@ -11,7 +11,7 @@ export function createSelectionState(): SelectionState {
   return { nodes: [], version: 0 };
 }
 
-export function getSelectedNodes(state: Readonly<SelectionState>): ReadonlyArray<Node> {
+export function getSelectedNodes(state: Readonly<SelectionState>): ReadonlyArray<NodeAny> {
   return state.nodes;
 }
 
@@ -19,15 +19,15 @@ export function getSelectionCount(state: Readonly<SelectionState>): number {
   return state.nodes.length;
 }
 
-export function getPrimarySelection(state: Readonly<SelectionState>): Node | null {
+export function getPrimarySelection(state: Readonly<SelectionState>): NodeAny | null {
   return state.nodes.length > 0 ? state.nodes[0] : null;
 }
 
-export function isSelected(state: Readonly<SelectionState>, node: Readonly<Node>): boolean {
-  return state.nodes.indexOf(node as Node) !== -1;
+export function isSelected(state: Readonly<SelectionState>, node: Readonly<NodeAny>): boolean {
+  return state.nodes.indexOf(node as NodeAny) !== -1;
 }
 
-export function setSelection(state: SelectionState, nodes: ReadonlyArray<Node>, filter?: SelectionFilter): void {
+export function setSelection(state: SelectionState, nodes: ReadonlyArray<NodeAny>, filter?: SelectionFilter): void {
   state.nodes.length = 0;
   for (const node of nodes) {
     if (filter !== undefined && !filter(node)) continue;
@@ -36,7 +36,7 @@ export function setSelection(state: SelectionState, nodes: ReadonlyArray<Node>, 
   state.version++;
 }
 
-export function addToSelection(state: SelectionState, node: Node, filter?: SelectionFilter): boolean {
+export function addToSelection(state: SelectionState, node: NodeAny, filter?: SelectionFilter): boolean {
   if (filter !== undefined && !filter(node)) return false;
   if (state.nodes.indexOf(node) !== -1) return false;
   state.nodes.push(node);
@@ -44,7 +44,7 @@ export function addToSelection(state: SelectionState, node: Node, filter?: Selec
   return true;
 }
 
-export function removeFromSelection(state: SelectionState, node: Node): boolean {
+export function removeFromSelection(state: SelectionState, node: NodeAny): boolean {
   const index = state.nodes.indexOf(node);
   if (index === -1) return false;
   state.nodes.splice(index, 1);
@@ -52,7 +52,7 @@ export function removeFromSelection(state: SelectionState, node: Node): boolean 
   return true;
 }
 
-export function toggleSelection(state: SelectionState, node: Node, filter?: SelectionFilter): boolean {
+export function toggleSelection(state: SelectionState, node: NodeAny, filter?: SelectionFilter): boolean {
   const index = state.nodes.indexOf(node);
   if (index !== -1) {
     state.nodes.splice(index, 1);

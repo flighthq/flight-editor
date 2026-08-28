@@ -1,4 +1,7 @@
+export { createAddFromFactoryCommand } from './commands/addFromFactoryCommand';
 export { createAddNodeCommand } from './commands/addNodeCommand';
+export { createCopySelectionCommand } from './commands/copySelectionCommand';
+export { createPasteNodesCommand } from './commands/pasteNodesCommand';
 export { createRemoveNodeCommand } from './commands/removeNodeCommand';
 export { createReparentNodeCommand } from './commands/reparentNodeCommand';
 export { createSetNodeNameCommand } from './commands/setNodeNameCommand';

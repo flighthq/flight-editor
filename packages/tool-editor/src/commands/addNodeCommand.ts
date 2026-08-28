@@ -1,9 +1,9 @@
 import type { Command } from '@flighthq/editor-command';
-import type { Node2D } from '@flighthq/types';
+import type { NodeAny } from '@flighthq/types';
 
 import { addNodeChild, removeNodeChild } from '@flighthq/node';
 
-export function createAddNodeCommand(parent: Node2D, child: Node2D): Command {
+export function createAddNodeCommand(parent: NodeAny, child: NodeAny): Command {
   return {
     label: 'Add Node',
     execute() {
