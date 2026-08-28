@@ -75,6 +75,32 @@ describe('lockState', () => {
     expect(getLockVersion(state)).toBe(v);
   });
 
+  it('handles multiple locks and selective unlock', () => {
+    const state = createLockState();
+    const a = { id: 1 };
+    const b = { id: 2 };
+    const c = { id: 3 };
+    lockNode(state, a);
+    lockNode(state, b);
+    lockNode(state, c);
+    expect(getLockedCount(state)).toBe(3);
+
+    unlockNode(state, b);
+    expect(getLockedCount(state)).toBe(2);
+    expect(isLocked(state, a)).toBe(true);
+    expect(isLocked(state, b)).toBe(false);
+    expect(isLocked(state, c)).toBe(true);
+  });
+
+  it('toggle always bumps version', () => {
+    const state = createLockState();
+    const node = { id: 1 };
+    toggleLock(state, node);
+    expect(getLockVersion(state)).toBe(1);
+    toggleLock(state, node);
+    expect(getLockVersion(state)).toBe(2);
+  });
+
   it('bumps version on each meaningful change', () => {
     const state = createLockState();
     const a = { id: 1 };

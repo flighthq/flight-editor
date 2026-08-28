@@ -98,6 +98,31 @@ describe('dragDropState', () => {
     expect(getDragDropVersion(state)).toBe(v);
   });
 
+  it('supports different drag sources', () => {
+    const state = createDragDropState();
+    const hierarchyPayload: DragPayload = { source: 'hierarchy', kind: 'Node2D', data: null };
+    beginDrag(state, hierarchyPayload, 0, 0);
+
+    expect(getDragPayload(state)?.source).toBe('hierarchy');
+    endDrag(state);
+
+    const externalPayload: DragPayload = { source: 'external', kind: 'image', data: { url: 'test.png' } };
+    beginDrag(state, externalPayload, 5, 5);
+
+    expect(getDragPayload(state)?.source).toBe('external');
+    expect(getDragPayload(state)?.kind).toBe('image');
+  });
+
+  it('clears drop target on end', () => {
+    const state = createDragDropState();
+    beginDrag(state, libraryPayload, 0, 0);
+    setDropTarget(state, { id: 'target' });
+
+    endDrag(state);
+
+    expect(getDropTarget(state)).toBeNull();
+  });
+
   it('bumps version on each state change', () => {
     const state = createDragDropState();
     expect(getDragDropVersion(state)).toBe(0);
