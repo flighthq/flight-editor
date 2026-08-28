@@ -50,5 +50,8 @@
       "oxfmt --write --no-error-on-unmatched-pattern"
     ],
     "**/*.{json,md}": "oxfmt --write --no-error-on-unmatched-pattern"
+  },
+  "dependencies": {
+    "@flighthq/sdk": "^0.5.0-next.1944.cd6b6e7"
   }
 }
