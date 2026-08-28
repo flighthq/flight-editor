@@ -44,6 +44,7 @@
     "@flighthq/editor-file": "*",
     "@flighthq/editor-guides": "*",
     "@flighthq/editor-hierarchy": "*",
+    "@flighthq/editor-history-state": "*",
     "@flighthq/editor-host": "*",
     "@flighthq/editor-keyboard": "*",
     "@flighthq/editor-lock": "*",

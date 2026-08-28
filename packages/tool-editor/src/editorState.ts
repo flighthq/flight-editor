@@ -9,6 +9,7 @@ import type { ExportSettingsState } from '@flighthq/editor-export-settings';
 import type { FileState } from '@flighthq/editor-file';
 import type { GuidesState } from '@flighthq/editor-guides';
 import type { HierarchyState } from '@flighthq/editor-hierarchy';
+import type { HistoryState } from '@flighthq/editor-history-state';
 import type { HostAdapterState } from '@flighthq/editor-host';
 import type { KeyboardMap } from '@flighthq/editor-keyboard';
 import type { LockState } from '@flighthq/editor-lock';
@@ -44,6 +45,7 @@ import { createExportSettingsState } from '@flighthq/editor-export-settings';
 import { createFileState } from '@flighthq/editor-file';
 import { createGuidesState } from '@flighthq/editor-guides';
 import { createHierarchyState } from '@flighthq/editor-hierarchy';
+import { createHistoryState } from '@flighthq/editor-history-state';
 import { createHostAdapterState } from '@flighthq/editor-host';
 import { createKeyboardMap } from '@flighthq/editor-keyboard';
 import { createLockState } from '@flighthq/editor-lock';
@@ -78,6 +80,7 @@ export interface EditorState {
   readonly file: FileState;
   readonly guides: GuidesState;
   readonly hierarchy: HierarchyState;
+  readonly historyPanel: HistoryState;
   readonly host: HostAdapterState;
   readonly keyboard: KeyboardMap;
   readonly locks: LockState;
@@ -115,6 +118,7 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
     file: createFileState(),
     guides: createGuidesState(),
     hierarchy: createHierarchyState(),
+    historyPanel: createHistoryState(),
     host: createHostAdapterState(),
     keyboard: createKeyboardMap(),
     locks: createLockState(),

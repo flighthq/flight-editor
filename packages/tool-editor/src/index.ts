@@ -129,6 +129,15 @@ export {
 } from './exportManager';
 export { createEyedropperTool } from './eyedropperTool';
 export {
+  addEditorCheckpoint,
+  clearEditorCheckpoints,
+  getEditorCheckpoint,
+  getEditorCheckpointCount,
+  getEditorCheckpoints,
+  getEditorHistoryPanelVersion,
+  removeEditorCheckpoint,
+} from './historyStateManager';
+export {
   addEditorGuide,
   clearAllGuides,
   getEditorGuide,
@@ -235,6 +244,23 @@ export { captureBridgeSnapshot, hasBridgeChanges, notifyHostChanges } from './ho
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMarqueeTool } from './marqueeTool';
 export {
+  addEditorMenu,
+  addEditorMenuItem,
+  createEditorMenuItem,
+  createEditorMenuSeparator,
+  createEditorSubmenu,
+  getEditorMenu,
+  getEditorMenuBarVersion,
+  getEditorMenuCount,
+  getEditorMenuItem,
+  getEditorMenuItems,
+  getEditorMenus,
+  removeEditorMenu,
+  removeEditorMenuItem,
+  setEditorMenuItemChecked,
+  setEditorMenuItemEnabled,
+} from './menuBarManager';
+export {
   clearEditorPropertyValues,
   getEditorEditingPropertyId,
   getEditorPropertyCategories,
@@ -335,6 +361,18 @@ export {
 } from './statusBarManager';
 export { formatWindowTitle, updateWindowTitle } from './windowTitle';
 export {
+  addEditorZoomPreset,
+  computeEditorFitWidthZoom,
+  computeEditorFitZoom,
+  findEditorNearestPreset,
+  getEditorNextZoomIn,
+  getEditorNextZoomOut,
+  getEditorZoomPreset,
+  getEditorZoomPresetVersion,
+  getEditorZoomPresets,
+  removeEditorZoomPreset,
+} from './zoomPresetManager';
+export {
   getZoomLevel,
   getZoomPercent,
   getZoomPercentLabel,
@@ -428,3 +466,6 @@ export type { CursorPosition, MessageSeverity } from '@flighthq/editor-status';
 export type { DocumentFormat, DocumentLifecycle, DocumentMetadata } from '@flighthq/editor-document';
 export type { HostAdapter, HostCallbacks, HostCapabilities } from '@flighthq/editor-host';
 export type { PropertyDefinition, PropertyType, PropertyValue } from '@flighthq/editor-properties';
+export type { Checkpoint } from '@flighthq/editor-history-state';
+export type { MenuDefinition, MenuItem, MenuItemRole } from '@flighthq/editor-menu';
+export type { ZoomPreset } from '@flighthq/editor-zoom-presets';

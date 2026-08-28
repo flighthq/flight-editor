@@ -20,6 +20,7 @@
     { "path": "../editor-file" },
     { "path": "../editor-guides" },
     { "path": "../editor-hierarchy" },
+    { "path": "../editor-history-state" },
     { "path": "../editor-host" },
     { "path": "../editor-keyboard" },
     { "path": "../editor-lock" },
