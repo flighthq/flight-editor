@@ -150,6 +150,25 @@ export {
   removeEditorGuide,
   unlockEditorGuide,
 } from './guideManager';
+export {
+  addEditorRecentFile,
+  clearEditorRecentFiles,
+  getEditorFilePath,
+  getEditorFileVersion,
+  getEditorMaxRecentFiles,
+  getEditorRecentFileCount,
+  getEditorRecentFiles,
+  getEditorSaveStatus,
+  isEditorFileDirty,
+  markEditorFileClean,
+  markEditorFileDirty,
+  newEditorFile,
+  openEditorFile,
+  removeEditorRecentFile,
+  setEditorFilePath,
+  setEditorMaxRecentFiles,
+  setEditorSaveStatus,
+} from './fileManager';
 export { canSave, canSaveAs, hasFilePath, needsSave, openFile, saveFile, saveFileAs } from './fileOperations';
 export {
   getEditorKeyBinding,
@@ -360,6 +379,16 @@ export {
 } from './selectionQueries';
 export { formatSelectionLabel, getSelectionSummary, syncSelectionToStatusBar } from './selectionSync';
 export {
+  activateEditorTool,
+  deactivateEditorTool,
+  getActiveEditorTool,
+  getActiveEditorToolId,
+  getRegisteredEditorToolIds,
+  isEditorToolActive,
+  registerEditorTool,
+  unregisterEditorTool,
+} from './toolManager';
+export {
   clearEditorCursorPosition,
   clearEditorStatusMessage,
   getEditorCursorPosition,
@@ -487,3 +516,5 @@ export type { MenuDefinition, MenuItem, MenuItemRole } from '@flighthq/editor-me
 export type { ZoomPreset } from '@flighthq/editor-zoom-presets';
 export type { NodeCreator, NodeFactoryEntry } from '@flighthq/editor-node-factory';
 export type { KeyBinding, KeyboardEventLike } from '@flighthq/editor-keyboard';
+export type { RecentFile, SaveStatus } from '@flighthq/editor-file';
+export type { EditorPointerEvent, EditorTool } from '@flighthq/editor-tool';
