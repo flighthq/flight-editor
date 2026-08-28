@@ -51,4 +51,32 @@ describe('createMoveToPageCommand', () => {
     command.execute();
     expect(getNodeChildren(target)).toEqual([second, detached, first]);
   });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const source = createDisplayObject();
+    const target = createDisplayObject();
+    const node = createDisplayObject({ name: 'n' });
+    addNodeChild(source, node);
+    const command = createMoveToPageCommand([node], target);
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(getNodeParent(node)).toBe(target);
+      command.undo();
+      expect(getNodeParent(node)).toBe(source);
+    }
+  });
+
+  it('handles moving a single rootless node', () => {
+    const target = createDisplayObject();
+    const node = createDisplayObject({ name: 'orphan' });
+    const command = createMoveToPageCommand([node], target);
+
+    command.execute();
+    expect(getNodeChildren(target)).toEqual([node]);
+
+    command.undo();
+    expect(getNodeChildren(target)).toEqual([]);
+    expect(getNodeParent(node)).toBeNull();
+  });
 });

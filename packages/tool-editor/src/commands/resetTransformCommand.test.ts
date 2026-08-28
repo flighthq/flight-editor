@@ -35,4 +35,27 @@ describe('createResetTransformCommand', () => {
     expect(node).toMatchObject(original);
     expect(command.label).toBe('Reset Transform');
   });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const node = createDisplayObject({ x: 10, y: 20, rotation: 1.5, scaleX: 3, scaleY: 4 });
+    const command = createResetTransformCommand(node);
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(node.x).toBe(0);
+      expect(node.scaleX).toBe(1);
+      command.undo();
+      expect(node.x).toBe(10);
+      expect(node.scaleX).toBe(3);
+    }
+  });
+
+  it('is a no-op on a node already at identity', () => {
+    const node = createDisplayObject();
+    const command = createResetTransformCommand(node);
+    command.execute();
+    expect(node).toMatchObject({ x: 0, y: 0, scaleX: 1, scaleY: 1, rotation: 0 });
+    command.undo();
+    expect(node).toMatchObject({ x: 0, y: 0, scaleX: 1, scaleY: 1, rotation: 0 });
+  });
 });

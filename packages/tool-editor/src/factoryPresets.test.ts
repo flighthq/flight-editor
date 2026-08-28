@@ -26,4 +26,21 @@ describe('registerDefaultNodeKinds', () => {
     registerDefaultNodeKinds(factory);
     expect(factory.entries.size).toBe(5);
   });
+
+  it('each registered kind creates a node with the correct kind', () => {
+    const factory = createNodeFactory();
+    registerDefaultNodeKinds(factory);
+    for (const id of getNodeKindIds(factory)) {
+      const node = createNodeFromKind(factory, id);
+      expect(node).not.toBeNull();
+      expect(node!.kind).toBe(id);
+    }
+  });
+
+  it('category groupings are correct', () => {
+    const factory = createNodeFactory();
+    registerDefaultNodeKinds(factory);
+    expect(getNodeKindsByCategory(factory, 'Containers').map(({ id }) => id)).toEqual([DisplayObjectKind]);
+    expect(getNodeKindsByCategory(factory, 'Text').map(({ id }) => id)).toEqual([NativeTextKind, TextLabelKind]);
+  });
 });

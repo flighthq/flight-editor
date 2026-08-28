@@ -1,4 +1,4 @@
-import { getNodeChildAt, getNodeChildCount, getNodeParent } from '@flighthq/node';
+import { addNodeChild, getNodeChildAt, getNodeChildCount, getNodeParent } from '@flighthq/node';
 import { createDisplayObject } from '@flighthq/scene2d';
 import type { Shape, ShapeCommandToken } from '@flighthq/types';
 import { ShapeKind } from '@flighthq/types';
@@ -35,5 +35,33 @@ describe('createFromShapeCommand', () => {
     const command = createFromShapeCommand(parent, []);
     command.execute();
     expect(getNodeChildAt(parent, 0)?.name).toBeNull();
+  });
+
+  it('preserves existing siblings in the parent', () => {
+    const parent = createDisplayObject();
+    const sibling = createDisplayObject();
+    addNodeChild(parent, sibling);
+    const command = createFromShapeCommand(parent, ['moveTo', 2, 0, 0], 'Test');
+    command.execute();
+    expect(getNodeChildCount(parent)).toBe(2);
+    expect(getNodeChildAt(parent, 0)).toBe(sibling);
+    command.undo();
+    expect(getNodeChildCount(parent)).toBe(1);
+    expect(getNodeChildAt(parent, 0)).toBe(sibling);
+  });
+
+  it('multiple undo/redo cycles reuse the same shape instance', () => {
+    const parent = createDisplayObject();
+    const command = createFromShapeCommand(parent, ['moveTo', 2, 5, 5], 'Stable');
+    command.execute();
+    const shape = getNodeChildAt(parent, 0);
+    command.undo();
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(getNodeChildAt(parent, 0)).toBe(shape);
+      command.undo();
+      expect(getNodeChildCount(parent)).toBe(0);
+    }
   });
 });

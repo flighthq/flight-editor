@@ -32,4 +32,31 @@ describe('createSetColorAdjustmentCommand', () => {
     command.undo();
     expect(getNodeColorAdjustments(node)).toBeNull();
   });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const node = createDisplayObject();
+    const adj = createGrayscaleAdjustment();
+    const command = createSetColorAdjustmentCommand(node, [adj]);
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(getNodeColorAdjustments(node)).toEqual([adj]);
+      command.undo();
+      expect(getNodeColorAdjustments(node)).toBeNull();
+    }
+  });
+
+  it('replaces a multi-adjustment stack', () => {
+    const node = createDisplayObject();
+    const inv = createInvertAdjustment();
+    const gray = createGrayscaleAdjustment();
+    setNodeColorAdjustments(node, [inv, gray]);
+
+    const replacement = createInvertAdjustment();
+    const command = createSetColorAdjustmentCommand(node, [replacement]);
+    command.execute();
+    expect(getNodeColorAdjustments(node)).toEqual([replacement]);
+    command.undo();
+    expect(getNodeColorAdjustments(node)).toEqual([inv, gray]);
+  });
 });

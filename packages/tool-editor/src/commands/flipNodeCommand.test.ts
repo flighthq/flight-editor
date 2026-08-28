@@ -30,4 +30,27 @@ describe('createFlipNodeCommand', () => {
     expect(() => createFlipNodeCommand([], 'vertical').execute()).not.toThrow();
     expect(command.label).toBe('Flip Vertically');
   });
+
+  it('double flip restores original scale', () => {
+    const node = createDisplayObject({ scaleX: 3, scaleY: 5 });
+    const flip1 = createFlipNodeCommand([node], 'horizontal');
+    flip1.execute();
+    expect(node.scaleX).toBe(-3);
+    const flip2 = createFlipNodeCommand([node], 'horizontal');
+    flip2.execute();
+    expect(node.scaleX).toBe(3);
+    expect(node.scaleY).toBe(5);
+  });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const node = createDisplayObject({ scaleX: 2, scaleY: -3 });
+    const command = createFlipNodeCommand([node], 'vertical');
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(node.scaleY).toBe(3);
+      command.undo();
+      expect(node.scaleY).toBe(-3);
+    }
+  });
 });

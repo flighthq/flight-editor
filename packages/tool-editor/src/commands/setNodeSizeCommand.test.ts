@@ -31,4 +31,33 @@ describe('createSetNodeSizeCommand', () => {
     expect(getNodeWidth(node)).toBeCloseTo(20);
     expect(getNodeHeight(node)).toBeCloseTo(30);
   });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const parent = createDisplayObject();
+    const node = createHtmlView({ data: { width: 10, height: 20 } });
+    addNodeChild(parent, node);
+    const command = createSetNodeSizeCommand(node, 50, 60);
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(getNodeWidth(node)).toBeCloseTo(50);
+      expect(getNodeHeight(node)).toBeCloseTo(60);
+      command.undo();
+      expect(getNodeWidth(node)).toBeCloseTo(10);
+      expect(getNodeHeight(node)).toBeCloseTo(20);
+    }
+  });
+
+  it('same size is a valid identity operation', () => {
+    const parent = createDisplayObject();
+    const node = createHtmlView({ data: { width: 80, height: 40 } });
+    addNodeChild(parent, node);
+    const command = createSetNodeSizeCommand(node, 80, 40);
+    command.execute();
+    expect(getNodeWidth(node)).toBeCloseTo(80);
+    expect(getNodeHeight(node)).toBeCloseTo(40);
+    command.undo();
+    expect(getNodeWidth(node)).toBeCloseTo(80);
+    expect(getNodeHeight(node)).toBeCloseTo(40);
+  });
 });
