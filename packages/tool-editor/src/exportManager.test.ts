@@ -1,8 +1,12 @@
+import { addToSelection } from '@flighthq/editor-selection';
+import { createNode2D } from '@flighthq/scene2d';
+import { DisplayObjectKind } from '@flighthq/types';
 import { describe, expect, it } from 'vitest';
 
 import { createEditorState } from './editorState';
 import {
   addExportForNode,
+  addExportForSelection,
   clearAllExports,
   getAllExports,
   getEnabledExportCount,
@@ -40,6 +44,22 @@ describe('addExportForNode', () => {
     expect(slice!.format).toBe('svg');
     expect(slice!.scale).toBe(2);
     expect(slice!.suffix).toBe('@2x');
+  });
+});
+
+describe('addExportForSelection', () => {
+  it('adds exports for selected nodes', () => {
+    const editor = createEditorState();
+    addToSelection(editor.selection, createNode2D(DisplayObjectKind));
+    addToSelection(editor.selection, createNode2D(DisplayObjectKind));
+    const count = addExportForSelection(editor);
+    expect(count).toBe(2);
+    expect(getExportCount(editor)).toBe(2);
+  });
+
+  it('returns 0 when nothing selected', () => {
+    const editor = createEditorState();
+    expect(addExportForSelection(editor)).toBe(0);
   });
 });
 
