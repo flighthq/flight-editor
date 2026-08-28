@@ -7,5 +7,10 @@ export default defineConfig({
     globals: true,
     include: ['packages/*/src/**/*.test.ts'],
     exclude: ['.claude', 'node_modules'],
+    server: {
+      deps: {
+        inline: ['@flighthq'],
+      },
+    },
   },
 });

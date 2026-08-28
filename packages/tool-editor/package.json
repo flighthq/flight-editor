@@ -39,6 +39,7 @@
     "@flighthq/types": "*"
   },
   "devDependencies": {
+    "@flighthq/scene2d": "*",
     "typescript": "^5.9.3"
   },
   "description": "Flight editor application core — composes selection, commands, and tools into an editor state",
