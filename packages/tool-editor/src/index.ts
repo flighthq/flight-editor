@@ -1,11 +1,19 @@
 export { createAddFromFactoryCommand } from './commands/addFromFactoryCommand';
 export { createAddNodeCommand } from './commands/addNodeCommand';
 export { createCopySelectionCommand } from './commands/copySelectionCommand';
+export { createDeleteSelectionCommand } from './commands/deleteSelectionCommand';
+export { createDuplicateSelectionCommand } from './commands/duplicateSelectionCommand';
 export { createPasteNodesCommand } from './commands/pasteNodesCommand';
 export { createRemoveNodeCommand } from './commands/removeNodeCommand';
 export { createReparentNodeCommand } from './commands/reparentNodeCommand';
 export { createSetNodeNameCommand } from './commands/setNodeNameCommand';
 export { createSetTransform2DCommand } from './commands/setTransform2DCommand';
+export {
+  createBringForwardCommand,
+  createBringToFrontCommand,
+  createSendBackwardCommand,
+  createSendToBackCommand,
+} from './commands/zOrderCommands';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMoveTool } from './moveTool';
