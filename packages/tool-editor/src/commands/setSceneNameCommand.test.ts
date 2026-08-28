@@ -50,4 +50,21 @@ describe('createSetSceneNameCommand', () => {
     expect(state.name).toBe('After');
     expect(isSceneDirty(state)).toBe(true);
   });
+
+  it('supports empty name', () => {
+    const state = createSceneState('Named');
+    const command = createSetSceneNameCommand(state, '');
+
+    command.execute();
+    expect(state.name).toBe('');
+
+    command.undo();
+    expect(state.name).toBe('Named');
+  });
+
+  it('has the correct label', () => {
+    const state = createSceneState('Test');
+    const cmd = createSetSceneNameCommand(state, 'New');
+    expect(cmd.label).toBe('Set Scene Name');
+  });
 });

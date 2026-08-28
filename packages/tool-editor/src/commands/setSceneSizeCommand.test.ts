@@ -45,4 +45,26 @@ describe('createSetSceneSizeCommand', () => {
     expect(scene.scene2dWidth).toBe(1920);
     expect(scene.scene2dHeight).toBe(1080);
   });
+
+  it('identity operation preserves dimensions', () => {
+    const scene = createScene2D({ scene2dWidth: 800, scene2dHeight: 600 });
+    const cmd = createSetSceneSizeCommand(scene, 800, 600);
+
+    cmd.execute();
+    expect(scene.scene2dWidth).toBe(800);
+    expect(scene.scene2dHeight).toBe(600);
+
+    cmd.undo();
+    expect(scene.scene2dWidth).toBe(800);
+    expect(scene.scene2dHeight).toBe(600);
+  });
+
+  it('changes only width when height stays the same', () => {
+    const scene = createScene2D({ scene2dWidth: 800, scene2dHeight: 600 });
+    const cmd = createSetSceneSizeCommand(scene, 1024, 600);
+
+    cmd.execute();
+    expect(scene.scene2dWidth).toBe(1024);
+    expect(scene.scene2dHeight).toBe(600);
+  });
 });

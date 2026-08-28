@@ -69,4 +69,48 @@ describe('createRotateTool', () => {
     tool.pointerMove(makeEvent(0, 100));
     tool.pointerUp(makeEvent(0, 100));
   });
+
+  it('deactivate clears drag state', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+
+    const tool = createRotateTool(editor, { centerX: 0, centerY: 0 });
+    tool.pointerDown(makeEvent(100, 0));
+    tool.deactivate();
+    tool.pointerMove(makeEvent(0, 100));
+    tool.pointerUp(makeEvent(0, 100));
+
+    expect(readTransform(node).rotation).toBe(0);
+  });
+
+  it('rotates multiple selected nodes', () => {
+    const editor = createEditorState();
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [a, b]);
+
+    const tool = createRotateTool(editor, { centerX: 0, centerY: 0 });
+    tool.pointerDown(makeEvent(100, 0));
+    tool.pointerUp(makeEvent(0, 100));
+
+    expect(readTransform(a).rotation).toBeCloseTo(Math.PI / 2, 5);
+    expect(readTransform(b).rotation).toBeCloseTo(Math.PI / 2, 5);
+
+    undo(editor.commandHistory);
+    expect(readTransform(a).rotation).toBe(0);
+    expect(readTransform(b).rotation).toBe(0);
+  });
+
+  it('pointerMove without pointerDown does nothing', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+
+    const tool = createRotateTool(editor, { centerX: 0, centerY: 0 });
+    tool.pointerMove(makeEvent(0, 100));
+    tool.pointerUp(makeEvent(0, 100));
+
+    expect(readTransform(node).rotation).toBe(0);
+  });
 });

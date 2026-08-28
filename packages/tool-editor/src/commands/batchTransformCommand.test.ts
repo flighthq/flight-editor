@@ -81,4 +81,34 @@ describe('createBatchTransformCommand', () => {
     cmd.execute();
     cmd.undo();
   });
+
+  it('has the correct label', () => {
+    const cmd = createBatchTransformCommand([]);
+    expect(cmd.label).toBe('Transform');
+  });
+
+  it('can re-execute after undo', () => {
+    const a = createNode2D(DisplayObjectKind);
+    const cmd = createBatchTransformCommand([{ node: a, transform: { ...identity, x: 42, y: 84 } }]);
+
+    cmd.execute();
+    cmd.undo();
+    cmd.execute();
+
+    expect(readTransform(a).x).toBe(42);
+    expect(readTransform(a).y).toBe(84);
+  });
+
+  it('preserves unmodified transform fields', () => {
+    const node = createNode2D(DisplayObjectKind);
+    setNodeTransform2D(node, { ...identity, scaleX: 3, scaleY: 5 });
+
+    const cmd = createBatchTransformCommand([{ node, transform: { ...identity, x: 10, scaleX: 3, scaleY: 5 } }]);
+    cmd.execute();
+
+    const t = readTransform(node);
+    expect(t.x).toBe(10);
+    expect(t.scaleX).toBe(3);
+    expect(t.scaleY).toBe(5);
+  });
 });
