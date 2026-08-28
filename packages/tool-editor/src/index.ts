@@ -66,6 +66,19 @@ export {
 } from './clipboardManager';
 export { createEditorLoopState, forceUpdateTitle, tickEditor } from './editorLoop';
 export { createEyedropperTool } from './eyedropperTool';
+export {
+  addEditorGuide,
+  clearAllGuides,
+  getEditorGuide,
+  getEditorGuideCount,
+  getEditorSnapPositions,
+  getHorizontalGuides,
+  getVerticalGuides,
+  lockEditorGuide,
+  moveEditorGuide,
+  removeEditorGuide,
+  unlockEditorGuide,
+} from './guideManager';
 export { canSave, canSaveAs, hasFilePath, needsSave, openFile, saveFile, saveFileAs } from './fileOperations';
 export {
   getActiveEditorToolId,
