@@ -26,6 +26,8 @@
       "@flighthq/editor-drag-drop/*": ["./packages/editor-drag-drop/src/*"],
       "@flighthq/editor-export-settings": ["./packages/editor-export-settings/src/index.ts"],
       "@flighthq/editor-export-settings/*": ["./packages/editor-export-settings/src/*"],
+      "@flighthq/editor-file": ["./packages/editor-file/src/index.ts"],
+      "@flighthq/editor-file/*": ["./packages/editor-file/src/*"],
       "@flighthq/editor-guides": ["./packages/editor-guides/src/index.ts"],
       "@flighthq/editor-guides/*": ["./packages/editor-guides/src/*"],
       "@flighthq/editor-node-factory": ["./packages/editor-node-factory/src/index.ts"],

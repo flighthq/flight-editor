@@ -8,6 +8,7 @@
     { "path": "./packages/editor-context-menu" },
     { "path": "./packages/editor-drag-drop" },
     { "path": "./packages/editor-export-settings" },
+    { "path": "./packages/editor-file" },
     { "path": "./packages/editor-guides" },
     { "path": "./packages/editor-history-state" },
     { "path": "./packages/editor-lock" },
