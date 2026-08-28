@@ -46,6 +46,14 @@ export { createEditorState, getEditorScene, setEditorScene } from './editorState
 export { executeNamedCommand, registerDefaultCommands } from './commandRegistry';
 export { createEyedropperTool } from './eyedropperTool';
 export {
+  getActiveEditorToolId,
+  handleKeyDown,
+  handlePointerDown,
+  handlePointerMove,
+  handlePointerUp,
+  switchTool,
+} from './eventHandler';
+export {
   getRegisteredCommandCount,
   getRegisteredMenuCount,
   getRegisteredShortcutCount,
