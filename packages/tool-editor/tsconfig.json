@@ -11,7 +11,10 @@
   "references": [
     { "path": "../editor-clipboard" },
     { "path": "../editor-command" },
+    { "path": "../editor-drag-drop" },
+    { "path": "../editor-guides" },
     { "path": "../editor-hierarchy" },
+    { "path": "../editor-lock" },
     { "path": "../editor-node-factory" },
     { "path": "../editor-selection" },
     { "path": "../editor-tool" },
