@@ -8,6 +8,14 @@
     "declarationMap": true,
     "sourceMap": true
   },
-  "references": [{ "path": "../editor-command" }, { "path": "../editor-selection" }, { "path": "../editor-tool" }],
+  "references": [
+    { "path": "../editor-clipboard" },
+    { "path": "../editor-command" },
+    { "path": "../editor-hierarchy" },
+    { "path": "../editor-node-factory" },
+    { "path": "../editor-selection" },
+    { "path": "../editor-tool" },
+    { "path": "../editor-viewport" }
+  ],
   "include": ["src"]
 }

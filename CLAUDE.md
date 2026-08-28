@@ -32,6 +32,9 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 
 - `editor-command` — command history: `Command` interface, execute/undo/redo, clean tracking
 - `editor-selection` — selection state: multi-select, filters by kind/hierarchy, version tracking
+- `editor-clipboard` — clipboard state: copy/cut entries, paste-ready node references
+- `editor-hierarchy` — hierarchy tree state: expand/collapse tracking, flattened visible rows for tree views
+- `editor-node-factory` — node kind registry: register creation functions by category, create nodes from registered kinds
 - `editor-tool` — tool registry: register/activate/deactivate tools, pointer dispatch lifecycle
 - `editor-viewport` — viewport management: Camera2D wrapper with zoom limits, pan, fit-to-rect, coordinate conversion
 

@@ -32,9 +32,13 @@
     "test": "vitest run --config ../../vitest.config.ts"
   },
   "dependencies": {
+    "@flighthq/editor-clipboard": "*",
     "@flighthq/editor-command": "*",
+    "@flighthq/editor-hierarchy": "*",
+    "@flighthq/editor-node-factory": "*",
     "@flighthq/editor-selection": "*",
     "@flighthq/editor-tool": "*",
+    "@flighthq/editor-viewport": "*",
     "@flighthq/node": "*",
     "@flighthq/types": "*"
   },
