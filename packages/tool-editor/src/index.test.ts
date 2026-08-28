@@ -17,8 +17,10 @@ import {
   createSetPivotCommand,
   createSetSceneBackgroundColorCommand,
   createSetSceneNameCommand,
+  decomposeTransform,
   expandBounds,
   findNodesByName,
+  snapToGrid,
   screenToScene,
 } from './index';
 
@@ -46,5 +48,10 @@ describe('tool-editor', () => {
     expect(screenToScene).toBeTypeOf('function');
     expect(findNodesByName).toBeTypeOf('function');
     expect(expandBounds).toBeTypeOf('function');
+  });
+
+  it('exports transform and snap utilities', () => {
+    expect(decomposeTransform).toBeTypeOf('function');
+    expect(snapToGrid).toBeTypeOf('function');
   });
 });

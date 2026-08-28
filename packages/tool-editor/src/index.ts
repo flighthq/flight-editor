@@ -49,6 +49,14 @@ export {
   getCommonAncestor,
   getNodePath,
 } from './nodeQueries';
+export { snapDimension, snapPosition, snapToGrid, snapToGuides } from './snapUtils';
+export {
+  composeTransform,
+  decomposeTransform,
+  getLocalPosition,
+  getNodeCenter,
+  getWorldPosition,
+} from './transformUtils';
 
 export type { AlignMode } from './commands/alignNodesCommand';
 export type { TransformEntry } from './commands/batchTransformCommand';
@@ -74,3 +82,5 @@ export type { HitTestFn, SelectTool } from './selectTool';
 export type { ZoomTool } from './zoomTool';
 export type { BoundsRectangle } from './boundsUtils';
 export type { CoordinatePoint } from './coordinateUtils';
+export type { GuideSnapResult, SnapPoint } from './snapUtils';
+export type { DecomposedTransform, TransformPoint } from './transformUtils';
