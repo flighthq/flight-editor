@@ -8,5 +8,6 @@
     "declarationMap": true,
     "sourceMap": true
   },
+  "references": [{ "path": "../editor-command" }, { "path": "../editor-selection" }, { "path": "../editor-tool" }],
   "include": ["src"]
 }

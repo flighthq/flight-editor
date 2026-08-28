@@ -11,3 +11,5 @@ export {
   redo,
   undo,
 } from './commandHistory';
+
+export type { Command, CommandHistory } from './commandHistory';

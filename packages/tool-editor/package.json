@@ -31,9 +31,16 @@
     "clean": "tsc -b --clean",
     "test": "vitest run --config ../../vitest.config.ts"
   },
+  "dependencies": {
+    "@flighthq/editor-command": "*",
+    "@flighthq/editor-selection": "*",
+    "@flighthq/editor-tool": "*",
+    "@flighthq/node": "*",
+    "@flighthq/types": "*"
+  },
   "devDependencies": {
     "typescript": "^5.9.3"
   },
-  "description": "Flight editor tooling",
+  "description": "Flight editor application core — composes selection, commands, and tools into an editor state",
   "sideEffects": false
 }
