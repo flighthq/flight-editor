@@ -62,4 +62,27 @@ describe('createSetClipCommand', () => {
       expect(node.clip).toBeNull();
     }
   });
+
+  it('does not mutate the node before execution', () => {
+    const node = createDisplayObject();
+    const previous = createClipRegionFromRectangle({ x: 1, y: 2, width: 3, height: 4 });
+    setNode2DClip(node, previous);
+
+    createSetClipCommand(node, createClipRegionFromRectangle({ x: 2, y: 3, width: 4, height: 5 }));
+
+    expect(equalsClipRegion(node.clip!, previous)).toBe(true);
+  });
+
+  it('restores the captured clip over an intervening clip change', () => {
+    const node = createDisplayObject();
+    const previous = createClipRegionFromRectangle({ x: 0, y: 0, width: 20, height: 20 });
+    setNode2DClip(node, previous);
+    const command = createSetClipCommand(node, createClipRegionFromRectangle({ x: 10, y: 10, width: 20, height: 20 }));
+    command.execute();
+    setNode2DClip(node, createClipRegionFromRectangle({ x: 100, y: 100, width: 1, height: 1 }));
+
+    command.undo();
+
+    expect(equalsClipRegion(node.clip!, previous)).toBe(true);
+  });
 });

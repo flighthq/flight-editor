@@ -60,4 +60,29 @@ describe('createSetNodeSizeCommand', () => {
     expect(getNodeWidth(node)).toBeCloseTo(80);
     expect(getNodeHeight(node)).toBeCloseTo(40);
   });
+
+  it('supports zero width and height', () => {
+    const parent = createDisplayObject();
+    const node = createHtmlView({ data: { width: 80, height: 40 } });
+    addNodeChild(parent, node);
+    const command = createSetNodeSizeCommand(node, 0, 0);
+
+    command.execute();
+    expect(getNodeWidth(node)).toBeCloseTo(0);
+    expect(getNodeHeight(node)).toBeCloseTo(0);
+    command.undo();
+    expect(getNodeWidth(node)).toBeCloseTo(80);
+    expect(getNodeHeight(node)).toBeCloseTo(40);
+  });
+
+  it('does not mutate dimensions before execution', () => {
+    const parent = createDisplayObject();
+    const node = createHtmlView({ data: { width: 25, height: 35 } });
+    addNodeChild(parent, node);
+
+    createSetNodeSizeCommand(node, 50, 70);
+
+    expect(getNodeWidth(node)).toBeCloseTo(25);
+    expect(getNodeHeight(node)).toBeCloseTo(35);
+  });
 });

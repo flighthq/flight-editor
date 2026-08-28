@@ -76,4 +76,21 @@ describe('registerDefaultTools', () => {
       editor.toolRegistry.tools.get('rectangle')!.pointerDown!(event);
     }).not.toThrow();
   });
+
+  it('stores tools whose ids match their registry keys', () => {
+    const editor = createEditorState();
+    registerDefaultTools(editor);
+
+    for (const [id, tool] of editor.toolRegistry.tools) expect(tool.id).toBe(id);
+  });
+
+  it('creates fresh tool instances for each registration pass', () => {
+    const editor = createEditorState();
+    registerDefaultTools(editor);
+    const first = new Map(editor.toolRegistry.tools);
+
+    registerDefaultTools(editor);
+
+    for (const [id, tool] of editor.toolRegistry.tools) expect(tool).not.toBe(first.get(id));
+  });
 });

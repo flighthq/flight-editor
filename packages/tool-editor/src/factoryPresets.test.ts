@@ -43,4 +43,33 @@ describe('registerDefaultNodeKinds', () => {
     expect(getNodeKindsByCategory(factory, 'Containers').map(({ id }) => id)).toEqual([DisplayObjectKind]);
     expect(getNodeKindsByCategory(factory, 'Text').map(({ id }) => id)).toEqual([NativeTextKind, TextLabelKind]);
   });
+
+  it('creates independent instances for every registered kind', () => {
+    const factory = createNodeFactory();
+    registerDefaultNodeKinds(factory);
+
+    for (const id of getNodeKindIds(factory)) {
+      const first = createNodeFromKind(factory, id)!;
+      const second = createNodeFromKind(factory, id)!;
+      first.name = 'changed';
+      expect(second).not.toBe(first);
+      expect(second.name).toBeNull();
+    }
+  });
+
+  it('creates nodes with canonical initial display state', () => {
+    const factory = createNodeFactory();
+    registerDefaultNodeKinds(factory);
+
+    for (const id of getNodeKindIds(factory)) {
+      expect(createNodeFromKind(factory, id)).toMatchObject({
+        kind: id,
+        name: null,
+        alpha: 1,
+        visible: true,
+        scaleX: 1,
+        scaleY: 1,
+      });
+    }
+  });
 });

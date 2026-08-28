@@ -59,4 +59,25 @@ describe('createSetColorAdjustmentCommand', () => {
     command.undo();
     expect(getNodeColorAdjustments(node)).toEqual([inv, gray]);
   });
+
+  it('supports an explicitly empty adjustment stack', () => {
+    const node = createDisplayObject();
+    setNodeColorAdjustments(node, [createInvertAdjustment()]);
+    const command = createSetColorAdjustmentCommand(node, []);
+
+    command.execute();
+    expect(getNodeColorAdjustments(node)).toEqual([]);
+    command.undo();
+    expect(getNodeColorAdjustments(node)).toHaveLength(1);
+  });
+
+  it('preserves the order of multiple new adjustments', () => {
+    const node = createDisplayObject();
+    const grayscale = createGrayscaleAdjustment();
+    const invert = createInvertAdjustment();
+
+    createSetColorAdjustmentCommand(node, [grayscale, invert]).execute();
+
+    expect(getNodeColorAdjustments(node)).toEqual([grayscale, invert]);
+  });
 });

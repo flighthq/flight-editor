@@ -24,6 +24,24 @@ describe('getSelectionBounds', () => {
     const { first } = createBoundedTree();
     expect(getSelectionBounds([first])).toEqual({ x: 10, y: 5, width: 20, height: 10 });
   });
+
+  it('merges nodes entirely in negative coordinate space', () => {
+    const root = createDisplayObject();
+    const first = createHtmlView({ data: { width: 10, height: 20 }, x: -30, y: -40 });
+    const second = createHtmlView({ data: { width: 5, height: 5 }, x: -10, y: -15 });
+    addNodeChild(root, first);
+    addNodeChild(root, second);
+
+    expect(getSelectionBounds([first, second])).toEqual({ x: -30, y: -40, width: 25, height: 30 });
+  });
+
+  it('returns a point rectangle for a zero-size node', () => {
+    const root = createDisplayObject();
+    const node = createHtmlView({ data: { width: 0, height: 0 }, x: -5, y: 7 });
+    addNodeChild(root, node);
+
+    expect(getSelectionBounds([node])).toEqual({ x: -5, y: 7, width: 0, height: 0 });
+  });
 });
 
 describe('getSceneBounds', () => {

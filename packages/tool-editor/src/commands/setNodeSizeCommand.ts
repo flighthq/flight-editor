@@ -1,11 +1,21 @@
 import type { Command } from '@flighthq/editor-command';
-import type { Node2D } from '@flighthq/types';
+import type { Node2D, Transform2DLike } from '@flighthq/types';
 
-import { getNodeHeight, getNodeWidth, setNodeHeight, setNodeWidth } from '@flighthq/node';
+import { getNodeTransform2D, setNodeHeight, setNodeTransform2D, setNodeWidth } from '@flighthq/node';
 
 export function createSetNodeSizeCommand(node: Node2D, width: number, height: number): Command {
-  const oldWidth = getNodeWidth(node);
-  const oldHeight = getNodeHeight(node);
+  const oldTransform: Transform2DLike = {
+    pivotX: 0,
+    pivotY: 0,
+    rotation: 0,
+    scaleX: 1,
+    scaleY: 1,
+    skewX: 0,
+    skewY: 0,
+    x: 0,
+    y: 0,
+  };
+  getNodeTransform2D(oldTransform, node);
   return {
     label: 'Set Node Size',
     execute() {
@@ -13,8 +23,7 @@ export function createSetNodeSizeCommand(node: Node2D, width: number, height: nu
       setNodeHeight(node, height);
     },
     undo() {
-      setNodeWidth(node, oldWidth);
-      setNodeHeight(node, oldHeight);
+      setNodeTransform2D(node, oldTransform);
     },
   };
 }
