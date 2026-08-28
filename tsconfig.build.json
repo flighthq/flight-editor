@@ -23,6 +23,7 @@
     { "path": "./packages/editor-rulers" },
     { "path": "./packages/editor-scene-state" },
     { "path": "./packages/editor-snap" },
+    { "path": "./packages/editor-status" },
     { "path": "./packages/editor-text-style" },
     { "path": "./packages/editor-tool" },
     { "path": "./packages/editor-toolbar" },
