@@ -364,6 +364,15 @@ export {
   getLayoutNodeNames,
   resizeLayout,
 } from './layoutRenderer';
+export { createDarkTheme, createLightTheme, getThemeColor, mergeTheme } from './themeDefinition';
+export {
+  applyPreferences,
+  capturePreferences,
+  deserializePreferences,
+  getDefaultPreferences,
+  mergePreferences,
+  serializePreferences,
+} from './editorPreferences';
 export { sceneToScreen, sceneToScreenDistance, screenToScene, screenToSceneDistance } from './coordinateUtils';
 export {
   filterUnlockedNodes,
@@ -534,6 +543,8 @@ export type { SceneDef, SceneNodeDef } from './sceneBuilder';
 export type { LayoutConfig, LayoutRegion } from './editorLayout';
 export type { SceneSearchCriteria } from './sceneSearch';
 export type { LayoutScene } from './layoutRenderer';
+export type { EditorTheme, ThemeColors, ThemeSizes, ThemeSpacing } from './themeDefinition';
+export type { EditorPreferences } from './editorPreferences';
 export type { CoordinatePoint } from './coordinateUtils';
 export type { GuideSnapResult, SnapPoint } from './snapUtils';
 export type { DecomposedTransform, TransformPoint } from './transformUtils';

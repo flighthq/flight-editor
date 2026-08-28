@@ -50,6 +50,16 @@ import {
   getLayoutChildNode,
   getLayoutNodeNames,
   resizeLayout,
+  createDarkTheme,
+  createLightTheme,
+  getThemeColor,
+  mergeTheme,
+  getDefaultPreferences,
+  serializePreferences,
+  deserializePreferences,
+  applyPreferences,
+  capturePreferences,
+  mergePreferences,
   executeNamedCommand,
   deserializeScene,
   getSerializerFormats,
@@ -136,5 +146,21 @@ describe('tool-editor', () => {
     expect(getLayoutChildNode).toBeTypeOf('function');
     expect(getLayoutNodeNames).toBeTypeOf('function');
     expect(resizeLayout).toBeTypeOf('function');
+  });
+
+  it('exports theme utilities', () => {
+    expect(createDarkTheme).toBeTypeOf('function');
+    expect(createLightTheme).toBeTypeOf('function');
+    expect(getThemeColor).toBeTypeOf('function');
+    expect(mergeTheme).toBeTypeOf('function');
+  });
+
+  it('exports preferences utilities', () => {
+    expect(getDefaultPreferences).toBeTypeOf('function');
+    expect(serializePreferences).toBeTypeOf('function');
+    expect(deserializePreferences).toBeTypeOf('function');
+    expect(applyPreferences).toBeTypeOf('function');
+    expect(capturePreferences).toBeTypeOf('function');
+    expect(mergePreferences).toBeTypeOf('function');
   });
 });
