@@ -5,13 +5,17 @@ import { addRecentFile, getCurrentFilePath, isFileDirty, setCurrentFilePath } fr
 import { getHostAdapter, hasCapability } from '@flighthq/editor-host';
 
 import { markEditorClean } from './dirtyTracker';
+import { deserializeScene, serializeScene } from './sceneSerializer';
 
 export interface SaveResult {
   readonly saved: boolean;
   readonly path: string | null;
 }
 
-export async function saveFile(editor: EditorState, serialize: () => ArrayBuffer): Promise<SaveResult> {
+export async function saveFile(
+  editor: EditorState,
+  serialize: () => ArrayBuffer = () => serializeScene(editor),
+): Promise<SaveResult> {
   const path = getCurrentFilePath(editor.file);
   if (path !== null) {
     return saveToPath(editor, path, serialize);
@@ -21,7 +25,7 @@ export async function saveFile(editor: EditorState, serialize: () => ArrayBuffer
 
 export async function saveFileAs(
   editor: EditorState,
-  serialize: () => ArrayBuffer,
+  serialize: () => ArrayBuffer = () => serializeScene(editor),
   defaultName = 'Untitled.flight',
 ): Promise<SaveResult> {
   if (!hasCapability(editor.host, 'hasNativeDialogs')) {
@@ -39,7 +43,7 @@ export async function saveFileAs(
 
 export async function openFile(
   editor: EditorState,
-  deserialize: (data: ArrayBuffer) => void,
+  deserialize: (data: ArrayBuffer) => void = (data) => deserializeScene(editor, data),
 ): Promise<{ opened: boolean; path: string | null }> {
   if (!hasCapability(editor.host, 'hasFileSystem')) {
     return { opened: false, path: null };

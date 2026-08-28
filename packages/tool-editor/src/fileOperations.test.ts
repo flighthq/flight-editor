@@ -11,6 +11,8 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { createEditorState } from './editorState';
 import { canSave, canSaveAs, hasFilePath, needsSave, openFile, saveFile, saveFileAs } from './fileOperations';
+import { createNewScene } from './sceneManager';
+import { serializeScene } from './sceneSerializer';
 
 import type { HostAdapter } from '@flighthq/editor-host';
 
@@ -61,6 +63,18 @@ describe('saveFile', () => {
     const result = await saveFile(editor, () => new ArrayBuffer(0));
     expect(result.saved).toBe(true);
     expect(showSaveDialog).toHaveBeenCalled();
+  });
+
+  it('uses scene serialization by default', async () => {
+    const editor = createEditorState();
+    createNewScene(editor, 320, 240, 'Saved Scene');
+    setCurrentFilePath(editor.file, '/tmp/default.flight');
+    const writeFile = vi.fn().mockResolvedValue(undefined);
+    setHostAdapter(editor.host, createDesktopAdapter({ writeFile }));
+
+    await expect(saveFile(editor)).resolves.toEqual({ saved: true, path: '/tmp/default.flight' });
+    const data = writeFile.mock.calls[0]![1] as ArrayBuffer;
+    expect(JSON.parse(new TextDecoder().decode(data))).toMatchObject({ name: 'Saved Scene' });
   });
 });
 
@@ -169,6 +183,18 @@ describe('openFile', () => {
     await openFile(editor, () => {});
     const recent = getRecentFiles(editor.file);
     expect(recent.length).toBe(1);
+  });
+
+  it('uses scene deserialization by default', async () => {
+    const source = createEditorState();
+    createNewScene(source, 900, 700, 'Opened Scene');
+    const data = serializeScene(source);
+    const editor = createEditorState();
+    const showOpenDialog = vi.fn().mockResolvedValue({ path: '/tmp/opened.flight', name: 'opened.flight' });
+    setHostAdapter(editor.host, createDesktopAdapter({ showOpenDialog, readFile: () => Promise.resolve(data) }));
+
+    await expect(openFile(editor)).resolves.toEqual({ opened: true, path: '/tmp/opened.flight' });
+    expect(editor.sceneState).toMatchObject({ name: 'Opened Scene', width: 900, height: 700 });
   });
 });
 

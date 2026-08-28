@@ -40,8 +40,11 @@ import {
   createLineTool,
   createRectangleTool,
   executeNamedCommand,
+  deserializeScene,
+  getSerializerFormats,
   registerDefaultCommands,
   registerDefaultTools,
+  serializeScene,
 } from './index';
 
 describe('tool-editor', () => {
@@ -96,5 +99,11 @@ describe('tool-editor', () => {
     expect(getSelectedNodes).toBeTypeOf('function');
     expect(executeCommand).toBeTypeOf('function');
     expect(registerDefaultNodeKinds).toBeTypeOf('function');
+  });
+
+  it('exports scene serialization helpers', () => {
+    expect(deserializeScene).toBeTypeOf('function');
+    expect(getSerializerFormats).toBeTypeOf('function');
+    expect(serializeScene).toBeTypeOf('function');
   });
 });
