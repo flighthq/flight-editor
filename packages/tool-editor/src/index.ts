@@ -53,6 +53,20 @@ export {
 } from './commands/zOrderCommands';
 export { getDefaultShortcutLabel, registerDefaultShortcuts } from './defaultShortcuts';
 export { getDefaultMenuCount, registerDefaultMenus } from './defaultMenus';
+export {
+  beginEditorDrag,
+  beginExternalDrag,
+  beginHierarchyDrag,
+  beginLibraryDrag,
+  cancelEditorDrag,
+  endEditorDrag,
+  getEditorDragPayload,
+  getEditorDragPosition,
+  getEditorDropTarget,
+  isEditorDragging,
+  setEditorDropTarget,
+  updateEditorDragPosition,
+} from './dragDropManager';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
 export { executeNamedCommand, registerDefaultCommands } from './commandRegistry';
 export {
@@ -122,6 +136,20 @@ export {
   initEditor,
 } from './initEditor';
 export { registerDefaultNodeKinds } from './factoryPresets';
+export {
+  clearEditorLocks,
+  getEditorLockedCount,
+  hasLockedSelection,
+  isEditorNodeLocked,
+  isSelectionLocked,
+  isSelectionPartiallyLocked,
+  lockEditorNode,
+  lockSelectedNodes,
+  toggleEditorNodeLock,
+  toggleSelectedLocks,
+  unlockEditorNode,
+  unlockSelectedNodes,
+} from './lockManager';
 export { registerDefaultTools } from './registerDefaultTools';
 export { createHandTool } from './handTool';
 export { captureBridgeSnapshot, hasBridgeChanges, notifyHostChanges } from './hostCallbackBridge';
