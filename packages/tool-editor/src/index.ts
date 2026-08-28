@@ -1,4 +1,15 @@
 export { dispatchAction, dispatchKeyEvent, dispatchMenuItem, getMenuItemsForAction } from './commandDispatch';
+export {
+  CONTEXT_MENU_ACTION_MAP,
+  closeEditorContextMenu,
+  getContextMenuActionId,
+  getContextMenuItemCount,
+  getEditorContextMenuItems,
+  isEditorContextMenuOpen,
+  openEditorContextMenu,
+  registerDefaultContextMenuItems,
+} from './contextMenuManager';
+export { isEditorClean, isEditorDirty, markEditorClean, markEditorDirty, syncDirtyState } from './dirtyTracker';
 export { createBatchTransformCommand } from './commands/batchTransformCommand';
 export { createAddFromFactoryCommand } from './commands/addFromFactoryCommand';
 export { createAddNodeCommand } from './commands/addNodeCommand';
@@ -94,6 +105,16 @@ export {
   isAncestorSelected,
 } from './selectionQueries';
 export { formatWindowTitle, updateWindowTitle } from './windowTitle';
+export {
+  getZoomLevel,
+  getZoomPercent,
+  getZoomPercentLabel,
+  setZoomLevel,
+  zoomIn,
+  zoomOut,
+  zoomToActualSize,
+  zoomToFit,
+} from './zoomController';
 export {
   composeTransform,
   decomposeTransform,
