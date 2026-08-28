@@ -4,7 +4,7 @@ import type { EditorState } from './editorState';
 import type { KeyEventLike } from './commandDispatch';
 
 import { setCursorPosition } from '@flighthq/editor-status';
-import { activateTool, getActiveTool, getActiveToolId } from '@flighthq/editor-tool';
+import { activateTool, getActiveTool } from '@flighthq/editor-tool';
 import { setActiveToolName } from '@flighthq/editor-status';
 
 import { dispatchKeyEvent } from './commandDispatch';
@@ -37,8 +37,4 @@ export function switchTool(editor: EditorState, toolId: string): boolean {
     setActiveToolName(editor.statusBar, toolId);
   }
   return activated;
-}
-
-export function getActiveEditorToolId(editor: Readonly<EditorState>): string | null {
-  return getActiveToolId(editor.toolRegistry);
 }

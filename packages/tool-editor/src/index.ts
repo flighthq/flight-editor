@@ -198,14 +198,7 @@ export {
   selectAndRevealNode,
   toggleNode,
 } from './hierarchyManager';
-export {
-  getActiveEditorToolId,
-  handleKeyDown,
-  handlePointerDown,
-  handlePointerMove,
-  handlePointerUp,
-  switchTool,
-} from './eventHandler';
+export { handleKeyDown, handlePointerDown, handlePointerMove, handlePointerUp, switchTool } from './eventHandler';
 export {
   getRegisteredCommandCount,
   getRegisteredMenuCount,

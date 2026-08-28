@@ -3,14 +3,7 @@ import { getActiveToolId, registerTool } from '@flighthq/editor-tool';
 import { describe, expect, it, vi } from 'vitest';
 
 import { createEditorState } from './editorState';
-import {
-  getActiveEditorToolId,
-  handleKeyDown,
-  handlePointerDown,
-  handlePointerMove,
-  handlePointerUp,
-  switchTool,
-} from './eventHandler';
+import { handleKeyDown, handlePointerDown, handlePointerMove, handlePointerUp, switchTool } from './eventHandler';
 import { registerDefaultCommands } from './commandRegistry';
 import { registerDefaultShortcuts } from './defaultShortcuts';
 import { createNewScene } from './sceneManager';
@@ -119,19 +112,5 @@ describe('switchTool', () => {
     const editor = setupEditor();
     const result = switchTool(editor, 'nonexistent');
     expect(result).toBe(false);
-  });
-});
-
-describe('getActiveEditorToolId', () => {
-  it('returns null when no tool active', () => {
-    const editor = setupEditor();
-    expect(getActiveEditorToolId(editor)).toBeNull();
-  });
-
-  it('returns active tool id', () => {
-    const editor = setupEditor();
-    registerTool(editor.toolRegistry, { id: 'pen' });
-    switchTool(editor, 'pen');
-    expect(getActiveEditorToolId(editor)).toBe('pen');
   });
 });
