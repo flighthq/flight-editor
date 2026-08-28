@@ -67,4 +67,18 @@ describe('createSetSceneSizeCommand', () => {
     expect(scene.scene2dWidth).toBe(1024);
     expect(scene.scene2dHeight).toBe(600);
   });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const scene = createScene2D({ scene2dWidth: 640, scene2dHeight: 480 });
+    const cmd = createSetSceneSizeCommand(scene, 1280, 720);
+
+    for (let i = 0; i < 3; i++) {
+      cmd.execute();
+      expect(scene.scene2dWidth).toBe(1280);
+      expect(scene.scene2dHeight).toBe(720);
+      cmd.undo();
+      expect(scene.scene2dWidth).toBe(640);
+      expect(scene.scene2dHeight).toBe(480);
+    }
+  });
 });

@@ -67,4 +67,16 @@ describe('createSetSceneNameCommand', () => {
     const cmd = createSetSceneNameCommand(state, 'New');
     expect(cmd.label).toBe('Set Scene Name');
   });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const state = createSceneState('Original');
+    const command = createSetSceneNameCommand(state, 'Changed');
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(state.name).toBe('Changed');
+      command.undo();
+      expect(state.name).toBe('Original');
+    }
+  });
 });

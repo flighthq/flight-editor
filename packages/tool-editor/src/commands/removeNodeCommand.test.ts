@@ -109,4 +109,28 @@ describe('createRemoveNodeCommand', () => {
     expect(getNodeChildCount(parent)).toBe(0);
     expect(getNodeParent(node)).toBeNull();
   });
+
+  it('is a no-op for a rootless node', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const command = createRemoveNodeCommand(node);
+    command.execute();
+    expect(getNodeParent(node)).toBeNull();
+    command.undo();
+    expect(getNodeParent(node)).toBeNull();
+  });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const parent = createNode2D(DisplayObjectKind);
+    const node = createNode2D(DisplayObjectKind);
+    addNodeChild(parent, node);
+    const command = createRemoveNodeCommand(node);
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(getNodeChildCount(parent)).toBe(0);
+      command.undo();
+      expect(getNodeChildCount(parent)).toBe(1);
+      expect(getNodeChildAt(parent, 0)).toBe(node);
+    }
+  });
 });
