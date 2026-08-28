@@ -39,12 +39,15 @@ import {
   createMeasureTool,
   createLineTool,
   createRectangleTool,
+  createEditorLayoutDef,
+  getLayoutRegion,
+  getLayoutRegions,
   executeNamedCommand,
   deserializeScene,
   getSerializerFormats,
+  serializeScene,
   registerDefaultCommands,
   registerDefaultTools,
-  serializeScene,
 } from './index';
 
 describe('tool-editor', () => {
@@ -105,5 +108,11 @@ describe('tool-editor', () => {
     expect(deserializeScene).toBeTypeOf('function');
     expect(getSerializerFormats).toBeTypeOf('function');
     expect(serializeScene).toBeTypeOf('function');
+  });
+
+  it('exports layout utilities', () => {
+    expect(createEditorLayoutDef).toBeTypeOf('function');
+    expect(getLayoutRegion).toBeTypeOf('function');
+    expect(getLayoutRegions).toBeTypeOf('function');
   });
 });

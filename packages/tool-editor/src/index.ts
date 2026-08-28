@@ -355,6 +355,7 @@ export {
 } from './historyUtils';
 export { expandBounds, getSceneBounds, getSelectionBounds, isNodeInBounds } from './boundsUtils';
 export { buildNode, buildScene, countNodes } from './sceneBuilder';
+export { createEditorLayoutDef, getLayoutRegion, getLayoutRegions } from './editorLayout';
 export { sceneToScreen, sceneToScreenDistance, screenToScene, screenToSceneDistance } from './coordinateUtils';
 export {
   filterUnlockedNodes,
@@ -522,6 +523,7 @@ export type { HitTestFn, SelectTool } from './selectTool';
 export type { ZoomTool } from './zoomTool';
 export type { BoundsRectangle } from './boundsUtils';
 export type { SceneDef, SceneNodeDef } from './sceneBuilder';
+export type { LayoutConfig, LayoutRegion } from './editorLayout';
 export type { CoordinatePoint } from './coordinateUtils';
 export type { GuideSnapResult, SnapPoint } from './snapUtils';
 export type { DecomposedTransform, TransformPoint } from './transformUtils';
