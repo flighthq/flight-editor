@@ -19,6 +19,42 @@ import {
   toggleRulers,
 } from './rulerState';
 
+describe('getRulerOrigin', () => {
+  it('is exported', () => expect(getRulerOrigin).toBeTypeOf('function'));
+});
+
+describe('getRulerSubdivisions', () => {
+  it('is exported', () => expect(getRulerSubdivisions).toBeTypeOf('function'));
+});
+
+describe('getRulerTickSpacing', () => {
+  it('is exported', () => expect(getRulerTickSpacing).toBeTypeOf('function'));
+});
+
+describe('getRulerUnit', () => {
+  it('is exported', () => expect(getRulerUnit).toBeTypeOf('function'));
+});
+
+describe('getRulerVersion', () => {
+  it('is exported', () => expect(getRulerVersion).toBeTypeOf('function'));
+});
+
+describe('isRulerVisible', () => {
+  it('is exported', () => expect(isRulerVisible).toBeTypeOf('function'));
+});
+
+describe('resetRulerOrigin', () => {
+  it('is exported', () => expect(resetRulerOrigin).toBeTypeOf('function'));
+});
+
+describe('showRulers', () => {
+  it('is exported', () => expect(showRulers).toBeTypeOf('function'));
+});
+
+describe('toggleRulers', () => {
+  it('is exported', () => expect(toggleRulers).toBeTypeOf('function'));
+});
+
 describe('createRulerState', () => {
   it('creates with default values', () => {
     const state = createRulerState();
@@ -32,7 +68,7 @@ describe('createRulerState', () => {
   });
 });
 
-describe('visibility', () => {
+describe('hideRulers', () => {
   it('hides rulers', () => {
     const state = createRulerState();
     hideRulers(state);
@@ -78,7 +114,7 @@ describe('visibility', () => {
   });
 });
 
-describe('units', () => {
+describe('setRulerUnit', () => {
   it('changes unit', () => {
     const state = createRulerState();
     setRulerUnit(state, 'inches');
@@ -102,7 +138,7 @@ describe('units', () => {
   });
 });
 
-describe('origin', () => {
+describe('setRulerOrigin', () => {
   it('sets origin', () => {
     const state = createRulerState();
     setRulerOrigin(state, 50, 75);
@@ -141,7 +177,7 @@ describe('origin', () => {
   });
 });
 
-describe('tick spacing', () => {
+describe('setRulerTickSpacing', () => {
   it('sets tick spacing', () => {
     const state = createRulerState();
     setRulerTickSpacing(state, 50);
@@ -174,7 +210,7 @@ describe('tick spacing', () => {
   });
 });
 
-describe('subdivisions', () => {
+describe('setRulerSubdivisions', () => {
   it('sets subdivisions', () => {
     const state = createRulerState();
     setRulerSubdivisions(state, 5);

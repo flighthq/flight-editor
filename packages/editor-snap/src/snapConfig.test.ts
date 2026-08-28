@@ -10,7 +10,31 @@ import {
   snapPosition,
 } from './snapConfig';
 
-describe('snapConfig', () => {
+describe('addSnapGuide', () => {
+  it('is exported', () => expect(addSnapGuide).toBeTypeOf('function'));
+});
+
+describe('clearSnapGuides', () => {
+  it('is exported', () => expect(clearSnapGuides).toBeTypeOf('function'));
+});
+
+describe('enableSnapGrid', () => {
+  it('is exported', () => expect(enableSnapGrid).toBeTypeOf('function'));
+});
+
+describe('removeSnapGuide', () => {
+  it('is exported', () => expect(removeSnapGuide).toBeTypeOf('function'));
+});
+
+describe('setSnapGrid', () => {
+  it('is exported', () => expect(setSnapGrid).toBeTypeOf('function'));
+});
+
+describe('snapPosition', () => {
+  it('is exported', () => expect(snapPosition).toBeTypeOf('function'));
+});
+
+describe('createSnapConfig', () => {
   it('starts with all snapping disabled and a ten-unit grid', () => {
     const config = createSnapConfig();
 

@@ -10,6 +10,7 @@ const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 
 const checks = [
   ['package metadata', 'packages:check'],
+  ['source/test completeness', 'exports:check'],
   ['license provenance', 'check:license-provenance'],
   ['orphaned package output', 'check:package-dist-orphans'],
   ['types', 'typecheck'],

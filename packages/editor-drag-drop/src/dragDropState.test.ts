@@ -18,7 +18,47 @@ import type { DragPayload } from './dragDropState';
 
 const libraryPayload: DragPayload = { source: 'library', kind: 'Sprite', data: { assetId: 'abc' } };
 
-describe('dragDropState', () => {
+describe('beginDrag', () => {
+  it('is exported', () => expect(beginDrag).toBeTypeOf('function'));
+});
+
+describe('cancelDrag', () => {
+  it('is exported', () => expect(cancelDrag).toBeTypeOf('function'));
+});
+
+describe('endDrag', () => {
+  it('is exported', () => expect(endDrag).toBeTypeOf('function'));
+});
+
+describe('getDragDropVersion', () => {
+  it('is exported', () => expect(getDragDropVersion).toBeTypeOf('function'));
+});
+
+describe('getDragPayload', () => {
+  it('is exported', () => expect(getDragPayload).toBeTypeOf('function'));
+});
+
+describe('getDragPosition', () => {
+  it('is exported', () => expect(getDragPosition).toBeTypeOf('function'));
+});
+
+describe('getDropTarget', () => {
+  it('is exported', () => expect(getDropTarget).toBeTypeOf('function'));
+});
+
+describe('isDragging', () => {
+  it('is exported', () => expect(isDragging).toBeTypeOf('function'));
+});
+
+describe('setDropTarget', () => {
+  it('is exported', () => expect(setDropTarget).toBeTypeOf('function'));
+});
+
+describe('updateDragPosition', () => {
+  it('is exported', () => expect(updateDragPosition).toBeTypeOf('function'));
+});
+
+describe('createDragDropState', () => {
   it('starts inactive', () => {
     const state = createDragDropState();
     expect(isDragging(state)).toBe(false);

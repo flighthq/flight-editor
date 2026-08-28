@@ -25,7 +25,7 @@ const identity: Transform2DLike = {
   y: 0,
 };
 
-describe('batchTransformCommand', () => {
+describe('createBatchTransformCommand', () => {
   it('applies transforms to multiple nodes in one command', () => {
     const a = createNode2D(DisplayObjectKind);
     const b = createNode2D(DisplayObjectKind);

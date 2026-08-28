@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 import { createGroupNodesCommand } from './groupNodesCommand';
 
-describe('groupNodesCommand', () => {
+describe('createGroupNodesCommand', () => {
   it('moves nodes into the group container', () => {
     const root = createNode2D(DisplayObjectKind);
     const a = createNode2D(DisplayObjectKind);

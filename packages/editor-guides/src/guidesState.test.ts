@@ -15,7 +15,51 @@ import {
   unlockGuide,
 } from './guidesState';
 
-describe('guidesState', () => {
+describe('addGuide', () => {
+  it('is exported', () => expect(addGuide).toBeTypeOf('function'));
+});
+
+describe('clearGuides', () => {
+  it('is exported', () => expect(clearGuides).toBeTypeOf('function'));
+});
+
+describe('getGuideById', () => {
+  it('is exported', () => expect(getGuideById).toBeTypeOf('function'));
+});
+
+describe('getGuideCount', () => {
+  it('is exported', () => expect(getGuideCount).toBeTypeOf('function'));
+});
+
+describe('getGuideSnapPositions', () => {
+  it('is exported', () => expect(getGuideSnapPositions).toBeTypeOf('function'));
+});
+
+describe('getGuidesByAxis', () => {
+  it('is exported', () => expect(getGuidesByAxis).toBeTypeOf('function'));
+});
+
+describe('getGuidesVersion', () => {
+  it('is exported', () => expect(getGuidesVersion).toBeTypeOf('function'));
+});
+
+describe('lockGuide', () => {
+  it('is exported', () => expect(lockGuide).toBeTypeOf('function'));
+});
+
+describe('moveGuide', () => {
+  it('is exported', () => expect(moveGuide).toBeTypeOf('function'));
+});
+
+describe('removeGuide', () => {
+  it('is exported', () => expect(removeGuide).toBeTypeOf('function'));
+});
+
+describe('unlockGuide', () => {
+  it('is exported', () => expect(unlockGuide).toBeTypeOf('function'));
+});
+
+describe('createGuidesState', () => {
   it('starts empty', () => {
     const state = createGuidesState();
     expect(getGuideCount(state)).toBe(0);

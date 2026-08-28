@@ -11,7 +11,35 @@ import {
   removeCheckpoint,
 } from './historyState';
 
-describe('historyState', () => {
+describe('addCheckpoint', () => {
+  it('is exported', () => expect(addCheckpoint).toBeTypeOf('function'));
+});
+
+describe('clearCheckpoints', () => {
+  it('is exported', () => expect(clearCheckpoints).toBeTypeOf('function'));
+});
+
+describe('getCheckpoint', () => {
+  it('is exported', () => expect(getCheckpoint).toBeTypeOf('function'));
+});
+
+describe('getCheckpointCount', () => {
+  it('is exported', () => expect(getCheckpointCount).toBeTypeOf('function'));
+});
+
+describe('getCheckpoints', () => {
+  it('is exported', () => expect(getCheckpoints).toBeTypeOf('function'));
+});
+
+describe('getHistoryVersion', () => {
+  it('is exported', () => expect(getHistoryVersion).toBeTypeOf('function'));
+});
+
+describe('removeCheckpoint', () => {
+  it('is exported', () => expect(removeCheckpoint).toBeTypeOf('function'));
+});
+
+describe('createHistoryState', () => {
   it('starts empty at version zero', () => {
     const state = createHistoryState();
 

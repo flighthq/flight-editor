@@ -13,6 +13,22 @@ import {
   unregisterNodeKind,
 } from './nodeFactory';
 
+describe('getNodeKindEntry', () => {
+  it('is exported', () => expect(getNodeKindEntry).toBeTypeOf('function'));
+});
+
+describe('getNodeKindIds', () => {
+  it('is exported', () => expect(getNodeKindIds).toBeTypeOf('function'));
+});
+
+describe('registerNodeKind', () => {
+  it('is exported', () => expect(registerNodeKind).toBeTypeOf('function'));
+});
+
+describe('unregisterNodeKind', () => {
+  it('is exported', () => expect(unregisterNodeKind).toBeTypeOf('function'));
+});
+
 describe('createNodeFactory', () => {
   it('starts empty', () => {
     const factory = createNodeFactory();

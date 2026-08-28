@@ -34,6 +34,22 @@ function buildTree() {
   return { root, a, b, a1, a2 };
 }
 
+describe('collapseHierarchyNode', () => {
+  it('is exported', () => expect(collapseHierarchyNode).toBeTypeOf('function'));
+});
+
+describe('expandHierarchyNode', () => {
+  it('is exported', () => expect(expandHierarchyNode).toBeTypeOf('function'));
+});
+
+describe('getHierarchyVersion', () => {
+  it('is exported', () => expect(getHierarchyVersion).toBeTypeOf('function'));
+});
+
+describe('isHierarchyNodeExpanded', () => {
+  it('is exported', () => expect(isHierarchyNodeExpanded).toBeTypeOf('function'));
+});
+
 describe('createHierarchyState', () => {
   it('starts with nothing expanded', () => {
     const state = createHierarchyState();

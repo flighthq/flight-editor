@@ -22,6 +22,14 @@ function createMockTool(id: string) {
   };
 }
 
+describe('getActiveTool', () => {
+  it('is exported', () => expect(getActiveTool).toBeTypeOf('function'));
+});
+
+describe('getActiveToolId', () => {
+  it('is exported', () => expect(getActiveToolId).toBeTypeOf('function'));
+});
+
 describe('activateTool', () => {
   it('returns false for unregistered tool', () => {
     const registry = createToolRegistry();

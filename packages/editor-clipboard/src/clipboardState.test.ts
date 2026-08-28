@@ -13,6 +13,26 @@ import {
   setClipboardEntries,
 } from './clipboardState';
 
+describe('getClipboardEntries', () => {
+  it('is exported', () => expect(getClipboardEntries).toBeTypeOf('function'));
+});
+
+describe('getClipboardEntryCount', () => {
+  it('is exported', () => expect(getClipboardEntryCount).toBeTypeOf('function'));
+});
+
+describe('getClipboardOperation', () => {
+  it('is exported', () => expect(getClipboardOperation).toBeTypeOf('function'));
+});
+
+describe('getClipboardVersion', () => {
+  it('is exported', () => expect(getClipboardVersion).toBeTypeOf('function'));
+});
+
+describe('isClipboardEmpty', () => {
+  it('is exported', () => expect(isClipboardEmpty).toBeTypeOf('function'));
+});
+
 describe('createClipboardState', () => {
   it('starts empty', () => {
     const state = createClipboardState();

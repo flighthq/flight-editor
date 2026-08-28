@@ -31,7 +31,7 @@ function readTransform(node: any): Transform2DLike {
   return t;
 }
 
-describe('moveTool', () => {
+describe('createMoveTool', () => {
   it('moves a selected node by drag delta', () => {
     const editor = createEditorState();
     const node = createNode2D(DisplayObjectKind);

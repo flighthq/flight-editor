@@ -34,7 +34,7 @@ function readTransform(node: any): Transform2DLike {
 
 const noHandles: HandleHitTestFn = () => null;
 
-describe('pointerTool', () => {
+describe('createPointerTool', () => {
   it('selects a node on click', () => {
     const editor = createEditorState();
     const node = createNode2D(DisplayObjectKind);

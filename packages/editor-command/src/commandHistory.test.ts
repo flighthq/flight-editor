@@ -29,6 +29,18 @@ function createTestCommand(label: string, state: { value: number }, newValue: nu
   };
 }
 
+describe('getCommandHistoryRedoCount', () => {
+  it('is exported', () => expect(getCommandHistoryRedoCount).toBeTypeOf('function'));
+});
+
+describe('getCommandHistoryUndoCount', () => {
+  it('is exported', () => expect(getCommandHistoryUndoCount).toBeTypeOf('function'));
+});
+
+describe('markCommandHistoryClean', () => {
+  it('is exported', () => expect(markCommandHistoryClean).toBeTypeOf('function'));
+});
+
 describe('clearCommandHistory', () => {
   it('empties both stacks', () => {
     const history = createCommandHistory();

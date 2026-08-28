@@ -7,7 +7,11 @@ import { describe, expect, it } from 'vitest';
 import { createEditorState } from './editorState';
 import { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 
-describe('inspectorState', () => {
+describe('getInspectorSelectedNames', () => {
+  it('is exported', () => expect(getInspectorSelectedNames).toBeTypeOf('function'));
+});
+
+describe('getInspectorSnapshot', () => {
   it('returns empty snapshot with no selection', () => {
     const editor = createEditorState();
     const snapshot = getInspectorSnapshot(editor);

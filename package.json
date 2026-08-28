@@ -22,6 +22,8 @@
     "check:package-dist-orphans": "tsx ./scripts/check-package-dist-orphans.ts",
     "clean": "npm run clean:build",
     "clean:build": "tsx ./scripts/clean-package-dist.ts && tsc -b tsconfig.build.json --clean",
+    "exports:check": "tsx ./scripts/completeness.ts",
+    "exports:check:json": "tsx ./scripts/completeness.ts --json",
     "fix": "npm run lint:fix && npm run format",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check --threads=4 .",

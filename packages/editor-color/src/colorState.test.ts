@@ -13,7 +13,43 @@ import {
   setActiveColor,
 } from './colorState';
 
-describe('colorState', () => {
+describe('addRecentColor', () => {
+  it('is exported', () => expect(addRecentColor).toBeTypeOf('function'));
+});
+
+describe('addSwatch', () => {
+  it('is exported', () => expect(addSwatch).toBeTypeOf('function'));
+});
+
+describe('clearSwatches', () => {
+  it('is exported', () => expect(clearSwatches).toBeTypeOf('function'));
+});
+
+describe('getActiveColor', () => {
+  it('is exported', () => expect(getActiveColor).toBeTypeOf('function'));
+});
+
+describe('getColorVersion', () => {
+  it('is exported', () => expect(getColorVersion).toBeTypeOf('function'));
+});
+
+describe('getRecentColors', () => {
+  it('is exported', () => expect(getRecentColors).toBeTypeOf('function'));
+});
+
+describe('getSwatches', () => {
+  it('is exported', () => expect(getSwatches).toBeTypeOf('function'));
+});
+
+describe('removeSwatch', () => {
+  it('is exported', () => expect(removeSwatch).toBeTypeOf('function'));
+});
+
+describe('setActiveColor', () => {
+  it('is exported', () => expect(setActiveColor).toBeTypeOf('function'));
+});
+
+describe('createColorState', () => {
   it('starts with opaque black and empty color collections', () => {
     const state = createColorState();
 

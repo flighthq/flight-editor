@@ -22,6 +22,22 @@ function readChildren(parent: Node2D): Array<Node2D | null> {
   return Array.from({ length: getNodeChildCount(parent) }, (_, index) => getNodeChildAt(parent, index));
 }
 
+describe('createBringForwardCommand', () => {
+  it('is exported', () => expect(createBringForwardCommand).toBeTypeOf('function'));
+});
+
+describe('createBringToFrontCommand', () => {
+  it('is exported', () => expect(createBringToFrontCommand).toBeTypeOf('function'));
+});
+
+describe('createSendBackwardCommand', () => {
+  it('is exported', () => expect(createSendBackwardCommand).toBeTypeOf('function'));
+});
+
+describe('createSendToBackCommand', () => {
+  it('is exported', () => expect(createSendToBackCommand).toBeTypeOf('function'));
+});
+
 describe('z-order commands', () => {
   it('brings a node forward one position and restores it on undo', () => {
     const { parent, children } = createSiblings();

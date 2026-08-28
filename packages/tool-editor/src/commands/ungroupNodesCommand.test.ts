@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 import { createUngroupNodesCommand } from './ungroupNodesCommand';
 
-describe('ungroupNodesCommand', () => {
+describe('createUngroupNodesCommand', () => {
   it('moves children up to the group parent and removes group', () => {
     const root = createNode2D(DisplayObjectKind);
     const group = createNode2D(DisplayObjectKind);

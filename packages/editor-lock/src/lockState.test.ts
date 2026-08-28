@@ -11,7 +11,35 @@ import {
   unlockNode,
 } from './lockState';
 
-describe('lockState', () => {
+describe('clearLocks', () => {
+  it('is exported', () => expect(clearLocks).toBeTypeOf('function'));
+});
+
+describe('getLockVersion', () => {
+  it('is exported', () => expect(getLockVersion).toBeTypeOf('function'));
+});
+
+describe('getLockedCount', () => {
+  it('is exported', () => expect(getLockedCount).toBeTypeOf('function'));
+});
+
+describe('isLocked', () => {
+  it('is exported', () => expect(isLocked).toBeTypeOf('function'));
+});
+
+describe('lockNode', () => {
+  it('is exported', () => expect(lockNode).toBeTypeOf('function'));
+});
+
+describe('toggleLock', () => {
+  it('is exported', () => expect(toggleLock).toBeTypeOf('function'));
+});
+
+describe('unlockNode', () => {
+  it('is exported', () => expect(unlockNode).toBeTypeOf('function'));
+});
+
+describe('createLockState', () => {
   it('starts empty', () => {
     const state = createLockState();
     expect(getLockedCount(state)).toBe(0);

@@ -20,7 +20,7 @@ function makeEvent(x: number, y: number, extra?: Partial<any>) {
   return { x, y, shiftKey: false, ...extra } as any;
 }
 
-describe('rotateTool', () => {
+describe('createRotateTool', () => {
   it('rotates selected nodes around center', () => {
     const editor = createEditorState();
     const node = createNode2D(DisplayObjectKind);

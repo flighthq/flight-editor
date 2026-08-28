@@ -22,7 +22,7 @@ function makeEvent(overrides: Partial<EditorPointerEvent> = {}): EditorPointerEv
   };
 }
 
-describe('selectTool', () => {
+describe('createSelectTool', () => {
   it('selects a hit node on pointer down', () => {
     const editor = createEditorState();
     const node = createNode2D(DisplayObjectKind);

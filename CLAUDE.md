@@ -22,6 +22,9 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - The primary editor tool is `packages/tool-editor` (`@flighthq/tool-editor`) — the composition layer.
 - Supporting packages use the `editor-*` prefix and are bedrock cells: each is simple, with minimal cross-dependencies.
 - Each package has `src/index.ts` as its entry point and colocated `*.test.ts` files.
+- Every hand-authored `*.ts` or `*.tsx` file under `packages/*/src/`, including `index.ts`, has a colocated `*.test.ts` or `*.test.tsx` file. Scripts are exempt.
+- Every locally declared exported function has an exact-name `describe('<exportName>', ...)` block in its colocated test file. Re-export-only entry points use package-surface tests instead of duplicating every implementation suite.
+- The completeness gate proves file and suite structure, not behavioral coverage; keep substantive assertions inside the named suites.
 - Follow Flight's API style: free functions, explicit inputs, `Readonly<T>` parameters, no hidden state.
 
 ## Package Map
@@ -57,4 +60,4 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 
 - **After any edit session, before committing** — `npm run fix`.
 - **While iterating** — run the narrowest meaningful test (`npm run test --workspace=packages/<name>`).
-- **Before handoff** — `npm run check` (package metadata, license provenance, build-output hygiene, types, tests, lint, and formatting).
+- **Before handoff** — `npm run check` (package metadata, source/test completeness, license provenance, build-output hygiene, types, tests, lint, and formatting). Run `npm run exports:check` for the focused source/test completeness gate.

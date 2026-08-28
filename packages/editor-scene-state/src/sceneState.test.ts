@@ -11,7 +11,35 @@ import {
   setSceneName,
 } from './sceneState';
 
-describe('sceneState', () => {
+describe('getSceneVersion', () => {
+  it('is exported', () => expect(getSceneVersion).toBeTypeOf('function'));
+});
+
+describe('isSceneDirty', () => {
+  it('is exported', () => expect(isSceneDirty).toBeTypeOf('function'));
+});
+
+describe('markSceneClean', () => {
+  it('is exported', () => expect(markSceneClean).toBeTypeOf('function'));
+});
+
+describe('markSceneDirty', () => {
+  it('is exported', () => expect(markSceneDirty).toBeTypeOf('function'));
+});
+
+describe('setSceneBackgroundColor', () => {
+  it('is exported', () => expect(setSceneBackgroundColor).toBeTypeOf('function'));
+});
+
+describe('setSceneDimensions', () => {
+  it('is exported', () => expect(setSceneDimensions).toBeTypeOf('function'));
+});
+
+describe('setSceneName', () => {
+  it('is exported', () => expect(setSceneName).toBeTypeOf('function'));
+});
+
+describe('createSceneState', () => {
   it('creates an untitled 800 by 600 scene by default', () => {
     const state = createSceneState();
 

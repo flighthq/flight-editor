@@ -7,12 +7,25 @@ import {
   editorViewportWorldToScreen,
   fitEditorViewportToRect,
   getEditorViewportCamera,
+  getEditorViewportVisibleBounds,
   getEditorViewportZoom,
   panEditorViewport,
   setEditorViewportSize,
   setEditorViewportZoom,
   zoomEditorViewportAtPoint,
 } from './editorViewport';
+
+describe('getEditorViewportCamera', () => {
+  it('is exported', () => expect(getEditorViewportCamera).toBeTypeOf('function'));
+});
+
+describe('getEditorViewportVisibleBounds', () => {
+  it('is exported', () => expect(getEditorViewportVisibleBounds).toBeTypeOf('function'));
+});
+
+describe('getEditorViewportZoom', () => {
+  it('is exported', () => expect(getEditorViewportZoom).toBeTypeOf('function'));
+});
 
 describe('centerEditorViewportOnPoint', () => {
   it('moves camera to the given world point', () => {

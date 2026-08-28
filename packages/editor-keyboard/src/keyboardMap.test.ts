@@ -17,7 +17,27 @@ const baseEvent = {
   metaKey: false,
 };
 
-describe('keyboardMap', () => {
+describe('getKeyBinding', () => {
+  it('is exported', () => expect(getKeyBinding).toBeTypeOf('function'));
+});
+
+describe('getRegisteredActions', () => {
+  it('is exported', () => expect(getRegisteredActions).toBeTypeOf('function'));
+});
+
+describe('matchKeyEvent', () => {
+  it('is exported', () => expect(matchKeyEvent).toBeTypeOf('function'));
+});
+
+describe('registerKeyBinding', () => {
+  it('is exported', () => expect(registerKeyBinding).toBeTypeOf('function'));
+});
+
+describe('unregisterKeyBinding', () => {
+  it('is exported', () => expect(unregisterKeyBinding).toBeTypeOf('function'));
+});
+
+describe('createKeyboardMap', () => {
   it('starts empty at version zero', () => {
     const map = createKeyboardMap();
 

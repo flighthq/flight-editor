@@ -19,6 +19,10 @@ function createMockNode(kind: string = 'DisplayObject', name: string | null = nu
   return { kind, name, data: null, enabled: true, [Symbol.for('flight.entity.runtime')]: undefined } as any;
 }
 
+describe('getSelectionCount', () => {
+  it('is exported', () => expect(getSelectionCount).toBeTypeOf('function'));
+});
+
 describe('addToSelection', () => {
   it('adds a node and increments version', () => {
     const state = createSelectionState();
