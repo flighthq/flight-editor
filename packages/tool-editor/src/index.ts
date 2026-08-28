@@ -29,6 +29,7 @@ export {
   createSendToBackCommand,
 } from './commands/zOrderCommands';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
+export { createHandTool } from './handTool';
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMarqueeTool } from './marqueeTool';
 export { createMoveTool } from './moveTool';
@@ -36,11 +37,13 @@ export { createPointerTool } from './pointerTool';
 export { createRotateTool } from './rotateTool';
 export { createScaleTool } from './scaleTool';
 export { createSelectTool } from './selectTool';
+export { createZoomTool } from './zoomTool';
 
 export type { AlignMode } from './commands/alignNodesCommand';
 export type { TransformEntry } from './commands/batchTransformCommand';
 export type { DistributeMode } from './commands/distributeNodesCommand';
 export type { EditorState } from './editorState';
+export type { HandTool } from './handTool';
 export type { InspectorSnapshot } from './inspectorState';
 export type { MarqueeHitTestFn, MarqueeRect, MarqueeTool } from './marqueeTool';
 export type { MoveTool } from './moveTool';
@@ -57,3 +60,4 @@ export type {
 export type { RotateTool, RotateToolConfig } from './rotateTool';
 export type { ScaleTool } from './scaleTool';
 export type { HitTestFn, SelectTool } from './selectTool';
+export type { ZoomTool } from './zoomTool';
