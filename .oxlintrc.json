@@ -1,0 +1,67 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "import", "oxc"],
+  "categories": {
+    "correctness": "error"
+  },
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/build/**",
+    "**/.cache/**",
+    "**/coverage/**",
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/.idea/**",
+    "**/.vscode/**",
+    "**/.claude/**",
+    "**/.quimby/**"
+  ],
+  "rules": {
+    "no-console": "warn",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-empty-object-type": ["error", { "allowInterfaces": "with-single-extends" }],
+    "typescript/no-namespace": "off",
+    "import/no-relative-parent-imports": "error",
+    "unicorn/no-new-array": "off",
+    "unicorn/no-useless-spread": "off",
+    "unicorn/prefer-module": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/scripts/**"],
+      "rules": {
+        "no-console": "off",
+        "import/no-relative-parent-imports": "off"
+      }
+    },
+    {
+      "files": ["agents/**"],
+      "rules": {
+        "no-console": "off"
+      }
+    },
+    {
+      "files": ["packages/tool-*/src/**/*.{ts,tsx}"],
+      "rules": {
+        "no-console": "off"
+      }
+    },
+    {
+      "files": ["**/*.test.{ts,tsx}"],
+      "rules": {
+        "typescript/no-explicit-any": "off",
+        "no-unused-vars": "off",
+        "no-console": "off",
+        "oxc/erasing-op": "off"
+      }
+    },
+    {
+      "files": ["packages/*/src/**/*.{ts,tsx}"],
+      "rules": {
+        "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+        "no-warning-comments": ["error", { "terms": ["todo", "fixme", "hack", "xxx"], "location": "anywhere" }]
+      }
+    }
+  ]
+}

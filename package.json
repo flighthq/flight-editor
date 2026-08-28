@@ -1,0 +1,54 @@
+{
+  "name": "flight-editor",
+  "author": "Joshua Granick and other contributors",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flighthq/flight-editor.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/**"
+  ],
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json",
+    "build:clean": "npm run clean && npm run build",
+    "clean": "npm run clean:build",
+    "clean:build": "tsc -b tsconfig.build.json --clean",
+    "fix": "npm run lint:fix && npm run format",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check --threads=4 .",
+    "lint": "oxlint --max-warnings=0",
+    "lint:fix": "oxlint --fix",
+    "precommit": "lint-staged --no-stash",
+    "prepare": "husky",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc -b tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@vitest/coverage-v8": "^4.0.17",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "oxfmt": "0.57.0",
+    "oxlint": "1.72.0",
+    "tsx": "^4.22.4",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-tsconfig-paths": "^6.0.4",
+    "vitest": "^4.0.17"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "oxlint --fix --max-warnings=0 --no-error-on-unmatched-pattern",
+      "oxfmt --write --no-error-on-unmatched-pattern"
+    ],
+    "**/*.{json,md}": "oxfmt --write --no-error-on-unmatched-pattern"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noImplicitOverride": true,
+    "useDefineForClassFields": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "noEmitOnError": true,
+    "paths": {
+      "@flighthq/tool-editor": ["./packages/tool-editor/src/index.ts"],
+      "@flighthq/tool-editor/*": ["./packages/tool-editor/src/*"]
+    },
+    "types": ["vitest/globals"]
+  },
+  "include": ["./packages/*/src"],
+  "exclude": ["node_modules", "dist", ".claude"]
+}

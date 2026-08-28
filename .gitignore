@@ -1,1 +1,37 @@
-.quimby
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+*.map
+*.d.ts
+*.js
+!commitlint.config.js
+!vitest.config.ts
+!.claude/workflows/*.js
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# Cache
+.cache/
+.test-assets/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings
+.claude/settings.local.json
