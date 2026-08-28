@@ -62,6 +62,7 @@ export {
 export { registerDefaultNodeKinds } from './factoryPresets';
 export { registerDefaultTools } from './registerDefaultTools';
 export { createHandTool } from './handTool';
+export { captureBridgeSnapshot, hasBridgeChanges, notifyHostChanges } from './hostCallbackBridge';
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMarqueeTool } from './marqueeTool';
 export { createMeasureTool } from './measureTool';
@@ -109,6 +110,7 @@ export type { EditorState } from './editorState';
 export type { NamedCommandArguments, NamedCommandFactory } from './commandRegistry';
 export type { ColorAtPoint, ColorPickCallback, EyedropperTool, EyedropperToolOptions } from './eyedropperTool';
 export type { HandTool } from './handTool';
+export type { BridgeSnapshot } from './hostCallbackBridge';
 export type { InitEditorOptions } from './initEditor';
 export type { DefaultToolsOptions } from './registerDefaultTools';
 export type { InspectorSnapshot } from './inspectorState';
