@@ -22,6 +22,8 @@
       "@flighthq/editor-context-menu/*": ["./packages/editor-context-menu/src/*"],
       "@flighthq/editor-color": ["./packages/editor-color/src/index.ts"],
       "@flighthq/editor-color/*": ["./packages/editor-color/src/*"],
+      "@flighthq/editor-document": ["./packages/editor-document/src/index.ts"],
+      "@flighthq/editor-document/*": ["./packages/editor-document/src/*"],
       "@flighthq/editor-drag-drop": ["./packages/editor-drag-drop/src/index.ts"],
       "@flighthq/editor-drag-drop/*": ["./packages/editor-drag-drop/src/*"],
       "@flighthq/editor-export-settings": ["./packages/editor-export-settings/src/index.ts"],

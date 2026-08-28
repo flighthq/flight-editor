@@ -37,6 +37,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-color` — color picker state: active packed color, saved swatches, bounded recent-color history
 - `editor-command` — command history: `Command` interface, execute/undo/redo, clean tracking
 - `editor-context-menu` — hierarchical context-menu registry with enabled state, open position, and active item selection
+- `editor-document` — document lifecycle state: serialization format, load/save coordination, metadata
 - `editor-drag-drop` — drag-and-drop state: tracks drag operations from library/hierarchy/external into the scene
 - `editor-export-settings` — per-node export format, scale, suffix, and enabled state
 - `editor-file` — file state: current file path, recent files, dirty tracking, save state

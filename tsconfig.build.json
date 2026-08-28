@@ -5,6 +5,7 @@
     { "path": "./packages/editor-clipboard" },
     { "path": "./packages/editor-color" },
     { "path": "./packages/editor-command" },
+    { "path": "./packages/editor-document" },
     { "path": "./packages/editor-context-menu" },
     { "path": "./packages/editor-drag-drop" },
     { "path": "./packages/editor-export-settings" },

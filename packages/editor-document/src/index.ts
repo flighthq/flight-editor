@@ -1,0 +1,26 @@
+export {
+  createDocumentState,
+  getDocumentAuthor,
+  getDocumentError,
+  getDocumentFormat,
+  getDocumentLifecycle,
+  getDocumentMetadata,
+  getDocumentTitle,
+  getDocumentVersion,
+  getUndoCheckpoint,
+  hasDocumentError,
+  isDocumentLoading,
+  isDocumentReady,
+  isDocumentSaving,
+  resetDocument,
+  setDocumentAuthor,
+  setDocumentError,
+  setDocumentFormat,
+  setDocumentLifecycle,
+  setDocumentTimestamps,
+  setDocumentTitle,
+  setUndoCheckpoint,
+  touchDocumentModified,
+} from './documentState';
+
+export type { DocumentFormat, DocumentLifecycle, DocumentMetadata, DocumentState } from './documentState';
