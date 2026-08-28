@@ -64,4 +64,16 @@ describe('registerDefaultTools', () => {
     registerDefaultTools(editor, { rotate: { centerX: 1, centerY: 2 } });
     expect(getRegisteredToolIds(editor.toolRegistry)).toHaveLength(12);
   });
+
+  it('defaults all callbacks to safe no-ops', () => {
+    const editor = createEditorState();
+    registerDefaultTools(editor);
+    expect(() => {
+      editor.toolRegistry.tools.get('select')!.pointerDown!(event);
+      editor.toolRegistry.tools.get('eyedropper')!.pointerDown!(event);
+      editor.toolRegistry.tools.get('measure')!.pointerDown!(event);
+      editor.toolRegistry.tools.get('line')!.pointerDown!(event);
+      editor.toolRegistry.tools.get('rectangle')!.pointerDown!(event);
+    }).not.toThrow();
+  });
 });

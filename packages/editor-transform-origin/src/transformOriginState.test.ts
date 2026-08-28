@@ -89,4 +89,12 @@ describe('computeTransformOriginPoint', () => {
       y: 8,
     });
   });
+
+  it('handles zero-size bounds', () => {
+    const state = createTransformOriginState();
+    const bounds = { x: 5, y: 10, width: 0, height: 0 };
+    expect(computeTransformOriginPoint(state, bounds)).toEqual({ x: 5, y: 10 });
+    setTransformOriginMode(state, 'bottomRight');
+    expect(computeTransformOriginPoint(state, bounds)).toEqual({ x: 5, y: 10 });
+  });
 });
