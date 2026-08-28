@@ -64,4 +64,28 @@ describe('createFromShapeCommand', () => {
       expect(getNodeChildCount(parent)).toBe(0);
     }
   });
+
+  it('creates a valid shape from an empty command stream', () => {
+    const parent = createDisplayObject();
+    const command = createFromShapeCommand(parent, [], 'Empty');
+
+    command.execute();
+
+    const shape = getNodeChildAt(parent, 0) as Shape;
+    expect(shape.kind).toBe(ShapeKind);
+    expect(shape.data.commands).toEqual([]);
+  });
+
+  it('clones array tokens independently from the caller', () => {
+    const parent = createDisplayObject();
+    const matrixToken: number[] = [1, 0, 0, 1, 10, 20];
+    const command = createFromShapeCommand(parent, ['beginBitmapFill', 3, matrixToken]);
+    matrixToken[4] = 999;
+
+    command.execute();
+
+    const shape = getNodeChildAt(parent, 0) as Shape;
+    expect(shape.data.commands[2]).toEqual([1, 0, 0, 1, 10, 20]);
+    expect(shape.data.commands[2]).not.toBe(matrixToken);
+  });
 });

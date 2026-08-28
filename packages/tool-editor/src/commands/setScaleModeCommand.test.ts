@@ -36,4 +36,23 @@ describe('createSetScaleModeCommand', () => {
     command.undo();
     expect(scene.scaleMode).toBe('exactfit');
   });
+
+  it('captures the original mode when the command is created', () => {
+    const scene = createScene2D({ scaleMode: 'noborder' });
+    const command = createSetScaleModeCommand(scene, 'showall');
+    scene.scaleMode = 'exactfit';
+
+    command.execute();
+    expect(scene.scaleMode).toBe('showall');
+    command.undo();
+    expect(scene.scaleMode).toBe('noborder');
+  });
+
+  it('does not change the scene before execution', () => {
+    const scene = createScene2D({ scaleMode: 'noscale' });
+
+    createSetScaleModeCommand(scene, 'showall');
+
+    expect(scene.scaleMode).toBe('noscale');
+  });
 });

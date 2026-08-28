@@ -37,4 +37,23 @@ describe('createSetSceneAlignCommand', () => {
     command.undo();
     expect(scene.align).toBe('top');
   });
+
+  it('captures the original alignment when the command is created', () => {
+    const scene = createScene2D({ align: 'left' });
+    const command = createSetSceneAlignCommand(scene, 'bottomright');
+    scene.align = 'top';
+
+    command.execute();
+    expect(scene.align).toBe('bottomright');
+    command.undo();
+    expect(scene.align).toBe('left');
+  });
+
+  it('does not change alignment before execution', () => {
+    const scene = createScene2D({ align: 'topright' });
+
+    createSetSceneAlignCommand(scene, 'bottomleft');
+
+    expect(scene.align).toBe('topright');
+  });
 });

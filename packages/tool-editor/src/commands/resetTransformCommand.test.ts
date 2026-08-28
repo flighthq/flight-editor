@@ -58,4 +58,26 @@ describe('createResetTransformCommand', () => {
     command.undo();
     expect(node).toMatchObject({ x: 0, y: 0, scaleX: 1, scaleY: 1, rotation: 0 });
   });
+
+  it('does not affect other nodes', () => {
+    const target = createDisplayObject({ x: 10, scaleX: 2 });
+    const sibling = createDisplayObject({ x: 20, scaleX: 3 });
+
+    createResetTransformCommand(target).execute();
+
+    expect(target).toMatchObject({ x: 0, scaleX: 1 });
+    expect(sibling).toMatchObject({ x: 20, scaleX: 3 });
+  });
+
+  it('undo restores the snapshot over intervening mutations', () => {
+    const node = createDisplayObject({ x: 10, y: 20, rotation: 0.5, scaleX: 2, scaleY: 3 });
+    const command = createResetTransformCommand(node);
+    command.execute();
+    node.x = 999;
+    node.rotation = 4;
+
+    command.undo();
+
+    expect(node).toMatchObject({ x: 10, y: 20, rotation: 0.5, scaleX: 2, scaleY: 3 });
+  });
 });

@@ -53,4 +53,46 @@ describe('createFlipNodeCommand', () => {
       expect(node.scaleY).toBe(-3);
     }
   });
+
+  it('preserves position, rotation, skew, and pivot during a vertical flip', () => {
+    const node = createDisplayObject({
+      x: 11,
+      y: 12,
+      rotation: 0.75,
+      scaleX: 2,
+      scaleY: 3,
+      skewX: 0.1,
+      skewY: 0.2,
+      pivotX: 4,
+      pivotY: 5,
+    });
+
+    createFlipNodeCommand([node], 'vertical').execute();
+
+    expect(node).toMatchObject({
+      x: 11,
+      y: 12,
+      rotation: 0.75,
+      scaleX: 2,
+      scaleY: -3,
+      skewX: 0.1,
+      skewY: 0.2,
+      pivotX: 4,
+      pivotY: 5,
+    });
+  });
+
+  it('horizontal and vertical commands compose and undo independently', () => {
+    const node = createDisplayObject({ scaleX: 2, scaleY: 3 });
+    const horizontal = createFlipNodeCommand([node], 'horizontal');
+    horizontal.execute();
+    const vertical = createFlipNodeCommand([node], 'vertical');
+    vertical.execute();
+    expect([node.scaleX, node.scaleY]).toEqual([-2, -3]);
+
+    vertical.undo();
+    expect([node.scaleX, node.scaleY]).toEqual([-2, 3]);
+    horizontal.undo();
+    expect([node.scaleX, node.scaleY]).toEqual([2, 3]);
+  });
 });

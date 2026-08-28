@@ -79,4 +79,31 @@ describe('createMoveToPageCommand', () => {
     expect(getNodeChildren(target)).toEqual([]);
     expect(getNodeParent(node)).toBeNull();
   });
+
+  it('is an identity operation when the only node is already in the target', () => {
+    const target = createDisplayObject();
+    const node = createDisplayObject({ name: 'only' });
+    addNodeChild(target, node);
+    const command = createMoveToPageCommand([node], target);
+
+    command.execute();
+    expect(getNodeChildren(target)).toEqual([node]);
+    command.undo();
+    expect(getNodeChildren(target)).toEqual([node]);
+  });
+
+  it('restores the parent captured before an intervening reparent', () => {
+    const original = createDisplayObject();
+    const intervening = createDisplayObject();
+    const target = createDisplayObject();
+    const node = createDisplayObject();
+    addNodeChild(original, node);
+    const command = createMoveToPageCommand([node], target);
+    addNodeChild(intervening, node);
+
+    command.execute();
+    expect(getNodeParent(node)).toBe(target);
+    command.undo();
+    expect(getNodeParent(node)).toBe(original);
+  });
 });
