@@ -519,6 +519,34 @@ export {
   getWorldPosition,
 } from './transformUtils';
 
+export {
+  applyThemeBorders,
+  applyThemeToLayout,
+  applyThemeToLayoutChild,
+  applyThemeToNode,
+  clearThemeFromLayout,
+  getDefaultRegionColors,
+  getRegionColor,
+} from './themeRenderer';
+export {
+  createRenderLoopState,
+  getMinFrameInterval,
+  getRenderLoopFps,
+  getRenderLoopFrameCount,
+  isRenderLoopRunning,
+  pauseRenderLoop,
+  resumeRenderLoop,
+  setRenderLoopCallback,
+  startRenderLoop,
+  stepRenderLoop,
+  stopRenderLoop,
+} from './renderLoop';
+export { createDefaultFileFilters, createTauriHostAdapter, createTauriHostCapabilities } from './tauriHost';
+
+export type { ThemeMapping } from './themeRenderer';
+export type { RenderLoopConfig, RenderLoopState } from './renderLoop';
+export type { TauriFileFilter, TauriHostConfig, TauriIpc } from './tauriHost';
+
 export type { KeyEventLike } from './commandDispatch';
 export type { AlignMode } from './commands/alignNodesCommand';
 export type { TransformEntry } from './commands/batchTransformCommand';

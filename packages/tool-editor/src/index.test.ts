@@ -86,6 +86,27 @@ import {
   serializeScene,
   registerDefaultCommands,
   registerDefaultTools,
+  applyThemeToLayout,
+  applyThemeToNode,
+  applyThemeToLayoutChild,
+  applyThemeBorders,
+  clearThemeFromLayout,
+  getDefaultRegionColors,
+  getRegionColor,
+  createRenderLoopState,
+  startRenderLoop,
+  stopRenderLoop,
+  pauseRenderLoop,
+  resumeRenderLoop,
+  stepRenderLoop,
+  isRenderLoopRunning,
+  getRenderLoopFps,
+  getRenderLoopFrameCount,
+  setRenderLoopCallback,
+  getMinFrameInterval,
+  createTauriHostAdapter,
+  createTauriHostCapabilities,
+  createDefaultFileFilters,
 } from './index';
 
 describe('tool-editor', () => {
@@ -214,5 +235,35 @@ describe('tool-editor', () => {
     expect(deepCloneNode).toBeTypeOf('function');
     expect(cloneNodeWithOffset).toBeTypeOf('function');
     expect(cloneNodes).toBeTypeOf('function');
+  });
+
+  it('exports theme renderer utilities', () => {
+    expect(applyThemeToLayout).toBeTypeOf('function');
+    expect(applyThemeToNode).toBeTypeOf('function');
+    expect(applyThemeToLayoutChild).toBeTypeOf('function');
+    expect(applyThemeBorders).toBeTypeOf('function');
+    expect(clearThemeFromLayout).toBeTypeOf('function');
+    expect(getDefaultRegionColors).toBeTypeOf('function');
+    expect(getRegionColor).toBeTypeOf('function');
+  });
+
+  it('exports render loop utilities', () => {
+    expect(createRenderLoopState).toBeTypeOf('function');
+    expect(startRenderLoop).toBeTypeOf('function');
+    expect(stopRenderLoop).toBeTypeOf('function');
+    expect(pauseRenderLoop).toBeTypeOf('function');
+    expect(resumeRenderLoop).toBeTypeOf('function');
+    expect(stepRenderLoop).toBeTypeOf('function');
+    expect(isRenderLoopRunning).toBeTypeOf('function');
+    expect(getRenderLoopFps).toBeTypeOf('function');
+    expect(getRenderLoopFrameCount).toBeTypeOf('function');
+    expect(setRenderLoopCallback).toBeTypeOf('function');
+    expect(getMinFrameInterval).toBeTypeOf('function');
+  });
+
+  it('exports Tauri host utilities', () => {
+    expect(createTauriHostAdapter).toBeTypeOf('function');
+    expect(createTauriHostCapabilities).toBeTypeOf('function');
+    expect(createDefaultFileFilters).toBeTypeOf('function');
   });
 });
