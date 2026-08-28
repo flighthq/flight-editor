@@ -56,6 +56,8 @@
       "@flighthq/editor-keyboard/*": ["./packages/editor-keyboard/src/*"],
       "@flighthq/editor-lock": ["./packages/editor-lock/src/index.ts"],
       "@flighthq/editor-lock/*": ["./packages/editor-lock/src/*"],
+      "@flighthq/editor-menu": ["./packages/editor-menu/src/index.ts"],
+      "@flighthq/editor-menu/*": ["./packages/editor-menu/src/*"],
       "@flighthq/editor-scene-state": ["./packages/editor-scene-state/src/index.ts"],
       "@flighthq/editor-scene-state/*": ["./packages/editor-scene-state/src/*"],
       "@flighthq/editor-snap": ["./packages/editor-snap/src/index.ts"],
