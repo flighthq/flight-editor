@@ -278,6 +278,13 @@ export {
   zoomToFit,
 } from './zoomController';
 export {
+  computeEditorTransformOrigin,
+  getEditorCustomTransformOrigin,
+  getEditorTransformOriginMode,
+  setEditorCustomTransformOrigin,
+  setEditorTransformOriginMode,
+} from './transformOriginManager';
+export {
   composeTransform,
   decomposeTransform,
   getLocalPosition,
