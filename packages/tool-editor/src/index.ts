@@ -44,6 +44,12 @@ export { getDefaultMenuCount, registerDefaultMenus } from './defaultMenus';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
 export { executeNamedCommand, registerDefaultCommands } from './commandRegistry';
 export { createEyedropperTool } from './eyedropperTool';
+export {
+  getRegisteredCommandCount,
+  getRegisteredMenuCount,
+  getRegisteredShortcutCount,
+  initEditor,
+} from './initEditor';
 export { registerDefaultNodeKinds } from './factoryPresets';
 export { registerDefaultTools } from './registerDefaultTools';
 export { createHandTool } from './handTool';
@@ -92,6 +98,7 @@ export type { EditorState } from './editorState';
 export type { NamedCommandArguments, NamedCommandFactory } from './commandRegistry';
 export type { ColorAtPoint, ColorPickCallback, EyedropperTool, EyedropperToolOptions } from './eyedropperTool';
 export type { HandTool } from './handTool';
+export type { InitEditorOptions } from './initEditor';
 export type { DefaultToolsOptions } from './registerDefaultTools';
 export type { InspectorSnapshot } from './inspectorState';
 export type { MarqueeHitTestFn, MarqueeRect, MarqueeTool } from './marqueeTool';
