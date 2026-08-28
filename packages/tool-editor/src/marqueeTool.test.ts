@@ -114,4 +114,29 @@ describe('createMarqueeTool', () => {
     expect(tool.currentRect).toBeNull();
     expect(hitTest).not.toHaveBeenCalled();
   });
+
+  it('has id "marquee"', () => {
+    const tool = createMarqueeTool(createEditorState(), () => []);
+    expect(tool.id).toBe('marquee');
+  });
+
+  it('clears selection when no nodes are hit', () => {
+    const editor = createEditorState();
+    const existing = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [existing]);
+    const tool = createMarqueeTool(editor, () => []);
+
+    tool.pointerDown(makeEvent({ x: 0, y: 0 }));
+    tool.pointerUp(makeEvent({ x: 100, y: 100 }));
+
+    expect(getSelectionCount(editor.selection)).toBe(0);
+  });
+
+  it('pointer move without pointer down does nothing', () => {
+    const tool = createMarqueeTool(createEditorState(), () => []);
+
+    tool.pointerMove(makeEvent({ x: 50, y: 50 }));
+
+    expect(tool.currentRect).toBeNull();
+  });
 });

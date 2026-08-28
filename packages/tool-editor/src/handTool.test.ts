@@ -109,4 +109,35 @@ describe('createHandTool', () => {
 
     expect(tool.id).toBe('hand');
   });
+
+  it('second drag after first completes works independently', () => {
+    const editor = createEditorState();
+    const tool = createHandTool(editor);
+
+    tool.pointerDown(makeEvent(100, 100));
+    tool.pointerMove(makeEvent(150, 100));
+    tool.pointerUp(makeEvent(150, 100));
+
+    const xBetween = editor.viewport.camera.x;
+
+    tool.pointerDown(makeEvent(200, 200));
+    tool.pointerMove(makeEvent(250, 200));
+    tool.pointerUp(makeEvent(250, 200));
+
+    expect(editor.viewport.camera.x).toBeLessThan(xBetween);
+  });
+
+  it('pans in both axes simultaneously', () => {
+    const editor = createEditorState();
+    const startX = editor.viewport.camera.x;
+    const startY = editor.viewport.camera.y;
+    const tool = createHandTool(editor);
+
+    tool.pointerDown(makeEvent(0, 0));
+    tool.pointerMove(makeEvent(100, 50));
+    tool.pointerUp(makeEvent(100, 50));
+
+    expect(editor.viewport.camera.x).not.toBe(startX);
+    expect(editor.viewport.camera.y).not.toBe(startY);
+  });
 });
