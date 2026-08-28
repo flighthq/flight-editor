@@ -40,6 +40,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-keyboard` — keyboard shortcut registry: action bindings, modifier matching, version tracking
 - `editor-lock` — lock state: tracks which nodes are locked to prevent editing
 - `editor-node-factory` — node kind registry: register creation functions by category, create nodes from registered kinds
+- `editor-rulers` — ruler display state: visibility, units (pixels/inches/cm), origin, tick spacing, subdivisions
 - `editor-scene-state` — scene metadata: name, dimensions, background color, dirty/version tracking
 - `editor-selection` — selection state: multi-select, filters by kind/hierarchy, version tracking
 - `editor-snap` — snap configuration: grid and guide management, position snapping
@@ -48,7 +49,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 
 **Composition:**
 
-- `tool-editor` — editor application core: `EditorState` (composes command history + selection + clipboard + drag-drop + guides + hierarchy + keyboard + locks + node factory + scene metadata + snapping + tool registry + viewport + scene), concrete commands (add/remove/reparent node, set transform/pivot/alpha/visible/blend-mode, batch transform, rename node/scene, copy/paste, add-from-factory, group/ungroup, delete/duplicate/lock selection, z-order, align/distribute, clear scene, set scene size/background), concrete tools (select, marquee, move, scale, rotate, pointer — combined arrow tool with rotation), inspector snapshot for host property panels
+- `tool-editor` — editor application core: `EditorState` (composes command history + selection + clipboard + drag-drop + guides + hierarchy + keyboard + locks + node factory + rulers + scene metadata + snapping + tool registry + viewport + scene), concrete commands (add/remove/reparent node, set transform/pivot/alpha/visible/blend-mode, batch transform, rename node/scene, copy/paste, add-from-factory, group/ungroup, delete/duplicate/lock selection, z-order, align/distribute, clear scene, set scene size/color/background), concrete tools (select, marquee, move, scale, rotate, pointer — combined arrow tool with rotation, hand — viewport pan, zoom — click/drag zoom), inspector snapshot for host property panels
 
 **Flight SDK** (`@flighthq/sdk`) — provides `Scene2D`, `Node2D`, `Sprite`, renderers, interaction, picking, scene-formats, and the full graphics substrate.
 
