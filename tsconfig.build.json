@@ -16,6 +16,7 @@
     { "path": "./packages/editor-lock" },
     { "path": "./packages/editor-menu" },
     { "path": "./packages/editor-selection" },
+    { "path": "./packages/editor-selection-actions" },
     { "path": "./packages/editor-hierarchy" },
     { "path": "./packages/editor-keyboard" },
     { "path": "./packages/editor-node-factory" },

@@ -48,6 +48,8 @@
       "@flighthq/editor-scene-io/*": ["./packages/editor-scene-io/src/*"],
       "@flighthq/editor-selection": ["./packages/editor-selection/src/index.ts"],
       "@flighthq/editor-selection/*": ["./packages/editor-selection/src/*"],
+      "@flighthq/editor-selection-actions": ["./packages/editor-selection-actions/src/index.ts"],
+      "@flighthq/editor-selection-actions/*": ["./packages/editor-selection-actions/src/*"],
       "@flighthq/editor-tool": ["./packages/editor-tool/src/index.ts"],
       "@flighthq/editor-tool/*": ["./packages/editor-tool/src/*"],
       "@flighthq/editor-transform-origin": ["./packages/editor-transform-origin/src/index.ts"],
