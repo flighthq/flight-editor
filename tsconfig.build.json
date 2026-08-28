@@ -29,6 +29,7 @@
     { "path": "./packages/editor-scene-state" },
     { "path": "./packages/editor-snap" },
     { "path": "./packages/editor-status" },
+    { "path": "./packages/editor-tauri-adapter" },
     { "path": "./packages/editor-text-style" },
     { "path": "./packages/editor-tool" },
     { "path": "./packages/editor-toolbar" },

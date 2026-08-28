@@ -56,6 +56,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-selection` — selection state: multi-select, filters by kind/hierarchy, version tracking
 - `editor-snap` — snap configuration: grid and guide management, position snapping
 - `editor-status` — status bar state: messages, zoom display, selection info, cursor position, active tool
+- `editor-tauri-adapter` — desktop host adapter bridge for future Tauri native API integration
 - `editor-text-style` — active text formatting state for host property panels and Flight text formats
 - `editor-tool` — tool registry: register/activate/deactivate tools, pointer dispatch lifecycle
 - `editor-transform-origin` — transform-origin mode and scene-space origin computation for node bounds
