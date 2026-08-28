@@ -152,6 +152,13 @@ export {
 } from './guideManager';
 export { canSave, canSaveAs, hasFilePath, needsSave, openFile, saveFile, saveFileAs } from './fileOperations';
 export {
+  getEditorKeyBinding,
+  getEditorRegisteredActions,
+  matchEditorKeyEvent,
+  registerEditorKeyBinding,
+  unregisterEditorKeyBinding,
+} from './keyboardManager';
+export {
   getEditorHostAdapter,
   getEditorHostAdapterVersion,
   getEditorHostCallbacks,
@@ -203,6 +210,15 @@ export {
   showEditorRulers,
   toggleEditorRulers,
 } from './rulerManager';
+export {
+  createEditorNodeFromKind,
+  getEditorNodeKindCategories,
+  getEditorNodeKindEntry,
+  getEditorNodeKindIds,
+  getEditorNodeKindsByCategory,
+  registerEditorNodeKind,
+  unregisterEditorNodeKind,
+} from './nodeFactoryManager';
 export {
   addNode,
   alignSelection,
@@ -469,3 +485,5 @@ export type { PropertyDefinition, PropertyType, PropertyValue } from '@flighthq/
 export type { Checkpoint } from '@flighthq/editor-history-state';
 export type { MenuDefinition, MenuItem, MenuItemRole } from '@flighthq/editor-menu';
 export type { ZoomPreset } from '@flighthq/editor-zoom-presets';
+export type { NodeCreator, NodeFactoryEntry } from '@flighthq/editor-node-factory';
+export type { KeyBinding, KeyboardEventLike } from '@flighthq/editor-keyboard';
