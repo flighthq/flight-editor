@@ -24,8 +24,13 @@ export function getEditorStatusMessage(editor: Readonly<EditorState>): string | 
   return msg ? msg.text : null;
 }
 
-export function setEditorStatusMessage(editor: EditorState, text: string, severity?: MessageSeverity): void {
-  setStatusMessage(editor.statusBar, text, severity);
+export function setEditorStatusMessage(
+  editor: EditorState,
+  text: string,
+  severity: MessageSeverity = 'info',
+  timestamp: number = 0,
+): void {
+  setStatusMessage(editor.statusBar, text, severity, timestamp);
 }
 
 export function clearEditorStatusMessage(editor: EditorState): void {
