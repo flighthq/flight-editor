@@ -1,6 +1,7 @@
 {
   "files": [],
   "references": [
+    { "path": "./packages/editor-clipboard" },
     { "path": "./packages/editor-command" },
     { "path": "./packages/editor-selection" },
     { "path": "./packages/editor-hierarchy" },
