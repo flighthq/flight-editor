@@ -1,0 +1,77 @@
+{
+  "name": "flight",
+  "displayName": "Flight",
+  "description": "Visual editing and source navigation for Flight scene files",
+  "version": "0.1.0",
+  "publisher": "flighthq",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCustomEditor:flight.visualEditor"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "flight",
+        "aliases": [
+          "Flight"
+        ],
+        "extensions": [
+          ".flight"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "flight.visualEditor",
+        "displayName": "Flight Visual Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.flight"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "flight.openVisual",
+        "title": "Flight: Open Visual Editor"
+      },
+      {
+        "command": "flight.openSource",
+        "title": "Flight: Open Source"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "flight.openSource",
+          "when": "activeCustomEditorId == flight.visualEditor",
+          "group": "navigation"
+        },
+        {
+          "command": "flight.openVisual",
+          "when": "editorLangId == flight",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --config ../../vitest.config.ts src"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.17"
+  }
+}
