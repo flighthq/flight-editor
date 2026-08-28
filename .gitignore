@@ -11,6 +11,8 @@ build/
 !commitlint.config.js
 !vitest.config.ts
 !.claude/workflows/*.js
+!extensions/vscode/media/*.js
+!extensions/vscode/src/*.d.ts
 
 # Coverage
 coverage/

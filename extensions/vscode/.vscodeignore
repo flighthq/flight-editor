@@ -1,0 +1,6 @@
+src/**
+.vscode/**
+fixtures/**
+tsconfig.json
+vitest.config.ts
+**/*.test.*

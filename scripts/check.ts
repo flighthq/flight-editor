@@ -13,6 +13,7 @@ const checks = [
   ['source/test completeness', 'exports:check'],
   ['license provenance', 'check:license-provenance'],
   ['orphaned package output', 'check:package-dist-orphans'],
+  ['VS Code extension', 'check:vscode'],
   ['types', 'typecheck'],
   ['tests', 'test'],
   ['lint', 'lint'],

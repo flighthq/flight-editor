@@ -21,6 +21,7 @@
     "check": "tsx ./scripts/check.ts",
     "check:license-provenance": "tsx ./scripts/check-license-provenance.ts",
     "check:package-dist-orphans": "tsx ./scripts/check-package-dist-orphans.ts",
+    "check:vscode": "npm run check --prefix extensions/vscode",
     "clean": "npm run clean:build",
     "clean:build": "tsx ./scripts/clean-package-dist.ts && tsc -b tsconfig.build.json --clean",
     "exports:check": "tsx ./scripts/completeness.ts",

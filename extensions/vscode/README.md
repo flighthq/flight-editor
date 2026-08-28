@@ -1,7 +1,37 @@
 # Flight for Visual Studio Code
 
-Opening a `.flight` file uses the Flight visual editor by default. Use the editor-title button or the commands `Flight: Open Source` and `Flight: Open Visual Editor` to move between the JSON source and visual navigation.
+Flight provides a visual editor for `.flight` scene files while keeping VS Code's text document as the single source of truth.
 
-The VS Code text document is the source of truth. The visual editor listens to document revisions, so changes from the source editor, disk reloads, formatters, Git operations, and other extensions are reflected without reopening the tab.
+## Features
 
-Build from this directory with `npm run build`. During development, open this directory in VS Code and run the extension host launch configuration.
+- Opens `.flight` files in the visual editor by default.
+- Navigates the complete serialized node hierarchy.
+- Previews nested node transforms, bounds, visibility, alpha, and packed colors.
+- Pans with pointer drag, zooms around the pointer with the wheel, and fits the scene to the viewport.
+- Inspects and edits node name, position, scale, rotation (radians), alpha, and visibility.
+- Routes visual edits through VS Code, preserving dirty state, save, undo, and redo.
+- Refreshes every visual editor when its source changes, including changes made by formatters and external tools.
+- Rejects edits based on stale revisions instead of overwriting newer source.
+- Reports malformed JSON and incompatible Flight document versions inside the editor.
+
+Use the editor-title actions or these commands:
+
+- `Flight: Open Source`
+- `Flight: Open Visual Editor`
+- `Flight: Validate Scene`
+
+## Development
+
+From `extensions/vscode`:
+
+```sh
+npm run check
+```
+
+Open the same directory in VS Code and run **Run Flight Extension**. The included `fixtures/sample.flight` file is a small scene for exercising visual edits, source toggling, undo/redo, save, and external reload behavior.
+
+## Architecture
+
+The custom text editor deliberately lets VS Code own document persistence and history. A revisioned message protocol sends immutable snapshots to the webview. Inspector edits include the revision they were based on; the extension validates the scene and revision before applying one `WorkspaceEdit`.
+
+The current canvas is a format-compatible scene preview, not the full Flight renderer. It covers hierarchy, transforms, bounds, and editor interaction without duplicating document ownership. A future browser bootstrap exported by `@flighthq/tool-editor` can replace the preview behind the same document protocol.

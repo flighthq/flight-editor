@@ -10,5 +10,5 @@
     "rootDir": "src",
     "types": []
   },
-  "include": ["src/extension.ts", "src/vscode.d.ts"]
+  "include": ["src/**/*.ts"]
 }
