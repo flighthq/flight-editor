@@ -88,4 +88,24 @@ describe('createDistributeNodesCommand', () => {
 
     expect(readTransform(node)).toEqual(original);
   });
+
+  it('has the correct labels', () => {
+    expect(createDistributeNodesCommand([], 'horizontal').label).toBe('Distribute Horizontally');
+    expect(createDistributeNodesCommand([], 'vertical').label).toBe('Distribute Vertically');
+  });
+
+  it('distributes 5 nodes evenly', () => {
+    const nodes = [
+      createPositionedNode(0, 0),
+      createPositionedNode(80, 0),
+      createPositionedNode(50, 0),
+      createPositionedNode(30, 0),
+      createPositionedNode(100, 0),
+    ];
+
+    createDistributeNodesCommand(nodes, 'horizontal').execute();
+
+    const xs = nodes.map((n) => readTransform(n).x).sort((a, b) => a - b);
+    expect(xs).toEqual([0, 25, 50, 75, 100]);
+  });
 });
