@@ -48,4 +48,26 @@ describe('createReorderNodesCommand', () => {
     expect(() => createReorderNodesCommand(children, [0, 0])).toThrow(RangeError);
     expect(() => createReorderNodesCommand([children[0]], [2])).toThrow(RangeError);
   });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const { parent, children } = createSiblings(['a', 'b', 'c']);
+    const [a, b, c] = children;
+    const command = createReorderNodesCommand([a], [2]);
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(getNodeChildren(parent)).toEqual([b, c, a]);
+      command.undo();
+      expect(getNodeChildren(parent)).toEqual([a, b, c]);
+    }
+  });
+
+  it('reorder with empty input is a no-op', () => {
+    const { parent, children } = createSiblings(['a', 'b']);
+    const command = createReorderNodesCommand([], []);
+    command.execute();
+    expect(getNodeChildren(parent)).toEqual(children);
+    command.undo();
+    expect(getNodeChildren(parent)).toEqual(children);
+  });
 });

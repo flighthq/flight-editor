@@ -19,6 +19,11 @@ describe('getSelectionBounds', () => {
     expect(getSelectionBounds([])).toBeNull();
     expect(getSelectionBounds([first, second])).toEqual({ x: 10, y: -5, width: 45, height: 25 });
   });
+
+  it('returns exact bounds for a single node', () => {
+    const { first } = createBoundedTree();
+    expect(getSelectionBounds([first])).toEqual({ x: 10, y: 5, width: 20, height: 10 });
+  });
 });
 
 describe('getSceneBounds', () => {

@@ -44,6 +44,29 @@ describe('batchCommands', () => {
       batch.undo();
     }).not.toThrow();
   });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const events: string[] = [];
+    const batch = batchCommands([command('X', events), command('Y', events)], 'Pair');
+    for (let i = 0; i < 3; i++) {
+      batch.execute();
+      batch.undo();
+    }
+    expect(events).toEqual([
+      'execute:X',
+      'execute:Y',
+      'undo:Y',
+      'undo:X',
+      'execute:X',
+      'execute:Y',
+      'undo:Y',
+      'undo:X',
+      'execute:X',
+      'execute:Y',
+      'undo:Y',
+      'undo:X',
+    ]);
+  });
 });
 
 describe('getUndoLabel', () => {

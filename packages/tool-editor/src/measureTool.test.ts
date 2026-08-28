@@ -68,4 +68,22 @@ describe('createMeasureTool', () => {
     expect(tool.currentMeasurement).toBeNull();
     expect(onMeasure).toHaveBeenLastCalledWith(null);
   });
+
+  it('computes zero distance and angle for zero-length drag', () => {
+    const editor = createEditorState();
+    const onMeasure = vi.fn();
+    const tool = createMeasureTool(editor, onMeasure);
+    tool.pointerDown(makeEvent(400, 300));
+    tool.pointerUp(makeEvent(400, 300));
+    expect(tool.currentMeasurement).toMatchObject({ distance: 0, deltaX: 0, deltaY: 0 });
+  });
+
+  it('reports negative angle for downward drag', () => {
+    const editor = createEditorState();
+    const onMeasure = vi.fn();
+    const tool = createMeasureTool(editor, onMeasure);
+    tool.pointerDown(makeEvent(400, 300));
+    tool.pointerMove(makeEvent(400, 200));
+    expect(tool.currentMeasurement!.angle).toBe(-90);
+  });
 });

@@ -79,4 +79,17 @@ describe('createEyedropperTool', () => {
     tool.pointerUp(makeEvent(0, 0));
     expect(getActiveToolId(editor.toolRegistry)).toBe(tool.id);
   });
+
+  it('does not deactivate on pointer up without prior pointer down', () => {
+    const editor = createEditorState();
+    const tool = createEyedropperTool(
+      editor,
+      () => 1,
+      () => {},
+    );
+    registerTool(editor.toolRegistry, tool);
+    activateTool(editor.toolRegistry, tool.id);
+    tool.pointerUp(makeEvent(0, 0));
+    expect(getActiveToolId(editor.toolRegistry)).toBe(tool.id);
+  });
 });

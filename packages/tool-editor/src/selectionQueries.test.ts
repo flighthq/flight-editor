@@ -28,6 +28,12 @@ describe('getSelectedNodes', () => {
     setSelection(selection, [sibling, createDisplayObject(), root, leaf]);
     expect(getSelectedNodes(selection, root)).toEqual([root, leaf, sibling]);
   });
+
+  it('returns empty array when nothing is selected', () => {
+    const { root } = createTree();
+    const selection = createSelectionState();
+    expect(getSelectedNodes(selection, root)).toEqual([]);
+  });
 });
 
 describe('getSelectedBounds', () => {

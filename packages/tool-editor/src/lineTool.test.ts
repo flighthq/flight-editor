@@ -95,4 +95,11 @@ describe('createLineTool', () => {
     expect(tool.currentLine).toBeNull();
     expect(getCommandHistoryUndoCount(editor.commandHistory)).toBe(0);
   });
+
+  it('ignores pointer move without preceding pointer down', () => {
+    const editor = createEditorState();
+    const tool = createLineTool(editor);
+    tool.pointerMove(makeEvent(500, 500));
+    expect(tool.currentLine).toBeNull();
+  });
 });

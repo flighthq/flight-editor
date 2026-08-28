@@ -88,4 +88,11 @@ describe('createRectangleTool', () => {
     expect(tool.currentRectangle).toBeNull();
     expect(getCommandHistoryUndoCount(editor.commandHistory)).toBe(0);
   });
+
+  it('ignores pointer move without preceding pointer down', () => {
+    const editor = createEditorState();
+    const tool = createRectangleTool(editor);
+    tool.pointerMove(makeEvent(500, 500));
+    expect(tool.currentRectangle).toBeNull();
+  });
 });

@@ -12,6 +12,12 @@ describe('screenToScene', () => {
     expect(screenToScene(viewport, 400, 300)).toEqual({ x: 100, y: 50 });
     expect(screenToScene(viewport, 440, 280)).toEqual({ x: 120, y: 40 });
   });
+
+  it('handles zoom of 1 at origin', () => {
+    const viewport = createEditorViewport(100, 100);
+    const point = screenToScene(viewport, 50, 50);
+    expect(point).toEqual({ x: 0, y: 0 });
+  });
 });
 
 describe('sceneToScreen', () => {

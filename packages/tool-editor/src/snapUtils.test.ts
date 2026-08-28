@@ -35,6 +35,16 @@ describe('snapToGuides', () => {
       snappedV: false,
     });
   });
+
+  it('returns unsnapped result when no guides exist', () => {
+    const guides = createGuidesState();
+    expect(snapToGuides(guides, 50, 50, 10)).toEqual({
+      x: 50,
+      y: 50,
+      snappedH: false,
+      snappedV: false,
+    });
+  });
 });
 
 describe('snapPosition', () => {
