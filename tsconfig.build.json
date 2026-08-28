@@ -20,6 +20,7 @@
     { "path": "./packages/editor-snap" },
     { "path": "./packages/editor-text-style" },
     { "path": "./packages/editor-tool" },
+    { "path": "./packages/editor-toolbar" },
     { "path": "./packages/editor-transform-origin" },
     { "path": "./packages/editor-viewport" },
     { "path": "./packages/editor-zoom-presets" },

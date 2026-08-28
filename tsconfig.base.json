@@ -54,6 +54,8 @@
       "@flighthq/editor-snap/*": ["./packages/editor-snap/src/*"],
       "@flighthq/editor-text-style": ["./packages/editor-text-style/src/index.ts"],
       "@flighthq/editor-text-style/*": ["./packages/editor-text-style/src/*"],
+      "@flighthq/editor-toolbar": ["./packages/editor-toolbar/src/index.ts"],
+      "@flighthq/editor-toolbar/*": ["./packages/editor-toolbar/src/*"],
       "@flighthq/editor-viewport": ["./packages/editor-viewport/src/index.ts"],
       "@flighthq/editor-viewport/*": ["./packages/editor-viewport/src/*"],
       "@flighthq/editor-zoom-presets": ["./packages/editor-zoom-presets/src/index.ts"],
