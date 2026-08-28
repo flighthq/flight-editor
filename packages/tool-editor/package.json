@@ -40,6 +40,7 @@
     "@flighthq/editor-keyboard": "*",
     "@flighthq/editor-lock": "*",
     "@flighthq/editor-node-factory": "*",
+    "@flighthq/editor-rulers": "*",
     "@flighthq/editor-scene-state": "*",
     "@flighthq/editor-selection": "*",
     "@flighthq/editor-snap": "*",

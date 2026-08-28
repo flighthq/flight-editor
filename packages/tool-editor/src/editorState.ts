@@ -6,6 +6,7 @@ import type { HierarchyState } from '@flighthq/editor-hierarchy';
 import type { KeyboardMap } from '@flighthq/editor-keyboard';
 import type { LockState } from '@flighthq/editor-lock';
 import type { NodeFactory } from '@flighthq/editor-node-factory';
+import type { RulerState } from '@flighthq/editor-rulers';
 import type { SceneState } from '@flighthq/editor-scene-state';
 import type { SelectionState } from '@flighthq/editor-selection';
 import type { SnapConfig } from '@flighthq/editor-snap';
@@ -21,6 +22,7 @@ import { createHierarchyState } from '@flighthq/editor-hierarchy';
 import { createKeyboardMap } from '@flighthq/editor-keyboard';
 import { createLockState } from '@flighthq/editor-lock';
 import { createNodeFactory } from '@flighthq/editor-node-factory';
+import { createRulerState } from '@flighthq/editor-rulers';
 import { createSceneState } from '@flighthq/editor-scene-state';
 import { createSelectionState } from '@flighthq/editor-selection';
 import { createSnapConfig } from '@flighthq/editor-snap';
@@ -36,6 +38,7 @@ export interface EditorState {
   readonly keyboard: KeyboardMap;
   readonly locks: LockState;
   readonly nodeFactory: NodeFactory;
+  readonly rulers: RulerState;
   readonly sceneState: SceneState;
   readonly selection: SelectionState;
   readonly snap: SnapConfig;
@@ -54,6 +57,7 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
     keyboard: createKeyboardMap(),
     locks: createLockState(),
     nodeFactory: createNodeFactory(),
+    rulers: createRulerState(),
     sceneState: createSceneState(),
     selection: createSelectionState(),
     snap: createSnapConfig(),

@@ -11,6 +11,7 @@ describe('createEditorState', () => {
     expect(state.hierarchy.expanded.size).toBe(0);
     expect(state.nodeFactory.entries.size).toBe(0);
     expect(state.selection.nodes).toHaveLength(0);
+    expect(state.rulers.visible).toBe(true);
     expect(state.toolRegistry.activeToolId).toBeNull();
     expect(state.viewport.config.minZoom).toBe(0.05);
   });

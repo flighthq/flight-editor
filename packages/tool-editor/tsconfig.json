@@ -17,6 +17,7 @@
     { "path": "../editor-keyboard" },
     { "path": "../editor-lock" },
     { "path": "../editor-node-factory" },
+    { "path": "../editor-rulers" },
     { "path": "../editor-scene-state" },
     { "path": "../editor-selection" },
     { "path": "../editor-snap" },
