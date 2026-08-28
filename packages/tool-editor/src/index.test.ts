@@ -18,10 +18,13 @@ import {
   createSetSceneBackgroundColorCommand,
   createSetSceneNameCommand,
   decomposeTransform,
+  executeCommand,
   expandBounds,
   findNodesByName,
   snapToGrid,
   screenToScene,
+  getSelectedNodes,
+  registerDefaultNodeKinds,
 } from './index';
 
 describe('tool-editor', () => {
@@ -53,5 +56,11 @@ describe('tool-editor', () => {
   it('exports transform and snap utilities', () => {
     expect(decomposeTransform).toBeTypeOf('function');
     expect(snapToGrid).toBeTypeOf('function');
+  });
+
+  it('exports selection, history, and node-factory helpers', () => {
+    expect(getSelectedNodes).toBeTypeOf('function');
+    expect(executeCommand).toBeTypeOf('function');
+    expect(registerDefaultNodeKinds).toBeTypeOf('function');
   });
 });

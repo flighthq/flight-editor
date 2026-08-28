@@ -30,6 +30,7 @@ export {
   createSendToBackCommand,
 } from './commands/zOrderCommands';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
+export { registerDefaultNodeKinds } from './factoryPresets';
 export { createHandTool } from './handTool';
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMarqueeTool } from './marqueeTool';
@@ -39,6 +40,7 @@ export { createRotateTool } from './rotateTool';
 export { createScaleTool } from './scaleTool';
 export { createSelectTool } from './selectTool';
 export { createZoomTool } from './zoomTool';
+export { batchCommands, executeCommand, getRedoLabel, getUndoLabel } from './historyUtils';
 export { expandBounds, getSceneBounds, getSelectionBounds, isNodeInBounds } from './boundsUtils';
 export { sceneToScreen, sceneToScreenDistance, screenToScene, screenToSceneDistance } from './coordinateUtils';
 export {
@@ -50,6 +52,12 @@ export {
   getNodePath,
 } from './nodeQueries';
 export { snapDimension, snapPosition, snapToGrid, snapToGuides } from './snapUtils';
+export {
+  getDeepestSelectedAncestor,
+  getSelectedBounds,
+  getSelectedNodes,
+  isAncestorSelected,
+} from './selectionQueries';
 export {
   composeTransform,
   decomposeTransform,

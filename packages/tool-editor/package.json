@@ -53,6 +53,8 @@
     "@flighthq/editor-viewport": "*",
     "@flighthq/editor-zoom-presets": "*",
     "@flighthq/node": "*",
+    "@flighthq/shape": "*",
+    "@flighthq/text": "*",
     "@flighthq/types": "*"
   },
   "devDependencies": {
