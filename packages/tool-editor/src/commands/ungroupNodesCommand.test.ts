@@ -90,4 +90,40 @@ describe('createUngroupNodesCommand', () => {
     expect(children[2]).toBe(after);
     expect(getNodeChildren(group)[0]).toBe(x);
   });
+
+  it('has the correct label', () => {
+    const root = createNode2D(DisplayObjectKind);
+    const group = createNode2D(DisplayObjectKind);
+    addNodeChild(root, group);
+    const cmd = createUngroupNodesCommand(group);
+    expect(cmd.label).toBe('Ungroup');
+  });
+
+  it('can re-execute after undo', () => {
+    const root = createNode2D(DisplayObjectKind);
+    const group = createNode2D(DisplayObjectKind);
+    const a = createNode2D(DisplayObjectKind);
+    addNodeChild(root, group);
+    addNodeChild(group, a);
+
+    const cmd = createUngroupNodesCommand(group);
+    cmd.execute();
+    cmd.undo();
+    cmd.execute();
+
+    expect(getNodeParent(a)).toBe(root);
+    expect(getNodeParent(group)).toBeNull();
+  });
+
+  it('handles empty group', () => {
+    const root = createNode2D(DisplayObjectKind);
+    const group = createNode2D(DisplayObjectKind);
+    addNodeChild(root, group);
+
+    const cmd = createUngroupNodesCommand(group);
+    cmd.execute();
+
+    expect(getNodeParent(group)).toBeNull();
+    expect(getNodeChildren(root)).toHaveLength(0);
+  });
 });

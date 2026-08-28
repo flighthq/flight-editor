@@ -1,5 +1,5 @@
 import { registerNodeKind } from '@flighthq/editor-node-factory';
-import { getNodeChildAt, getNodeChildCount, getNodeParent } from '@flighthq/node';
+import { addNodeChild, getNodeChildAt, getNodeChildCount, getNodeParent } from '@flighthq/node';
 import { createNode2D } from '@flighthq/scene2d';
 import { createEditorState } from '@flighthq/tool-editor';
 import { DisplayObjectKind } from '@flighthq/types';
@@ -35,5 +35,37 @@ describe('createAddFromFactoryCommand', () => {
     const parent = createNode2D(DisplayObjectKind);
 
     expect(createAddFromFactoryCommand(editor, 'missing', parent)).toBeNull();
+  });
+
+  it('can re-execute after undo', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const created = createNode2D(DisplayObjectKind);
+    registerNodeKind(editor.nodeFactory, 'test', 'Test', 'Test', () => created);
+    const command = createAddFromFactoryCommand(editor, 'test', parent)!;
+
+    command.execute();
+    command.undo();
+    command.execute();
+
+    expect(getNodeChildCount(parent)).toBe(1);
+    expect(getNodeChildAt(parent, 0)).toBe(created);
+  });
+
+  it('appends after existing children', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const existing = createNode2D(DisplayObjectKind);
+    addNodeChild(parent, existing);
+
+    const created = createNode2D(DisplayObjectKind);
+    registerNodeKind(editor.nodeFactory, 'test', 'Test', 'Test', () => created);
+    const command = createAddFromFactoryCommand(editor, 'test', parent)!;
+
+    command.execute();
+
+    expect(getNodeChildCount(parent)).toBe(2);
+    expect(getNodeChildAt(parent, 0)).toBe(existing);
+    expect(getNodeChildAt(parent, 1)).toBe(created);
   });
 });

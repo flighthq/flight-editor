@@ -89,4 +89,38 @@ describe('createGroupNodesCommand', () => {
     expect(children[2]).toBe(c);
     expect(getNodeParent(group)).toBeNull();
   });
+
+  it('has the correct label', () => {
+    const root = createNode2D(DisplayObjectKind);
+    const a = createNode2D(DisplayObjectKind);
+    addNodeChild(root, a);
+    const group = createNode2D(DisplayObjectKind);
+    const cmd = createGroupNodesCommand([a], group);
+    expect(cmd.label).toBe('Group');
+  });
+
+  it('can re-execute after undo', () => {
+    const root = createNode2D(DisplayObjectKind);
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    const group = createNode2D(DisplayObjectKind);
+    addNodeChild(root, a);
+    addNodeChild(root, b);
+
+    const cmd = createGroupNodesCommand([a, b], group);
+    cmd.execute();
+    cmd.undo();
+    cmd.execute();
+
+    expect(getNodeParent(a)).toBe(group);
+    expect(getNodeParent(b)).toBe(group);
+    expect(getNodeParent(group)).toBe(root);
+  });
+
+  it('handles empty node array', () => {
+    const group = createNode2D(DisplayObjectKind);
+    const cmd = createGroupNodesCommand([], group);
+    expect(() => cmd.execute()).not.toThrow();
+    expect(() => cmd.undo()).not.toThrow();
+  });
 });

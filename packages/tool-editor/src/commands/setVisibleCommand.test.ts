@@ -28,4 +28,32 @@ describe('createSetVisibleCommand', () => {
     cmd.undo();
     expect(node.visible).toBe(false);
   });
+
+  it('has the correct label', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const cmd = createSetVisibleCommand(node, false);
+    expect(cmd.label).toBe('Set Visible');
+  });
+
+  it('can re-execute after undo', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const cmd = createSetVisibleCommand(node, false);
+
+    cmd.execute();
+    cmd.undo();
+    cmd.execute();
+
+    expect(node.visible).toBe(false);
+  });
+
+  it('setting same visibility is a valid operation', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const cmd = createSetVisibleCommand(node, true);
+
+    cmd.execute();
+    expect(node.visible).toBe(true);
+
+    cmd.undo();
+    expect(node.visible).toBe(true);
+  });
 });

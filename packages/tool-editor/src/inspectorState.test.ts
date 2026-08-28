@@ -84,4 +84,44 @@ describe('getInspectorSnapshot', () => {
     const names = getInspectorSelectedNames(editor);
     expect(names).toEqual([]);
   });
+
+  it('returns empty string for unnamed nodes', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+
+    const names = getInspectorSelectedNames(editor);
+    expect(names).toEqual(['']);
+  });
+
+  it('snapshot reflects transform changes', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setNodeTransform2D(node, {
+      pivotX: 5,
+      pivotY: 10,
+      rotation: 45,
+      scaleX: 2,
+      scaleY: 3,
+      skewX: 0,
+      skewY: 0,
+      x: 100,
+      y: 200,
+    });
+    setSelection(editor.selection, [node]);
+
+    const snapshot = getInspectorSnapshot(editor);
+    expect(snapshot.transform!.pivotX).toBe(5);
+    expect(snapshot.transform!.pivotY).toBe(10);
+    expect(snapshot.transform!.rotation).toBe(45);
+  });
+
+  it('snapshot count matches selection size', () => {
+    const editor = createEditorState();
+    const nodes = Array.from({ length: 5 }, () => createNode2D(DisplayObjectKind));
+    setSelection(editor.selection, nodes);
+
+    expect(getInspectorSnapshot(editor).count).toBe(5);
+    expect(getInspectorSelectedNames(editor)).toHaveLength(5);
+  });
 });

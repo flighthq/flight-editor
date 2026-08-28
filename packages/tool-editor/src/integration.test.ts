@@ -1,26 +1,64 @@
-import { executeCommand, redo, undo } from '@flighthq/editor-command';
+import {
+  clearCommandHistory,
+  executeCommand,
+  getCommandHistoryUndoCount,
+  isCommandHistoryClean,
+  markCommandHistoryClean,
+  redo,
+  undo,
+} from '@flighthq/editor-command';
 import { expandHierarchyNode, getHierarchyRows } from '@flighthq/editor-hierarchy';
+import { isLocked } from '@flighthq/editor-lock';
 import { registerNodeKind } from '@flighthq/editor-node-factory';
 import { hideRulers, isRulerVisible, showRulers } from '@flighthq/editor-rulers';
 import { getSelectionCount, isSelected, setSelection } from '@flighthq/editor-selection';
 import { activateTool, registerTool } from '@flighthq/editor-tool';
-import { addNodeChild, getNodeChildCount, getNodeTransform2D } from '@flighthq/node';
+import {
+  addNodeChild,
+  getNodeChildAt,
+  getNodeChildCount,
+  getNodeChildren,
+  getNodeParent,
+  getNodeTransform2D,
+  setNodeTransform2D,
+} from '@flighthq/node';
 import { createNode2D, createScene2D } from '@flighthq/scene2d';
-import { DisplayObjectKind } from '@flighthq/types';
+import { BlendMode, DisplayObjectKind } from '@flighthq/types';
 import { describe, expect, it } from 'vitest';
 
 import type { Transform2DLike } from '@flighthq/types';
 
 import { createAddNodeCommand } from './commands/addNodeCommand';
+import { createAlignNodesCommand } from './commands/alignNodesCommand';
 import { createClearSceneCommand } from './commands/clearSceneCommand';
+import { createCopySelectionCommand } from './commands/copySelectionCommand';
 import { createDeleteSelectionCommand } from './commands/deleteSelectionCommand';
+import { createDuplicateSelectionCommand } from './commands/duplicateSelectionCommand';
+import { createGroupNodesCommand } from './commands/groupNodesCommand';
+import { createLockSelectionCommand } from './commands/lockSelectionCommand';
+import { createPasteNodesCommand } from './commands/pasteNodesCommand';
+import { createRemoveNodeCommand } from './commands/removeNodeCommand';
+import { createReparentNodeCommand } from './commands/reparentNodeCommand';
+import { createSetAlphaCommand } from './commands/setAlphaCommand';
+import { createSetBlendModeCommand } from './commands/setBlendModeCommand';
 import { createSetNodeNameCommand } from './commands/setNodeNameCommand';
 import { createSetSceneColorCommand } from './commands/setSceneColorCommand';
+import { createSetTransform2DCommand } from './commands/setTransform2DCommand';
+import { createSetVisibleCommand } from './commands/setVisibleCommand';
+import { createUngroupNodesCommand } from './commands/ungroupNodesCommand';
+import {
+  createBringForwardCommand,
+  createBringToFrontCommand,
+  createSendBackwardCommand,
+  createSendToBackCommand,
+} from './commands/zOrderCommands';
 import { createEditorState, setEditorScene } from './editorState';
 import { createHandTool } from './handTool';
+import { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 import { createMoveTool } from './moveTool';
 import { createScaleTool } from './scaleTool';
 import { createSelectTool } from './selectTool';
+import { createZoomTool } from './zoomTool';
 
 function readTransform(node: any): Transform2DLike {
   const t = { pivotX: 0, pivotY: 0, rotation: 0, scaleX: 1, scaleY: 1, skewX: 0, skewY: 0, x: 0, y: 0 };
@@ -229,5 +267,344 @@ describe('editor integration', () => {
 
     showRulers(editor.rulers);
     expect(isRulerVisible(editor.rulers)).toBe(true);
+  });
+
+  it('command history stress: 20 commands with full undo/redo cycle', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+    const node = createNode2D(DisplayObjectKind);
+    addNodeChild(root, node);
+
+    for (let i = 0; i < 20; i++) {
+      executeCommand(
+        editor.commandHistory,
+        createSetTransform2DCommand(node, {
+          pivotX: 0,
+          pivotY: 0,
+          rotation: 0,
+          scaleX: 1,
+          scaleY: 1,
+          skewX: 0,
+          skewY: 0,
+          x: i * 10,
+          y: i * 5,
+        }),
+      );
+    }
+
+    expect(getCommandHistoryUndoCount(editor.commandHistory)).toBe(20);
+
+    for (let i = 0; i < 20; i++) undo(editor.commandHistory);
+    expect(readTransform(node).x).toBe(0);
+    expect(readTransform(node).y).toBe(0);
+
+    for (let i = 0; i < 20; i++) redo(editor.commandHistory);
+    expect(readTransform(node).x).toBe(190);
+    expect(readTransform(node).y).toBe(95);
+  });
+
+  it('interleaved command types: undo preserves each command state independently', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const node = createNode2D(DisplayObjectKind);
+    node.name = 'Original';
+    addNodeChild(root, node);
+
+    executeCommand(editor.commandHistory, createSetNodeNameCommand(node, 'Renamed'));
+    executeCommand(editor.commandHistory, createSetAlphaCommand(node, 0.5));
+    executeCommand(editor.commandHistory, createSetBlendModeCommand(node, BlendMode.Multiply));
+    executeCommand(editor.commandHistory, createSetVisibleCommand(node, false));
+
+    expect(node.name).toBe('Renamed');
+    expect(node.alpha).toBe(0.5);
+    expect(node.blendMode).toBe(BlendMode.Multiply);
+    expect(node.visible).toBe(false);
+
+    undo(editor.commandHistory);
+    expect(node.visible).toBe(true);
+    expect(node.blendMode).toBe(BlendMode.Multiply);
+
+    undo(editor.commandHistory);
+    expect(node.blendMode).toBeNull();
+    expect(node.alpha).toBe(0.5);
+
+    undo(editor.commandHistory);
+    expect(node.alpha).toBe(1);
+    expect(node.name).toBe('Renamed');
+
+    undo(editor.commandHistory);
+    expect(node.name).toBe('Original');
+  });
+
+  it('new command after undo clears redo stack', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+
+    executeCommand(editor.commandHistory, createSetNodeNameCommand(node, 'A'));
+    executeCommand(editor.commandHistory, createSetNodeNameCommand(node, 'B'));
+    executeCommand(editor.commandHistory, createSetNodeNameCommand(node, 'C'));
+
+    undo(editor.commandHistory);
+    undo(editor.commandHistory);
+    expect(node.name).toBe('A');
+
+    executeCommand(editor.commandHistory, createSetNodeNameCommand(node, 'D'));
+    expect(redo(editor.commandHistory)).toBe(false);
+    expect(node.name).toBe('D');
+  });
+
+  it('clean tracking across command history', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+
+    executeCommand(editor.commandHistory, createSetNodeNameCommand(node, 'A'));
+    markCommandHistoryClean(editor.commandHistory);
+    expect(isCommandHistoryClean(editor.commandHistory)).toBe(true);
+
+    executeCommand(editor.commandHistory, createSetNodeNameCommand(node, 'B'));
+    expect(isCommandHistoryClean(editor.commandHistory)).toBe(false);
+
+    undo(editor.commandHistory);
+    expect(isCommandHistoryClean(editor.commandHistory)).toBe(true);
+  });
+
+  it('duplicate selection with undo at each step', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const a = createNode2D(DisplayObjectKind);
+    a.name = 'Source';
+    addNodeChild(root, a);
+    setSelection(editor.selection, [a]);
+
+    executeCommand(editor.commandHistory, createDuplicateSelectionCommand(editor));
+    expect(getNodeChildCount(root)).toBe(2);
+    expect(getNodeChildAt(root, 1).name).toBe('Source Copy');
+
+    setSelection(editor.selection, [getNodeChildAt(root, 1)]);
+    executeCommand(editor.commandHistory, createDuplicateSelectionCommand(editor));
+    expect(getNodeChildCount(root)).toBe(3);
+
+    undo(editor.commandHistory);
+    expect(getNodeChildCount(root)).toBe(2);
+
+    undo(editor.commandHistory);
+    expect(getNodeChildCount(root)).toBe(1);
+    expect(getNodeChildAt(root, 0)).toBe(a);
+  });
+
+  it('group → ungroup round-trip preserves tree structure', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    const c = createNode2D(DisplayObjectKind);
+    addNodeChild(root, a);
+    addNodeChild(root, b);
+    addNodeChild(root, c);
+
+    const group = createNode2D(DisplayObjectKind);
+    const groupCmd = createGroupNodesCommand([a, b], group);
+    executeCommand(editor.commandHistory, groupCmd);
+
+    expect(getNodeChildren(root).length).toBe(2);
+    expect(getNodeParent(a)).toBe(group);
+    expect(getNodeParent(b)).toBe(group);
+
+    const ungroupCmd = createUngroupNodesCommand(group);
+    executeCommand(editor.commandHistory, ungroupCmd);
+
+    expect(getNodeChildren(root).length).toBe(3);
+    expect(getNodeParent(a)).toBe(root);
+    expect(getNodeParent(b)).toBe(root);
+
+    undo(editor.commandHistory);
+    expect(getNodeParent(a)).toBe(group);
+    expect(getNodeParent(b)).toBe(group);
+
+    undo(editor.commandHistory);
+    expect(getNodeChildren(root).length).toBe(3);
+    expect(getNodeChildren(root)[0]).toBe(a);
+    expect(getNodeChildren(root)[1]).toBe(b);
+    expect(getNodeChildren(root)[2]).toBe(c);
+  });
+
+  it('lock node → verify lock state via command', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    addNodeChild(root, a);
+    addNodeChild(root, b);
+
+    setSelection(editor.selection, [a]);
+    executeCommand(editor.commandHistory, createLockSelectionCommand(editor));
+    expect(isLocked(editor.locks, a)).toBe(true);
+    expect(isLocked(editor.locks, b)).toBe(false);
+
+    undo(editor.commandHistory);
+    expect(isLocked(editor.locks, a)).toBe(false);
+  });
+
+  it('z-order commands through history', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    const c = createNode2D(DisplayObjectKind);
+    addNodeChild(root, a);
+    addNodeChild(root, b);
+    addNodeChild(root, c);
+
+    executeCommand(editor.commandHistory, createBringToFrontCommand(a));
+    expect(getNodeChildAt(root, 2)).toBe(a);
+
+    executeCommand(editor.commandHistory, createSendToBackCommand(a));
+    expect(getNodeChildAt(root, 0)).toBe(a);
+
+    undo(editor.commandHistory);
+    expect(getNodeChildAt(root, 2)).toBe(a);
+
+    undo(editor.commandHistory);
+    expect(getNodeChildAt(root, 0)).toBe(a);
+  });
+
+  it('align nodes through history', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const nodes = [0, 50, 100].map((x) => {
+      const n = createNode2D(DisplayObjectKind);
+      setNodeTransform2D(n, {
+        pivotX: 0,
+        pivotY: 0,
+        rotation: 0,
+        scaleX: 1,
+        scaleY: 1,
+        skewX: 0,
+        skewY: 0,
+        x,
+        y: 0,
+      });
+      addNodeChild(root, n);
+      return n;
+    });
+
+    executeCommand(editor.commandHistory, createAlignNodesCommand(nodes, 'left'));
+    expect(nodes.every((n) => readTransform(n).x === 0)).toBe(true);
+
+    undo(editor.commandHistory);
+    expect(readTransform(nodes[0]).x).toBe(0);
+    expect(readTransform(nodes[1]).x).toBe(50);
+    expect(readTransform(nodes[2]).x).toBe(100);
+  });
+
+  it('inspector snapshot updates with selection changes', () => {
+    const editor = createEditorState();
+    const a = createNode2D(DisplayObjectKind);
+    a.name = 'NodeA';
+    const b = createNode2D(DisplayObjectKind);
+    b.name = 'NodeB';
+
+    expect(getInspectorSnapshot(editor).count).toBe(0);
+
+    setSelection(editor.selection, [a]);
+    const snap1 = getInspectorSnapshot(editor);
+    expect(snap1.count).toBe(1);
+    expect(snap1.name).toBe('NodeA');
+    expect(snap1.node).toBe(a);
+
+    setSelection(editor.selection, [a, b]);
+    const snap2 = getInspectorSnapshot(editor);
+    expect(snap2.count).toBe(2);
+    expect(getInspectorSelectedNames(editor)).toEqual(['NodeA', 'NodeB']);
+  });
+
+  it('zoom tool integrates with viewport state', () => {
+    const editor = createEditorState();
+    const zoomTool = createZoomTool(editor);
+    registerTool(editor.toolRegistry, zoomTool);
+    activateTool(editor.toolRegistry, 'zoom');
+
+    const initialZoom = editor.viewport.camera.zoom;
+    zoomTool.pointerDown({ x: 400, y: 300, button: 0, shiftKey: false, ctrlKey: false, altKey: false, metaKey: false });
+    zoomTool.pointerUp({ x: 400, y: 300, button: 0, shiftKey: false, ctrlKey: false, altKey: false, metaKey: false });
+
+    expect(editor.viewport.camera.zoom).toBeGreaterThan(initialZoom);
+  });
+
+  it('clear history resets all tracking', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+
+    executeCommand(editor.commandHistory, createSetNodeNameCommand(node, 'A'));
+    executeCommand(editor.commandHistory, createSetNodeNameCommand(node, 'B'));
+    markCommandHistoryClean(editor.commandHistory);
+
+    clearCommandHistory(editor.commandHistory);
+    expect(getCommandHistoryUndoCount(editor.commandHistory)).toBe(0);
+    expect(isCommandHistoryClean(editor.commandHistory)).toBe(true);
+    expect(undo(editor.commandHistory)).toBe(false);
+  });
+
+  it('reparent via command then undo restores original parent', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const parent1 = createNode2D(DisplayObjectKind);
+    const parent2 = createNode2D(DisplayObjectKind);
+    const child = createNode2D(DisplayObjectKind);
+    addNodeChild(root, parent1);
+    addNodeChild(root, parent2);
+    addNodeChild(parent1, child);
+
+    executeCommand(editor.commandHistory, createReparentNodeCommand(child, parent2));
+    expect(getNodeParent(child)).toBe(parent2);
+    expect(getNodeChildCount(parent1)).toBe(0);
+    expect(getNodeChildCount(parent2)).toBe(1);
+
+    undo(editor.commandHistory);
+    expect(getNodeParent(child)).toBe(parent1);
+    expect(getNodeChildCount(parent1)).toBe(1);
+    expect(getNodeChildCount(parent2)).toBe(0);
+  });
+
+  it('delete and re-add through history preserves node identity', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const node = createNode2D(DisplayObjectKind);
+    node.name = 'Persistent';
+    addNodeChild(root, node);
+
+    executeCommand(editor.commandHistory, createRemoveNodeCommand(node));
+    expect(getNodeChildCount(root)).toBe(0);
+
+    undo(editor.commandHistory);
+    expect(getNodeChildCount(root)).toBe(1);
+    expect(getNodeChildAt(root, 0)).toBe(node);
+    expect(getNodeChildAt(root, 0).name).toBe('Persistent');
   });
 });
