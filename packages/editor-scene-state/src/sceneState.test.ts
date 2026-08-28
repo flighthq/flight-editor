@@ -33,6 +33,13 @@ describe('sceneState', () => {
     expect(state.height).toBe(1080);
   });
 
+  it('starts clean', () => {
+    const state = createSceneState();
+
+    expect(isSceneDirty(state)).toBe(false);
+    expect(getSceneVersion(state)).toBe(0);
+  });
+
   it('updates fields and marks the scene dirty', () => {
     const state = createSceneState();
 
@@ -46,6 +53,15 @@ describe('sceneState', () => {
     expect(state.backgroundColor).toBe(0xff0000ff);
     expect(isSceneDirty(state)).toBe(true);
     expect(getSceneVersion(state)).toBe(3);
+  });
+
+  it('stores packed colors as unsigned 32-bit values', () => {
+    const state = createSceneState();
+
+    setSceneBackgroundColor(state, -1);
+
+    expect(state.backgroundColor).toBe(0xffffffff);
+    expect(state.backgroundColor).toBeGreaterThan(0);
   });
 
   it('tracks explicit dirty and clean transitions', () => {
@@ -62,13 +78,59 @@ describe('sceneState', () => {
     expect(getSceneVersion(state)).toBe(2);
   });
 
-  it('does not increment the version for unchanged values', () => {
+  it('does not increment the version for an unchanged name', () => {
     const state = createSceneState();
 
     setSceneName(state, state.name);
+
+    expect(getSceneVersion(state)).toBe(0);
+    expect(isSceneDirty(state)).toBe(false);
+  });
+
+  it('does not increment the version for unchanged dimensions', () => {
+    const state = createSceneState();
+
     setSceneDimensions(state, state.width, state.height);
+
+    expect(getSceneVersion(state)).toBe(0);
+    expect(isSceneDirty(state)).toBe(false);
+  });
+
+  it('does not increment the version for an unchanged background color', () => {
+    const state = createSceneState();
+
     setSceneBackgroundColor(state, state.backgroundColor);
 
     expect(getSceneVersion(state)).toBe(0);
+  });
+
+  it('does not increment the version when marking an already dirty scene dirty', () => {
+    const state = createSceneState();
+    markSceneDirty(state);
+
+    markSceneDirty(state);
+
+    expect(getSceneVersion(state)).toBe(1);
+  });
+
+  it('does not increment the version when marking an already clean scene clean', () => {
+    const state = createSceneState();
+
+    markSceneClean(state);
+
+    expect(getSceneVersion(state)).toBe(0);
+  });
+
+  it('increments once for every meaningful operation', () => {
+    const state = createSceneState();
+
+    setSceneName(state, 'Level 1');
+    markSceneClean(state);
+    setSceneDimensions(state, 1024, 768);
+    setSceneBackgroundColor(state, 0x123456ff);
+    markSceneClean(state);
+
+    expect(getSceneVersion(state)).toBe(5);
+    expect(isSceneDirty(state)).toBe(false);
   });
 });

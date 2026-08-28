@@ -74,4 +74,18 @@ describe('createDistributeNodesCommand', () => {
 
     expect(nodes.map(readTransform)).toEqual(originals);
   });
+
+  it('keeps a single node unchanged and accepts an empty node list', () => {
+    const node = createPositionedNode(17, 29);
+    const original = readTransform(node);
+    const single = createDistributeNodesCommand([node], 'vertical');
+    const empty = createDistributeNodesCommand([], 'horizontal');
+
+    expect(() => empty.execute()).not.toThrow();
+    expect(() => empty.undo()).not.toThrow();
+    single.execute();
+    single.undo();
+
+    expect(readTransform(node)).toEqual(original);
+  });
 });

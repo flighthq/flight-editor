@@ -60,4 +60,18 @@ describe('createAlignNodesCommand', () => {
 
     expect(nodes.map(readTransform)).toEqual(originals);
   });
+
+  it('keeps a single node unchanged and accepts an empty node list', () => {
+    const node = createPositionedNode(17, 29);
+    const original = readTransform(node);
+    const single = createAlignNodesCommand([node], 'bottom');
+    const empty = createAlignNodesCommand([], 'left');
+
+    expect(() => empty.execute()).not.toThrow();
+    expect(() => empty.undo()).not.toThrow();
+    single.execute();
+    single.undo();
+
+    expect(readTransform(node)).toEqual(original);
+  });
 });
