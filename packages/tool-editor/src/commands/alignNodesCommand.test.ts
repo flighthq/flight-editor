@@ -101,4 +101,25 @@ describe('createAlignNodesCommand', () => {
 
     expect(command.label).toBe(expectedLabel);
   });
+
+  it('supports re-execute after undo', () => {
+    const nodes = [createPositionedNode(10, 20), createPositionedNode(50, 60)];
+    const command = createAlignNodesCommand(nodes, 'left');
+
+    command.execute();
+    command.undo();
+    command.execute();
+
+    expect(nodes.map((node) => readTransform(node).x)).toEqual([10, 10]);
+  });
+
+  it('already-aligned nodes are unchanged', () => {
+    const nodes = [createPositionedNode(30, 20), createPositionedNode(30, 60)];
+    const originals = nodes.map(readTransform);
+    const command = createAlignNodesCommand(nodes, 'left');
+
+    command.execute();
+
+    expect(nodes.map(readTransform)).toEqual(originals);
+  });
 });

@@ -66,4 +66,31 @@ describe('createCopySelectionCommand', () => {
     expect(getClipboardEntries(editor.clipboard)).toEqual([node]);
     expect(getClipboardOperation(editor.clipboard)).toBe('cut');
   });
+
+  it('overwrites existing clipboard entries', () => {
+    const editor = createEditorState();
+    const first = createNode2D(DisplayObjectKind);
+    const second = createNode2D(DisplayObjectKind);
+
+    setSelection(editor.selection, [first]);
+    createCopySelectionCommand(editor, 'copy').execute();
+    expect(getClipboardEntries(editor.clipboard)).toEqual([first]);
+
+    setSelection(editor.selection, [second]);
+    createCopySelectionCommand(editor, 'copy').execute();
+    expect(getClipboardEntries(editor.clipboard)).toEqual([second]);
+  });
+
+  it('reads selection at execute time, not creation time', () => {
+    const editor = createEditorState();
+    const first = createNode2D(DisplayObjectKind);
+    const second = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [first]);
+    const command = createCopySelectionCommand(editor, 'copy');
+
+    setSelection(editor.selection, [second]);
+    command.execute();
+
+    expect(getClipboardEntries(editor.clipboard)).toEqual([second]);
+  });
 });

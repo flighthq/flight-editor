@@ -75,4 +75,41 @@ describe('createPasteNodesCommand', () => {
     expect(getNodeChildCount(parent)).toBe(1);
     expect(getNodeChildAt(parent, 0)).toBe(node);
   });
+
+  it('undo removes pasted nodes in reverse order', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const existing = createNode2D(DisplayObjectKind);
+    addNodeChild(parent, existing);
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    const c = createNode2D(DisplayObjectKind);
+    setClipboardEntries(editor.clipboard, [a, b, c], 'copy');
+    const command = createPasteNodesCommand(editor, parent);
+
+    command.execute();
+    expect(getNodeChildCount(parent)).toBe(4);
+
+    command.undo();
+    expect(getNodeChildCount(parent)).toBe(1);
+    expect(getNodeChildAt(parent, 0)).toBe(existing);
+    expect(getNodeParent(a)).toBeNull();
+    expect(getNodeParent(b)).toBeNull();
+    expect(getNodeParent(c)).toBeNull();
+  });
+
+  it('captures clipboard at creation time', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const first = createNode2D(DisplayObjectKind);
+    const second = createNode2D(DisplayObjectKind);
+    setClipboardEntries(editor.clipboard, [first], 'copy');
+    const command = createPasteNodesCommand(editor, parent);
+
+    setClipboardEntries(editor.clipboard, [second], 'copy');
+    command.execute();
+
+    expect(getNodeChildCount(parent)).toBe(1);
+    expect(getNodeChildAt(parent, 0)).toBe(first);
+  });
 });

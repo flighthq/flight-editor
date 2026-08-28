@@ -102,4 +102,38 @@ describe('createReparentNodeCommand', () => {
     expect(getNodeChildCount(newParent)).toBe(1);
     expect(getNodeChildCount(oldParent)).toBe(0);
   });
+
+  it('reparents a node with no current parent', () => {
+    const newParent = createNode2D(DisplayObjectKind);
+    const node = createNode2D(DisplayObjectKind);
+    const command = createReparentNodeCommand(node, newParent);
+
+    command.execute();
+
+    expect(getNodeParent(node)).toBe(newParent);
+    expect(getNodeChildCount(newParent)).toBe(1);
+
+    command.undo();
+
+    expect(getNodeParent(node)).toBeNull();
+    expect(getNodeChildCount(newParent)).toBe(0);
+  });
+
+  it('preserves sibling order in old parent after move', () => {
+    const oldParent = createNode2D(DisplayObjectKind);
+    const newParent = createNode2D(DisplayObjectKind);
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    const c = createNode2D(DisplayObjectKind);
+    addNodeChild(oldParent, a);
+    addNodeChild(oldParent, b);
+    addNodeChild(oldParent, c);
+    const command = createReparentNodeCommand(b, newParent);
+
+    command.execute();
+
+    expect(getNodeChildCount(oldParent)).toBe(2);
+    expect(getNodeChildAt(oldParent, 0)).toBe(a);
+    expect(getNodeChildAt(oldParent, 1)).toBe(c);
+  });
 });

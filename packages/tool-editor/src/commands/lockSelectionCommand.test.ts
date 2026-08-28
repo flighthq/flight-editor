@@ -74,4 +74,24 @@ describe('createLockSelectionCommand', () => {
     expect(getLockedCount(editor.locks)).toBe(0);
     expect(getLockVersion(editor.locks)).toBe(0);
   });
+
+  it('has the correct label', () => {
+    const editor = createEditorState();
+    const command = createLockSelectionCommand(editor);
+    expect(command.label).toBe('Lock Selection');
+  });
+
+  it('supports re-execute after undo', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+    const command = createLockSelectionCommand(editor);
+
+    command.execute();
+    command.undo();
+    command.execute();
+
+    expect(isLocked(editor.locks, node)).toBe(true);
+    expect(getLockedCount(editor.locks)).toBe(1);
+  });
 });

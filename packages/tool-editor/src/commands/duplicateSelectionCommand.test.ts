@@ -142,4 +142,52 @@ describe('createDuplicateSelectionCommand', () => {
     const clone = getNodeChildAt(parent, 1) as Node2D;
     expect(clone.name).toBe('Node Copy');
   });
+
+  it('clone copies all transform fields from source', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const node = createNode2D(DisplayObjectKind);
+    node.name = 'T';
+    const transform: Transform2DLike = {
+      pivotX: 11,
+      pivotY: 22,
+      rotation: 45,
+      scaleX: 2,
+      scaleY: 3,
+      skewX: 0.1,
+      skewY: 0.2,
+      x: 100,
+      y: 200,
+    };
+    setNodeTransform2D(node, transform);
+    addNodeChild(parent, node);
+    setSelection(editor.selection, [node]);
+    const command = createDuplicateSelectionCommand(editor);
+
+    command.execute();
+
+    const clone = getNodeChildAt(parent, 1) as Node2D;
+    expect(readTransform(clone)).toEqual(transform);
+  });
+
+  it('multiple selected nodes produce clones adjacent to their sources', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    a.name = 'A';
+    b.name = 'B';
+    addNodeChild(parent, a);
+    addNodeChild(parent, b);
+    setSelection(editor.selection, [a, b]);
+    const command = createDuplicateSelectionCommand(editor);
+
+    command.execute();
+
+    expect(getNodeChildCount(parent)).toBe(4);
+    expect(getNodeChildAt(parent, 0)).toBe(a);
+    expect((getNodeChildAt(parent, 1) as Node2D).name).toBe('A Copy');
+    expect(getNodeChildAt(parent, 2)).toBe(b);
+    expect((getNodeChildAt(parent, 3) as Node2D).name).toBe('B Copy');
+  });
 });

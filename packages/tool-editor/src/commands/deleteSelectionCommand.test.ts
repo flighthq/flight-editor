@@ -114,4 +114,48 @@ describe('createDeleteSelectionCommand', () => {
     expect(getNodeChildCount(parent)).toBe(0);
     expect(getSelectionCount(editor.selection)).toBe(0);
   });
+
+  it('deletes nodes from different parents', () => {
+    const editor = createEditorState();
+    const parent1 = createNode2D(DisplayObjectKind);
+    const parent2 = createNode2D(DisplayObjectKind);
+    const child1 = createNode2D(DisplayObjectKind);
+    const child2 = createNode2D(DisplayObjectKind);
+    addNodeChild(parent1, child1);
+    addNodeChild(parent2, child2);
+    setSelection(editor.selection, [child1, child2]);
+    const command = createDeleteSelectionCommand(editor);
+
+    command.execute();
+
+    expect(getNodeChildCount(parent1)).toBe(0);
+    expect(getNodeChildCount(parent2)).toBe(0);
+
+    command.undo();
+
+    expect(getNodeChildCount(parent1)).toBe(1);
+    expect(getNodeChildAt(parent1, 0)).toBe(child1);
+    expect(getNodeChildCount(parent2)).toBe(1);
+    expect(getNodeChildAt(parent2, 0)).toBe(child2);
+  });
+
+  it('skips nodes without a parent', () => {
+    const editor = createEditorState();
+    const orphan = createNode2D(DisplayObjectKind);
+    const parent = createNode2D(DisplayObjectKind);
+    const child = createNode2D(DisplayObjectKind);
+    addNodeChild(parent, child);
+    setSelection(editor.selection, [orphan, child]);
+    const command = createDeleteSelectionCommand(editor);
+
+    command.execute();
+
+    expect(getNodeChildCount(parent)).toBe(0);
+    expect(getSelectionCount(editor.selection)).toBe(0);
+
+    command.undo();
+
+    expect(getNodeChildCount(parent)).toBe(1);
+    expect(getNodeChildAt(parent, 0)).toBe(child);
+  });
 });

@@ -59,4 +59,31 @@ describe('createAddNodeCommand', () => {
     expect(getNodeChildAt(parent, 0)).toBe(child);
     expect(getNodeParent(child)).toBe(parent);
   });
+
+  it('undo preserves existing siblings', () => {
+    const parent = createNode2D(DisplayObjectKind);
+    const sibling = createNode2D(DisplayObjectKind);
+    addNodeChild(parent, sibling);
+    const child = createNode2D(DisplayObjectKind);
+    const command = createAddNodeCommand(parent, child);
+
+    command.execute();
+    expect(getNodeChildCount(parent)).toBe(2);
+
+    command.undo();
+    expect(getNodeChildCount(parent)).toBe(1);
+    expect(getNodeChildAt(parent, 0)).toBe(sibling);
+  });
+
+  it('detaches child from parent on undo', () => {
+    const parent = createNode2D(DisplayObjectKind);
+    const child = createNode2D(DisplayObjectKind);
+    const command = createAddNodeCommand(parent, child);
+
+    command.execute();
+    expect(getNodeParent(child)).toBe(parent);
+
+    command.undo();
+    expect(getNodeParent(child)).toBeNull();
+  });
 });

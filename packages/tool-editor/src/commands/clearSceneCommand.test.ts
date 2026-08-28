@@ -71,4 +71,40 @@ describe('createClearSceneCommand', () => {
 
     expect(getNodeChildCount(scene.root)).toBe(0);
   });
+
+  it('snapshots children at execute time', () => {
+    const scene = createScene2D();
+    const cmd = createClearSceneCommand(scene.root);
+
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    addNodeChild(scene.root, a);
+    addNodeChild(scene.root, b);
+
+    cmd.execute();
+    expect(getNodeChildCount(scene.root)).toBe(0);
+
+    cmd.undo();
+    expect(getNodeChildCount(scene.root)).toBe(2);
+    expect(getNodeChildAt(scene.root, 0)).toBe(a);
+    expect(getNodeChildAt(scene.root, 1)).toBe(b);
+  });
+
+  it('multiple execute/undo cycles are stable', () => {
+    const scene = createScene2D();
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    addNodeChild(scene.root, a);
+    addNodeChild(scene.root, b);
+    const cmd = createClearSceneCommand(scene.root);
+
+    for (let i = 0; i < 3; i++) {
+      cmd.execute();
+      expect(getNodeChildCount(scene.root)).toBe(0);
+      cmd.undo();
+      expect(getNodeChildCount(scene.root)).toBe(2);
+      expect(getNodeChildAt(scene.root, 0)).toBe(a);
+      expect(getNodeChildAt(scene.root, 1)).toBe(b);
+    }
+  });
 });

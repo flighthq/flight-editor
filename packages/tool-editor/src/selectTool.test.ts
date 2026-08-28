@@ -101,4 +101,42 @@ describe('createSelectTool', () => {
     expect(editor.selection.version).toBe(versionAfterFirst);
     expect(getSelectedNodes(editor.selection)).toEqual([a]);
   });
+
+  it('has id "select"', () => {
+    const editor = createEditorState();
+    const tool = createSelectTool(editor, () => null);
+    expect(tool.id).toBe('select');
+  });
+
+  it('passes event coordinates to hitTest', () => {
+    const editor = createEditorState();
+    let receivedX = 0;
+    let receivedY = 0;
+    const tool = createSelectTool(editor, (x, y) => {
+      receivedX = x;
+      receivedY = y;
+      return null;
+    });
+
+    tool.pointerDown(makeEvent({ x: 42, y: 99 }));
+
+    expect(receivedX).toBe(42);
+    expect(receivedY).toBe(99);
+  });
+
+  it('replaces selection when clicking a different node without shift', () => {
+    const editor = createEditorState();
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    let current = a;
+    const tool = createSelectTool(editor, () => current);
+
+    tool.pointerDown(makeEvent());
+    expect(getSelectedNodes(editor.selection)).toEqual([a]);
+
+    current = b;
+    tool.pointerDown(makeEvent());
+    expect(getSelectedNodes(editor.selection)).toEqual([b]);
+    expect(isSelected(editor.selection, a)).toBe(false);
+  });
 });
