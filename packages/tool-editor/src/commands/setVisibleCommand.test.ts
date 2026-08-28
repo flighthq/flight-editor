@@ -56,4 +56,16 @@ describe('createSetVisibleCommand', () => {
     cmd.undo();
     expect(node.visible).toBe(true);
   });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const cmd = createSetVisibleCommand(node, false);
+
+    for (let i = 0; i < 3; i++) {
+      cmd.execute();
+      expect(node.visible).toBe(false);
+      cmd.undo();
+      expect(node.visible).toBe(true);
+    }
+  });
 });

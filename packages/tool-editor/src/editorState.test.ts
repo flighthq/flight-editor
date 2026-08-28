@@ -70,3 +70,25 @@ describe('setEditorScene', () => {
     expect(getEditorScene(state)).toBeNull();
   });
 });
+
+describe('createEditorState viewport dimensions', () => {
+  it('uses default 800x600 viewport', () => {
+    const state = createEditorState();
+    expect(state.viewport.camera.viewportWidth).toBe(800);
+    expect(state.viewport.camera.viewportHeight).toBe(600);
+  });
+
+  it('accepts custom viewport dimensions', () => {
+    const state = createEditorState(1920, 1080);
+    expect(state.viewport.camera.viewportWidth).toBe(1920);
+    expect(state.viewport.camera.viewportHeight).toBe(1080);
+  });
+
+  it('subsystems are independent across instances', () => {
+    const a = createEditorState();
+    const b = createEditorState();
+    expect(a.selection).not.toBe(b.selection);
+    expect(a.commandHistory).not.toBe(b.commandHistory);
+    expect(a.clipboard).not.toBe(b.clipboard);
+  });
+});

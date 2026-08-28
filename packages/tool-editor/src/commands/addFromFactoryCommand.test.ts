@@ -68,4 +68,28 @@ describe('createAddFromFactoryCommand', () => {
     expect(getNodeChildAt(parent, 0)).toBe(existing);
     expect(getNodeChildAt(parent, 1)).toBe(created);
   });
+
+  it('uses the label from the registered kind entry', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    registerNodeKind(editor.nodeFactory, 'sprite', 'Sprite', 'Graphics', () => createNode2D(DisplayObjectKind));
+    const command = createAddFromFactoryCommand(editor, 'sprite', parent);
+
+    expect(command?.label).toBe('Add Sprite');
+  });
+
+  it('undo detaches created node from parent', () => {
+    const editor = createEditorState();
+    const parent = createNode2D(DisplayObjectKind);
+    const created = createNode2D(DisplayObjectKind);
+    registerNodeKind(editor.nodeFactory, 'test', 'Test', 'Test', () => created);
+    const command = createAddFromFactoryCommand(editor, 'test', parent)!;
+
+    command.execute();
+    expect(getNodeParent(created)).toBe(parent);
+
+    command.undo();
+    expect(getNodeParent(created)).toBeNull();
+    expect(getNodeChildCount(parent)).toBe(0);
+  });
 });
