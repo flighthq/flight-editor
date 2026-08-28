@@ -10,6 +10,29 @@ export {
   registerDefaultContextMenuItems,
 } from './contextMenuManager';
 export { isEditorClean, isEditorDirty, markEditorClean, markEditorDirty, syncDirtyState } from './dirtyTracker';
+export {
+  getEditorDocumentAuthor,
+  getEditorDocumentError,
+  getEditorDocumentFormat,
+  getEditorDocumentLifecycle,
+  getEditorDocumentMetadata,
+  getEditorDocumentTitle,
+  getEditorDocumentVersion,
+  getEditorUndoCheckpoint,
+  hasEditorDocumentError,
+  isEditorDocumentLoading,
+  isEditorDocumentReady,
+  isEditorDocumentSaving,
+  resetEditorDocument,
+  setEditorDocumentAuthor,
+  setEditorDocumentError,
+  setEditorDocumentFormat,
+  setEditorDocumentLifecycle,
+  setEditorDocumentTimestamps,
+  setEditorDocumentTitle,
+  setEditorUndoCheckpoint,
+  touchEditorDocumentModified,
+} from './documentManager';
 export { createBatchTransformCommand } from './commands/batchTransformCommand';
 export { createAddFromFactoryCommand } from './commands/addFromFactoryCommand';
 export { createAddNodeCommand } from './commands/addNodeCommand';
@@ -120,6 +143,15 @@ export {
 } from './guideManager';
 export { canSave, canSaveAs, hasFilePath, needsSave, openFile, saveFile, saveFileAs } from './fileOperations';
 export {
+  getEditorHostAdapter,
+  getEditorHostAdapterVersion,
+  getEditorHostCallbacks,
+  getEditorHostCapabilities,
+  hasEditorCapability,
+  setEditorHostAdapter,
+  setEditorHostCallbacks,
+} from './hostManager';
+export {
   collapseAll,
   collapseNode,
   expandAll,
@@ -203,6 +235,24 @@ export { captureBridgeSnapshot, hasBridgeChanges, notifyHostChanges } from './ho
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMarqueeTool } from './marqueeTool';
 export {
+  clearEditorPropertyValues,
+  getEditorEditingPropertyId,
+  getEditorPropertyCategories,
+  getEditorPropertyCount,
+  getEditorPropertyDefinition,
+  getEditorPropertyDefinitions,
+  getEditorPropertyDefinitionsByCategory,
+  getEditorPropertyPanelVersion,
+  getEditorPropertyValue,
+  isEditorCategoryExpanded,
+  isEditorPropertyMixed,
+  registerEditorProperty,
+  setEditorCategoryExpanded,
+  setEditorEditingPropertyId,
+  setEditorPropertyValue,
+  unregisterEditorProperty,
+} from './propertyManager';
+export {
   createPage,
   deleteCurrentPage,
   getCurrentPage,
@@ -267,6 +317,22 @@ export {
   isAncestorSelected,
 } from './selectionQueries';
 export { formatSelectionLabel, getSelectionSummary, syncSelectionToStatusBar } from './selectionSync';
+export {
+  clearEditorCursorPosition,
+  clearEditorStatusMessage,
+  getEditorCursorPosition,
+  getEditorStatusActiveToolName,
+  getEditorStatusBarVersion,
+  getEditorStatusMessage,
+  getEditorStatusSelectionCount,
+  getEditorStatusSelectionLabel,
+  getEditorStatusZoomPercent,
+  setEditorCursorPosition,
+  setEditorStatusActiveToolName,
+  setEditorStatusMessage,
+  setEditorStatusSelectionInfo,
+  setEditorStatusZoomPercent,
+} from './statusBarManager';
 export { formatWindowTitle, updateWindowTitle } from './windowTitle';
 export {
   getZoomLevel,
@@ -358,3 +424,7 @@ export type { GuideSnapResult, SnapPoint } from './snapUtils';
 export type { DecomposedTransform, TransformPoint } from './transformUtils';
 export type { WindowTitleOptions } from './windowTitle';
 export type { SaveResult } from './fileOperations';
+export type { CursorPosition, MessageSeverity } from '@flighthq/editor-status';
+export type { DocumentFormat, DocumentLifecycle, DocumentMetadata } from '@flighthq/editor-document';
+export type { HostAdapter, HostCallbacks, HostCapabilities } from '@flighthq/editor-host';
+export type { PropertyDefinition, PropertyType, PropertyValue } from '@flighthq/editor-properties';
