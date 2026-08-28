@@ -37,6 +37,8 @@ import {
   createFromShapeCommand,
   createEyedropperTool,
   createMeasureTool,
+  createLineTool,
+  createRectangleTool,
 } from './index';
 
 describe('tool-editor', () => {
@@ -69,6 +71,8 @@ describe('tool-editor', () => {
     expect(createReorderNodesCommand).toBeTypeOf('function');
     expect(createEyedropperTool).toBeTypeOf('function');
     expect(createMeasureTool).toBeTypeOf('function');
+    expect(createLineTool).toBeTypeOf('function');
+    expect(createRectangleTool).toBeTypeOf('function');
   });
 
   it('exports coordinate, node-query, and bounds utilities', () => {

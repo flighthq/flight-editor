@@ -46,9 +46,11 @@ export { createHandTool } from './handTool';
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMarqueeTool } from './marqueeTool';
 export { createMeasureTool } from './measureTool';
+export { createLineTool } from './lineTool';
 export { createMoveTool } from './moveTool';
 export { createPointerTool } from './pointerTool';
 export { createRotateTool } from './rotateTool';
+export { createRectangleTool } from './rectangleTool';
 export { createScaleTool } from './scaleTool';
 export { createSelectTool } from './selectTool';
 export { createZoomTool } from './zoomTool';
@@ -88,6 +90,7 @@ export type { HandTool } from './handTool';
 export type { InspectorSnapshot } from './inspectorState';
 export type { MarqueeHitTestFn, MarqueeRect, MarqueeTool } from './marqueeTool';
 export type { MeasureResult, MeasureTool } from './measureTool';
+export type { LinePreview, LineTool, LineToolOptions } from './lineTool';
 export type { MoveTool } from './moveTool';
 export type {
   HandleHitTestFn,
@@ -100,6 +103,7 @@ export type {
   ScaleHandleHit,
 } from './pointerTool';
 export type { RotateTool, RotateToolConfig } from './rotateTool';
+export type { RectanglePreview, RectangleTool, RectangleToolOptions } from './rectangleTool';
 export type { ScaleTool } from './scaleTool';
 export type { HitTestFn, SelectTool } from './selectTool';
 export type { ZoomTool } from './zoomTool';
