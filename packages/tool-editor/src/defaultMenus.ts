@@ -17,12 +17,19 @@ export function registerDefaultMenus(menuBar: MenuBarState): void {
   addMenuItem(menuBar, 'file', createSeparator('file-sep-1'));
 
   addMenu(menuBar, 'edit', 'Edit');
+  addMenuItem(menuBar, 'edit', item('undo', 'Undo'));
+  addMenuItem(menuBar, 'edit', item('redo', 'Redo'));
+  addMenuItem(menuBar, 'edit', createSeparator('edit-sep-1'));
+  addMenuItem(menuBar, 'edit', item('cut', 'Cut'));
+  addMenuItem(menuBar, 'edit', item('copy', 'Copy'));
+  addMenuItem(menuBar, 'edit', item('paste', 'Paste'));
+  addMenuItem(menuBar, 'edit', createSeparator('edit-sep-2'));
   addMenuItem(menuBar, 'edit', item('deleteSelection', 'Delete'));
   addMenuItem(menuBar, 'edit', item('duplicateSelection', 'Duplicate'));
-  addMenuItem(menuBar, 'edit', createSeparator('edit-sep-1'));
+  addMenuItem(menuBar, 'edit', createSeparator('edit-sep-3'));
   addMenuItem(menuBar, 'edit', item('groupNodes', 'Group'));
   addMenuItem(menuBar, 'edit', item('ungroup', 'Ungroup'));
-  addMenuItem(menuBar, 'edit', createSeparator('edit-sep-2'));
+  addMenuItem(menuBar, 'edit', createSeparator('edit-sep-4'));
   addMenuItem(menuBar, 'edit', item('lockSelection', 'Lock'));
 
   addMenu(menuBar, 'view', 'View');

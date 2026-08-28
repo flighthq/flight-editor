@@ -3,6 +3,11 @@ import { registerKeyBinding } from '@flighthq/editor-keyboard';
 import type { KeyboardMap } from '@flighthq/editor-keyboard';
 
 export function registerDefaultShortcuts(keyboard: KeyboardMap): void {
+  registerKeyBinding(keyboard, 'undo', { key: 'z', ctrl: true });
+  registerKeyBinding(keyboard, 'redo', { key: 'z', ctrl: true, shift: true });
+  registerKeyBinding(keyboard, 'copy', { key: 'c', ctrl: true });
+  registerKeyBinding(keyboard, 'cut', { key: 'x', ctrl: true });
+  registerKeyBinding(keyboard, 'paste', { key: 'v', ctrl: true });
   registerKeyBinding(keyboard, 'deleteSelection', { key: 'Delete' });
   registerKeyBinding(keyboard, 'deleteSelection.backspace', { key: 'Backspace' });
   registerKeyBinding(keyboard, 'duplicateSelection', { key: 'd', ctrl: true });
@@ -24,6 +29,11 @@ export function registerDefaultShortcuts(keyboard: KeyboardMap): void {
 
 export function getDefaultShortcutLabel(actionId: string): string | null {
   const labels: Record<string, string> = {
+    undo: 'Ctrl+Z',
+    redo: 'Ctrl+Shift+Z',
+    copy: 'Ctrl+C',
+    cut: 'Ctrl+X',
+    paste: 'Ctrl+V',
     deleteSelection: 'Del',
     'deleteSelection.backspace': 'Backspace',
     duplicateSelection: 'Ctrl+D',

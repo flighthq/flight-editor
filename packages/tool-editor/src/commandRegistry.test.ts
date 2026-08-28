@@ -46,6 +46,8 @@ describe('registerDefaultCommands', () => {
     registerDefaultCommands(editor);
 
     expect(Array.from(editor.commandRegistry.keys())).toEqual([
+      'copy',
+      'cut',
       'alignLeft',
       'alignRight',
       'alignTop',
@@ -98,7 +100,7 @@ describe('registerDefaultCommands', () => {
     registerDefaultCommands(editor);
     registerDefaultCommands(editor);
 
-    expect(editor.commandRegistry.size).toBe(44);
+    expect(editor.commandRegistry.size).toBe(46);
   });
 });
 

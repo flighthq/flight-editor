@@ -15,6 +15,7 @@ import { getSelectedNodes } from '@flighthq/editor-selection';
 import { createNode2D, isNode2D } from '@flighthq/scene2d';
 import { DisplayObjectKind } from '@flighthq/types';
 
+import { createCopySelectionCommand } from './commands/copySelectionCommand';
 import { createAddFromFactoryCommand } from './commands/addFromFactoryCommand';
 import { createAddNodeCommand } from './commands/addNodeCommand';
 import { createAlignNodesCommand } from './commands/alignNodesCommand';
@@ -99,6 +100,8 @@ function nodesCommand(factory: (nodes: readonly Node2D[]) => Command): NamedComm
 }
 
 const defaultCommandFactories: Readonly<Record<string, NamedCommandFactory>> = {
+  copy: (editor) => createCopySelectionCommand(editor, 'copy'),
+  cut: (editor) => createCopySelectionCommand(editor, 'cut'),
   alignLeft: nodesCommand((nodes) => createAlignNodesCommand(nodes, 'left')),
   alignRight: nodesCommand((nodes) => createAlignNodesCommand(nodes, 'right')),
   alignTop: nodesCommand((nodes) => createAlignNodesCommand(nodes, 'top')),

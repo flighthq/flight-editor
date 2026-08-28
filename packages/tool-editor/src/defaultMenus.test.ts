@@ -78,6 +78,21 @@ describe('registerDefaultMenus', () => {
     expect(item!.shortcutLabel).toBe('Ctrl+D');
   });
 
+  it('Edit menu has undo and redo items', () => {
+    const menuBar = createMenuBarState();
+    registerDefaultMenus(menuBar);
+    expect(getMenuItem(menuBar, 'edit', 'undo')).not.toBeNull();
+    expect(getMenuItem(menuBar, 'edit', 'redo')).not.toBeNull();
+  });
+
+  it('Edit menu has copy, cut, paste items', () => {
+    const menuBar = createMenuBarState();
+    registerDefaultMenus(menuBar);
+    expect(getMenuItem(menuBar, 'edit', 'copy')).not.toBeNull();
+    expect(getMenuItem(menuBar, 'edit', 'cut')).not.toBeNull();
+    expect(getMenuItem(menuBar, 'edit', 'paste')).not.toBeNull();
+  });
+
   it('Edit menu has groupNodes and ungroup items', () => {
     const menuBar = createMenuBarState();
     registerDefaultMenus(menuBar);
@@ -150,7 +165,7 @@ describe('registerDefaultMenus', () => {
     registerDefaultMenus(menuBar);
     const items = getMenuItems(menuBar, 'edit');
     const separators = items.filter((i) => i.role === 'separator');
-    expect(separators.length).toBeGreaterThanOrEqual(2);
+    expect(separators.length).toBeGreaterThanOrEqual(4);
   });
 
   it('items have shortcut labels from defaults', () => {

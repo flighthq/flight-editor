@@ -7,7 +7,7 @@ describe('registerDefaultShortcuts', () => {
   it('registers 17 default shortcuts', () => {
     const keyboard = createKeyboardMap();
     registerDefaultShortcuts(keyboard);
-    expect(getRegisteredActions(keyboard)).toHaveLength(17);
+    expect(getRegisteredActions(keyboard)).toHaveLength(22);
   });
 
   it('registers Delete for deleteSelection', () => {
@@ -68,7 +68,7 @@ describe('registerDefaultShortcuts', () => {
     const keyboard = createKeyboardMap();
     registerDefaultShortcuts(keyboard);
     registerDefaultShortcuts(keyboard);
-    expect(getRegisteredActions(keyboard)).toHaveLength(17);
+    expect(getRegisteredActions(keyboard)).toHaveLength(22);
   });
 
   it('registers alignment shortcuts with Ctrl+Shift+Arrow', () => {

@@ -128,8 +128,8 @@ describe('getRegisteredMenuCount', () => {
 });
 
 describe('getRegisteredShortcutCount', () => {
-  it('returns 17 default shortcuts', () => {
+  it('returns 22 default shortcuts', () => {
     const editor = initEditor();
-    expect(getRegisteredShortcutCount(editor)).toBe(17);
+    expect(getRegisteredShortcutCount(editor)).toBe(22);
   });
 });
