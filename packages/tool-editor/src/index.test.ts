@@ -8,6 +8,7 @@ import {
   createCopySelectionCommand,
   createDeleteSelectionCommand,
   createDuplicateSelectionCommand,
+  createFlipNodeCommand,
   createDistributeNodesCommand,
   createLockSelectionCommand,
   createMarqueeTool,
@@ -15,6 +16,9 @@ import {
   createSendBackwardCommand,
   createSendToBackCommand,
   createSetPivotCommand,
+  createSetClipCommand,
+  createSetScaleModeCommand,
+  createSetSceneAlignCommand,
   createSetSceneBackgroundColorCommand,
   createSetSceneNameCommand,
   decomposeTransform,
@@ -45,6 +49,10 @@ describe('tool-editor', () => {
     expect(createSetPivotCommand).toBeTypeOf('function');
     expect(createSetSceneBackgroundColorCommand).toBeTypeOf('function');
     expect(createSetSceneNameCommand).toBeTypeOf('function');
+    expect(createSetSceneAlignCommand).toBeTypeOf('function');
+    expect(createSetScaleModeCommand).toBeTypeOf('function');
+    expect(createSetClipCommand).toBeTypeOf('function');
+    expect(createFlipNodeCommand).toBeTypeOf('function');
   });
 
   it('exports coordinate, node-query, and bounds utilities', () => {
