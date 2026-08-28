@@ -14,6 +14,7 @@ import { createAddNodeCommand } from './commands/addNodeCommand';
 import { createSetNodeNameCommand } from './commands/setNodeNameCommand';
 import { createEditorState, setEditorScene } from './editorState';
 import { createMoveTool } from './moveTool';
+import { createScaleTool } from './scaleTool';
 import { createSelectTool } from './selectTool';
 
 function readTransform(node: any): Transform2DLike {
@@ -93,6 +94,20 @@ describe('editor integration', () => {
 
     undo(editor.commandHistory);
     expect(child.name).toBe('Sprite1');
+
+    const scaleTool = createScaleTool(editor);
+    registerTool(editor.toolRegistry, scaleTool);
+    activateTool(editor.toolRegistry, 'scale');
+
+    scaleTool.pointerDown({ x: 0, y: 0, button: 0, shiftKey: false, ctrlKey: false, altKey: false, metaKey: false });
+    scaleTool.pointerUp({ x: 100, y: 100, button: 0, shiftKey: false, ctrlKey: false, altKey: false, metaKey: false });
+
+    expect(readTransform(container).scaleX).toBe(2);
+    expect(readTransform(container).scaleY).toBe(2);
+
+    undo(editor.commandHistory);
+    expect(readTransform(container).scaleX).toBe(1);
+    expect(readTransform(container).scaleY).toBe(1);
   });
 
   it('hierarchy reflects scene structure after add/remove', () => {
