@@ -151,6 +151,26 @@ describe('expandHierarchyToNode', () => {
     expect(isHierarchyNodeExpanded(state, a)).toBe(true);
     expect(isHierarchyNodeExpanded(state, a1)).toBe(false);
   });
+
+  it('does not bump version if ancestors already expanded', () => {
+    const { root, a, a1 } = buildTree();
+    const state = createHierarchyState();
+    expandHierarchyNode(state, root);
+    expandHierarchyNode(state, a);
+    const v = getHierarchyVersion(state);
+
+    expandHierarchyToNode(state, a1);
+    expect(getHierarchyVersion(state)).toBe(v);
+  });
+
+  it('expands only necessary ancestors for root child', () => {
+    const { root, a } = buildTree();
+    const state = createHierarchyState();
+
+    expandHierarchyToNode(state, a);
+    expect(isHierarchyNodeExpanded(state, root)).toBe(true);
+    expect(isHierarchyNodeExpanded(state, a)).toBe(false);
+  });
 });
 
 describe('getHierarchyRows', () => {
@@ -184,5 +204,32 @@ describe('getHierarchyRows', () => {
     expect(rows).toHaveLength(5);
     expect(rows.map((r) => r.node)).toEqual([root, a, a1, a2, b]);
     expect(rows.map((r) => r.depth)).toEqual([0, 1, 2, 2, 1]);
+  });
+
+  it('marks leaf nodes as hasChildren: false', () => {
+    const { root, a, b, a1, a2 } = buildTree();
+    const state = createHierarchyState();
+    expandHierarchyAll(state, root);
+    const rows = getHierarchyRows(state, root);
+
+    const a1Row = rows.find((r) => r.node === a1);
+    const a2Row = rows.find((r) => r.node === a2);
+    const bRow = rows.find((r) => r.node === b);
+    expect(a1Row?.hasChildren).toBe(false);
+    expect(a2Row?.hasChildren).toBe(false);
+    expect(bRow?.hasChildren).toBe(false);
+  });
+
+  it('returns subtree when starting from a child', () => {
+    const { root, a, a1, a2 } = buildTree();
+    const state = createHierarchyState();
+    expandHierarchyNode(state, a);
+    const rows = getHierarchyRows(state, a);
+
+    expect(rows).toHaveLength(3);
+    expect(rows[0].node).toBe(a);
+    expect(rows[0].depth).toBe(0);
+    expect(rows[1].node).toBe(a1);
+    expect(rows[2].node).toBe(a2);
   });
 });

@@ -386,9 +386,10 @@ describe('editor integration', () => {
 
     executeCommand(editor.commandHistory, createDuplicateSelectionCommand(editor));
     expect(getNodeChildCount(root)).toBe(2);
-    expect(getNodeChildAt(root, 1).name).toBe('Source Copy');
+    const dup = getNodeChildAt(root, 1)!;
+    expect(dup.name).toBe('Source Copy');
 
-    setSelection(editor.selection, [getNodeChildAt(root, 1)]);
+    setSelection(editor.selection, [dup]);
     executeCommand(editor.commandHistory, createDuplicateSelectionCommand(editor));
     expect(getNodeChildCount(root)).toBe(3);
 
@@ -605,6 +606,6 @@ describe('editor integration', () => {
     undo(editor.commandHistory);
     expect(getNodeChildCount(root)).toBe(1);
     expect(getNodeChildAt(root, 0)).toBe(node);
-    expect(getNodeChildAt(root, 0).name).toBe('Persistent');
+    expect(getNodeChildAt(root, 0)!.name).toBe('Persistent');
   });
 });

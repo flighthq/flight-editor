@@ -115,6 +115,21 @@ describe('removeFromSelection', () => {
     expect(getSelectionCount(state)).toBe(0);
     expect(state.version).toBe(v + 1);
   });
+
+  it('removes from the middle preserving order', () => {
+    const state = createSelectionState();
+    const a = createMockNode();
+    const b = createMockNode();
+    const c = createMockNode();
+    addToSelection(state, a);
+    addToSelection(state, b);
+    addToSelection(state, c);
+    removeFromSelection(state, b);
+    const nodes = getSelectedNodes(state);
+    expect(nodes).toHaveLength(2);
+    expect(nodes[0]).toBe(a);
+    expect(nodes[1]).toBe(c);
+  });
 });
 
 describe('setSelection', () => {
@@ -144,6 +159,13 @@ describe('setSelection', () => {
     expect(getSelectionCount(state)).toBe(1);
     expect(isSelected(state, b)).toBe(true);
   });
+
+  it('clears selection when given empty array', () => {
+    const state = createSelectionState();
+    addToSelection(state, createMockNode());
+    setSelection(state, []);
+    expect(getSelectionCount(state)).toBe(0);
+  });
 });
 
 describe('toggleSelection', () => {
@@ -159,6 +181,14 @@ describe('toggleSelection', () => {
     const node = createMockNode();
     addToSelection(state, node);
     expect(toggleSelection(state, node)).toBe(false);
+    expect(isSelected(state, node)).toBe(false);
+  });
+
+  it('respects filter when adding', () => {
+    const state = createSelectionState();
+    const node = createMockNode('Sprite');
+    const filter: SelectionFilter = (n) => n.kind === 'DisplayObject';
+    expect(toggleSelection(state, node, filter)).toBe(false);
     expect(isSelected(state, node)).toBe(false);
   });
 });
