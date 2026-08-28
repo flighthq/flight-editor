@@ -90,6 +90,34 @@ describe('createEditorState', () => {
     expect(state.host.callbacks).toEqual({});
     expect(state.host.version).toBe(0);
   });
+
+  it('initializes an empty toolbar', () => {
+    const state = createEditorState();
+    expect(state.toolbar.groups).toEqual([]);
+    expect(state.toolbar.version).toBe(0);
+  });
+
+  it('initializes an empty panel layout', () => {
+    const state = createEditorState();
+    expect(state.panels.panels).toEqual([]);
+    expect(state.panels.version).toBe(0);
+  });
+
+  it('initializes canvas display defaults', () => {
+    const state = createEditorState();
+    expect(state.canvas.backgroundPattern).toBe('checkerboard');
+    expect(state.canvas.pixelRatio).toBe(1);
+    expect(state.canvas.overlayOpacity).toBe(1);
+    expect(state.canvas.version).toBe(0);
+  });
+
+  it('initializes workspace preferences', () => {
+    const state = createEditorState();
+    expect(state.preferences.gridSize).toBe(10);
+    expect(state.preferences.autosaveEnabled).toBe(true);
+    expect(state.preferences.theme).toBe('system');
+    expect(state.preferences.version).toBe(0);
+  });
 });
 
 describe('getEditorScene', () => {
