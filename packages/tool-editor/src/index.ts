@@ -137,6 +137,26 @@ export {
 } from './initEditor';
 export { registerDefaultNodeKinds } from './factoryPresets';
 export {
+  addNode,
+  alignSelection,
+  bringNodeForward,
+  bringNodeToFront,
+  deleteSelection,
+  distributeSelection,
+  duplicateSelection,
+  flipNodes,
+  flipSelection,
+  groupSelection,
+  removeNode,
+  renameNode,
+  reparentNode,
+  sendNodeBackward,
+  sendNodeToBack,
+  setNodeTransform,
+  setNodeVisible,
+  ungroupNode,
+} from './nodeOperations';
+export {
   clearEditorLocks,
   getEditorLockedCount,
   hasLockedSelection,
