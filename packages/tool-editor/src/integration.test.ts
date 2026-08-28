@@ -608,4 +608,108 @@ describe('editor integration', () => {
     expect(getNodeChildAt(root, 0)).toBe(node);
     expect(getNodeChildAt(root, 0)!.name).toBe('Persistent');
   });
+
+  it('copy → paste to different parent → undo paste → redo paste cycle', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const source = createNode2D(DisplayObjectKind);
+    const target = createNode2D(DisplayObjectKind);
+    source.name = 'Source';
+    addNodeChild(root, source);
+    addNodeChild(root, target);
+
+    setSelection(editor.selection, [source]);
+    executeCommand(editor.commandHistory, createCopySelectionCommand(editor, 'copy'));
+
+    const pasteCmd = createPasteNodesCommand(editor, target);
+    executeCommand(editor.commandHistory, pasteCmd);
+    expect(getNodeChildCount(target)).toBe(1);
+    expect(getNodeChildAt(target, 0)).toBe(source);
+
+    undo(editor.commandHistory);
+    expect(getNodeChildCount(target)).toBe(0);
+
+    redo(editor.commandHistory);
+    expect(getNodeChildCount(target)).toBe(1);
+  });
+
+  it('duplicate → lock → delete → undo all restores state', () => {
+    const editor = createEditorState();
+    const scene = createScene2D();
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const node = createNode2D(DisplayObjectKind);
+    node.name = 'Original';
+    addNodeChild(root, node);
+    setSelection(editor.selection, [node]);
+
+    executeCommand(editor.commandHistory, createDuplicateSelectionCommand(editor));
+    expect(getNodeChildCount(root)).toBe(2);
+
+    const dup = getNodeChildAt(root, 1)!;
+    setSelection(editor.selection, [dup]);
+
+    executeCommand(editor.commandHistory, createLockSelectionCommand(editor));
+    expect(isLocked(editor.locks, dup)).toBe(true);
+
+    executeCommand(editor.commandHistory, createDeleteSelectionCommand(editor));
+    expect(getNodeChildCount(root)).toBe(1);
+
+    undo(editor.commandHistory);
+    undo(editor.commandHistory);
+    undo(editor.commandHistory);
+    expect(getNodeChildCount(root)).toBe(1);
+    expect(getNodeChildAt(root, 0)).toBe(node);
+    expect(isLocked(editor.locks, dup)).toBe(false);
+  });
+
+  it('set alpha + blend mode + visible compose independently', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+
+    executeCommand(editor.commandHistory, createSetAlphaCommand(node, 0.5));
+    executeCommand(editor.commandHistory, createSetBlendModeCommand(node, BlendMode.Multiply));
+    executeCommand(editor.commandHistory, createSetVisibleCommand(node, false));
+
+    expect(node.alpha).toBe(0.5);
+    expect(node.blendMode).toBe(BlendMode.Multiply);
+    expect(node.visible).toBe(false);
+
+    undo(editor.commandHistory);
+    expect(node.visible).toBe(true);
+    expect(node.blendMode).toBe(BlendMode.Multiply);
+
+    undo(editor.commandHistory);
+    expect(node.blendMode).toBeNull();
+    expect(node.alpha).toBe(0.5);
+
+    undo(editor.commandHistory);
+    expect(node.alpha).toBe(1);
+  });
+
+  it('scene color + clear scene + undo restores both', () => {
+    const editor = createEditorState();
+    const scene = createScene2D({ color: 0xff0000ff });
+    setEditorScene(editor, scene);
+    const root = scene.root;
+
+    const node = createNode2D(DisplayObjectKind);
+    addNodeChild(root, node);
+
+    executeCommand(editor.commandHistory, createSetSceneColorCommand(scene, 0x00ff00ff));
+    executeCommand(editor.commandHistory, createClearSceneCommand(root));
+
+    expect(scene.color).toBe(0x00ff00ff);
+    expect(getNodeChildCount(root)).toBe(0);
+
+    undo(editor.commandHistory);
+    expect(getNodeChildCount(root)).toBe(1);
+
+    undo(editor.commandHistory);
+    expect(scene.color).toBe(0xff0000ff);
+  });
 });
