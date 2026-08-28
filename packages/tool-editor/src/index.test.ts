@@ -35,6 +35,8 @@ import {
   createResetTransformCommand,
   createReorderNodesCommand,
   createFromShapeCommand,
+  createEyedropperTool,
+  createMeasureTool,
 } from './index';
 
 describe('tool-editor', () => {
@@ -65,6 +67,8 @@ describe('tool-editor', () => {
     expect(createMoveToPageCommand).toBeTypeOf('function');
     expect(createFromShapeCommand).toBeTypeOf('function');
     expect(createReorderNodesCommand).toBeTypeOf('function');
+    expect(createEyedropperTool).toBeTypeOf('function');
+    expect(createMeasureTool).toBeTypeOf('function');
   });
 
   it('exports coordinate, node-query, and bounds utilities', () => {

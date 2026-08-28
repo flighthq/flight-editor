@@ -40,10 +40,12 @@ export {
   createSendToBackCommand,
 } from './commands/zOrderCommands';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
+export { createEyedropperTool } from './eyedropperTool';
 export { registerDefaultNodeKinds } from './factoryPresets';
 export { createHandTool } from './handTool';
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMarqueeTool } from './marqueeTool';
+export { createMeasureTool } from './measureTool';
 export { createMoveTool } from './moveTool';
 export { createPointerTool } from './pointerTool';
 export { createRotateTool } from './rotateTool';
@@ -81,9 +83,11 @@ export type { TransformEntry } from './commands/batchTransformCommand';
 export type { DistributeMode } from './commands/distributeNodesCommand';
 export type { FlipAxis } from './commands/flipNodeCommand';
 export type { EditorState } from './editorState';
+export type { ColorAtPoint, ColorPickCallback, EyedropperTool, EyedropperToolOptions } from './eyedropperTool';
 export type { HandTool } from './handTool';
 export type { InspectorSnapshot } from './inspectorState';
 export type { MarqueeHitTestFn, MarqueeRect, MarqueeTool } from './marqueeTool';
+export type { MeasureResult, MeasureTool } from './measureTool';
 export type { MoveTool } from './moveTool';
 export type {
   HandleHitTestFn,
