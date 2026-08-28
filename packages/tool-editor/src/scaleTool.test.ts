@@ -102,4 +102,36 @@ describe('createScaleTool', () => {
 
     expect(editor.commandHistory.undoStack).toHaveLength(0);
   });
+
+  it('scales multiple selected nodes', () => {
+    const editor = createEditorState();
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [a, b]);
+    const tool = createScaleTool(editor);
+
+    tool.pointerDown(makeEvent({ x: 0, y: 0 }));
+    tool.pointerUp(makeEvent({ x: 100, y: 100 }));
+
+    expect(readTransform(a).scaleX).toBe(2);
+    expect(readTransform(b).scaleX).toBe(2);
+
+    undo(editor.commandHistory);
+    expect(readTransform(a).scaleX).toBe(1);
+    expect(readTransform(b).scaleX).toBe(1);
+  });
+
+  it('deactivate clears drag state', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+    const tool = createScaleTool(editor);
+
+    tool.pointerDown(makeEvent({ x: 0, y: 0 }));
+    tool.deactivate();
+    tool.pointerUp(makeEvent({ x: 100, y: 100 }));
+
+    expect(readTransform(node).scaleX).toBe(1);
+    expect(readTransform(node).scaleY).toBe(1);
+  });
 });

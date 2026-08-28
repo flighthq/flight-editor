@@ -102,4 +102,38 @@ describe('createMoveTool', () => {
     expect(t.x).toBe(50);
     expect(t.y).toBe(50);
   });
+
+  it('moves multiple selected nodes together', () => {
+    const editor = createEditorState();
+    const a = createNode2D(DisplayObjectKind);
+    const b = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [a, b]);
+    const tool = createMoveTool(editor);
+
+    tool.pointerDown(makeEvent({ x: 0, y: 0 }));
+    tool.pointerUp(makeEvent({ x: 10, y: 20 }));
+
+    expect(readTransform(a).x).toBe(10);
+    expect(readTransform(a).y).toBe(20);
+    expect(readTransform(b).x).toBe(10);
+    expect(readTransform(b).y).toBe(20);
+
+    undo(editor.commandHistory);
+    expect(readTransform(a).x).toBe(0);
+    expect(readTransform(b).x).toBe(0);
+  });
+
+  it('deactivate clears drag state', () => {
+    const editor = createEditorState();
+    const node = createNode2D(DisplayObjectKind);
+    setSelection(editor.selection, [node]);
+    const tool = createMoveTool(editor);
+
+    tool.pointerDown(makeEvent({ x: 0, y: 0 }));
+    tool.deactivate();
+    tool.pointerUp(makeEvent({ x: 100, y: 100 }));
+
+    expect(readTransform(node).x).toBe(0);
+    expect(readTransform(node).y).toBe(0);
+  });
 });
