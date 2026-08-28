@@ -5,6 +5,7 @@
     { "path": "./packages/editor-command" },
     { "path": "./packages/editor-selection" },
     { "path": "./packages/editor-hierarchy" },
+    { "path": "./packages/editor-node-factory" },
     { "path": "./packages/editor-tool" },
     { "path": "./packages/editor-viewport" },
     { "path": "./packages/tool-editor" }
