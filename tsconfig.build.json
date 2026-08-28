@@ -3,6 +3,8 @@
   "references": [
     { "path": "./packages/editor-clipboard" },
     { "path": "./packages/editor-command" },
+    { "path": "./packages/editor-drag-drop" },
+    { "path": "./packages/editor-guides" },
     { "path": "./packages/editor-selection" },
     { "path": "./packages/editor-hierarchy" },
     { "path": "./packages/editor-keyboard" },

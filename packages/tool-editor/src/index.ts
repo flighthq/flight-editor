@@ -2,6 +2,8 @@ export { createBatchTransformCommand } from './commands/batchTransformCommand';
 export { createAddFromFactoryCommand } from './commands/addFromFactoryCommand';
 export { createAddNodeCommand } from './commands/addNodeCommand';
 export { createAlignNodesCommand } from './commands/alignNodesCommand';
+export { createSetAlphaCommand } from './commands/setAlphaCommand';
+export { createSetVisibleCommand } from './commands/setVisibleCommand';
 export { createCopySelectionCommand } from './commands/copySelectionCommand';
 export { createDeleteSelectionCommand } from './commands/deleteSelectionCommand';
 export { createDuplicateSelectionCommand } from './commands/duplicateSelectionCommand';
