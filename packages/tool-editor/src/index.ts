@@ -248,6 +248,16 @@ export {
   getCommonAncestor,
   getNodePath,
 } from './nodeQueries';
+export {
+  addEditorSnapGuide,
+  clearEditorSnapGuides,
+  enableEditorSnapGrid,
+  getEditorSnapGridSize,
+  isEditorSnapGridEnabled,
+  removeEditorSnapGuide,
+  setEditorSnapGrid,
+  snapEditorPosition,
+} from './snapManager';
 export { snapDimension, snapPosition, snapToGrid, snapToGuides } from './snapUtils';
 export {
   getDeepestSelectedAncestor,
