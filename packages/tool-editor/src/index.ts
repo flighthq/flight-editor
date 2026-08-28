@@ -554,11 +554,22 @@ export {
   stepDesktopLoop,
   stopDesktopLoop,
 } from './desktopBootstrap';
+export {
+  createCanvasRenderer,
+  disposeCanvasRenderer,
+  renderScene,
+  resizeCanvasRenderer,
+  startCanvasLoop,
+  stopCanvasLoop,
+} from './canvasRenderer';
+export { bindDomEvents, createKeyEventFromDom, createPointerEventFromDom } from './domEventAdapter';
 
 export type { ThemeMapping } from './themeRenderer';
 export type { RenderLoopConfig, RenderLoopState } from './renderLoop';
 export type { TauriFileFilter, TauriHostConfig, TauriIpc } from './tauriHost';
 export type { DesktopBootstrap, DesktopBootstrapConfig } from './desktopBootstrap';
+export type { CanvasRendererConfig, CanvasRendererState } from './canvasRenderer';
+export type { DomEventBindings } from './domEventAdapter';
 
 export type { KeyEventLike } from './commandDispatch';
 export type { AlignMode } from './commands/alignNodesCommand';

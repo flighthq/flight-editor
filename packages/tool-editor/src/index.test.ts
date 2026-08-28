@@ -117,6 +117,15 @@ import {
   startDesktopLoop,
   stepDesktopLoop,
   stopDesktopLoop,
+  createCanvasRenderer,
+  disposeCanvasRenderer,
+  renderScene,
+  resizeCanvasRenderer,
+  startCanvasLoop,
+  stopCanvasLoop,
+  bindDomEvents,
+  createKeyEventFromDom,
+  createPointerEventFromDom,
 } from './index';
 
 describe('tool-editor', () => {
@@ -288,5 +297,20 @@ describe('tool-editor', () => {
     expect(startDesktopLoop).toBeTypeOf('function');
     expect(stepDesktopLoop).toBeTypeOf('function');
     expect(stopDesktopLoop).toBeTypeOf('function');
+  });
+
+  it('exports canvas renderer utilities', () => {
+    expect(createCanvasRenderer).toBeTypeOf('function');
+    expect(disposeCanvasRenderer).toBeTypeOf('function');
+    expect(renderScene).toBeTypeOf('function');
+    expect(resizeCanvasRenderer).toBeTypeOf('function');
+    expect(startCanvasLoop).toBeTypeOf('function');
+    expect(stopCanvasLoop).toBeTypeOf('function');
+  });
+
+  it('exports DOM event adapter utilities', () => {
+    expect(bindDomEvents).toBeTypeOf('function');
+    expect(createKeyEventFromDom).toBeTypeOf('function');
+    expect(createPointerEventFromDom).toBeTypeOf('function');
   });
 });
