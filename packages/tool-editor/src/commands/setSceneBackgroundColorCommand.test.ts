@@ -50,4 +50,27 @@ describe('createSetSceneBackgroundColorCommand', () => {
 
     expect(scene.color).toBe(0x111111ff);
   });
+
+  it('supports re-execute after undo', () => {
+    const scene = createScene2D({ color: 0xaabbccff });
+    const command = createSetSceneBackgroundColorCommand(scene, 0xddeeffff);
+
+    command.execute();
+    command.undo();
+    command.execute();
+
+    expect(scene.color).toBe(0xddeeffff);
+  });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const scene = createScene2D({ color: 0x112233ff });
+    const command = createSetSceneBackgroundColorCommand(scene, 0x445566ff);
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(scene.color).toBe(0x445566ff);
+      command.undo();
+      expect(scene.color).toBe(0x112233ff);
+    }
+  });
 });

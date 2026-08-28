@@ -105,4 +105,30 @@ describe('createSetTransform2DCommand', () => {
 
     expect(readTransform2D(node)).toEqual(newTransform);
   });
+
+  it('identity transform is a valid no-op', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const command = createSetTransform2DCommand(node, IDENTITY);
+
+    command.execute();
+    expect(readTransform2D(node)).toEqual(IDENTITY);
+
+    command.undo();
+    expect(readTransform2D(node)).toEqual(IDENTITY);
+  });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const node = createNode2D(DisplayObjectKind);
+    const original: Transform2DLike = { ...IDENTITY, x: 10, y: 20 };
+    const next: Transform2DLike = { ...IDENTITY, x: 100, y: 200, rotation: 90 };
+    setNodeTransform2D(node, original);
+    const command = createSetTransform2DCommand(node, next);
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(readTransform2D(node)).toEqual(next);
+      command.undo();
+      expect(readTransform2D(node)).toEqual(original);
+    }
+  });
 });

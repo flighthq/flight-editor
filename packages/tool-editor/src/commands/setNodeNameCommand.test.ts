@@ -65,4 +65,29 @@ describe('createSetNodeNameCommand', () => {
 
     expect(node.name).toBe('Renamed');
   });
+
+  it('sets an empty string name', () => {
+    const node = createNode2D(DisplayObjectKind);
+    node.name = 'HasName';
+    const command = createSetNodeNameCommand(node, '');
+
+    command.execute();
+    expect(node.name).toBe('');
+
+    command.undo();
+    expect(node.name).toBe('HasName');
+  });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const node = createNode2D(DisplayObjectKind);
+    node.name = 'A';
+    const command = createSetNodeNameCommand(node, 'B');
+
+    for (let i = 0; i < 3; i++) {
+      command.execute();
+      expect(node.name).toBe('B');
+      command.undo();
+      expect(node.name).toBe('A');
+    }
+  });
 });

@@ -57,4 +57,29 @@ describe('createSetAlphaCommand', () => {
 
     expect(node.alpha).toBe(0.25);
   });
+
+  it('setting same alpha is a valid identity operation', () => {
+    const node = createNode2D(DisplayObjectKind);
+    node.alpha = 0.7;
+    const cmd = createSetAlphaCommand(node, 0.7);
+
+    cmd.execute();
+    expect(node.alpha).toBe(0.7);
+
+    cmd.undo();
+    expect(node.alpha).toBe(0.7);
+  });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const node = createNode2D(DisplayObjectKind);
+    node.alpha = 0.9;
+    const cmd = createSetAlphaCommand(node, 0.1);
+
+    for (let i = 0; i < 3; i++) {
+      cmd.execute();
+      expect(node.alpha).toBe(0.1);
+      cmd.undo();
+      expect(node.alpha).toBe(0.9);
+    }
+  });
 });

@@ -97,4 +97,53 @@ describe('createSetPivotCommand', () => {
     expect(t.pivotX).toBe(-10);
     expect(t.pivotY).toBe(-20);
   });
+
+  it('multiple undo/redo cycles are stable', () => {
+    const node = createNode2D(DisplayObjectKind);
+    setNodeTransform2D(node, {
+      pivotX: 5,
+      pivotY: 10,
+      rotation: 0,
+      scaleX: 1,
+      scaleY: 1,
+      skewX: 0,
+      skewY: 0,
+      x: 0,
+      y: 0,
+    });
+    const cmd = createSetPivotCommand(node, 50, 60);
+
+    for (let i = 0; i < 3; i++) {
+      cmd.execute();
+      expect(readTransform(node).pivotX).toBe(50);
+      expect(readTransform(node).pivotY).toBe(60);
+      cmd.undo();
+      expect(readTransform(node).pivotX).toBe(5);
+      expect(readTransform(node).pivotY).toBe(10);
+    }
+  });
+
+  it('setting pivot to zero resets origin', () => {
+    const node = createNode2D(DisplayObjectKind);
+    setNodeTransform2D(node, {
+      pivotX: 25,
+      pivotY: 50,
+      rotation: 0,
+      scaleX: 1,
+      scaleY: 1,
+      skewX: 0,
+      skewY: 0,
+      x: 100,
+      y: 200,
+    });
+    const cmd = createSetPivotCommand(node, 0, 0);
+
+    cmd.execute();
+
+    const t = readTransform(node);
+    expect(t.pivotX).toBe(0);
+    expect(t.pivotY).toBe(0);
+    expect(t.x).toBe(100);
+    expect(t.y).toBe(200);
+  });
 });

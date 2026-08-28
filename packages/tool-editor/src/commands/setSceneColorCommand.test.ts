@@ -55,4 +55,27 @@ describe('createSetSceneColorCommand', () => {
 
     expect(scene.color).toBe(0x0000ffff);
   });
+
+  it('captures color at creation time', () => {
+    const scene = createScene2D({ color: 0xaabbccff });
+    const cmd = createSetSceneColorCommand(scene, 0x112233ff);
+    scene.color = 0x999999ff;
+
+    cmd.execute();
+    expect(scene.color).toBe(0x112233ff);
+
+    cmd.undo();
+    expect(scene.color).toBe(0xaabbccff);
+  });
+
+  it('setting same color is a valid identity operation', () => {
+    const scene = createScene2D({ color: 0xff00ffff });
+    const cmd = createSetSceneColorCommand(scene, 0xff00ffff);
+
+    cmd.execute();
+    expect(scene.color).toBe(0xff00ffff);
+
+    cmd.undo();
+    expect(scene.color).toBe(0xff00ffff);
+  });
 });

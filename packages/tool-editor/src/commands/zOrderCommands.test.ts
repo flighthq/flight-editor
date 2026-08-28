@@ -100,4 +100,50 @@ describe('z-order commands', () => {
     firstCommand.undo();
     expect(readChildren(parent)).toEqual(children);
   });
+
+  it('supports re-execute after undo for bring forward', () => {
+    const { parent, children } = createSiblings();
+    const [a, b, c, d] = children;
+    const command = createBringForwardCommand(a);
+
+    command.execute();
+    command.undo();
+    command.execute();
+
+    expect(readChildren(parent)).toEqual([b, a, c, d]);
+  });
+
+  it('bring to front is no-op for last child', () => {
+    const { parent, children } = createSiblings();
+    const command = createBringToFrontCommand(children[3]);
+
+    command.execute();
+    expect(readChildren(parent)).toEqual(children);
+  });
+
+  it('send to back is no-op for first child', () => {
+    const { parent, children } = createSiblings();
+    const command = createSendToBackCommand(children[0]);
+
+    command.execute();
+    expect(readChildren(parent)).toEqual(children);
+  });
+
+  it('handles single child without error', () => {
+    const parent = createNode2D(DisplayObjectKind);
+    const only = createNode2D(DisplayObjectKind);
+    addNodeChild(parent, only);
+
+    const forward = createBringForwardCommand(only);
+    const backward = createSendBackwardCommand(only);
+    const front = createBringToFrontCommand(only);
+    const back = createSendToBackCommand(only);
+
+    for (const cmd of [forward, backward, front, back]) {
+      cmd.execute();
+      expect(readChildren(parent)).toEqual([only]);
+      cmd.undo();
+      expect(readChildren(parent)).toEqual([only]);
+    }
+  });
 });
