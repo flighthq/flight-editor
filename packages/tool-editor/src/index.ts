@@ -55,6 +55,7 @@ export { getDefaultShortcutLabel, registerDefaultShortcuts } from './defaultShor
 export { getDefaultMenuCount, registerDefaultMenus } from './defaultMenus';
 export { createEditorState, getEditorScene, setEditorScene } from './editorState';
 export { executeNamedCommand, registerDefaultCommands } from './commandRegistry';
+export { createEditorLoopState, forceUpdateTitle, tickEditor } from './editorLoop';
 export { createEyedropperTool } from './eyedropperTool';
 export { canSave, canSaveAs, hasFilePath, needsSave, openFile, saveFile, saveFileAs } from './fileOperations';
 export {
@@ -134,6 +135,7 @@ export type { EditorState } from './editorState';
 export type { NamedCommandArguments, NamedCommandFactory } from './commandRegistry';
 export type { ColorAtPoint, ColorPickCallback, EyedropperTool, EyedropperToolOptions } from './eyedropperTool';
 export type { HandTool } from './handTool';
+export type { EditorLoopState } from './editorLoop';
 export type { BridgeSnapshot } from './hostCallbackBridge';
 export type { InitEditorOptions } from './initEditor';
 export type { DefaultToolsOptions } from './registerDefaultTools';
