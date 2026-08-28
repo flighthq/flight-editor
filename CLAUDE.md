@@ -30,20 +30,23 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 
 **Bedrock cells:**
 
-- `editor-command` — command history: `Command` interface, execute/undo/redo, clean tracking
-- `editor-selection` — selection state: multi-select, filters by kind/hierarchy, version tracking
 - `editor-clipboard` — clipboard state: copy/cut entries, paste-ready node references
+- `editor-command` — command history: `Command` interface, execute/undo/redo, clean tracking
+- `editor-drag-drop` — drag-and-drop state: tracks drag operations from library/hierarchy/external into the scene
+- `editor-guides` — guide state: horizontal/vertical ruler guides with add/remove/lock/move and snap positions
 - `editor-hierarchy` — hierarchy tree state: expand/collapse tracking, flattened visible rows for tree views
 - `editor-keyboard` — keyboard shortcut registry: action bindings, modifier matching, version tracking
+- `editor-lock` — lock state: tracks which nodes are locked to prevent editing
 - `editor-node-factory` — node kind registry: register creation functions by category, create nodes from registered kinds
 - `editor-scene-state` — scene metadata: name, dimensions, background color, dirty/version tracking
+- `editor-selection` — selection state: multi-select, filters by kind/hierarchy, version tracking
 - `editor-snap` — snap configuration: grid and guide management, position snapping
 - `editor-tool` — tool registry: register/activate/deactivate tools, pointer dispatch lifecycle
 - `editor-viewport` — viewport management: Camera2D wrapper with zoom limits, pan, fit-to-rect, coordinate conversion
 
 **Composition:**
 
-- `tool-editor` — editor application core: `EditorState` (composes command history + selection + clipboard + hierarchy + node factory + tool registry + viewport + scene), concrete commands (add/remove/reparent node, set transform, rename, copy/paste, add-from-factory, group/ungroup, delete/duplicate selection, z-order, align/distribute), concrete tools (select, move, scale, pointer — combined arrow tool with rotation), inspector snapshot for host property panels
+- `tool-editor` — editor application core: `EditorState` (composes command history + selection + clipboard + drag-drop + guides + hierarchy + locks + node factory + tool registry + viewport + scene), concrete commands (add/remove/reparent node, set transform/alpha/visible/blend-mode, batch transform, rename, copy/paste, add-from-factory, group/ungroup, delete/duplicate selection, z-order, align/distribute, clear scene, set scene size), concrete tools (select, move, scale, rotate, pointer — combined arrow tool with rotation), inspector snapshot for host property panels
 
 **Flight SDK** (`@flighthq/sdk`) — provides `Scene2D`, `Node2D`, `Sprite`, renderers, interaction, picking, scene-formats, and the full graphics substrate.
 

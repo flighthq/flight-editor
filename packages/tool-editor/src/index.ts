@@ -16,6 +16,7 @@ export { createRemoveNodeCommand } from './commands/removeNodeCommand';
 export { createReparentNodeCommand } from './commands/reparentNodeCommand';
 export { createUngroupNodesCommand } from './commands/ungroupNodesCommand';
 export { createSetNodeNameCommand } from './commands/setNodeNameCommand';
+export { createSetSceneSizeCommand } from './commands/setSceneSizeCommand';
 export { createSetTransform2DCommand } from './commands/setTransform2DCommand';
 export {
   createBringForwardCommand,
@@ -27,6 +28,7 @@ export { createEditorState, getEditorScene, setEditorScene } from './editorState
 export { getInspectorSelectedNames, getInspectorSnapshot } from './inspectorState';
 export { createMoveTool } from './moveTool';
 export { createPointerTool } from './pointerTool';
+export { createRotateTool } from './rotateTool';
 export { createScaleTool } from './scaleTool';
 export { createSelectTool } from './selectTool';
 
@@ -46,5 +48,6 @@ export type {
   ScaleHandle,
   ScaleHandleHit,
 } from './pointerTool';
+export type { RotateTool, RotateToolConfig } from './rotateTool';
 export type { ScaleTool } from './scaleTool';
 export type { HitTestFn, SelectTool } from './selectTool';
