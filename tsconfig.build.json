@@ -24,6 +24,7 @@
     { "path": "./packages/editor-preferences" },
     { "path": "./packages/editor-properties" },
     { "path": "./packages/editor-rulers" },
+    { "path": "./packages/editor-scene-io" },
     { "path": "./packages/editor-scene-state" },
     { "path": "./packages/editor-snap" },
     { "path": "./packages/editor-status" },
