@@ -10,7 +10,8 @@ let model = null,
   zoom = 1,
   panX = 0,
   panY = 0,
-  drag = null;
+  drag = null,
+  hitAreas = [];
 const fields = [
   ['name', 'text'],
   ['x', 'number'],
@@ -68,6 +69,20 @@ function renderInspector() {
   form.textContent = '';
   const node = nodeAt(selected);
   if (!node) return;
+  if (selected.length === 0) {
+    const title = document.createElement('p');
+    title.textContent = model.name || 'Scene';
+    form.appendChild(title);
+    addDetail('Document', 'Flight scene v' + model.version);
+    addDetail('Size', model.scene.width + ' × ' + model.scene.height);
+    addDetail('Scale', model.scene.scaleMode);
+    addDetail('Align', model.scene.align);
+    const hint = document.createElement('p');
+    hint.className = 'hint';
+    hint.textContent = 'The scene root has no position or transform. Select a child node to edit its properties.';
+    form.appendChild(hint);
+    return;
+  }
   const title = document.createElement('p');
   title.textContent = node.kind;
   form.appendChild(title);
@@ -88,7 +103,7 @@ function renderInspector() {
     const value = node.traits[property] ?? fallback;
     if (type === 'checkbox') input.checked = Boolean(value);
     else input.value = String(value);
-    if (type === 'number') input.step = property === 'rotation' ? '1' : '0.1';
+    if (type === 'number') input.step = property === 'rotation' ? '0.05' : '0.1';
     input.onchange = () => {
       const value = type === 'checkbox' ? input.checked : type === 'number' ? Number(input.value) : input.value;
       if (type === 'number' && !Number.isFinite(value)) return;
@@ -101,6 +116,16 @@ function renderInspector() {
   hint.className = 'hint';
   hint.textContent = 'Edits use VS Code undo/redo and save normally.';
   form.appendChild(hint);
+}
+function addDetail(label, value) {
+  const row = document.createElement('div'),
+    term = document.createElement('span'),
+    description = document.createElement('strong');
+  row.className = 'detail';
+  term.textContent = label;
+  description.textContent = value;
+  row.append(term, description);
+  form.appendChild(row);
 }
 function packedColor(value, fallback) {
   if (!Number.isFinite(value)) return fallback;
@@ -137,6 +162,7 @@ function draw() {
   const ctx = canvas.getContext('2d');
   ctx.scale(dpr, dpr);
   ctx.clearRect(0, 0, w, h);
+  hitAreas = [];
   if (!model) return;
   ctx.save();
   ctx.translate(panX, panY);
@@ -150,6 +176,7 @@ function draw() {
     const world = transform(node, matrix),
       width = Number(node.traits.width) || 80,
       height = Number(node.traits.height) || 50;
+    hitAreas.push({ path, matrix: world, width, height });
     ctx.save();
     ctx.transform(world.a, world.b, world.c, world.d, world.e, world.f);
     ctx.globalAlpha = Number.isFinite(node.traits.alpha) ? node.traits.alpha : 1;
@@ -164,6 +191,29 @@ function draw() {
   const identity = { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 };
   model.scene.root.children.forEach((node, i) => walk(node, [i], identity));
   ctx.restore();
+}
+function invertPoint(matrix, x, y) {
+  const determinant = matrix.a * matrix.d - matrix.b * matrix.c;
+  if (Math.abs(determinant) < 0.000001) return null;
+  const dx = x - matrix.e,
+    dy = y - matrix.f;
+  return {
+    x: (matrix.d * dx - matrix.c * dy) / determinant,
+    y: (-matrix.b * dx + matrix.a * dy) / determinant,
+  };
+}
+function pick(viewportX, viewportY) {
+  const sceneX = (viewportX - panX) / zoom,
+    sceneY = (viewportY - panY) / zoom;
+  for (let index = hitAreas.length - 1; index >= 0; index--) {
+    const hit = hitAreas[index],
+      local = invertPoint(hit.matrix, sceneX, sceneY);
+    if (local && local.x >= 0 && local.y >= 0 && local.x <= hit.width && local.y <= hit.height) {
+      select(hit.path);
+      return;
+    }
+  }
+  select([]);
 }
 function fit() {
   if (!model) return;
@@ -186,17 +236,21 @@ canvas.onwheel = (e) => {
   draw();
 };
 canvas.onpointerdown = (e) => {
-  drag = { x: e.clientX, y: e.clientY, panX, panY };
+  canvas.focus();
+  drag = { x: e.clientX, y: e.clientY, panX, panY, moved: false };
   canvas.setPointerCapture(e.pointerId);
   canvas.parentElement.classList.add('grabbing');
 };
 canvas.onpointermove = (e) => {
   if (!drag) return;
+  if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 3) drag.moved = true;
+  if (!drag.moved) return;
   panX = drag.panX + e.clientX - drag.x;
   panY = drag.panY + e.clientY - drag.y;
   draw();
 };
-canvas.onpointerup = () => {
+canvas.onpointerup = (e) => {
+  if (drag && !drag.moved) pick(e.offsetX, e.offsetY);
   drag = null;
   canvas.parentElement.classList.remove('grabbing');
 };

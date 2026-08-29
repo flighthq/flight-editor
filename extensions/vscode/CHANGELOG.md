@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+- Select the topmost transformed scene node by clicking it in the canvas.
+- Keep click selection distinct from viewport dragging.
+- Show scene metadata for the root instead of inapplicable node transform controls.
+
 ## 0.1.0
 
 - Open `.flight` scenes in a custom visual editor by default.

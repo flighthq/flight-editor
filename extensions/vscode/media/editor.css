@@ -104,6 +104,15 @@ canvas {
 form {
   padding: 10px;
 }
+.detail {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.detail span {
+  opacity: 0.7;
+}
 label {
   display: grid;
   grid-template-columns: 72px 1fr;
