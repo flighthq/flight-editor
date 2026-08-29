@@ -1,9 +1,10 @@
-import type { DocumentSnapshot, UpdateNodeMessage } from './protocol';
+import type { DocumentSnapshot, SceneActionMessage, UpdateNodeMessage } from './protocol';
 import type { EditorRuntime } from '@flighthq/tool-editor';
 
 import * as vscode from 'vscode';
 import { createEditorRuntime } from '@flighthq/tool-editor';
 
+import { decodeDocumentData, encodeDocumentText, formatSerializedDocument } from './documentText';
 import { isWebviewMessage } from './protocol';
 
 const viewType = 'flight.visualEditor';
@@ -11,10 +12,27 @@ const viewType = 'flight.visualEditor';
 function documentMessage(runtime: EditorRuntime, document: vscode.TextDocument): DocumentSnapshot {
   const text = document.getText();
   try {
-    runtime.load(encodeText(text));
-    return { type: 'document', text: decodeData(runtime.serialize()), version: document.version };
+    runtime.load(encodeDocumentText(text));
+    const selection = runtime.getSelectionPaths();
+    return {
+      type: 'document',
+      text: decodeDocumentData(runtime.serialize()),
+      version: document.version,
+      selection,
+      properties: selection.length === 1 ? runtime.getProperties(selection[0]!) : [],
+      nodeKinds: runtime.getNodeKinds(),
+      renderNodes: runtime.getRenderNodes(),
+    };
   } catch {
-    return { type: 'document', text, version: document.version };
+    return {
+      type: 'document',
+      text,
+      version: document.version,
+      selection: [],
+      properties: [],
+      nodeKinds: [],
+      renderNodes: [],
+    };
   }
 }
 
@@ -26,8 +44,12 @@ function webviewHtml(webview: vscode.Webview, extensionUri: vscode.Uri): string 
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} data:; style-src ${webview.cspSource}; script-src 'nonce-${nonce}'">
 <link rel="stylesheet" href="${styleUri}"><title>Flight Visual Editor</title></head>
-<body><header><strong>Flight</strong><span id="status" role="status">Loading…</span><span class="spacer"></span>
-<button id="fit" title="Fit scene to viewport">Fit</button><button id="source">Open Source</button></header>
+<body><header><strong>Flight</strong><span id="status" role="status">Loading…</span>
+<span class="tools" role="toolbar"><button id="selectTool" class="active" title="Select and move (V)">Select</button><button id="scaleTool" title="Scale selection (S)">Scale</button><button id="rotateTool" title="Rotate selection (R)">Rotate</button><button id="handTool" title="Pan (H or Space)">Hand</button></span>
+<span class="spacer"></span><select id="createKind" title="Node type"></select><button id="addNode">Add</button>
+<label class="snap"><input id="snap" type="checkbox" checked>Snap 10</label>
+<button id="duplicate" title="Duplicate (Ctrl/Cmd+D)">Duplicate</button><button id="delete" title="Delete">Delete</button>
+<button id="fit" title="Fit scene to viewport (F)">Fit</button><button id="source">Open Source</button></header>
 <main><aside class="hierarchy"><h2>Hierarchy</h2><div id="tree" role="tree"></div></aside>
 <section class="viewport"><canvas id="canvas" tabindex="0" aria-label="Flight scene viewport"></canvas><div id="empty"></div></section>
 <aside class="inspector"><h2>Inspector</h2><form id="inspector"><p>Select a node to inspect it.</p></form></aside></main>
@@ -55,8 +77,12 @@ class FlightEditorProvider implements vscode.CustomTextEditorProvider {
       if (!isWebviewMessage(value)) return;
       if (value.type === 'ready') sendDocument(document);
       if (value.type === 'openSource') await openSource(document.uri);
-      if (value.type === 'selectNode') runtime.selectNode(value.path);
+      if (value.type === 'selectNode') {
+        runtime.selectNodes(value.paths);
+        sendDocument(document);
+      }
       if (value.type === 'updateNode') await this.applyNodeUpdate(runtime, document, value, panel.webview);
+      if (value.type === 'sceneAction') await this.applySceneAction(runtime, document, value, panel.webview);
     });
     panel.onDidDispose(() => {
       changes.dispose();
@@ -71,28 +97,73 @@ class FlightEditorProvider implements vscode.CustomTextEditorProvider {
     message: UpdateNodeMessage,
     webview: vscode.Webview,
   ): Promise<void> {
-    if (document.version !== message.baseVersion) {
-      await webview.postMessage({ type: 'rejected', reason: 'The file changed. Your view has been refreshed.' });
-      await webview.postMessage(documentMessage(runtime, document));
-      return;
-    }
-    try {
-      runtime.load(encodeText(document.getText()));
-    } catch {
-      await webview.postMessage({ type: 'rejected', reason: 'The Flight document is invalid.' });
-      return;
-    }
-    if (!runtime.updateNode(message.path, message.property, message.value)) {
+    if (!(await prepareMutation(runtime, document, message.baseVersion, webview))) return;
+    if (!runtime.updateNodes(message.paths, message.property, message.value)) {
       await webview.postMessage({ type: 'rejected', reason: 'The shared editor rejected this edit.' });
       return;
     }
-    const updatedText = `${decodeData(runtime.serialize())}\n`;
-    const range = new vscode.Range(document.positionAt(0), document.positionAt(document.getText().length));
-    const edit = new vscode.WorkspaceEdit();
-    edit.replace(document.uri, range, updatedText);
-    if (!(await vscode.workspace.applyEdit(edit))) {
-      await webview.postMessage({ type: 'rejected', reason: 'VS Code rejected the document edit.' });
+    await replaceDocument(runtime, document, webview);
+  }
+
+  private async applySceneAction(
+    runtime: EditorRuntime,
+    document: vscode.TextDocument,
+    message: SceneActionMessage,
+    webview: vscode.Webview,
+  ): Promise<void> {
+    if (!(await prepareMutation(runtime, document, message.baseVersion, webview))) return;
+    const operation = message.operation;
+    const accepted =
+      operation.action === 'create'
+        ? runtime.createNode(operation.kind, operation.parentPath)
+        : operation.action === 'delete'
+          ? runtime.deleteNodes(operation.paths)
+          : operation.action === 'duplicate'
+            ? runtime.duplicateNodes(operation.paths)
+            : operation.action === 'translate'
+              ? runtime.translateNodes(operation.paths, operation.deltaX, operation.deltaY, operation.snap)
+              : operation.action === 'transform'
+                ? runtime.transformNodes(operation.paths, operation.scaleFactor, operation.rotationDelta)
+                : runtime.reparentNode(operation.path, operation.parentPath);
+    if (!accepted) {
+      await webview.postMessage({ type: 'rejected', reason: 'The shared editor rejected this scene operation.' });
+      return;
     }
+    await replaceDocument(runtime, document, webview);
+  }
+}
+
+async function prepareMutation(
+  runtime: EditorRuntime,
+  document: vscode.TextDocument,
+  baseVersion: number,
+  webview: vscode.Webview,
+): Promise<boolean> {
+  if (document.version !== baseVersion) {
+    await webview.postMessage({ type: 'rejected', reason: 'The file changed. Your view has been refreshed.' });
+    await webview.postMessage(documentMessage(runtime, document));
+    return false;
+  }
+  try {
+    runtime.load(encodeDocumentText(document.getText()));
+    return true;
+  } catch {
+    await webview.postMessage({ type: 'rejected', reason: 'The Flight document is invalid.' });
+    return false;
+  }
+}
+
+async function replaceDocument(
+  runtime: EditorRuntime,
+  document: vscode.TextDocument,
+  webview: vscode.Webview,
+): Promise<void> {
+  const updatedText = formatSerializedDocument(document.getText(), decodeDocumentData(runtime.serialize()));
+  const range = new vscode.Range(document.positionAt(0), document.positionAt(document.getText().length));
+  const edit = new vscode.WorkspaceEdit();
+  edit.replace(document.uri, range, updatedText);
+  if (!(await vscode.workspace.applyEdit(edit))) {
+    await webview.postMessage({ type: 'rejected', reason: 'VS Code rejected the document edit.' });
   }
 }
 
@@ -118,22 +189,13 @@ async function validateActiveDocument(): Promise<void> {
   if (!document || document.languageId !== 'flight') return;
   const runtime = createEditorRuntime({ autoCreateScene: false });
   try {
-    runtime.load(encodeText(document.getText()));
+    runtime.load(encodeDocumentText(document.getText()));
     await vscode.window.showInformationMessage('Flight scene is valid.');
   } catch {
     await vscode.window.showErrorMessage('Flight: Invalid or unsupported scene document.');
   } finally {
     runtime.dispose();
   }
-}
-
-function encodeText(text: string): ArrayBuffer {
-  const bytes = new TextEncoder().encode(text);
-  return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
-}
-
-function decodeData(data: ArrayBuffer): string {
-  return new TextDecoder().decode(new Uint8Array(data));
 }
 
 export function activate(context: vscode.ExtensionContext): void {

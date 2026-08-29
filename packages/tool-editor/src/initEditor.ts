@@ -9,6 +9,7 @@ import { registerDefaultMenus } from './defaultMenus';
 import { registerDefaultShortcuts } from './defaultShortcuts';
 import { createEditorState } from './editorState';
 import { registerDefaultNodeKinds } from './factoryPresets';
+import { registerDefaultProperties } from './defaultProperties';
 import { registerDefaultTools } from './registerDefaultTools';
 
 import type { EditorState } from './editorState';
@@ -35,6 +36,7 @@ export function initEditor(options: Readonly<InitEditorOptions> = {}): EditorSta
     registerDefaultShortcuts(editor.keyboard);
     registerDefaultMenus(editor.menuBar);
     registerDefaultNodeKinds(editor.nodeFactory);
+    registerDefaultProperties(editor);
     registerDefaultTools(editor, options.tools);
   }
 

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add multi-selection, marquee selection, Select/Scale/Rotate/Hand tools, and transactional canvas transforms.
+- Add node creation, duplication, deletion, and hierarchy drag-to-reparent workflows.
+- Generate inspector controls and render transforms from shared runtime metadata.
+- Restore selection across source reloads and preserve unknown document/scene extension fields when saving visual edits.
 - Drive selection, validation, edits, commands, and serialization through the shared `tool-editor` runtime.
 - Bundle the shared editor core into the extension while retaining the VS Code-specific presentation.
 - Select the topmost transformed scene node by clicking it in the canvas.

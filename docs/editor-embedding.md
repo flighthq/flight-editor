@@ -27,6 +27,8 @@ The extension creates one `EditorRuntime` for each custom editor panel. Its revi
 
 The hierarchy/canvas/inspector webview is intentionally VS Code-specific. It is a presentation plug-in over the shared runtime, not an alternative implementation of scene editing.
 
+The runtime exposes presentation-neutral property fields, registered node kinds, selection paths, and flattened render nodes with complete world matrices. Hosts render those snapshots in their native GUI and return user intent through runtime operations. Multi-node move, scale, rotate, property edits, and construction actions are recorded as single core command transactions.
+
 ## In-app or in-game
 
 An application can embed the same runtime directly:
@@ -48,3 +50,5 @@ The game overlay chooses its own presentation and input routing. It operates on 
 ## Boundary rule
 
 Host packages may implement presentation, transport, and platform I/O. Scene mutation, command semantics, selection, tools, history, and serialization belong in `tool-editor`. If two hosts need the same behavior, move it into the runtime instead of copying it between hosts.
+
+Serialized documents retain unknown top-level and scene fields so plug-ins can extend the format without losing their data during a visual edit. Selection is restored by valid hierarchy paths after an external reload; invalid paths are dropped safely.

@@ -578,9 +578,17 @@ export type { DistributeMode } from './commands/distributeNodesCommand';
 export type { FlipAxis } from './commands/flipNodeCommand';
 export { createDesktopEditor, isDesktopEditorModified } from './desktopEditor';
 export { createEditorRuntime, getRuntimeNode } from './editorRuntime';
+export { registerDefaultProperties } from './defaultProperties';
 
 export type { DesktopEditor, DesktopEditorOptions } from './desktopEditor';
-export type { EditorRuntime, EditorRuntimeOptions, EditorRuntimeProperty } from './editorRuntime';
+export type {
+  EditorRuntime,
+  EditorRuntimeMatrix2D,
+  EditorRuntimeOptions,
+  EditorRuntimeProperty,
+  EditorRuntimePropertyField,
+  EditorRuntimeRenderNode,
+} from './editorRuntime';
 export type { EditorState } from './editorState';
 export type { HeadlessEditor, HeadlessEditorOptions } from './headlessEditor';
 export type { NamedCommandArguments, NamedCommandFactory } from './commandRegistry';

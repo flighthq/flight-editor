@@ -73,6 +73,31 @@ describe('deserializeScene', () => {
     expect(() => deserializeScene(editor, malformed)).toThrow('Invalid Flight scene data');
     expect(editor.scene).toBe(scene);
   });
+
+  it('preserves unknown document and scene fields through visual edits', () => {
+    const source = {
+      format: 'flight-scene',
+      version: 1,
+      name: 'Extensible',
+      backgroundColor: 0xffffffff,
+      pluginData: { timeline: 'intro' },
+      scene: {
+        align: 'center',
+        color: null,
+        scaleMode: 'showall',
+        width: 800,
+        height: 600,
+        physics: { gravity: 9.8 },
+        root: { kind: DisplayObjectKind, traits: {}, children: [] },
+      },
+    };
+    const editor = createEditorState();
+    deserializeScene(editor, new TextEncoder().encode(JSON.stringify(source)).buffer as ArrayBuffer);
+
+    const saved = JSON.parse(new TextDecoder().decode(serializeScene(editor)));
+    expect(saved.pluginData).toEqual({ timeline: 'intro' });
+    expect(saved.scene.physics).toEqual({ gravity: 9.8 });
+  });
 });
 
 describe('getSerializerFormats', () => {

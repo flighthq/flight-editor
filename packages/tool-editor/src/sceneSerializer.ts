@@ -42,17 +42,24 @@ interface SerializedSceneDocument {
 }
 
 const SerializerFormats: readonly DocumentFormat[] = Object.freeze<DocumentFormat[]>(['flight', 'json']);
+const serializationExtras = new WeakMap<
+  EditorState,
+  Readonly<{ document: Record<string, unknown>; scene: Record<string, unknown> }>
+>();
 
 export function serializeScene(editor: Readonly<EditorState>): ArrayBuffer {
   const scene = editor.scene;
   if (scene === null) throw new Error('Cannot serialize an editor without a scene');
 
+  const extras = serializationExtras.get(editor);
   const document: SerializedSceneDocument = {
+    ...extras?.document,
     format: 'flight-scene',
     version: 1,
     name: editor.sceneState.name,
     backgroundColor: editor.sceneState.backgroundColor,
     scene: {
+      ...extras?.scene,
       align: scene.align,
       color: scene.color,
       scaleMode: scene.scaleMode,
@@ -68,6 +75,10 @@ export function serializeScene(editor: Readonly<EditorState>): ArrayBuffer {
 export function deserializeScene(editor: EditorState, data: ArrayBuffer): void {
   const document = parseDocument(data);
   const serialized = document.scene;
+  serializationExtras.set(editor, {
+    document: omitKeys(document, ['format', 'version', 'name', 'backgroundColor', 'scene']),
+    scene: omitKeys(serialized, ['align', 'color', 'scaleMode', 'width', 'height', 'root']),
+  });
   const scene = createScene2D({
     align: serialized.align,
     color: serialized.color,
@@ -161,4 +172,9 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value);
+}
+
+function omitKeys(value: object, keys: readonly string[]): Record<string, unknown> {
+  const omitted = new Set(keys);
+  return Object.fromEntries(Object.entries(value).filter(([key]) => !omitted.has(key)));
 }
