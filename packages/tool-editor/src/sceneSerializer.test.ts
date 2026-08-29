@@ -1,6 +1,7 @@
 import { addToSelection, getSelectionCount } from '@flighthq/editor-selection';
 import { addNodeChild, getNodeChildAt, getNodeChildCount } from '@flighthq/node';
 import { createNode2D } from '@flighthq/scene2d';
+import { parseFlightScene } from '@flighthq/scene-format';
 import { DisplayObjectKind } from '@flighthq/types';
 import { describe, expect, it } from 'vitest';
 
@@ -9,7 +10,7 @@ import { createNewScene } from './sceneManager';
 import { deserializeScene, getSerializerFormats, serializeScene } from './sceneSerializer';
 
 describe('serializeScene', () => {
-  it('serializes scene metadata, fit settings, traits, and hierarchy to UTF-8 JSON', () => {
+  it('serializes scene metadata, fit settings, traits, and hierarchy to UTF-8 YAML', () => {
     const editor = createEditorState();
     createNewScene(editor, 640, 480, 'Round Trip');
     editor.scene!.align = 'top';
@@ -20,7 +21,9 @@ describe('serializeScene', () => {
     addNodeChild(parent, child);
     addNodeChild(editor.scene!.root, parent);
 
-    const value = JSON.parse(new TextDecoder().decode(serializeScene(editor)));
+    const serialized = new TextDecoder().decode(serializeScene(editor));
+    expect(serialized).toContain('format: flight-scene\n');
+    const value = parseFlightScene(serialized);
     expect(value).toMatchObject({
       format: 'flight-scene',
       version: 1,
@@ -69,40 +72,43 @@ describe('deserializeScene', () => {
     const editor = createEditorState();
     createNewScene(editor);
     const scene = editor.scene;
-    const malformed = new TextEncoder().encode('{"format":"other"}').buffer as ArrayBuffer;
+    const malformed = new TextEncoder().encode('format: other\n').buffer as ArrayBuffer;
     expect(() => deserializeScene(editor, malformed)).toThrow('Invalid Flight scene data');
     expect(editor.scene).toBe(scene);
   });
 
   it('preserves unknown document and scene fields through visual edits', () => {
-    const source = {
-      format: 'flight-scene',
-      version: 1,
-      name: 'Extensible',
-      backgroundColor: 0xffffffff,
-      pluginData: { timeline: 'intro' },
-      scene: {
-        align: 'center',
-        color: null,
-        scaleMode: 'showall',
-        width: 800,
-        height: 600,
-        physics: { gravity: 9.8 },
-        root: { kind: DisplayObjectKind, traits: {}, children: [] },
-      },
-    };
+    const source = `format: flight-scene
+version: 1
+name: Extensible
+backgroundColor: 4294967295
+pluginData:
+  timeline: intro
+scene:
+  align: center
+  color: null
+  scaleMode: showall
+  width: 800
+  height: 600
+  physics:
+    gravity: 9.8
+  root:
+    kind: ${DisplayObjectKind}
+    traits: {}
+    children: []
+`;
     const editor = createEditorState();
-    deserializeScene(editor, new TextEncoder().encode(JSON.stringify(source)).buffer as ArrayBuffer);
+    deserializeScene(editor, new TextEncoder().encode(source).buffer as ArrayBuffer);
 
-    const saved = JSON.parse(new TextDecoder().decode(serializeScene(editor)));
+    const saved = parseFlightScene(new TextDecoder().decode(serializeScene(editor)));
     expect(saved.pluginData).toEqual({ timeline: 'intro' });
     expect(saved.scene.physics).toEqual({ gravity: 9.8 });
   });
 });
 
 describe('getSerializerFormats', () => {
-  it('reports the JSON-backed Flight scene formats', () => {
-    expect(getSerializerFormats()).toEqual(['flight', 'json']);
+  it('reports the canonical Flight scene format', () => {
+    expect(getSerializerFormats()).toEqual(['flight']);
   });
 
   it('returns an immutable shared format list', () => {

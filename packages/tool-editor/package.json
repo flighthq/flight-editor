@@ -67,6 +67,7 @@
     "@flighthq/editor-zoom-presets": "*",
     "@flighthq/node": "*",
     "@flighthq/scene2d": "*",
+    "@flighthq/scene-format": "*",
     "@flighthq/shape": "*",
     "@flighthq/text": "*",
     "@flighthq/types": "*"

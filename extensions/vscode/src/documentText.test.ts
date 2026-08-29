@@ -15,12 +15,12 @@ describe('decodeDocumentData', () => {
 });
 
 describe('formatSerializedDocument', () => {
-  it('retains pretty indentation and trailing-newline style', () => {
-    const result = formatSerializedDocument('{\n    "old": true\n}\n', '{"new":{"value":1}}');
-    expect(result).toBe('{\n    "new": {\n        "value": 1\n    }\n}\n');
+  it('retains the source trailing-newline style for canonical YAML', () => {
+    const result = formatSerializedDocument('old: true\n', 'new:\n  value: 1\n');
+    expect(result).toBe('new:\n  value: 1\n');
   });
 
-  it('keeps compact documents compact', () => {
-    expect(formatSerializedDocument('{"old":true}', '{"new":1}')).toBe('{"new":1}');
+  it('does not add a trailing newline when the source had none', () => {
+    expect(formatSerializedDocument('old: true', 'new: 1\n')).toBe('new: 1');
   });
 });

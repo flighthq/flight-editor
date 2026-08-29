@@ -16,7 +16,7 @@ function documentMessage(runtime: EditorRuntime, document: vscode.TextDocument):
     const selection = runtime.getSelectionPaths();
     return {
       type: 'document',
-      text: decodeDocumentData(runtime.serialize()),
+      scene: runtime.getSceneSnapshot(),
       version: document.version,
       selection,
       properties: selection.length === 1 ? runtime.getProperties(selection[0]!) : [],
@@ -26,7 +26,7 @@ function documentMessage(runtime: EditorRuntime, document: vscode.TextDocument):
   } catch {
     return {
       type: 'document',
-      text,
+      scene: null,
       version: document.version,
       selection: [],
       properties: [],

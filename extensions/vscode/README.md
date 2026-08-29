@@ -14,7 +14,7 @@ Flight provides a visual editor for `.flight` scene files while keeping VS Code'
 - Routes visual edits through VS Code, preserving dirty state, save, undo, and redo.
 - Refreshes every visual editor when its source changes, including changes made by formatters and external tools.
 - Rejects edits based on stale revisions instead of overwriting newer source.
-- Reports malformed JSON and incompatible Flight document versions inside the editor.
+- Reports malformed YAML and incompatible Flight document versions inside the editor.
 
 Use the editor-title actions or these commands:
 

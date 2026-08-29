@@ -8,9 +8,6 @@ export function decodeDocumentData(data: ArrayBuffer): string {
 }
 
 export function formatSerializedDocument(source: string, serialized: string): string {
-  const trailingNewline = source.endsWith('\n') ? '\n' : '';
-  if (!source.includes('\n')) return `${serialized}${trailingNewline}`;
-  const indentation = source.match(/\n([\t ]+)"/)?.[1] ?? '  ';
-  const value: unknown = JSON.parse(serialized);
-  return `${JSON.stringify(value, null, indentation)}${trailingNewline}`;
+  const normalized = serialized.endsWith('\n') ? serialized.slice(0, -1) : serialized;
+  return source.endsWith('\n') ? `${normalized}\n` : normalized;
 }

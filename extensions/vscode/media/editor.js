@@ -351,7 +351,7 @@ function setTool(next) {
 function load(snapshot) {
   version = snapshot.version;
   try {
-    const value = JSON.parse(snapshot.text);
+    const value = snapshot.scene;
     if (value.format !== 'flight-scene' || value.version !== 1 || !value.scene?.root)
       throw new Error('Expected a Flight scene document (format flight-scene, version 1).');
     model = value;

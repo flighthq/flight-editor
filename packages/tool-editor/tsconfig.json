@@ -40,7 +40,8 @@
     { "path": "../editor-tool" },
     { "path": "../editor-transform-origin" },
     { "path": "../editor-viewport" },
-    { "path": "../editor-zoom-presets" }
+    { "path": "../editor-zoom-presets" },
+    { "path": "../scene-format" }
   ],
   "include": ["src"]
 }

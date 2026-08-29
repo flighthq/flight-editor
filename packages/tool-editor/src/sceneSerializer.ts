@@ -1,4 +1,5 @@
 import type { DocumentFormat } from '@flighthq/editor-document';
+import type { FlightSceneDocument, FlightSceneNode, FlightSceneValue } from '@flighthq/scene-format';
 import type { Node2D, Scene2D } from '@flighthq/types';
 
 import type { EditorState } from './editorState';
@@ -15,33 +16,11 @@ import {
 import { clearSelection } from '@flighthq/editor-selection';
 import { addNodeChild, getNodeChildAt, getNodeChildCount } from '@flighthq/node';
 import { createNode2D, createScene2D } from '@flighthq/scene2d';
+import { parseFlightScene, stringifyFlightScene } from '@flighthq/scene-format';
 
 import { setEditorScene } from './editorState';
 
-interface SerializedNode {
-  readonly kind: string;
-  readonly traits: Readonly<Record<string, unknown>>;
-  readonly children: readonly SerializedNode[];
-}
-
-interface SerializedScene {
-  readonly align: Scene2D['align'];
-  readonly color: number | null;
-  readonly scaleMode: Scene2D['scaleMode'];
-  readonly width: number;
-  readonly height: number;
-  readonly root: SerializedNode;
-}
-
-interface SerializedSceneDocument {
-  readonly format: 'flight-scene';
-  readonly version: 1;
-  readonly name: string;
-  readonly backgroundColor: number;
-  readonly scene: SerializedScene;
-}
-
-const SerializerFormats: readonly DocumentFormat[] = Object.freeze<DocumentFormat[]>(['flight', 'json']);
+const SerializerFormats: readonly DocumentFormat[] = Object.freeze<DocumentFormat[]>(['flight']);
 const serializationExtras = new WeakMap<
   EditorState,
   Readonly<{ document: Record<string, unknown>; scene: Record<string, unknown> }>
@@ -52,7 +31,7 @@ export function serializeScene(editor: Readonly<EditorState>): ArrayBuffer {
   if (scene === null) throw new Error('Cannot serialize an editor without a scene');
 
   const extras = serializationExtras.get(editor);
-  const document: SerializedSceneDocument = {
+  const document: FlightSceneDocument = {
     ...extras?.document,
     format: 'flight-scene',
     version: 1,
@@ -68,7 +47,7 @@ export function serializeScene(editor: Readonly<EditorState>): ArrayBuffer {
       root: serializeNode(scene.root),
     },
   };
-  const bytes = new TextEncoder().encode(JSON.stringify(document));
+  const bytes = new TextEncoder().encode(stringifyFlightScene(document));
   return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
 }
 
@@ -80,9 +59,9 @@ export function deserializeScene(editor: EditorState, data: ArrayBuffer): void {
     scene: omitKeys(serialized, ['align', 'color', 'scaleMode', 'width', 'height', 'root']),
   });
   const scene = createScene2D({
-    align: serialized.align,
+    align: serialized.align as Scene2D['align'],
     color: serialized.color,
-    scaleMode: serialized.scaleMode,
+    scaleMode: serialized.scaleMode as Scene2D['scaleMode'],
     scene2dWidth: serialized.width,
     scene2dHeight: serialized.height,
   });
@@ -104,13 +83,13 @@ export function getSerializerFormats(): readonly DocumentFormat[] {
   return SerializerFormats;
 }
 
-function serializeNode(node: Readonly<Node2D>): SerializedNode {
-  const traits: Record<string, unknown> = {};
+function serializeNode(node: Readonly<Node2D>): FlightSceneNode {
+  const traits: Record<string, FlightSceneValue> = {};
   for (const [key, value] of Object.entries(node)) {
-    if (key !== 'kind') traits[key] = value;
+    if (key !== 'kind' && isFlightSceneValue(value)) traits[key] = value;
   }
 
-  const children: SerializedNode[] = [];
+  const children: FlightSceneNode[] = [];
   const childCount = getNodeChildCount(node);
   for (let index = 0; index < childCount; index++) {
     const child = getNodeChildAt(node, index);
@@ -119,18 +98,18 @@ function serializeNode(node: Readonly<Node2D>): SerializedNode {
   return { kind: node.kind, traits, children };
 }
 
-function restoreNode(serialized: SerializedNode): Node2D {
+function restoreNode(serialized: FlightSceneNode): Node2D {
   const node = createNode2D(serialized.kind);
   applyNodeTraits(node, serialized.traits);
   restoreNodeChildren(node, serialized.children);
   return node;
 }
 
-function restoreNodeChildren(parent: Node2D, children: readonly SerializedNode[]): void {
+function restoreNodeChildren(parent: Node2D, children: readonly FlightSceneNode[]): void {
   for (const child of children) addNodeChild(parent, restoreNode(child));
 }
 
-function applyNodeTraits(node: Node2D, traits: Readonly<Record<string, unknown>>): void {
+function applyNodeTraits(node: Node2D, traits: Readonly<Record<string, FlightSceneValue>>): void {
   const target = node as unknown as Record<string, unknown>;
   for (const [key, value] of Object.entries(traits)) {
     if (key === '__proto__' || key === 'constructor' || key === 'kind' || key === 'prototype') continue;
@@ -138,43 +117,24 @@ function applyNodeTraits(node: Node2D, traits: Readonly<Record<string, unknown>>
   }
 }
 
-function parseDocument(data: ArrayBuffer): SerializedSceneDocument {
-  let value: unknown;
-  try {
-    value = JSON.parse(new TextDecoder().decode(new Uint8Array(data)));
-  } catch {
-    throw new Error('Invalid Flight scene data');
-  }
-  if (!isSerializedSceneDocument(value)) throw new Error('Invalid Flight scene data');
-  return value;
-}
-
-function isSerializedSceneDocument(value: unknown): value is SerializedSceneDocument {
-  if (!isRecord(value) || value.format !== 'flight-scene' || value.version !== 1) return false;
-  if (typeof value.name !== 'string' || !isFiniteNumber(value.backgroundColor)) return false;
-
-  const scene = value.scene;
-  if (!isRecord(scene)) return false;
-  if (typeof scene.align !== 'string' || typeof scene.scaleMode !== 'string') return false;
-  if (scene.color !== null && !isFiniteNumber(scene.color)) return false;
-  if (!isFiniteNumber(scene.width) || !isFiniteNumber(scene.height)) return false;
-  return isSerializedNode(scene.root);
-}
-
-function isSerializedNode(value: unknown): value is SerializedNode {
-  if (!isRecord(value) || typeof value.kind !== 'string' || !isRecord(value.traits)) return false;
-  return Array.isArray(value.children) && value.children.every(isSerializedNode);
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
-
-function isFiniteNumber(value: unknown): value is number {
-  return typeof value === 'number' && Number.isFinite(value);
+function parseDocument(data: ArrayBuffer): FlightSceneDocument {
+  return parseFlightScene(new TextDecoder().decode(new Uint8Array(data)));
 }
 
 function omitKeys(value: object, keys: readonly string[]): Record<string, unknown> {
   const omitted = new Set(keys);
-  return Object.fromEntries(Object.entries(value).filter(([key]) => !omitted.has(key)));
+  return Object.fromEntries(
+    Object.entries(value).filter(([key, value]) => !omitted.has(key) && isFlightSceneValue(value)),
+  );
+}
+
+function isFlightSceneValue(value: unknown): value is FlightSceneValue {
+  if (value === null || typeof value === 'boolean' || typeof value === 'string') return true;
+  if (typeof value === 'number') return Number.isFinite(value);
+  if (Array.isArray(value)) return value.every(isFlightSceneValue);
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    Object.values(value as Record<string, unknown>).every(isFlightSceneValue)
+  );
 }

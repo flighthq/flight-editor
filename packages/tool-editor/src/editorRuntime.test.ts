@@ -25,6 +25,18 @@ describe('createEditorRuntime', () => {
     expect(target.state.sceneState.name).toBe('Shared');
   });
 
+  it('provides a structured scene snapshot without exposing source syntax to hosts', () => {
+    const runtime = createEditorRuntime({ sceneName: 'Host-neutral' });
+    addNodeChild(runtime.state.scene!.root, createNode2D(DisplayObjectKind, { name: 'Child' }));
+
+    expect(runtime.getSceneSnapshot()).toMatchObject({
+      format: 'flight-scene',
+      version: 1,
+      name: 'Host-neutral',
+      scene: { root: { children: [{ kind: DisplayObjectKind, traits: { name: 'Child' } }] } },
+    });
+  });
+
   it('selects and edits nodes using shared editor commands', () => {
     const runtime = createEditorRuntime();
     const node = createNode2D(DisplayObjectKind, { name: 'Before', x: 2 });

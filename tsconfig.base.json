@@ -86,6 +86,8 @@
       "@flighthq/editor-viewport/*": ["./packages/editor-viewport/src/*"],
       "@flighthq/editor-zoom-presets": ["./packages/editor-zoom-presets/src/index.ts"],
       "@flighthq/editor-zoom-presets/*": ["./packages/editor-zoom-presets/src/*"],
+      "@flighthq/scene-format": ["./packages/scene-format/src/index.ts"],
+      "@flighthq/scene-format/*": ["./packages/scene-format/src/*"],
       "@flighthq/tool-editor": ["./packages/tool-editor/src/index.ts"],
       "@flighthq/tool-editor/*": ["./packages/tool-editor/src/*"]
     },

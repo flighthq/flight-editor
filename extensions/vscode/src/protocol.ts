@@ -13,12 +13,31 @@ export interface PropertySnapshot {
 
 export interface DocumentSnapshot {
   readonly type: 'document';
-  readonly text: string;
+  readonly scene: SceneSnapshot | null;
   readonly version: number;
   readonly selection: readonly (readonly number[])[];
   readonly properties: readonly PropertySnapshot[];
   readonly nodeKinds: readonly string[];
   readonly renderNodes: readonly RenderNodeSnapshot[];
+}
+
+export interface SceneNodeSnapshot {
+  readonly kind: string;
+  readonly traits: Readonly<{ name?: string }>;
+  readonly children: readonly SceneNodeSnapshot[];
+}
+
+export interface SceneSnapshot {
+  readonly format: 'flight-scene';
+  readonly version: 1;
+  readonly name: string;
+  readonly scene: {
+    readonly align: string;
+    readonly scaleMode: string;
+    readonly width: number;
+    readonly height: number;
+    readonly root: SceneNodeSnapshot;
+  };
 }
 
 export interface RenderNodeSnapshot {

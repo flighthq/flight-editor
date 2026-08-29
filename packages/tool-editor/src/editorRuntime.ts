@@ -46,6 +46,7 @@ export interface EditorRuntime {
   getSelectionPaths(): readonly (readonly number[])[];
   getProperties(path: readonly number[]): readonly EditorRuntimePropertyField[];
   getNodeKinds(): readonly string[];
+  getSceneSnapshot(): EditorRuntimeSceneSnapshot;
   getRenderNodes(): readonly EditorRuntimeRenderNode[];
   updateNode(path: readonly number[], property: EditorRuntimeProperty, value: string | number | boolean): boolean;
   updateNodes(
@@ -88,6 +89,25 @@ export interface EditorRuntimeRenderNode {
   readonly height: number;
   readonly alpha: number;
   readonly color: number | null;
+}
+
+export interface EditorRuntimeSceneNodeSnapshot {
+  readonly kind: string;
+  readonly traits: Readonly<{ name?: string }>;
+  readonly children: readonly EditorRuntimeSceneNodeSnapshot[];
+}
+
+export interface EditorRuntimeSceneSnapshot {
+  readonly format: 'flight-scene';
+  readonly version: 1;
+  readonly name: string;
+  readonly scene: {
+    readonly align: string;
+    readonly scaleMode: string;
+    readonly width: number;
+    readonly height: number;
+    readonly root: EditorRuntimeSceneNodeSnapshot;
+  };
 }
 
 export function createEditorRuntime(options: Readonly<EditorRuntimeOptions> = {}): EditorRuntime {
@@ -146,6 +166,22 @@ export function createEditorRuntime(options: Readonly<EditorRuntimeOptions> = {}
     },
     getNodeKinds() {
       return getNodeKindIds(state.nodeFactory);
+    },
+    getSceneSnapshot() {
+      const scene = state.scene;
+      if (scene === null) throw new Error('Cannot snapshot an editor without a scene');
+      return {
+        format: 'flight-scene',
+        version: 1,
+        name: state.sceneState.name,
+        scene: {
+          align: scene.align,
+          scaleMode: scene.scaleMode,
+          width: scene.scene2dWidth,
+          height: scene.scene2dHeight,
+          root: getSceneNodeSnapshot(scene.root),
+        },
+      };
     },
     getRenderNodes() {
       return getRenderNodes(state);
@@ -245,6 +281,19 @@ export function createEditorRuntime(options: Readonly<EditorRuntimeOptions> = {}
     dispose() {
       state.scene = null;
     },
+  };
+}
+
+function getSceneNodeSnapshot(node: Readonly<Node2D>): EditorRuntimeSceneNodeSnapshot {
+  const children: EditorRuntimeSceneNodeSnapshot[] = [];
+  for (let index = 0; index < getNodeChildCount(node); index++) {
+    const child = getNodeChildAt(node, index);
+    if (child !== null) children.push(getSceneNodeSnapshot(child));
+  }
+  return {
+    kind: node.kind,
+    traits: typeof node.name === 'string' ? { name: node.name } : {},
+    children,
   };
 }
 
