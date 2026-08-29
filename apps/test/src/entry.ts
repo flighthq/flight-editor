@@ -355,12 +355,16 @@ function syncPropertiesPanel(snapshot: InspectorSnapshot): void {
     propsHeader.textContent = 'Properties';
   }
 
-  const sceneSize = getSceneSize(editor);
-  const sceneName = getSceneName(editor);
-  if (inputFocused !== propSceneName) propSceneName.value = sceneName;
-  if (inputFocused !== propSceneW) propSceneW.value = String(sceneSize.width);
-  if (inputFocused !== propSceneH) propSceneH.value = String(sceneSize.height);
-  toolbarSceneSizeEl.textContent = `${sceneSize.width} × ${sceneSize.height}`;
+  if (inputFocused !== propSceneName) propSceneName.value = getSceneName(editor);
+
+  const scene = editor.scene;
+  if (scene) {
+    const sw = scene.scene2dWidth;
+    const sh = scene.scene2dHeight;
+    if (inputFocused !== propSceneW) propSceneW.value = String(sw);
+    if (inputFocused !== propSceneH) propSceneH.value = String(sh);
+    toolbarSceneSizeEl.textContent = `${sw} × ${sh}`;
+  }
 }
 
 // ── Properties panel: write to editor ───────────────────────
