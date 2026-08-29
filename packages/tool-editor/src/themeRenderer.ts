@@ -38,10 +38,10 @@ export function getRegionColor(theme: Readonly<EditorTheme>, region: LayoutRegio
 
 export function applyThemeToLayout(layout: Readonly<LayoutScene>, theme: Readonly<EditorTheme>): void {
   for (const region of getLayoutRegions()) {
-    const node = getLayoutNode(layout, region);
-    if (node) {
+    const bgNode = getLayoutChildNode(layout, `${region}/bg`);
+    if (bgNode) {
       const color = getRegionColor(theme, region);
-      setNodeColorAdjustmentsTint(node, color);
+      setNodeColorAdjustmentsTint(bgNode, color);
     }
   }
 }
@@ -74,9 +74,9 @@ export function applyThemeBorders(layout: Readonly<LayoutScene>, theme: Readonly
 
 export function clearThemeFromLayout(layout: Readonly<LayoutScene>): void {
   for (const region of getLayoutRegions()) {
-    const node = getLayoutNode(layout, region);
-    if (node) {
-      clearNodeTint(node);
+    const bgNode = getLayoutChildNode(layout, `${region}/bg`);
+    if (bgNode) {
+      clearNodeTint(bgNode);
     }
   }
 }

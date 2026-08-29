@@ -79,8 +79,11 @@ export function getLayoutRegions(): readonly LayoutRegion[] {
   return ['menuBar', 'toolbar', 'leftPanel', 'canvas', 'rightPanel', 'statusBar'];
 }
 
-const MENU_ITEMS = ['File', 'Edit', 'View', 'Insert', 'Modify', 'Window', 'Help'] as const;
+function bgShape(width: number, height: number): SceneNodeDef {
+  return { name: 'bg', kind: 'shape', x: 0, y: 0, width, height, fillColor: 0xffffff, fillAlpha: 1 };
+}
 
+const MENU_ITEMS = ['File', 'Edit', 'View', 'Insert', 'Modify', 'Window', 'Help'] as const;
 const MENU_FORMAT = Object.freeze({ font: 'sans-serif', size: 12, color: 0xcccccc });
 
 function createMenuBarNode(width: number, height: number): SceneNodeDef {
@@ -98,45 +101,45 @@ function createMenuBarNode(width: number, height: number): SceneNodeDef {
 
   return {
     name: 'menuBar',
-    kind: 'shape',
     x: 0,
     y: 0,
     width,
     height,
-    fillColor: 0xffffff,
-    fillAlpha: 1,
-    children: menuChildren,
+    children: [bgShape(width, height), ...menuChildren],
   };
 }
 
 function createToolbarNode(width: number, top: number, height: number): SceneNodeDef {
-  return { name: 'toolbar', kind: 'shape', x: 0, y: top, width, height, fillColor: 0xffffff, fillAlpha: 1 };
+  return {
+    name: 'toolbar',
+    x: 0,
+    y: top,
+    width,
+    height,
+    children: [bgShape(width, height)],
+  };
 }
 
 function createLeftPanelNode(width: number, top: number, height: number): SceneNodeDef {
   return {
     name: 'leftPanel',
-    kind: 'shape',
     x: 0,
     y: top,
     width,
     height,
-    fillColor: 0xffffff,
-    fillAlpha: 1,
+    children: [bgShape(width, height)],
   };
 }
 
 function createCanvasNode(left: number, top: number, width: number, height: number): SceneNodeDef {
   return {
     name: 'canvas',
-    kind: 'shape',
     x: left,
     y: top,
     width,
     height,
-    fillColor: 0xffffff,
-    fillAlpha: 1,
     children: [
+      bgShape(width, height),
       { name: 'viewport', x: 0, y: 0, width, height },
       { name: 'rulers', x: 0, y: 0, width, height },
     ],
@@ -148,14 +151,12 @@ const PANEL_HEADER_FORMAT = Object.freeze({ font: 'sans-serif', size: 11, color:
 function createRightPanelNode(left: number, top: number, width: number, height: number): SceneNodeDef {
   return {
     name: 'rightPanel',
-    kind: 'shape',
     x: left,
     y: top,
     width,
     height,
-    fillColor: 0xffffff,
-    fillAlpha: 1,
     children: [
+      bgShape(width, height),
       {
         name: 'propertiesHeader',
         kind: 'text',
@@ -176,14 +177,12 @@ const STATUS_FORMAT = Object.freeze({ font: 'sans-serif', size: 11, color: 0x888
 function createStatusBarNode(width: number, top: number, height: number): SceneNodeDef {
   return {
     name: 'statusBar',
-    kind: 'shape',
     x: 0,
     y: top,
     width,
     height,
-    fillColor: 0xffffff,
-    fillAlpha: 1,
     children: [
+      bgShape(width, height),
       {
         name: 'statusTool',
         kind: 'text',

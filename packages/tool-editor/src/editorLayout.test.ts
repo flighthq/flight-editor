@@ -59,18 +59,21 @@ describe('createEditorLayoutDef', () => {
   it('includes children in panels', () => {
     const def = createEditorLayoutDef({ width: 1280, height: 720 });
     const menuBar = def.root![0];
-    expect(menuBar.children!.length).toBeGreaterThanOrEqual(7);
-    expect(menuBar.children![0].name).toBe('menu_file');
+    expect(menuBar.children!.length).toBeGreaterThanOrEqual(8);
+    expect(menuBar.children![0].name).toBe('bg');
+    expect(menuBar.children![1].name).toBe('menu_file');
     const canvas = def.root![3];
-    expect(canvas.children).toHaveLength(2);
-    expect(canvas.children![0].name).toBe('viewport');
-    expect(canvas.children![1].name).toBe('rulers');
+    expect(canvas.children).toHaveLength(3);
+    expect(canvas.children![0].name).toBe('bg');
+    expect(canvas.children![1].name).toBe('viewport');
+    expect(canvas.children![2].name).toBe('rulers');
     const right = def.root![4];
-    expect(right.children!.length).toBeGreaterThanOrEqual(1);
     expect(right.children!.some((c) => c.name === 'inspector')).toBe(true);
+    expect(right.children![0].name).toBe('bg');
     const statusBar = def.root![5];
-    expect(statusBar.children!.length).toBeGreaterThanOrEqual(2);
-    expect(statusBar.children![0].name).toBe('statusTool');
+    expect(statusBar.children!.length).toBeGreaterThanOrEqual(3);
+    expect(statusBar.children![0].name).toBe('bg');
+    expect(statusBar.children![1].name).toBe('statusTool');
   });
 });
 

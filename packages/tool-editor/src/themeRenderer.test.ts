@@ -1,7 +1,7 @@
 import { getNodeColorAdjustments } from '@flighthq/node';
 import { describe, expect, it } from 'vitest';
 
-import { createLayoutScene, getLayoutNode } from './layoutRenderer';
+import { createLayoutScene, getLayoutChildNode, getLayoutNode } from './layoutRenderer';
 import { createDarkTheme, createLightTheme } from './themeDefinition';
 import {
   applyThemeBorders,
@@ -47,24 +47,24 @@ describe('getRegionColor', () => {
 });
 
 describe('applyThemeToLayout', () => {
-  it('applies tint to all layout regions', () => {
+  it('applies tint to bg child of each region', () => {
     const layout = testLayout();
     const theme = createDarkTheme();
     applyThemeToLayout(layout, theme);
 
-    const menuBar = getLayoutNode(layout, 'menuBar');
-    expect(menuBar).not.toBeNull();
-    const adjustments = getNodeColorAdjustments(menuBar!);
+    const bg = getLayoutChildNode(layout, 'menuBar/bg');
+    expect(bg).not.toBeNull();
+    const adjustments = getNodeColorAdjustments(bg!);
     expect(adjustments).not.toBeNull();
   });
 
   it('applies different theme colors', () => {
     const layout = testLayout();
     applyThemeToLayout(layout, createDarkTheme());
-    const darkAdj = getNodeColorAdjustments(getLayoutNode(layout, 'canvas')!);
+    const darkAdj = getNodeColorAdjustments(getLayoutChildNode(layout, 'canvas/bg')!);
 
     applyThemeToLayout(layout, createLightTheme());
-    const lightAdj = getNodeColorAdjustments(getLayoutNode(layout, 'canvas')!);
+    const lightAdj = getNodeColorAdjustments(getLayoutChildNode(layout, 'canvas/bg')!);
 
     expect(darkAdj).not.toEqual(lightAdj);
   });
@@ -86,7 +86,7 @@ describe('applyThemeToLayoutChild', () => {
   it('applies theme to a child node by path', () => {
     const layout = testLayout();
     const theme = createDarkTheme();
-    applyThemeToLayoutChild(layout, theme, 'leftPanel/hierarchy', 'surfaceAlt');
+    applyThemeToLayoutChild(layout, theme, 'rightPanel/inspector', 'surfaceAlt');
   });
 
   it('handles missing path gracefully', () => {
@@ -110,13 +110,13 @@ describe('applyThemeBorders', () => {
 });
 
 describe('clearThemeFromLayout', () => {
-  it('resets tints on all regions', () => {
+  it('resets tints on bg children', () => {
     const layout = testLayout();
     const theme = createDarkTheme();
     applyThemeToLayout(layout, theme);
     clearThemeFromLayout(layout);
 
-    const canvas = getLayoutNode(layout, 'canvas');
-    expect(canvas).not.toBeNull();
+    const bg = getLayoutChildNode(layout, 'canvas/bg');
+    expect(bg).not.toBeNull();
   });
 });
