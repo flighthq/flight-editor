@@ -574,7 +574,7 @@
         </div>
         <div class="toolbar__spacer"></div>
         <div class="toolbar__group">
-          <span class="toolbar__label">800 &times; 600</span>
+          <span class="toolbar__label" id="toolbar-scene-size">800 &times; 600</span>
         </div>
       </div>
 
@@ -598,7 +598,7 @@
           </svg>
         </button>
         <div class="left-panel__separator"></div>
-        <button class="left-panel__tool" data-tool="select" data-tooltip="Marquee (M)">
+        <button class="left-panel__tool" data-tool="marquee" data-tooltip="Marquee (M)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path
               d="M3 5h2V3H3v2zm0 8h2v-2H3v2zm4 8h2v-2H7v2zM3 9h2V7H3v2zm10-6h-2v2h2V3zm6 0v2h2V3h-2zM5 21v-2H3v2h2zm-2-4h2v-2H3v2zM9 3H7v2h2V3zm2 18h2v-2h-2v2zm8-8h2v-2h-2v2zm0 8v-2h-2v2h2zm0-12h2V7h-2v2zm0 8h2v-2h-2v2zm-4 4h2v-2h-2v2zm0-16h2V3h-2v2z" />
@@ -645,7 +645,7 @@
           </svg>
         </button>
         <div class="left-panel__separator"></div>
-        <div class="left-panel__swatch" style="background: #0078d4" title="Foreground color"></div>
+        <div class="left-panel__swatch" id="tool-color-swatch" style="background: #0078d4" title="Foreground color"></div>
       </aside>
 
       <!-- ── Canvas (Flight editor renders here) ─────── -->
@@ -667,107 +667,87 @@
       </main>
 
       <!-- ── Right panel (properties inspector) ─────── -->
-      <aside class="right-panel">
+      <aside class="right-panel" id="props-panel">
         <div class="right-panel__header">
-          <span>Properties</span>
+          <span id="props-header">Properties</span>
         </div>
 
-        <div class="right-panel__section">
+        <div class="right-panel__section" id="props-transform">
           <div class="right-panel__section-title">Transform</div>
           <div class="right-panel__row">
             <span class="right-panel__label">X</span>
-            <input class="right-panel__input" type="text" value="0" />
+            <input class="right-panel__input" id="prop-x" type="number" step="1" value="0" />
             <span class="right-panel__label">Y</span>
-            <input class="right-panel__input" type="text" value="0" />
+            <input class="right-panel__input" id="prop-y" type="number" step="1" value="0" />
           </div>
           <div class="right-panel__row">
             <span class="right-panel__label">W</span>
-            <input class="right-panel__input" type="text" value="800" />
+            <input class="right-panel__input" id="prop-w" type="number" step="1" value="0" />
             <span class="right-panel__label">H</span>
-            <input class="right-panel__input" type="text" value="600" />
+            <input class="right-panel__input" id="prop-h" type="number" step="1" value="0" />
           </div>
           <div class="right-panel__row">
             <span class="right-panel__label" title="Rotation">&ang;</span>
-            <input class="right-panel__input" type="text" value="0.0&deg;" />
+            <input class="right-panel__input" id="prop-rotation" type="number" step="0.1" value="0" />
           </div>
         </div>
 
-        <div class="right-panel__section">
+        <div class="right-panel__section" id="props-appearance">
           <div class="right-panel__section-title">Appearance</div>
-          <div class="right-panel__color-row">
-            <span class="right-panel__label">Fill</span>
-            <div class="right-panel__color-swatch" style="background: #ffffff"></div>
-            <input class="right-panel__input" type="text" value="#FFFFFF" />
+          <div class="right-panel__checkbox-row">
+            <input class="right-panel__checkbox" id="prop-visible" type="checkbox" checked />
+            <span>Visible</span>
           </div>
           <div class="right-panel__slider-row">
             <span class="right-panel__label">&alpha;</span>
-            <input class="right-panel__slider" type="range" min="0" max="100" value="100" />
-            <input class="right-panel__input right-panel__input--short" type="text" value="100%" />
+            <input class="right-panel__slider" id="prop-alpha-slider" type="range" min="0" max="100" value="100" />
+            <input class="right-panel__input right-panel__input--short" id="prop-alpha-text" type="text" value="100%" />
           </div>
           <div class="right-panel__row">
             <span class="right-panel__label">Blend</span>
-            <select class="right-panel__select">
-              <option selected>Normal</option>
-              <option>Multiply</option>
-              <option>Screen</option>
-              <option>Overlay</option>
-              <option>Darken</option>
-              <option>Lighten</option>
-              <option>Add</option>
-              <option>Subtract</option>
-              <option>Difference</option>
-              <option>Invert</option>
+            <select class="right-panel__select" id="prop-blend">
+              <option value="Normal" selected>Normal</option>
+              <option value="Multiply">Multiply</option>
+              <option value="Screen">Screen</option>
+              <option value="Darken">Darken</option>
+              <option value="Lighten">Lighten</option>
+              <option value="Add">Add</option>
             </select>
           </div>
         </div>
 
-        <div class="right-panel__section">
+        <div class="right-panel__section" id="props-node-name">
+          <div class="right-panel__section-title">Node</div>
+          <div class="right-panel__row">
+            <span class="right-panel__label">Name</span>
+            <input class="right-panel__input" id="prop-name" type="text" value="" />
+          </div>
+        </div>
+
+        <div class="right-panel__section" id="props-scene">
           <div class="right-panel__section-title">Scene</div>
           <div class="right-panel__row">
             <span class="right-panel__label">Name</span>
-            <input class="right-panel__input" type="text" value="Untitled" />
+            <input class="right-panel__input" id="prop-scene-name" type="text" value="Untitled" />
           </div>
           <div class="right-panel__row">
-            <span class="right-panel__label">BG</span>
-            <div class="right-panel__color-swatch" style="background: #ffffff"></div>
-            <input class="right-panel__input" type="text" value="#FFFFFF" />
+            <span class="right-panel__label">W</span>
+            <input class="right-panel__input" id="prop-scene-w" type="number" step="1" value="800" />
+            <span class="right-panel__label">H</span>
+            <input class="right-panel__input" id="prop-scene-h" type="number" step="1" value="600" />
           </div>
         </div>
 
-        <div class="right-panel__section">
-          <div class="right-panel__section-title">Export</div>
-          <div class="right-panel__checkbox-row">
-            <input class="right-panel__checkbox" type="checkbox" />
-            <span>Enable export</span>
-          </div>
-          <div class="right-panel__row">
-            <span class="right-panel__label">Fmt</span>
-            <select class="right-panel__select">
-              <option selected>PNG</option>
-              <option>JPEG</option>
-              <option>SVG</option>
-              <option>WebP</option>
-            </select>
-          </div>
-          <div class="right-panel__row">
-            <span class="right-panel__label">Scale</span>
-            <select class="right-panel__select">
-              <option>0.5x</option>
-              <option selected>1x</option>
-              <option>2x</option>
-              <option>3x</option>
-            </select>
-          </div>
-        </div>
+        <div class="right-panel__empty" id="props-empty">Select an object to view its properties</div>
       </aside>
 
       <!-- ── Status bar ──────────────────────────────── -->
       <footer class="status-bar">
-        <span class="status-bar__tool">Pointer Tool</span>
+        <span class="status-bar__tool" id="status-tool">Pointer Tool</span>
         <span class="status-bar__separator"></span>
         <span class="status-bar__zoom" id="status-zoom">100%</span>
         <span class="status-bar__separator"></span>
-        <span class="status-bar__selection">No selection</span>
+        <span class="status-bar__selection" id="status-selection">No selection</span>
         <span class="status-bar__spacer"></span>
         <span class="status-bar__coords" id="status-coords">X: 0 Y: 0</span>
       </footer>
