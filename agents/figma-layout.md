@@ -248,3 +248,14 @@ Sections are organizational containers on the canvas (not in the layer hierarchy
 - Used to organize frames into logical groups (e.g., "Login Flow", "Settings Screens")
 - Sections do not clip content and do not appear in prototype flows
 - Useful for presentation and developer handoff organization
+
+## Flight Adaptation Notes
+
+Apply [the Figma-inspired frame, collaboration, preview, and developer-mode contract](./figma-implementation-contract.md).
+
+- Pages, frames, and sections are distinct document concepts; host panels and open files are not pages.
+- Collaborator cursors, selections, follow mode, measurements, labels, and handles are overlays outside canonical scene content.
+- Desktop, VS Code, and in-app hosts may use different layouts and omit multiplayer, comments, or Dev Mode entirely.
+- Prototype and developer views are capability-gated modes over shared document state, not forks of the editor model.
+- Persist workspace chrome per host; persist frame, section, layout, token, and prototype data in `.flight`.
+- Test narrow layouts, 200% text zoom, multiple pages, spatial frames, optional-service absence, and focus restoration.

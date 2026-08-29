@@ -401,3 +401,14 @@ Additional buttons appear in the toolbar based on the selection:
 - After creating a text object, Figma auto-switches to text editing mode; pressing Escape exits to the Move tool
 - The Pen tool stays active across multiple point placements until you press Enter/Escape
 - The Comment tool stays active until you switch to another tool or press Escape
+
+## Flight Adaptation Notes
+
+Apply [the Figma-inspired tool, frame, comments, and plugin contract](./figma-implementation-contract.md).
+
+- Shared tool state machines are presentation-neutral; desktop, VS Code, and in-app hosts may expose different tool chrome.
+- Move resize, Scale, vector edit, frame/section/slice creation, text resize, comments, and eyedropper have explicit begin/preview/commit/cancel behavior.
+- Frames own bounds and layout; groups derive bounds; sections are non-rendering organization metadata; slices are export metadata.
+- Comment and resource tools appear only when their service/contribution capability is available.
+- Path and bend tools require authoring-safe upstream topology; do not approximate them with destructive host-local geometry.
+- Test editing-scope transitions, temporary tool restore, incomplete paths, layout-controlled children, focus loss, and permission changes mid-gesture.

@@ -431,3 +431,15 @@ Guides snap to objects and artboard edges.
 | Escape | Exit presentation mode |
 | Click outside hotspots | No effect (or close overlay if configured) |
 | Scroll (on scrollable frames) | Scroll the content |
+
+## Flight Adaptation Notes
+
+Apply [the Figma-inspired gesture, collaboration, comments, and inspection contract](./figma-implementation-contract.md).
+
+- All canvas drags use the shared cancellable gesture lifecycle and commit at most one document command.
+- Direct selection and isolation traverse stable editing scopes; repeated clicks must not depend on stale hierarchy paths.
+- Smart-guide and Dev Mode measurements share scene/layout queries but remain transient overlays.
+- Comment pins anchor to stable identities and coordinates; placing or moving them uses a review service operation, not scene undo.
+- Remote cursors never participate in local hit testing, snapping, selection, or serialization.
+- Prototype wires edit stable graph edges, while presentation interactions mutate only runtime preview state.
+- Test click/drag thresholds, pointer capture loss, duplicate-drag rollback, layout reordering, comments unavailable/offline, and non-1 DPR.

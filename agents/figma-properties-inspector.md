@@ -504,3 +504,15 @@ Shows export configurations with download buttons for the selected object.
 - **Scrubbing**: click and drag on a numeric label (like "X" or "W") to scrub the value
 - **Style/Variable binding**: the four-dots icon (⊞) next to properties opens the style/variable picker; a hexagon icon indicates a bound variable; click to detach
 - **Copy properties**: Ctrl/Cmd+Alt+C copies all visual properties; Ctrl/Cmd+Alt+V pastes them onto the selection
+
+## Flight Adaptation Notes
+
+Apply [the Figma-inspired property, variable, layout, component, prototype, and developer contract](./figma-implementation-contract.md).
+
+- Inspector sections are contributed metadata; different hosts may render native controls while invoking identical commands.
+- Literal, style-bound, and variable-bound values are distinct states. Detach writes the resolved literal explicitly.
+- Draft expressions and units validate before commit; scrub and complex editors use one cancellable gesture transaction.
+- Auto Layout-controlled properties explain applicability and precedence instead of silently accepting ineffective values.
+- Component variant/property and prototype target selectors use stable identities with missing-reference diagnostics.
+- Dev Mode is read-only computed output; generators cannot mutate the document through inspection callbacks.
+- Test mixed/partial applicability, aliases/modes, permission changes, invalid drafts, layout reflow, and source/visual synchronization.

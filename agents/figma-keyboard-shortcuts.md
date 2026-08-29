@@ -314,3 +314,14 @@ Both tools select and transform objects. The key difference:
 | Effects on resize | Unchanged | Scales |
 | Constraints | Applied | Ignored |
 | Best for | Layout, repositioning | Uniform scaling of visual elements |
+
+## Flight Adaptation Notes
+
+Apply [the Figma-inspired command, focus, layout, and collaboration contract](./figma-implementation-contract.md).
+
+- Bind historical shortcuts to stable commands and let each host resolve platform or reserved-key conflicts.
+- Scope Enter, Escape, Delete, arrows, `Ctrl/Cmd+A`, and tool letters to text, vector, component, prototype, comment, panel, or canvas focus.
+- Move-tool resize, Scale-tool scaling, and Auto Layout resizing are separate commands with separate property semantics.
+- Collaboration, comments, version history, plugins, and Dev Mode shortcuts exist only when the host advertises those capabilities.
+- Named-version creation is durable history, not an undo checkpoint; following a collaborator is transient session state.
+- Test temporary tools, key repeat/coalescing, IME, source-editor focus, and host-reserved shortcuts.

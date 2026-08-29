@@ -354,3 +354,14 @@ Opens the Libraries modal:
 ### Layers Panel Context Menu
 
 Same as object context menu, since layers correspond directly to canvas objects.
+
+## Flight Adaptation Notes
+
+Apply [the Figma-inspired command and capability contract](./figma-implementation-contract.md).
+
+- Quick Actions, native menus, context menus, command palettes, and toolbar buttons project the same command registry.
+- Component, variable, Auto Layout, prototype, vector, history, comment, plugin, widget, and Dev Mode items are capability-gated.
+- Library and cloud/account actions are integrations; no inert menu item should imply a service exists.
+- Restore Version, detach instance, flatten, outline text, and destructive vector operations require explicit consequences and undo/recovery behavior.
+- Context menus resolve the invocation target and current selection before querying command state.
+- Test enablement for permissions, read-only revision preview, invalid YAML, missing plugins/assets, mixed selection, and active editing modes.

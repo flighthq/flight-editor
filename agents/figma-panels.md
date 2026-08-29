@@ -456,3 +456,15 @@ Dev Mode provides a developer-focused view of the design:
 | Utility plugins | Batch rename, sort layers, clean up |
 
 Plugins run within a sandboxed environment and interact with the Figma API.
+
+## Flight Adaptation Notes
+
+Apply [the Figma-inspired component, variable, collaboration, history, developer, and plugin contracts](./figma-implementation-contract.md).
+
+- Layers, Assets, comments, history, Dev Mode, resources, and plugin surfaces are replaceable projections or optional integrations.
+- Variants and component properties extend the shared component model; overrides use stable property identities rather than names or paths.
+- Variables, styles, collections, modes, aliases, scopes, and bindings are durable typed document data.
+- Presence is transient; comments are separate review records; version history stores immutable canonical document revisions.
+- Restoring history creates a new current revision and never masquerades as ordinary local undo.
+- Plugins mutate through shared commands and preserve versioned namespaced data when unavailable.
+- Test loading, empty, permission-denied, offline, stale, missing-plugin, broken-binding, and read-only-revision panel states.

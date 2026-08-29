@@ -14,6 +14,7 @@ This document records capabilities Flight Editor needs from the Flight runtime a
 | P1 | Reusable scene sources/instances | Stable source and descendant identity, nesting, reference fixup, deterministic materialization, and hot reload | Components, variants, overrides, linked assets, cross-document transfer |
 | P1 | `@flighthq/layout` | Deterministic authored constraint resolution, validation facts, intrinsic measurement, and transform precedence | Responsive resize, stacks, auto-layout, reusable component layout |
 | P2 | `@flighthq/flow` and `@flighthq/statechart` | Stable targets/states/actions, validation, deterministic execution, and live replacement | Prototype graphs, component states, interactive preview |
+| P2 | Runtime variables/bindings, if dynamic variables are a product goal | Typed identities, collections/modes, aliases, scope resolution, property bindings, diagnostics, and hot replacement | Theme modes, component properties, conditional prototypes, in-game tuning |
 | P2 | `@flighthq/shape`, `@flighthq/path`, `@flighthq/path-boolean` | Authoring-safe topology and robust query/edit primitives with deterministic tolerances | Flash-like pen, subselection, shape merge, fill, and stroke authoring |
 | P2 | `@flighthq/animation` and `@flighthq/timeline` | Stable target/property references, deterministic seek/sample, validation facts, and reload behavior | Timeline, keyframe, tween, onion-skin, and runtime preview tooling |
 
@@ -90,6 +91,17 @@ Flight Editor remains responsible for component creation, overrides, named varia
 
 Flight Editor remains responsible for constraint inference and handles, stack/property UI, prototype wires, graph commands, transition presentation, and preview navigation UX.
 
+### Runtime variables and bindings
+
+- Typed variables, modes, aliases, and scopes resolve deterministically with cycle and missing-value diagnostics.
+- Bindings target stable node/property identities and declare compatible types.
+- Flow/statechart actions can read or write variables through an explicit runtime contract.
+- Hot replacement preserves compatible values and reports invalidated bindings.
+
+Flight Editor remains responsible for token/style organization, pickers, mode authoring, property commands, detach-to-literal behavior, and library presentation. If all variables resolve at authoring time, this upstream request should be closed rather than implemented.
+
+Collaboration transport, comments, version-history storage, presence, permissions, and developer code generation are not Flight runtime requests. They belong to Flight Editor adapters or external services and consume canonical scene revisions and stable identities.
+
 ## Explicitly not upstream requests
 
 These concerns belong in Flight Editor even when they consume upstream primitives:
@@ -119,5 +131,6 @@ Detailed package notes live under:
 - `agents/packages/flight-flow/todo.md`
 - `agents/packages/flight-statechart/todo.md`
 - `agents/packages/flight-scene-instance/proposal.md`
+- `agents/packages/flight-variables/proposal.md`
 
 Before filing an upstream issue, validate the installed SDK surface and replace a request with a concrete API gap and a minimal editor use case. Once an upstream contract exists, add a Flight Editor integration test before considering the request complete.
