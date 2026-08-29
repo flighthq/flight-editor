@@ -10,6 +10,8 @@
     "build": "tauri build",
     "build:frontend": "tsc -p tsconfig.json && vite build",
     "dev:frontend": "vite",
+    "setup": "bash setup.sh",
+    "setup:install": "bash setup.sh --install",
     "test": "vitest run --config ../../vitest.config.ts src"
   },
   "dependencies": {

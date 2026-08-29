@@ -12,12 +12,6 @@
     "Visualization",
     "Other"
   ],
-  "keywords": [
-    "flight",
-    "scene",
-    "visual editor",
-    "2d"
-  ],
   "activationEvents": [
     "onCustomEditor:flight.visualEditor"
   ],
@@ -55,10 +49,6 @@
       {
         "command": "flight.openSource",
         "title": "Flight: Open Source"
-      },
-      {
-        "command": "flight.validate",
-        "title": "Flight: Validate Scene"
       }
     ],
     "menus": {
@@ -72,19 +62,14 @@
           "command": "flight.openVisual",
           "when": "editorLangId == flight",
           "group": "navigation"
-        },
-        {
-          "command": "flight.validate",
-          "when": "editorLangId == flight",
-          "group": "navigation@10"
         }
       ]
     }
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "check": "npm run build && npm run test",
-    "test": "vitest run --config vitest.config.ts"
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --config ../../vitest.config.ts src"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

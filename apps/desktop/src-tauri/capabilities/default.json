@@ -12,10 +12,10 @@
     "dialog:allow-save",
     "dialog:allow-message",
     "fs:default",
-    "fs:allow-read",
-    "fs:allow-write",
+    "fs:allow-read-file",
+    "fs:allow-write-file",
     "clipboard-manager:default",
-    "clipboard-manager:allow-read",
-    "clipboard-manager:allow-write"
+    "clipboard-manager:allow-read-text",
+    "clipboard-manager:allow-write-text"
   ]
 }
