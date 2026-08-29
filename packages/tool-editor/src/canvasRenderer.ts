@@ -50,10 +50,6 @@ export function createCanvasRenderer(config: Readonly<CanvasRendererConfig>): Ca
   registerApplicationWindow(app, win);
   setApplicationMainWindow(app, win);
 
-  win.width = canvas.width;
-  win.height = canvas.height;
-  win.devicePixelRatio = globalThis.devicePixelRatio || 1;
-
   attachWindowRenderContext(win, canvas);
   attachWindowResize(win, canvas);
 
