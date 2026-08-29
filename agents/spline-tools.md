@@ -353,3 +353,14 @@ Each state can have different Transform, Material, and visibility values. Transi
 - Path and Pen tools stay active for multi-point placement until Enter/Escape
 - Text tool switches to text editing on the created object; Escape returns to Move
 - Shape creation is a single-click action; the tool does not stay active (returns to Move after placing)
+
+## Flight Adaptation Notes
+
+Apply [the Spline-inspired 3D tool and runtime contract](./spline-implementation-contract.md).
+
+- Move, Scale, Rotate, Path, Pen, Text, primitive, boolean, and interaction tools are shared state machines with host-specific chrome.
+- Primitive creation preserves editable parameters; booleans/path/text rely on upstream geometry/text and report destructive conversion explicitly.
+- Transform and path gestures use editor-gizmo3d/editor-gesture and one undo boundary.
+- Interaction tools author stable event/state graphs compiled to Flight flow/statechart/animation primitives.
+- Physics, media, special objects, and exporters appear only when registered and supported.
+- Test incomplete paths, transform cancellation, primitive defaults, state transition validation, missing targets, and runtime preview isolation.

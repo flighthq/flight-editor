@@ -288,3 +288,14 @@ All gizmo handles are color-coded to match these axis colors.
 | Custom | Save any arrangement as a named layout |
 
 Panels can be dragged, docked, tabbed, and floated. Save custom layouts via Window > Layouts > Save Layout.
+
+## Flight Adaptation Notes
+
+Apply [the Unity-inspired scene, project, play, and viewport contract](./unity-scene-implementation-contract.md).
+
+- Scene, Game/Preview, Hierarchy, Inspector, Project, and Console are contributions over shared state or optional capabilities.
+- VS Code may substitute native explorer/tree/output views; in-app editing may omit project and console panels.
+- Multiple Scene views share a document but own independent editor cameras and viewport preferences.
+- Authored cameras and play state are document/runtime concepts; docking and Scene camera settings are workspace/session state.
+- Restore layouts safely when panels/plugins or monitors disappear.
+- Test minimum sizes, 200% text zoom, four-view layouts, focus transfer, and play-mode transitions.

@@ -13,10 +13,13 @@ This document records capabilities Flight Editor needs from the Flight runtime a
 | P1 | Runtime/application lifecycle | Deterministic create, pause, step, restart, snapshot/reload, and disposal seams | Shared desktop, VS Code, and in-app play/edit workflow |
 | P1 | Reusable scene sources/instances | Stable source and descendant identity, nesting, reference fixup, deterministic materialization, and hot reload | Components, variants, overrides, linked assets, cross-document transfer |
 | P1 | `@flighthq/layout` | Deterministic authored constraint resolution, validation facts, intrinsic measurement, and transform precedence | Responsive resize, stacks, auto-layout, reusable component layout |
+| P1 | `@flighthq/scene3d`, camera, and picking | Stable 3D identities/components, bounds/transforms, projection/rays, ordered hits, framing, and hot reload | 3D viewport, hierarchy, gizmos, component inspection, in-app editing |
+| P1 | `@flighthq/materials`, lighting, and environment | Discoverable typed schemas, defaults, validation, renderer support, textures, and reload semantics | Material/light/environment inspectors and portable previews |
 | P2 | `@flighthq/flow` and `@flighthq/statechart` | Stable targets/states/actions, validation, deterministic execution, and live replacement | Prototype graphs, component states, interactive preview |
 | P2 | Runtime variables/bindings, if dynamic variables are a product goal | Typed identities, collections/modes, aliases, scope resolution, property bindings, diagnostics, and hot replacement | Theme modes, component properties, conditional prototypes, in-game tuning |
 | P2 | `@flighthq/shape`, `@flighthq/path`, `@flighthq/path-boolean` | Authoring-safe topology and robust query/edit primitives with deterministic tolerances | Flash-like pen, subselection, shape merge, fill, and stroke authoring |
 | P2 | `@flighthq/animation` and `@flighthq/timeline` | Stable target/property references, deterministic seek/sample, validation facts, and reload behavior | Timeline, keyframe, tween, onion-skin, and runtime preview tooling |
+| P2 | `@flighthq/physics3d`, if physics authoring is a goal | Stable body/joint identities, validation facts, deterministic stepping, debug geometry, snapshot/reload | Collider/joint authoring and isolated physics preview |
 
 P2 requests are conditional on vector and timeline authoring being explicit Flight Editor product goals. The runtime packages already exist; the request is to confirm or deepen their authoring-facing seams, not to duplicate them in this repository.
 
@@ -102,6 +105,15 @@ Flight Editor remains responsible for token/style organization, pickers, mode au
 
 Collaboration transport, comments, version-history storage, presence, permissions, and developer code generation are not Flight runtime requests. They belong to Flight Editor adapters or external services and consume canonical scene revisions and stable identities.
 
+### Scene3D authoring substrate
+
+- Node and component identity, transforms, bounds, clone/instance behavior, references, and hot reload are deterministic and serializable.
+- Camera projection/unprojection, pick rays, framing, and navigation handle perspective, orthographic, extreme-scale, and degenerate cases consistently.
+- Picking returns ordered hits and sufficient local/world details without importing editor selection policy.
+- Material, light, environment, and physics properties expose typed schemas, defaults, validation, and renderer/runtime capability information.
+
+Flight Editor remains responsible for viewport session state, gizmos, selection, inspector metadata and drafts, prefab override policy, asset workflows, debug overlay presentation, and commands/history.
+
 ## Explicitly not upstream requests
 
 These concerns belong in Flight Editor even when they consume upstream primitives:
@@ -132,5 +144,10 @@ Detailed package notes live under:
 - `agents/packages/flight-statechart/todo.md`
 - `agents/packages/flight-scene-instance/proposal.md`
 - `agents/packages/flight-variables/proposal.md`
+- `agents/packages/flight-scene3d/todo.md`
+- `agents/packages/flight-scene3d-formats/todo.md`
+- `agents/packages/flight-camera/todo.md`
+- `agents/packages/flight-materials/todo.md`
+- `agents/packages/flight-physics3d/todo.md`
 
 Before filing an upstream issue, validate the installed SDK surface and replace a request with a concrete API gap and a minimal editor use case. Once an upstream contract exists, add a Flight Editor integration test before considering the request complete.

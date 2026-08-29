@@ -212,3 +212,14 @@ For layout: overriding a Prefab instance's Transform is the most common override
 - **Debug mode**: click the Inspector tab's ⋮ menu > Debug to show raw serialized values (useful for troubleshooting transform issues)
 - **Numeric precision**: Transform fields display to 6 decimal places; higher precision is stored internally
 - **Negative scale**: a negative scale value flips/mirrors the object on that axis (e.g., Scale X = -1 mirrors horizontally)
+
+## Flight Adaptation Notes
+
+Apply [the Unity-inspired component and inspector contract](./unity-scene-implementation-contract.md).
+
+- Inspector UI projects shared component schemas and commands; Unity's exact component set is not implied.
+- Transform fields use explicit local/world semantics and retain full stored precision through drafts and undo.
+- Multi-edit distinguishes mixed, partially applicable, read-only, missing-reference, and layout/runtime-controlled values.
+- Inspector lock is session state; add/remove/reset/reorder/enable component actions are document commands.
+- Prefab overrides use stable source/property identities and explicit apply/revert commands.
+- Raw/debug mode is read-only unless an edit is validated and command-backed.

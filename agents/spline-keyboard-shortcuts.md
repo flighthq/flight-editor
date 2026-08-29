@@ -198,3 +198,14 @@ When 2+ objects are selected:
 | Enter | Apply the typed value |
 | Escape | Cancel editing, revert |
 | Drag on field label | Scrub the value |
+
+## Flight Adaptation Notes
+
+Apply [the Spline-inspired tool, interaction, and 3D authoring contract](./spline-implementation-contract.md).
+
+- Bind shortcuts to shared tools/commands and resolve host/browser/game conflicts through the keyboard router.
+- Distinguish viewport navigation, object transforms, path/text editing, timeline, interaction authoring, and play focus.
+- Inspector scrubbing and gizmo transforms are cancellable single-history gestures.
+- Timeline, components, states/interactions, physics, collaboration, and export shortcuts are capability-gated.
+- Play-mode input belongs to the runtime until the user explicitly exits or invokes an editor-reserved command.
+- Test source/text focus, temporary navigation, key repeat, blur, touch alternatives, and host-reserved bindings.

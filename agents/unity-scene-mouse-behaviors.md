@@ -393,3 +393,14 @@ The gizmo position for multi-selection:
 | Rotate | Arc sweep + degree label (e.g., "45.0°") |
 | Scale | Scale factor readout near the handle |
 | Snap active (Ctrl held) | Values jump in discrete increments; the readout reflects snapped values |
+
+## Flight Adaptation Notes
+
+Apply [the Unity-inspired 3D viewport and gizmo contract](./unity-scene-implementation-contract.md).
+
+- Orbit, pan, dolly, fly, axis/plane/free transforms, field scrub, reparent, and asset placement use explicit cancellable gesture lifecycles.
+- Picking and gizmo math use shared camera/ray/transform primitives; host overlays do not invent coordinate conversions.
+- Reparenting preserves world transform unless the command explicitly requests local placement.
+- Vertex, surface, grid, and increment snapping return structured winning candidates and feedback geometry.
+- Inspector object assignment validates typed stable identities and rolls back rejected drops.
+- Test occlusion ordering, orthographic/perspective, negative scale, pointer capture loss, and drag/drop across hosts.

@@ -293,3 +293,14 @@ Unity 2022+ uses an overlay system — small toolbar panels that can be repositi
 | Camera | Camera speed and field of view for the Scene View editor camera |
 
 Overlays can be dragged to any edge or corner of the Scene View, collapsed to icons, or hidden via the ⋮ menu > Overlays.
+
+## Flight Adaptation Notes
+
+Apply [the Unity-inspired command and capability contract](./unity-scene-implementation-contract.md).
+
+- Menus, hierarchy context menus, overlays, command palettes, and shortcuts project the same shared commands.
+- Assets, GameObject/node kinds, components, build/run, packages, navigation, physics, animation, and debugging are contributed and capability-gated.
+- Creating or placing content allocates stable identity and uses the current editing scope in one undoable command.
+- Destructive asset, prefab, and scene actions expose dependency and recovery consequences.
+- Overlay placement is host preference state; actions inside overlays use shared commands.
+- Test enablement in edit/play/read-only/invalid-source states and with missing plugins or references.

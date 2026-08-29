@@ -293,3 +293,14 @@ These gizmos appear in the Scene View to visualize components, aiding layout:
 | ReflectionProbe | Box wireframe | Shows probe influence area |
 
 These are display-only (not interactive) — they help with spatial arrangement by showing invisible boundaries and influence zones.
+
+## Flight Adaptation Notes
+
+Apply [the Unity-inspired gizmo contract](./unity-scene-implementation-contract.md#3d-viewport-and-gizmos).
+
+- Move, Rotate, Scale, Rect/Plane, and combined gizmos share one presentation-neutral state and gesture engine.
+- Local/world and pivot/center affect both rendering and transform math and must be visible to every host UI.
+- Gizmo screen size, hit regions, depth/occlusion policy, axis degeneracy, and hover feedback are deterministic.
+- Multi-object transforms specify aggregate pivot/orientation and preserve one undo entry.
+- Component gizmos are typed overlay contributions; editable handles declare commands, while display-only geometry cannot intercept input.
+- Test every handle in perspective/orthographic views, nested/negative transforms, snap modes, cancellation, and accessibility alternatives.

@@ -356,3 +356,14 @@ When a scene is published and viewed at a public URL:
 | Drag (if orbit controls enabled) | Orbit the camera |
 | Pinch (mobile) | Zoom |
 | Touch and drag (mobile) | Pan or orbit depending on configuration |
+
+## Flight Adaptation Notes
+
+Apply [the Spline-inspired viewport, gesture, state, and runtime contract](./spline-implementation-contract.md).
+
+- Orbit/pan/zoom, transforms, path editing, field scrubs, texture drops, and interaction wiring use shared cancellable gestures.
+- Mouse, touch, pen, browser gesture, and in-game input ownership are explicit host mappings.
+- Material and texture drops validate stable asset/slot types before one undoable assignment.
+- Interaction authoring edits a stable graph; published hover/click/scroll changes runtime state only.
+- Gizmo/picking math comes from shared 3D camera and geometry primitives.
+- Test pointer capture loss, multitouch cancellation, occlusion, orthographic views, runtime/editor focus, and non-1 DPR.

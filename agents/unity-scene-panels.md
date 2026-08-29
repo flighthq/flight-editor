@@ -297,3 +297,14 @@ Install, update, and remove packages. For layout tools:
 **Default position:** Floating window; open from Edit > Project Settings > Preset Manager.
 
 Set default values for new components. For layout: ensures new Lights, Cameras, or Renderers are created with your preferred defaults rather than Unity's.
+
+## Flight Adaptation Notes
+
+Apply [the Unity-inspired panel, runtime, asset, and component contract](./unity-scene-implementation-contract.md).
+
+- Only Scene, Hierarchy, Inspector, and supported project/preview surfaces are baseline; specialized panels require real domain models.
+- Console, profiler, debugger, frame debugger, physics, navigation, lighting, animation, and package panels subscribe through explicit capabilities and dispose cleanly.
+- Project/asset presentation may be native to the host while placement, references, import diagnostics, and commands remain shared.
+- Game/Preview runs an isolated revision and never silently commits runtime changes.
+- Panel locks, filters, draw modes, overlays, and camera settings are session/workspace state.
+- Test missing capability, stale runtime, failed asset, read-only, empty, loading, and disconnected panel states.

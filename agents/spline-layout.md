@@ -207,3 +207,14 @@ Accessible from the ⋮ menu or the menu button (☰):
 - The toolbar position (bottom/floating) is configurable
 - Dark theme is the default (no light theme)
 - Viewport can be maximized by hiding both panels
+
+## Flight Adaptation Notes
+
+Apply [the Spline-inspired 3D, preview, collaboration, and export contract](./spline-implementation-contract.md).
+
+- This compact arrangement is a useful desktop/in-app default, not a fixed layout for VS Code or every host.
+- Layers and Properties are pluggable presentations; viewport, document, material, environment, interaction, and preview state remain shared.
+- Collaboration UI and export targets appear only when corresponding adapters contribute them.
+- Workspace panel state is host preference; transforms, materials, environment, interactions, and project settings are document data.
+- Published/runtime presentation is isolated from edit state and tied to a document revision.
+- Test narrow/embedded layouts, touch controls, 200% text zoom, panel hiding, and runtime focus transfer.

@@ -277,3 +277,14 @@ During play mode:
 | Create Component | Component creation |
 | Rename | Enter rename mode |
 | Select Children | Select all descendants |
+
+## Flight Adaptation Notes
+
+Apply [the Spline-inspired command, capability, and export contract](./spline-implementation-contract.md).
+
+- Menus, add palettes, context menus, toolbars, shortcuts, and command palettes invoke the same shared commands.
+- 3D node kinds, materials, effects, media, interactions, physics, importers, and exporters are registered contributions.
+- Share, publishing, collaboration, cloud history, and platform packages are optional integrations rather than core menu assumptions.
+- Import/export commands validate coordinate/unit/material/runtime capability conversions and report partial results.
+- Context-menu selection targets are resolved before command enablement; locked/read-only/play-mode content cannot mutate.
+- Test missing exporters/plugins/assets, invalid source, unsupported renderers, and editing-scope command state.

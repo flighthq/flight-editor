@@ -328,3 +328,14 @@ Accessible via File > Version History or project settings:
 | Browse versions | Visual timeline of all saved versions |
 | Restore | Revert to a previous version |
 | Fork | Create a new project from a historical version |
+
+## Flight Adaptation Notes
+
+Apply [the Spline-inspired material, animation, state, environment, collaboration, and version contracts](./spline-implementation-contract.md).
+
+- Layers, Properties, Assets, Timeline, Variables, Code, Scene Settings, Comments, and History are projections or optional capabilities.
+- Materials/components/assets use stable references; active animation/state/playhead and preview values are not automatically authored data.
+- Code/export panels consume versioned exporter contributions and cannot become a parallel source of truth.
+- Physics and post-processing sections derive from upstream schemas and renderer/runtime capabilities.
+- Comments and history follow service-neutral editor contracts; offline/in-game hosts may omit them.
+- Test empty/loading/offline/stale/unsupported/missing-asset/read-only states and subscription disposal.

@@ -392,3 +392,14 @@ When multiple objects are selected:
 | Drag a slider | Adjust the value |
 | Click the section header | Collapse/expand that section |
 | Right-click a field | Reset to default |
+
+## Flight Adaptation Notes
+
+Apply [the Spline-inspired schema-driven material, environment, state, and physics contract](./spline-implementation-contract.md).
+
+- Transform, primitive, material, light, camera, physics, and interaction sections derive from typed shared/upstream schemas.
+- Drafts, label scrubs, sliders, gradients, and complex controls preview safely and commit one command or cancel exactly.
+- Parent/local/world coordinate semantics and mixed/partial applicability are always explicit.
+- Shared material/texture references differ from inline values; reset uses schema defaults and is undoable.
+- State property sets and interaction targets use stable identities with validation; active state is runtime state.
+- Unsupported renderer/physics properties explain why they are unavailable and never silently no-op.

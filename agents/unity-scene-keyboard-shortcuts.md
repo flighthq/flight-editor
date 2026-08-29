@@ -206,3 +206,14 @@ Unity has no built-in alignment/distribution shortcuts (unlike 2D design tools).
 | Selection Outline toggle | Toggle the highlight outline on selected objects |
 | 3D Icons toggle | Switch between 3D and 2D component icons in Scene View |
 | Icon size slider | Adjust gizmo icon display size |
+
+## Flight Adaptation Notes
+
+Apply [the Unity-inspired viewport, gizmo, focus, and command contract](./unity-scene-implementation-contract.md).
+
+- Bind shortcuts to shared command/tool IDs and let each host reserve or remap conflicts.
+- Scene navigation acts on the focused editor viewport, never an authored Camera node unless explicitly commanded.
+- Tool, pivot/center, local/world, snap, frame, and axis-view state is queryable and reflected consistently in all UI surfaces.
+- Text/source/inspector focus owns ordinary typing; fly navigation ends on blur or input cancellation.
+- Capability-gate play, asset, component, panel, and 3D-only bindings.
+- Test key repeat, temporary navigation, multiple viewports, orthographic views, and platform modifiers.
