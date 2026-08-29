@@ -58,13 +58,19 @@ describe('createEditorLayoutDef', () => {
 
   it('includes children in panels', () => {
     const def = createEditorLayoutDef({ width: 1280, height: 720 });
+    const menuBar = def.root![0];
+    expect(menuBar.children!.length).toBeGreaterThanOrEqual(7);
+    expect(menuBar.children![0].name).toBe('menu_file');
     const canvas = def.root![3];
     expect(canvas.children).toHaveLength(2);
     expect(canvas.children![0].name).toBe('viewport');
     expect(canvas.children![1].name).toBe('rulers');
     const right = def.root![4];
-    expect(right.children).toHaveLength(1);
-    expect(right.children![0].name).toBe('inspector');
+    expect(right.children!.length).toBeGreaterThanOrEqual(1);
+    expect(right.children!.some((c) => c.name === 'inspector')).toBe(true);
+    const statusBar = def.root![5];
+    expect(statusBar.children!.length).toBeGreaterThanOrEqual(2);
+    expect(statusBar.children![0].name).toBe('statusTool');
   });
 });
 

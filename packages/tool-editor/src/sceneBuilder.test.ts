@@ -53,6 +53,11 @@ describe('buildNode', () => {
     expect(node.name).toBe('panel');
   });
 
+  it('creates a text label when kind is text', () => {
+    const node = buildNode({ kind: 'text', name: 'label', text: 'hello', width: 200, height: 20 });
+    expect(node.name).toBe('label');
+  });
+
   it('applies position without throwing', () => {
     const node = buildNode({ x: 100, y: 200 });
     expect(node).toBeDefined();

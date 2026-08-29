@@ -79,8 +79,34 @@ export function getLayoutRegions(): readonly LayoutRegion[] {
   return ['menuBar', 'toolbar', 'leftPanel', 'canvas', 'rightPanel', 'statusBar'];
 }
 
+const MENU_ITEMS = ['File', 'Edit', 'View', 'Insert', 'Modify', 'Window', 'Help'] as const;
+
+const MENU_FORMAT = Object.freeze({ font: 'sans-serif', size: 12, color: 0xcccccc });
+
 function createMenuBarNode(width: number, height: number): SceneNodeDef {
-  return { name: 'menuBar', kind: 'shape', x: 0, y: 0, width, height, fillColor: 0xffffff, fillAlpha: 1 };
+  const menuChildren: SceneNodeDef[] = MENU_ITEMS.map((label, i) => ({
+    name: `menu_${label.toLowerCase()}`,
+    kind: 'text' as const,
+    x: 8 + i * 60,
+    y: 4,
+    width: 56,
+    height: height - 8,
+    text: label,
+    textFormat: MENU_FORMAT,
+    textVerticalAlign: 'middle' as const,
+  }));
+
+  return {
+    name: 'menuBar',
+    kind: 'shape',
+    x: 0,
+    y: 0,
+    width,
+    height,
+    fillColor: 0xffffff,
+    fillAlpha: 1,
+    children: menuChildren,
+  };
 }
 
 function createToolbarNode(width: number, top: number, height: number): SceneNodeDef {
@@ -117,6 +143,8 @@ function createCanvasNode(left: number, top: number, width: number, height: numb
   };
 }
 
+const PANEL_HEADER_FORMAT = Object.freeze({ font: 'sans-serif', size: 11, color: 0x888888, bold: true });
+
 function createRightPanelNode(left: number, top: number, width: number, height: number): SceneNodeDef {
   return {
     name: 'rightPanel',
@@ -127,10 +155,57 @@ function createRightPanelNode(left: number, top: number, width: number, height: 
     height,
     fillColor: 0xffffff,
     fillAlpha: 1,
-    children: [{ name: 'inspector', x: 0, y: 0, width, height }],
+    children: [
+      {
+        name: 'propertiesHeader',
+        kind: 'text',
+        x: 12,
+        y: 8,
+        width: width - 24,
+        height: 20,
+        text: 'Properties',
+        textFormat: PANEL_HEADER_FORMAT,
+      },
+      { name: 'inspector', x: 0, y: 32, width, height: height - 32 },
+    ],
   };
 }
 
+const STATUS_FORMAT = Object.freeze({ font: 'sans-serif', size: 11, color: 0x888888 });
+
 function createStatusBarNode(width: number, top: number, height: number): SceneNodeDef {
-  return { name: 'statusBar', kind: 'shape', x: 0, y: top, width, height, fillColor: 0xffffff, fillAlpha: 1 };
+  return {
+    name: 'statusBar',
+    kind: 'shape',
+    x: 0,
+    y: top,
+    width,
+    height,
+    fillColor: 0xffffff,
+    fillAlpha: 1,
+    children: [
+      {
+        name: 'statusTool',
+        kind: 'text',
+        x: 12,
+        y: 2,
+        width: 120,
+        height: height - 4,
+        text: 'Pointer Tool',
+        textFormat: STATUS_FORMAT,
+        textVerticalAlign: 'middle',
+      },
+      {
+        name: 'statusZoom',
+        kind: 'text',
+        x: 140,
+        y: 2,
+        width: 60,
+        height: height - 4,
+        text: '100%',
+        textFormat: STATUS_FORMAT,
+        textVerticalAlign: 'middle',
+      },
+    ],
+  };
 }

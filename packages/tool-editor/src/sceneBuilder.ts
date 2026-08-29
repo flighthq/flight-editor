@@ -1,13 +1,22 @@
-import type { Node2D, Scene2D, Transform2DLike } from '@flighthq/types';
+import type { Node2D, Scene2D, TextAutoSize, TextFormat, TextVerticalAlign, Transform2DLike } from '@flighthq/types';
 
 import { addNodeChild, getNodeChildAt, getNodeChildCount, setNodeTransform2D } from '@flighthq/node';
 import { createNode2D, createScene2D, createSprite } from '@flighthq/scene2d';
 import { appendShapeBeginFill, appendShapeEndFill, appendShapeRectangle, createShape } from '@flighthq/shape';
+import {
+  createTextLabel,
+  setTextLabelAutoSize,
+  setTextLabelFormat,
+  setTextLabelHeight,
+  setTextLabelString,
+  setTextLabelVerticalAlign,
+  setTextLabelWidth,
+} from '@flighthq/text';
 import { DisplayObjectKind } from '@flighthq/types';
 
 export interface SceneNodeDef {
   readonly name?: string;
-  readonly kind?: 'container' | 'sprite' | 'shape';
+  readonly kind?: 'container' | 'sprite' | 'shape' | 'text';
   readonly x?: number;
   readonly y?: number;
   readonly width?: number;
@@ -19,6 +28,10 @@ export interface SceneNodeDef {
   readonly visible?: boolean;
   readonly fillColor?: number;
   readonly fillAlpha?: number;
+  readonly text?: string;
+  readonly textFormat?: TextFormat;
+  readonly textAutoSize?: TextAutoSize;
+  readonly textVerticalAlign?: TextVerticalAlign;
   readonly children?: readonly SceneNodeDef[];
 }
 
@@ -77,6 +90,9 @@ function createNodeForKind(def: Readonly<SceneNodeDef>): Node2D {
   if (def.kind === 'shape') {
     return createShapeNode(def);
   }
+  if (def.kind === 'text') {
+    return createTextNode(def);
+  }
   if (def.kind === 'sprite') {
     return createSprite();
   }
@@ -97,6 +113,29 @@ function createShapeNode(def: Readonly<SceneNodeDef>): Node2D {
   }
 
   return shape;
+}
+
+function createTextNode(def: Readonly<SceneNodeDef>): Node2D {
+  const label = createTextLabel();
+  if (def.text !== undefined) {
+    setTextLabelString(label, def.text);
+  }
+  if (def.width !== undefined) {
+    setTextLabelWidth(label, def.width);
+  }
+  if (def.height !== undefined) {
+    setTextLabelHeight(label, def.height);
+  }
+  if (def.textFormat !== undefined) {
+    setTextLabelFormat(label, def.textFormat);
+  }
+  if (def.textAutoSize !== undefined) {
+    setTextLabelAutoSize(label, def.textAutoSize);
+  }
+  if (def.textVerticalAlign !== undefined) {
+    setTextLabelVerticalAlign(label, def.textVerticalAlign);
+  }
+  return label;
 }
 
 function countDescendants(node: Readonly<Node2D>): number {
