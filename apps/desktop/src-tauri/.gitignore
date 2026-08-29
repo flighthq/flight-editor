@@ -1,2 +1,5 @@
 # Rust build output
 target/
+
+# Tauri auto-generated code
+gen/

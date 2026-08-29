@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "tauri dev",
     "build": "tauri build",
-    "build:frontend": "tsc -p tsconfig.json && vite build",
+    "build:packages": "npm run build --prefix ../..",
+    "build:frontend": "vite build",
     "dev:frontend": "vite",
     "setup": "bash setup.sh",
     "setup:install": "bash setup.sh --install",

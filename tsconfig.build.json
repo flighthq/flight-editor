@@ -37,7 +37,6 @@
     { "path": "./packages/editor-transform-origin" },
     { "path": "./packages/editor-viewport" },
     { "path": "./packages/editor-zoom-presets" },
-    { "path": "./packages/tool-editor" },
-    { "path": "./apps/desktop" }
+    { "path": "./packages/tool-editor" }
   ]
 }
