@@ -76,6 +76,7 @@
       }
 
       .menu-bar__item {
+        position: relative;
         padding: 4px 10px;
         font-size: var(--font-sm);
         color: var(--text);
@@ -88,10 +89,60 @@
         background: var(--surface-alt);
       }
 
-      .menu-bar__item:active,
-      .menu-bar__item[aria-expanded='true'] {
+      .menu-bar__item.open,
+      .menu-bar__item:active {
         background: var(--accent);
         color: #fff;
+      }
+
+      .menu-bar__dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 220px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+        padding: 4px 0;
+      }
+
+      .menu-bar__item.open .menu-bar__dropdown {
+        display: block;
+      }
+
+      .menu-bar__menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px 16px;
+        font-size: var(--font-sm);
+        color: var(--text);
+        cursor: default;
+        white-space: nowrap;
+      }
+
+      .menu-bar__menu-item:hover {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .menu-bar__menu-item:hover .menu-bar__shortcut {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .menu-bar__shortcut {
+        color: var(--text-muted);
+        font-size: 10px;
+        margin-left: 32px;
+      }
+
+      .menu-bar__menu-sep {
+        height: 1px;
+        background: var(--border);
+        margin: 4px 8px;
       }
 
       .menu-bar__spacer {
@@ -509,11 +560,95 @@
     <div class="editor-shell">
       <!-- ── Menu bar ────────────────────────────────── -->
       <nav class="menu-bar">
-        <span class="menu-bar__item">File</span>
-        <span class="menu-bar__item">Edit</span>
-        <span class="menu-bar__item">View</span>
-        <span class="menu-bar__item">Insert</span>
-        <span class="menu-bar__item">Modify</span>
+        <div class="menu-bar__item" data-menu="file">
+          File
+          <div class="menu-bar__dropdown">
+            <div class="menu-bar__menu-item" data-command="new-scene">New</div>
+          </div>
+        </div>
+        <div class="menu-bar__item" data-menu="edit">
+          Edit
+          <div class="menu-bar__dropdown">
+            <div class="menu-bar__menu-item" data-command="undo">
+              Undo<span class="menu-bar__shortcut">Ctrl+Z</span>
+            </div>
+            <div class="menu-bar__menu-item" data-command="redo">
+              Redo<span class="menu-bar__shortcut">Ctrl+Shift+Z</span>
+            </div>
+            <div class="menu-bar__menu-sep"></div>
+            <div class="menu-bar__menu-item" data-command="cut">Cut<span class="menu-bar__shortcut">Ctrl+X</span></div>
+            <div class="menu-bar__menu-item" data-command="copy">
+              Copy<span class="menu-bar__shortcut">Ctrl+C</span>
+            </div>
+            <div class="menu-bar__menu-item" data-command="paste">
+              Paste<span class="menu-bar__shortcut">Ctrl+V</span>
+            </div>
+            <div class="menu-bar__menu-sep"></div>
+            <div class="menu-bar__menu-item" data-command="deleteSelection">
+              Delete<span class="menu-bar__shortcut">Del</span>
+            </div>
+            <div class="menu-bar__menu-item" data-command="duplicateSelection">
+              Duplicate<span class="menu-bar__shortcut">Ctrl+D</span>
+            </div>
+            <div class="menu-bar__menu-sep"></div>
+            <div class="menu-bar__menu-item" data-command="groupNodes">
+              Group<span class="menu-bar__shortcut">Ctrl+G</span>
+            </div>
+            <div class="menu-bar__menu-item" data-command="ungroup">
+              Ungroup<span class="menu-bar__shortcut">Ctrl+Shift+G</span>
+            </div>
+            <div class="menu-bar__menu-sep"></div>
+            <div class="menu-bar__menu-item" data-command="lockSelection">
+              Lock<span class="menu-bar__shortcut">Ctrl+L</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-bar__item" data-menu="view">
+          View
+          <div class="menu-bar__dropdown">
+            <div class="menu-bar__menu-item" data-command="zoom-in">Zoom In</div>
+            <div class="menu-bar__menu-item" data-command="zoom-out">Zoom Out</div>
+            <div class="menu-bar__menu-item" data-command="zoom-fit">Fit to Window</div>
+            <div class="menu-bar__menu-item" data-command="zoom-100">Actual Size</div>
+          </div>
+        </div>
+        <div class="menu-bar__item" data-menu="arrange">
+          Arrange
+          <div class="menu-bar__dropdown">
+            <div class="menu-bar__menu-item" data-command="bringForward">
+              Bring Forward<span class="menu-bar__shortcut">Ctrl+]</span>
+            </div>
+            <div class="menu-bar__menu-item" data-command="sendBackward">
+              Send Backward<span class="menu-bar__shortcut">Ctrl+[</span>
+            </div>
+            <div class="menu-bar__menu-item" data-command="bringToFront">
+              Bring to Front<span class="menu-bar__shortcut">Ctrl+Shift+]</span>
+            </div>
+            <div class="menu-bar__menu-item" data-command="sendToBack">
+              Send to Back<span class="menu-bar__shortcut">Ctrl+Shift+[</span>
+            </div>
+            <div class="menu-bar__menu-sep"></div>
+            <div class="menu-bar__menu-item" data-command="alignLeft">Align Left</div>
+            <div class="menu-bar__menu-item" data-command="alignRight">Align Right</div>
+            <div class="menu-bar__menu-item" data-command="alignTop">Align Top</div>
+            <div class="menu-bar__menu-item" data-command="alignBottom">Align Bottom</div>
+            <div class="menu-bar__menu-item" data-command="alignHorizontalCenters">Align H. Centers</div>
+            <div class="menu-bar__menu-item" data-command="alignVerticalCenters">Align V. Centers</div>
+            <div class="menu-bar__menu-sep"></div>
+            <div class="menu-bar__menu-item" data-command="distributeHorizontally">Distribute Horizontally</div>
+            <div class="menu-bar__menu-item" data-command="distributeVertically">Distribute Vertically</div>
+            <div class="menu-bar__menu-sep"></div>
+            <div class="menu-bar__menu-item" data-command="flipHorizontal">
+              Flip Horizontal<span class="menu-bar__shortcut">Ctrl+Shift+H</span>
+            </div>
+            <div class="menu-bar__menu-item" data-command="flipVertical">
+              Flip Vertical<span class="menu-bar__shortcut">Ctrl+Shift+V</span>
+            </div>
+            <div class="menu-bar__menu-item" data-command="resetTransform">
+              Reset Transform<span class="menu-bar__shortcut">Ctrl+Shift+0</span>
+            </div>
+          </div>
+        </div>
         <span class="menu-bar__item">Window</span>
         <span class="menu-bar__item">Help</span>
         <span class="menu-bar__spacer"></span>

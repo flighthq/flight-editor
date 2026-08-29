@@ -1,4 +1,5 @@
 import { createHeadlessAdapter } from '@flighthq/editor-host';
+import { getNodeHeight, getNodeWidth } from '@flighthq/node';
 
 import type { Node2D } from '@flighthq/types';
 
@@ -8,6 +9,7 @@ import {
   canUndo,
   createCanvasRenderer,
   createDesktopBootstrap,
+  createNewScene,
   createSetAlphaCommand,
   createSetBlendModeCommand,
   createSetNodeNameCommand,
@@ -19,6 +21,7 @@ import {
   disposeCanvasRenderer,
   disposeDesktopBootstrap,
   executeCommand,
+  getEditorCursorPosition,
   getInspectorSnapshot,
   getSceneName,
   getSceneSize,
@@ -31,6 +34,8 @@ import {
   switchTool,
   zoomIn,
   zoomOut,
+  zoomToActualSize,
+  zoomToFit,
 } from '@flighthq/tool-editor';
 
 import type { InspectorSnapshot } from '@flighthq/tool-editor';
@@ -64,6 +69,8 @@ const TOOL_LABELS: Record<string, string> = {
   measure: 'Measure Tool',
 };
 
+// ── Bootstrap ───────────────────────────────────────────────
+
 const canvas = document.getElementById('editor-canvas') as HTMLCanvasElement;
 const canvasArea = canvas.parentElement!;
 
@@ -88,10 +95,13 @@ startDesktopLoop(bootstrap);
 
 const renderer = createCanvasRenderer({ canvas, antialias: true });
 const events = bindDomEvents(bootstrap.editor.state, canvas);
-
 startCanvasLoop(renderer, bootstrap);
 
 const editor = bootstrap.editor.state;
+
+switchTool(editor, 'pointer');
+
+// ── DOM references ──────────────────────────────────────────
 
 const toolEls = document.querySelectorAll<HTMLElement>('[data-tool]');
 const statusToolEl = document.getElementById('status-tool')!;
@@ -121,6 +131,8 @@ const propsNodeName = document.getElementById('props-node-name')!;
 const propsEmpty = document.getElementById('props-empty')!;
 const propsHeader = document.getElementById('props-header')!;
 
+// ── Tool strip ──────────────────────────────────────────────
+
 function activateToolUI(toolId: string): void {
   if (switchTool(editor, toolId)) {
     toolEls.forEach((el) => el.classList.toggle('active', el.dataset.tool === toolId));
@@ -136,42 +148,40 @@ toolEls.forEach((el) => {
   });
 });
 
-document.addEventListener('keydown', (e) => {
-  if (
-    e.target instanceof HTMLInputElement ||
-    e.target instanceof HTMLSelectElement ||
-    e.target instanceof HTMLTextAreaElement
-  ) {
-    return;
-  }
+// ── Keyboard shortcuts ──────────────────────────────────────
 
-  if (e.ctrlKey || e.metaKey) {
-    if (e.key === 'z' && !e.shiftKey) {
-      e.preventDefault();
-      dispatchAction(editor, 'undo');
+function isFormElement(target: EventTarget | null): boolean {
+  return (
+    target instanceof HTMLInputElement || target instanceof HTMLSelectElement || target instanceof HTMLTextAreaElement
+  );
+}
+
+document.addEventListener(
+  'keydown',
+  (e) => {
+    if (isFormElement(e.target)) {
+      e.stopPropagation();
       return;
     }
-    if ((e.key === 'z' && e.shiftKey) || e.key === 'y') {
-      e.preventDefault();
-      dispatchAction(editor, 'redo');
-      return;
-    }
-  }
 
-  const toolId = TOOL_SHORTCUTS[e.key.toLowerCase()];
-  if (toolId && !e.ctrlKey && !e.metaKey && !e.altKey) {
-    e.preventDefault();
-    activateToolUI(toolId);
-  }
-});
+    const toolId = TOOL_SHORTCUTS[e.key.toLowerCase()];
+    if (toolId && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault();
+      activateToolUI(toolId);
+    }
+  },
+  true,
+);
+
+// ── Toolbar actions ─────────────────────────────────────────
 
 document.querySelectorAll<HTMLButtonElement>('[data-action]').forEach((btn) => {
   btn.addEventListener('click', (e) => {
     e.preventDefault();
-    const action = btn.dataset.action;
-    if (!action) return;
-
-    switch (action) {
+    switch (btn.dataset.action) {
+      case 'new':
+        createNewScene(editor);
+        break;
       case 'undo':
         dispatchAction(editor, 'undo');
         break;
@@ -188,6 +198,73 @@ document.querySelectorAll<HTMLButtonElement>('[data-action]').forEach((btn) => {
   });
 });
 
+// ── Menu bar dropdowns ──────────────────────────────────────
+
+let openMenu: HTMLElement | null = null;
+
+function closeMenus(): void {
+  if (openMenu) {
+    openMenu.classList.remove('open');
+    openMenu = null;
+  }
+}
+
+function toggleMenu(item: HTMLElement): void {
+  if (openMenu === item) {
+    closeMenus();
+    return;
+  }
+  closeMenus();
+  item.classList.add('open');
+  openMenu = item;
+}
+
+document.querySelectorAll<HTMLElement>('.menu-bar__item[data-menu]').forEach((item) => {
+  item.addEventListener('pointerdown', (e) => {
+    e.stopPropagation();
+    toggleMenu(item);
+  });
+
+  item.addEventListener('pointerenter', () => {
+    if (openMenu && openMenu !== item) toggleMenu(item);
+  });
+});
+
+document.addEventListener('pointerdown', () => closeMenus());
+
+document.querySelectorAll<HTMLElement>('[data-command]').forEach((menuItem) => {
+  menuItem.addEventListener('pointerdown', (e) => {
+    e.stopPropagation();
+    const cmd = menuItem.dataset.command!;
+    closeMenus();
+
+    switch (cmd) {
+      case 'zoom-in':
+        zoomIn(editor);
+        break;
+      case 'zoom-out':
+        zoomOut(editor);
+        break;
+      case 'zoom-fit': {
+        const size = getSceneSize(editor);
+        zoomToFit(editor, size.width, size.height);
+        break;
+      }
+      case 'zoom-100':
+        zoomToActualSize(editor);
+        break;
+      case 'new-scene':
+        createNewScene(editor);
+        break;
+      default:
+        dispatchAction(editor, cmd);
+        break;
+    }
+  });
+});
+
+// ── Cursor position ─────────────────────────────────────────
+
 canvas.addEventListener('pointermove', (e) => {
   const rect = canvas.getBoundingClientRect();
   const screenX = e.clientX - rect.left;
@@ -196,51 +273,40 @@ canvas.addEventListener('pointermove', (e) => {
   statusCoordsEl.textContent = `X: ${Math.round(scene.x)} Y: ${Math.round(scene.y)}`;
 });
 
-let lastSnapshot: InspectorSnapshot | null = null;
+// ── Properties panel: focus tracking ────────────────────────
+
 let inputFocused: HTMLElement | null = null;
 
-function trackInputFocus(): void {
-  const inputs = [
-    propX,
-    propY,
-    propW,
-    propH,
-    propRotation,
-    propName,
-    propAlphaText,
-    propSceneName,
-    propSceneW,
-    propSceneH,
-  ];
-  for (const input of inputs) {
-    input.addEventListener('focus', () => {
-      inputFocused = input;
-    });
-    input.addEventListener('blur', () => {
-      if (inputFocused === input) inputFocused = null;
-    });
-  }
-  propAlphaSlider.addEventListener('focus', () => {
-    inputFocused = propAlphaSlider;
+function trackFocus(el: HTMLElement): void {
+  el.addEventListener('focus', () => {
+    inputFocused = el;
   });
-  propAlphaSlider.addEventListener('blur', () => {
-    if (inputFocused === propAlphaSlider) inputFocused = null;
-  });
-  propBlend.addEventListener('focus', () => {
-    inputFocused = propBlend;
-  });
-  propBlend.addEventListener('blur', () => {
-    if (inputFocused === propBlend) inputFocused = null;
-  });
-  propVisible.addEventListener('focus', () => {
-    inputFocused = propVisible;
-  });
-  propVisible.addEventListener('blur', () => {
-    if (inputFocused === propVisible) inputFocused = null;
+  el.addEventListener('blur', () => {
+    if (inputFocused === el) inputFocused = null;
   });
 }
 
-trackInputFocus();
+for (const el of [
+  propX,
+  propY,
+  propW,
+  propH,
+  propRotation,
+  propName,
+  propAlphaSlider,
+  propAlphaText,
+  propBlend,
+  propSceneName,
+  propSceneW,
+  propSceneH,
+  propVisible,
+]) {
+  trackFocus(el);
+}
+
+// ── Properties panel: sync from editor ──────────────────────
+
+let lastSnapshot: InspectorSnapshot | null = null;
 
 function showNodeProps(show: boolean): void {
   const display = show ? '' : 'none';
@@ -260,8 +326,12 @@ function syncPropertiesPanel(snapshot: InspectorSnapshot): void {
 
     if (inputFocused !== propX) propX.value = String(Math.round(snapshot.transform.x * 100) / 100);
     if (inputFocused !== propY) propY.value = String(Math.round(snapshot.transform.y * 100) / 100);
-    if (inputFocused !== propW) propW.value = String(Math.round(snapshot.transform.scaleX * 100) / 100);
-    if (inputFocused !== propH) propH.value = String(Math.round(snapshot.transform.scaleY * 100) / 100);
+
+    const nodeW = getNodeWidth(node);
+    const nodeH = getNodeHeight(node);
+    if (inputFocused !== propW) propW.value = String(Math.round(nodeW * 100) / 100);
+    if (inputFocused !== propH) propH.value = String(Math.round(nodeH * 100) / 100);
+
     if (inputFocused !== propRotation) {
       const degrees = Math.round(((snapshot.transform.rotation * 180) / Math.PI) * 100) / 100;
       propRotation.value = String(degrees);
@@ -293,36 +363,13 @@ function syncPropertiesPanel(snapshot: InspectorSnapshot): void {
   toolbarSceneSizeEl.textContent = `${sceneSize.width} × ${sceneSize.height}`;
 }
 
-function syncStatusBar(): void {
-  const zoomLabel = getZoomPercentLabel(editor);
-  statusZoomEl.textContent = zoomLabel;
-  toolbarZoomEl.textContent = zoomLabel;
-
-  const snapshot = getInspectorSnapshot(editor);
-  if (snapshot.count === 0) {
-    statusSelectionEl.textContent = 'No selection';
-  } else if (snapshot.count === 1) {
-    statusSelectionEl.textContent = snapshot.name ? `"${snapshot.name}"` : '1 object';
-  } else {
-    statusSelectionEl.textContent = `${snapshot.count} objects`;
-  }
-
-  const undoBtn = document.querySelector('[data-action="undo"]') as HTMLButtonElement | null;
-  const redoBtn = document.querySelector('[data-action="redo"]') as HTMLButtonElement | null;
-  if (undoBtn) undoBtn.style.opacity = canUndo(editor) ? '1' : '0.3';
-  if (redoBtn) redoBtn.style.opacity = canRedo(editor) ? '1' : '0.3';
-
-  lastSnapshot = snapshot;
-  syncPropertiesPanel(snapshot);
-}
+// ── Properties panel: write to editor ───────────────────────
 
 function commitTransform(): void {
   if (!lastSnapshot?.node || !lastSnapshot.transform) return;
   const node = lastSnapshot.node as Node2D;
   const x = parseFloat(propX.value) || 0;
   const y = parseFloat(propY.value) || 0;
-  const scaleX = parseFloat(propW.value) || 1;
-  const scaleY = parseFloat(propH.value) || 1;
   const rotationDeg = parseFloat(propRotation.value) || 0;
   const rotation = (rotationDeg * Math.PI) / 180;
 
@@ -330,12 +377,25 @@ function commitTransform(): void {
     ...lastSnapshot.transform,
     x,
     y,
-    scaleX,
-    scaleY,
     rotation,
   };
 
   executeCommand(editor, createSetTransform2DCommand(node, newTransform));
+
+  const newW = parseFloat(propW.value);
+  const newH = parseFloat(propH.value);
+  const curW = getNodeWidth(node);
+  const curH = getNodeHeight(node);
+  if (!isNaN(newW) && !isNaN(newH) && (newW !== curW || newH !== curH)) {
+    const scaleX = curW > 0 ? newW / curW : 1;
+    const scaleY = curH > 0 ? newH / curH : 1;
+    const sizeTransform = {
+      ...newTransform,
+      scaleX: lastSnapshot.transform.scaleX * scaleX,
+      scaleY: lastSnapshot.transform.scaleY * scaleY,
+    };
+    executeCommand(editor, createSetTransform2DCommand(node, sizeTransform));
+  }
 }
 
 function commitAlpha(): void {
@@ -344,8 +404,7 @@ function commitAlpha(): void {
   let percent = parseInt(propAlphaSlider.value, 10);
   if (isNaN(percent)) percent = 100;
   percent = Math.max(0, Math.min(100, percent));
-  const alpha = percent / 100;
-  executeCommand(editor, createSetAlphaCommand(node, alpha));
+  executeCommand(editor, createSetAlphaCommand(node, percent / 100));
 }
 
 propX.addEventListener('change', commitTransform);
@@ -379,7 +438,8 @@ propAlphaText.addEventListener('change', () => {
 propBlend.addEventListener('change', () => {
   if (!lastSnapshot?.node) return;
   const node = lastSnapshot.node as Node2D;
-  executeCommand(editor, createSetBlendModeCommand(node, propBlend.value || null));
+  const value = propBlend.value === 'Normal' ? null : propBlend.value;
+  executeCommand(editor, createSetBlendModeCommand(node, value));
 });
 
 propName.addEventListener('change', () => {
@@ -403,11 +463,37 @@ function commitSceneSize(): void {
   executeCommand(editor, createSetSceneSizeCommand(editor.scene, w, h));
 }
 
-const resizeObserver = new ResizeObserver(() => {
-  const { width: w, height: h } = syncCanvasSize();
-  resizeCanvasRenderer(renderer, bootstrap, w, h);
-});
-resizeObserver.observe(canvasArea);
+// ── Status bar sync ─────────────────────────────────────────
+
+function syncStatusBar(): void {
+  const zoomLabel = getZoomPercentLabel(editor);
+  statusZoomEl.textContent = zoomLabel;
+  toolbarZoomEl.textContent = zoomLabel;
+
+  const snapshot = getInspectorSnapshot(editor);
+  if (snapshot.count === 0) {
+    statusSelectionEl.textContent = 'No selection';
+  } else if (snapshot.count === 1) {
+    statusSelectionEl.textContent = snapshot.name ? `"${snapshot.name}"` : '1 object';
+  } else {
+    statusSelectionEl.textContent = `${snapshot.count} objects`;
+  }
+
+  const undoBtn = document.querySelector('[data-action="undo"]') as HTMLButtonElement | null;
+  const redoBtn = document.querySelector('[data-action="redo"]') as HTMLButtonElement | null;
+  if (undoBtn) undoBtn.style.opacity = canUndo(editor) ? '1' : '0.3';
+  if (redoBtn) redoBtn.style.opacity = canRedo(editor) ? '1' : '0.3';
+
+  const cursor = getEditorCursorPosition(editor);
+  if (cursor) {
+    statusCoordsEl.textContent = `X: ${Math.round(cursor.x)} Y: ${Math.round(cursor.y)}`;
+  }
+
+  lastSnapshot = snapshot;
+  syncPropertiesPanel(snapshot);
+}
+
+// ── Main loop ───────────────────────────────────────────────
 
 let rafId = 0;
 function pollUI(): void {
@@ -415,6 +501,16 @@ function pollUI(): void {
   rafId = requestAnimationFrame(pollUI);
 }
 rafId = requestAnimationFrame(pollUI);
+
+// ── Resize ──────────────────────────────────────────────────
+
+const resizeObserver = new ResizeObserver(() => {
+  const { width: w, height: h } = syncCanvasSize();
+  resizeCanvasRenderer(renderer, bootstrap, w, h);
+});
+resizeObserver.observe(canvasArea);
+
+// ── Cleanup ─────────────────────────────────────────────────
 
 window.addEventListener('beforeunload', () => {
   cancelAnimationFrame(rafId);

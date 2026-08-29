@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@flighthq/editor-host": "0.1.0",
+    "@flighthq/node": "*",
     "@flighthq/tool-editor": "0.1.0"
   },
   "devDependencies": {
