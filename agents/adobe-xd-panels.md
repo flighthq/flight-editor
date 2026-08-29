@@ -282,3 +282,15 @@ States are managed in the Property Inspector when the Main Component is selected
 ### Nested Components
 
 Components can contain other components. Editing a nested component's Main Component updates all instances of it, even within other components.
+
+## Flight Adaptation Notes
+
+Apply [the XD-inspired component, token, preview, plugin, and panel contracts](./adobe-xd-implementation-contract.md).
+
+- Layers, Assets, Plugins, Preview, and Share are replaceable presentations over shared state or optional integrations.
+- Components use stable source and override identities; names and hierarchy paths are display data, not reference keys.
+- Colors and text styles distinguish referenced tokens from copied literal values, with propagation expressed as document commands.
+- Preview reflects a specific document revision and exposes stale, loading, disconnected, and runtime-error states.
+- Plugin panels declare capabilities and mutate the document only through shared commands. Missing plugins preserve namespaced data and surface diagnostics.
+- Share and collaboration services remain outside the core until a host integration defines authentication, permissions, transport, and recovery.
+- Repeat Grid remains conditional until its parametric document model exists; a panel mock alone is not implementation.

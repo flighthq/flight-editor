@@ -11,6 +11,9 @@ This document records capabilities Flight Editor needs from the Flight runtime a
 | P1 | Scene2D interaction / `@flighthq/picking` | Ordered 2D hit results with coordinate details, predicates, backend parity, and geometry-detail hooks | Mouse focus, click drilling, scoped selection, fill/stroke/path subselection |
 | P1 | `@flighthq/assets` | Stable asset identity, replacement semantics, dependency metadata, cancellation, and hot reload | Authoring library, relink, usage queries, cross-document clipboard, live preview |
 | P1 | Runtime/application lifecycle | Deterministic create, pause, step, restart, snapshot/reload, and disposal seams | Shared desktop, VS Code, and in-app play/edit workflow |
+| P1 | Reusable scene sources/instances | Stable source and descendant identity, nesting, reference fixup, deterministic materialization, and hot reload | Components, variants, overrides, linked assets, cross-document transfer |
+| P1 | `@flighthq/layout` | Deterministic authored constraint resolution, validation facts, intrinsic measurement, and transform precedence | Responsive resize, stacks, auto-layout, reusable component layout |
+| P2 | `@flighthq/flow` and `@flighthq/statechart` | Stable targets/states/actions, validation, deterministic execution, and live replacement | Prototype graphs, component states, interactive preview |
 | P2 | `@flighthq/shape`, `@flighthq/path`, `@flighthq/path-boolean` | Authoring-safe topology and robust query/edit primitives with deterministic tolerances | Flash-like pen, subselection, shape merge, fill, and stroke authoring |
 | P2 | `@flighthq/animation` and `@flighthq/timeline` | Stable target/property references, deterministic seek/sample, validation facts, and reload behavior | Timeline, keyframe, tween, onion-skin, and runtime preview tooling |
 
@@ -68,6 +71,25 @@ Flight Editor remains responsible for import workflows, library organization, th
 
 Flight Editor remains responsible for play-mode state, runtime override presentation, apply/discard policy, host transport, and editor command generation.
 
+### Reusable scene sources and instances
+
+- A reusable source and each placed instance have distinct stable identities.
+- Descendants have stable source identities that instance overrides can target through source reordering.
+- Nested instances are supported or rejected explicitly; cycles are always diagnosed deterministically.
+- Missing sources and incompatible source updates remain inspectable rather than silently flattening or deleting data.
+- Hot reload reports how authored source and instance identities map to runtime identities.
+
+Flight Editor remains responsible for component creation, overrides, named variants, reset/detach/swap commands, library organization, and presentation.
+
+### Responsive layout and interactive flows
+
+- Layout resolution is deterministic and reports contradictory or unsupported constraints.
+- Manual transforms, intrinsic measurement, and layout-controlled values have explicit precedence.
+- Flow/statechart targets and actions use stable identities and validate missing references.
+- Runtime active state is distinct from authored definitions and can be replaced safely during preview.
+
+Flight Editor remains responsible for constraint inference and handles, stack/property UI, prototype wires, graph commands, transition presentation, and preview navigation UX.
+
 ## Explicitly not upstream requests
 
 These concerns belong in Flight Editor even when they consume upstream primitives:
@@ -93,5 +115,9 @@ Detailed package notes live under:
 - `agents/packages/flight-assets/todo.md`
 - `agents/packages/flight-shape/todo.md`
 - `agents/packages/flight-animation/todo.md`
+- `agents/packages/flight-layout/todo.md`
+- `agents/packages/flight-flow/todo.md`
+- `agents/packages/flight-statechart/todo.md`
+- `agents/packages/flight-scene-instance/proposal.md`
 
 Before filing an upstream issue, validate the installed SDK surface and replace a request with a concrete API gap and a minimal editor use case. Once an upstream contract exists, add a Flight Editor integration test before considering the request complete.

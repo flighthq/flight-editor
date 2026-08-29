@@ -272,3 +272,14 @@ XD has no configurable panel layout or window management — the workspace is fi
 - Reveal in Layers Panel
 - Add to Favorites / Remove from Favorites
 - Group / Ungroup (organize components into named groups)
+
+## Flight Adaptation Notes
+
+Apply [the shared XD command and capability model](./adobe-xd-implementation-contract.md).
+
+- File, Object, View, prototype, export, and asset entries project shared command state; they do not implement mutations in menu callbacks.
+- Native host menus, hamburger menus, context menus, and command palettes may present different subsets of the same command IDs.
+- Cloud, Share, plugin-manager, and Adobe import entries appear only when an integration contributes them.
+- Component, responsive-layout, repeat-grid, vector, and prototype commands remain absent or explainably disabled until their document models exist.
+- Menu enablement covers invalid YAML, read-only preview, editing scope, locked selection, mixed selection, and unavailable host capabilities.
+- Context-menu invocation first resolves the target and selection policy, then queries commands; it must not operate on a stale prior selection accidentally.

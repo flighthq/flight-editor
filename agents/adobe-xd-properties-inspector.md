@@ -469,3 +469,15 @@ When Share mode is active, the Property Inspector shows link management:
 - Changes are applied **immediately** — there is no "Apply" button. Undo (Ctrl/Cmd+Z) reverts.
 - When properties **differ** across a multiple selection, the field shows blank or "Mixed" and typing a value applies it to all selected objects.
 - The Property Inspector scrolls vertically if there are more sections than fit in the panel height.
+
+## Flight Adaptation Notes
+
+Apply [the XD-inspired property, component, responsive-layout, and prototype contracts](./adobe-xd-implementation-contract.md).
+
+- Sections are contributed from shared property definitions and commands; the fixed XD arrangement is only a desktop default.
+- Scene roots and artboards expose only properties their model owns. Do not show inert X/Y fields for a non-transformable scene root.
+- Draft numeric and text values validate before commit, preview safely, cancel exactly, and coalesce into one command.
+- Multi-selection shows mixed, unavailable, and partially applicable states distinctly.
+- Responsive constraints and component overrides are explicit authored data, not inspector-local flags.
+- Prototype destinations and component sources use stable identities; display names may change without breaking references.
+- Color, gradient, path, and other complex editors use the shared gesture lifecycle and retain accessible structured-input alternatives.

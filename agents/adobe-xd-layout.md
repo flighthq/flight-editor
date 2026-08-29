@@ -197,3 +197,14 @@ Located at the bottom-left corner of the canvas area:
 ## Responsive Resize
 
 When Responsive Resize is enabled (toggle in the Property Inspector for groups and components), child elements reposition and resize relative to their parent when the parent is resized. XD infers pin and stretch rules from object placement. Manual overrides are available per object in the Property Inspector.
+
+## Flight Adaptation Notes
+
+Apply [the XD-inspired implementation contract](./adobe-xd-implementation-contract.md), especially its artboard and responsive-layout rules.
+
+- Treat artboards as document objects in an infinite scene, not as host windows, open files, or editor panels.
+- Desktop may adopt this full layout; VS Code may use native views and an editor tab; in-app editing may use compact overlays. All invoke the same commands.
+- Design, Prototype, and Share are capability-gated workspace modes. Share is an integration, not a required core mode.
+- The inspector and left panel are pluggable contributions. Their historical fixed sizes are not Flight requirements.
+- Persist host layout separately from document data. Artboard positions, sizes, and prototype graph are document data.
+- Test narrow layouts, 200% text zoom, spatial artboard navigation, and viewport restoration independently of cosmetic resemblance.

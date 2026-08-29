@@ -284,3 +284,14 @@ These are navigation behaviors available from any tool:
 - The selected tool remains active after one use (draw a rectangle, then draw another without reselecting)
 - Exception: switching to Select (V) after completing a text creation (XD auto-switches to text editing, then to Select after pressing Escape)
 - All tools remember their last-used styling (fill, border, text properties) for newly created objects
+
+## Flight Adaptation Notes
+
+Apply [the shared XD tool and gesture contract](./adobe-xd-implementation-contract.md#interaction-and-focus).
+
+- Tools are shared state machines; desktop, VS Code, and in-app surfaces may present different buttons for the same tool IDs.
+- Drawing, transform, path, radius, arc, text-box, and artboard gestures preview continuously but commit once and cancel exactly.
+- Artboard labels and handles are editor overlays. Artboard content and containment are durable document data.
+- Path editing depends on authoring-safe upstream topology and geometry queries; omit it until those contracts are present.
+- Inherited appearance is an explicit editor preference, not hidden global state.
+- Tool activation, temporary overrides, editing scopes, focus, and incomplete-path behavior need keyboard and pointer-cancellation tests.

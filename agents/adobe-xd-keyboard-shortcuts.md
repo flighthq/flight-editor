@@ -256,3 +256,14 @@ XD shows smart guides automatically:
 | Magenta spacing guides | Uniform margin/gap between objects |
 
 These appear during drag and resize operations and cannot be individually toggled (they are always active; only grid snapping can be toggled).
+
+## Flight Adaptation Notes
+
+Historical bindings are defaults only. Apply [the shared focus and command rules](./adobe-xd-implementation-contract.md#interaction-and-focus).
+
+- Bind shortcuts to stable shared command or tool IDs; hosts resolve platform and reserved-key conflicts.
+- Scope `Ctrl/Cmd+A`, Escape, Delete, arrows, and text-formatting keys to the active canvas, editing scope, path editor, text editor, prototype graph, or panel.
+- Temporary Pan and Select overrides restore the previous tool on release, blur, cancellation, or document replacement.
+- Duplicate-drag and nudging are single undoable commands; key repeat may coalesce without losing the final exact position.
+- Smart-guide display is transient snap feedback and does not create history.
+- Add tests proving typing in source, inspector, and text objects never switches tools or deletes scene content.

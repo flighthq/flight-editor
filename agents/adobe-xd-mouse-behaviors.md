@@ -390,3 +390,14 @@ XD supports continuous zoom from 0.28% to 12,800%. The zoom dropdown in the bott
 ### Pixel Grid
 
 At zoom levels above 800%, XD shows a pixel grid overlay (if enabled in View menu). Individual pixels are visible and objects snap to pixel boundaries.
+
+## Flight Adaptation Notes
+
+Apply [the shared gesture, artboard, scope, and prototype contracts](./adobe-xd-implementation-contract.md).
+
+- Every drag uses `begin -> preview -> commit/cancel`, pointer capture, a click/drag threshold, and one history transaction.
+- Reparenting into or out of an artboard preserves world position unless an explicit command specifies local placement.
+- Group/component/path/text isolation is an editing-scope transition with deterministic Escape and focus restoration.
+- Smart guides consume shared snap candidates and report which edge, center, gap, grid, or guide won; visual feedback is host-rendered.
+- Prototype wires edit stable graph edges. Cancelled wires leave no partial interaction, and broken destinations remain diagnosable.
+- On-canvas handles are overlays in viewport space backed by shared scene-space calculations and accessible command/property alternatives.
