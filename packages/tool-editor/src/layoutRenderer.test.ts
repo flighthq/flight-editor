@@ -63,11 +63,11 @@ describe('getLayoutChildNode', () => {
     expect(viewport!.name).toBe('viewport');
   });
 
-  it('finds hierarchy inside leftPanel', () => {
+  it('finds inspector inside rightPanel', () => {
     const layout = createLayoutScene(config);
-    const hierarchy = getLayoutChildNode(layout, 'leftPanel/hierarchy');
-    expect(hierarchy).not.toBeNull();
-    expect(hierarchy!.name).toBe('hierarchy');
+    const inspector = getLayoutChildNode(layout, 'rightPanel/inspector');
+    expect(inspector).not.toBeNull();
+    expect(inspector!.name).toBe('inspector');
   });
 
   it('returns null for invalid path', () => {

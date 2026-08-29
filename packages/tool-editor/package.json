@@ -65,9 +65,13 @@
     "@flighthq/editor-transform-origin": "*",
     "@flighthq/editor-viewport": "*",
     "@flighthq/editor-zoom-presets": "*",
+    "@flighthq/application": "*",
+    "@flighthq/application-gl": "*",
     "@flighthq/node": "*",
+    "@flighthq/render": "*",
     "@flighthq/scene2d": "*",
     "@flighthq/scene-format": "*",
+    "@flighthq/scene2d-gl": "*",
     "@flighthq/shape": "*",
     "@flighthq/text": "*",
     "@flighthq/types": "*"

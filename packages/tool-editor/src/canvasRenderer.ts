@@ -19,6 +19,7 @@ import {
 import { createGlApplicationRenderView } from '@flighthq/application-gl';
 import { renderGlScene2D } from '@flighthq/scene2d-gl';
 
+import { registerGlRenderers } from './glRendererSetup';
 import { resizeDesktop, stepDesktopLoop } from './desktopBootstrap';
 
 export interface CanvasRendererState {
@@ -28,6 +29,7 @@ export interface CanvasRendererState {
   readonly canvas: HTMLCanvasElement;
   animationFrameId: number;
   isRunning: boolean;
+  renderersRegistered: boolean;
 }
 
 export interface CanvasRendererConfig {
@@ -56,14 +58,20 @@ export function createCanvasRenderer(config: Readonly<CanvasRendererConfig>): Ca
 
   attachApplicationRenderView(renderView);
 
-  return {
+  const state: CanvasRendererState = {
     app,
     window: win,
     renderView,
     canvas,
     animationFrameId: 0,
     isRunning: false,
+    renderersRegistered: false,
   };
+
+  registerGlRenderers(renderView.renderState);
+  state.renderersRegistered = true;
+
+  return state;
 }
 
 export function renderScene(renderer: Readonly<CanvasRendererState>, scene: Scene2D): void {
@@ -80,11 +88,10 @@ export function startCanvasLoop(renderer: CanvasRendererState, bootstrap: Deskto
 
     stepDesktopLoop(bootstrap, timestamp);
 
-    const scene = bootstrap.editor.state.scene;
-    if (scene) {
-      stepApplicationLoop(renderer.app, 0);
-      renderScene(renderer, scene);
-    }
+    stepApplicationLoop(renderer.app, 0);
+
+    const layoutScene = bootstrap.layout.scene;
+    renderScene(renderer, layoutScene);
 
     renderer.animationFrameId = requestAnimationFrame(frame);
   }

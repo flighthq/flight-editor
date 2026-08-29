@@ -48,6 +48,11 @@ describe('buildNode', () => {
     expect(node.name).toBe('bg');
   });
 
+  it('creates a shape when kind is shape', () => {
+    const node = buildNode({ kind: 'shape', name: 'panel', width: 100, height: 50, fillColor: 0xff0000 });
+    expect(node.name).toBe('panel');
+  });
+
   it('applies position without throwing', () => {
     const node = buildNode({ x: 100, y: 200 });
     expect(node).toBeDefined();

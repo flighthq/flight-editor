@@ -562,6 +562,7 @@ export {
   startCanvasLoop,
   stopCanvasLoop,
 } from './canvasRenderer';
+export { registerGlRenderers } from './glRendererSetup';
 export { bindDomEvents, createKeyEventFromDom, createPointerEventFromDom } from './domEventAdapter';
 
 export type { ThemeMapping } from './themeRenderer';

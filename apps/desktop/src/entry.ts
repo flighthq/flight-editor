@@ -6,8 +6,11 @@ import { createTauriApp } from './main';
 import type { TauriIpc } from '@flighthq/tool-editor';
 
 const canvas = document.getElementById('editor-canvas') as HTMLCanvasElement;
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+const width = window.innerWidth;
+const height = window.innerHeight;
+canvas.width = width;
+canvas.height = height;
 
 const ipc: TauriIpc = {
   invoke: (command, args) => invoke(command, args),
@@ -17,10 +20,14 @@ const ipc: TauriIpc = {
 const app = createTauriApp({
   ipc,
   canvas,
-  width: canvas.width,
-  height: canvas.height,
+  width,
+  height,
 });
 
 window.addEventListener('resize', () => {
-  app.resize(window.innerWidth, window.innerHeight);
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  canvas.width = w;
+  canvas.height = h;
+  app.resize(w, h);
 });

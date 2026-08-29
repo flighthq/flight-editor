@@ -52,15 +52,12 @@ describe('createEditorLayoutDef', () => {
   it('canvas fills remaining space', () => {
     const def = createEditorLayoutDef({ width: 1280, height: 720 });
     const canvas = def.root![3];
-    expect(canvas.width).toBe(1280 - 240 - 280);
+    expect(canvas.width).toBe(1280 - 44 - 280);
     expect(canvas.height).toBe(720 - 28 - 40 - 24);
   });
 
   it('includes children in panels', () => {
     const def = createEditorLayoutDef({ width: 1280, height: 720 });
-    const left = def.root![2];
-    expect(left.children).toHaveLength(1);
-    expect(left.children![0].name).toBe('hierarchy');
     const canvas = def.root![3];
     expect(canvas.children).toHaveLength(2);
     expect(canvas.children![0].name).toBe('viewport');
@@ -90,14 +87,14 @@ describe('getLayoutRegion', () => {
 
   it('returns canvas with correct offset', () => {
     const r = getLayoutRegion(config, 'canvas');
-    expect(r.x).toBe(240);
+    expect(r.x).toBe(44);
     expect(r.y).toBe(68);
   });
 
   it('returns leftPanel at left edge', () => {
     const r = getLayoutRegion(config, 'leftPanel');
     expect(r.x).toBe(0);
-    expect(r.width).toBe(240);
+    expect(r.width).toBe(44);
   });
 
   it('returns rightPanel at right edge', () => {

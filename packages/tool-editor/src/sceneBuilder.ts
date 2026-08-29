@@ -2,11 +2,12 @@ import type { Node2D, Scene2D, Transform2DLike } from '@flighthq/types';
 
 import { addNodeChild, getNodeChildAt, getNodeChildCount, setNodeTransform2D } from '@flighthq/node';
 import { createNode2D, createScene2D, createSprite } from '@flighthq/scene2d';
+import { appendShapeBeginFill, appendShapeEndFill, appendShapeRectangle, createShape } from '@flighthq/shape';
 import { DisplayObjectKind } from '@flighthq/types';
 
 export interface SceneNodeDef {
   readonly name?: string;
-  readonly kind?: 'container' | 'sprite';
+  readonly kind?: 'container' | 'sprite' | 'shape';
   readonly x?: number;
   readonly y?: number;
   readonly width?: number;
@@ -16,6 +17,8 @@ export interface SceneNodeDef {
   readonly rotation?: number;
   readonly alpha?: number;
   readonly visible?: boolean;
+  readonly fillColor?: number;
+  readonly fillAlpha?: number;
   readonly children?: readonly SceneNodeDef[];
 }
 
@@ -41,8 +44,7 @@ export function buildScene(def: Readonly<SceneDef>): Scene2D {
 }
 
 export function buildNode(def: Readonly<SceneNodeDef>): Node2D {
-  const isSprite = def.kind === 'sprite';
-  const node = isSprite ? createSprite() : createNode2D(DisplayObjectKind);
+  const node = createNodeForKind(def);
 
   if (def.name !== undefined) {
     node.name = def.name;
@@ -69,6 +71,32 @@ export function buildNode(def: Readonly<SceneNodeDef>): Node2D {
 
 export function countNodes(scene: Readonly<Scene2D>): number {
   return countDescendants(scene.root);
+}
+
+function createNodeForKind(def: Readonly<SceneNodeDef>): Node2D {
+  if (def.kind === 'shape') {
+    return createShapeNode(def);
+  }
+  if (def.kind === 'sprite') {
+    return createSprite();
+  }
+  return createNode2D(DisplayObjectKind);
+}
+
+function createShapeNode(def: Readonly<SceneNodeDef>): Node2D {
+  const shape = createShape();
+  const w = def.width ?? 0;
+  const h = def.height ?? 0;
+  const color = def.fillColor ?? 0xffffff;
+  const alpha = def.fillAlpha ?? 1;
+
+  if (w > 0 && h > 0) {
+    appendShapeBeginFill(shape, color, alpha);
+    appendShapeRectangle(shape, 0, 0, w, h);
+    appendShapeEndFill(shape);
+  }
+
+  return shape;
 }
 
 function countDescendants(node: Readonly<Node2D>): number {

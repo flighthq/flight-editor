@@ -16,7 +16,7 @@ export function createEditorLayoutDef(config: Readonly<LayoutConfig>): SceneDef 
     height,
     toolbarHeight = 40,
     statusBarHeight = 24,
-    leftPanelWidth = 240,
+    leftPanelWidth = 44,
     rightPanelWidth = 280,
     menuBarHeight = 28,
   } = config;
@@ -48,7 +48,7 @@ export function getLayoutRegion(
     height,
     toolbarHeight = 40,
     statusBarHeight = 24,
-    leftPanelWidth = 240,
+    leftPanelWidth = 44,
     rightPanelWidth = 280,
     menuBarHeight = 28,
   } = config;
@@ -80,31 +80,36 @@ export function getLayoutRegions(): readonly LayoutRegion[] {
 }
 
 function createMenuBarNode(width: number, height: number): SceneNodeDef {
-  return { name: 'menuBar', x: 0, y: 0, width, height };
+  return { name: 'menuBar', kind: 'shape', x: 0, y: 0, width, height, fillColor: 0xffffff, fillAlpha: 1 };
 }
 
 function createToolbarNode(width: number, top: number, height: number): SceneNodeDef {
-  return { name: 'toolbar', x: 0, y: top, width, height };
+  return { name: 'toolbar', kind: 'shape', x: 0, y: top, width, height, fillColor: 0xffffff, fillAlpha: 1 };
 }
 
 function createLeftPanelNode(width: number, top: number, height: number): SceneNodeDef {
   return {
     name: 'leftPanel',
+    kind: 'shape',
     x: 0,
     y: top,
     width,
     height,
-    children: [{ name: 'hierarchy', x: 0, y: 0, width, height }],
+    fillColor: 0xffffff,
+    fillAlpha: 1,
   };
 }
 
 function createCanvasNode(left: number, top: number, width: number, height: number): SceneNodeDef {
   return {
     name: 'canvas',
+    kind: 'shape',
     x: left,
     y: top,
     width,
     height,
+    fillColor: 0xffffff,
+    fillAlpha: 1,
     children: [
       { name: 'viewport', x: 0, y: 0, width, height },
       { name: 'rulers', x: 0, y: 0, width, height },
@@ -115,14 +120,17 @@ function createCanvasNode(left: number, top: number, width: number, height: numb
 function createRightPanelNode(left: number, top: number, width: number, height: number): SceneNodeDef {
   return {
     name: 'rightPanel',
+    kind: 'shape',
     x: left,
     y: top,
     width,
     height,
+    fillColor: 0xffffff,
+    fillAlpha: 1,
     children: [{ name: 'inspector', x: 0, y: 0, width, height }],
   };
 }
 
 function createStatusBarNode(width: number, top: number, height: number): SceneNodeDef {
-  return { name: 'statusBar', x: 0, y: top, width, height };
+  return { name: 'statusBar', kind: 'shape', x: 0, y: top, width, height, fillColor: 0xffffff, fillAlpha: 1 };
 }
