@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Drive selection, validation, edits, commands, and serialization through the shared `tool-editor` runtime.
+- Bundle the shared editor core into the extension while retaining the VS Code-specific presentation.
 - Select the topmost transformed scene node by clicking it in the canvas.
 - Keep click selection distinct from viewport dragging.
 - Show scene metadata for the root instead of inapplicable node transform controls.

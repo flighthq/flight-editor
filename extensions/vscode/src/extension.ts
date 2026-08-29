@@ -1,14 +1,21 @@
 import type { DocumentSnapshot, UpdateNodeMessage } from './protocol';
+import type { EditorRuntime } from '@flighthq/tool-editor';
 
 import * as vscode from 'vscode';
+import { createEditorRuntime } from '@flighthq/tool-editor';
 
 import { isWebviewMessage } from './protocol';
-import { parseFlightDocument, updateFlightNode } from './sceneDocument';
 
 const viewType = 'flight.visualEditor';
 
-function documentMessage(document: vscode.TextDocument): DocumentSnapshot {
-  return { type: 'document', text: document.getText(), version: document.version };
+function documentMessage(runtime: EditorRuntime, document: vscode.TextDocument): DocumentSnapshot {
+  const text = document.getText();
+  try {
+    runtime.load(encodeText(text));
+    return { type: 'document', text: decodeData(runtime.serialize()), version: document.version };
+  } catch {
+    return { type: 'document', text, version: document.version };
+  }
 }
 
 function webviewHtml(webview: vscode.Webview, extensionUri: vscode.Uri): string {
@@ -31,6 +38,7 @@ class FlightEditorProvider implements vscode.CustomTextEditorProvider {
   constructor(private readonly extensionUri: vscode.Uri) {}
 
   async resolveCustomTextEditor(document: vscode.TextDocument, panel: vscode.WebviewPanel): Promise<void> {
+    const runtime = createEditorRuntime({ autoCreateScene: false });
     panel.webview.options = {
       enableScripts: true,
       localResourceRoots: [vscode.Uri.joinPath(this.extensionUri, 'media')],
@@ -38,7 +46,7 @@ class FlightEditorProvider implements vscode.CustomTextEditorProvider {
     panel.webview.html = webviewHtml(panel.webview, this.extensionUri);
 
     const sendDocument = (current: vscode.TextDocument): void => {
-      void panel.webview.postMessage(documentMessage(current));
+      void panel.webview.postMessage(documentMessage(runtime, current));
     };
     const changes = vscode.workspace.onDidChangeTextDocument((event) => {
       if (event.document.uri.toString() === document.uri.toString()) sendDocument(event.document);
@@ -47,32 +55,41 @@ class FlightEditorProvider implements vscode.CustomTextEditorProvider {
       if (!isWebviewMessage(value)) return;
       if (value.type === 'ready') sendDocument(document);
       if (value.type === 'openSource') await openSource(document.uri);
-      if (value.type === 'updateNode') await this.applyNodeUpdate(document, value, panel.webview);
+      if (value.type === 'selectNode') runtime.selectNode(value.path);
+      if (value.type === 'updateNode') await this.applyNodeUpdate(runtime, document, value, panel.webview);
     });
     panel.onDidDispose(() => {
       changes.dispose();
       messages.dispose();
+      runtime.dispose();
     });
   }
 
   private async applyNodeUpdate(
+    runtime: EditorRuntime,
     document: vscode.TextDocument,
     message: UpdateNodeMessage,
     webview: vscode.Webview,
   ): Promise<void> {
     if (document.version !== message.baseVersion) {
       await webview.postMessage({ type: 'rejected', reason: 'The file changed. Your view has been refreshed.' });
-      await webview.postMessage(documentMessage(document));
+      await webview.postMessage(documentMessage(runtime, document));
       return;
     }
-    const update = updateFlightNode(document.getText(), message.path, message.property, message.value);
-    if (!update.text) {
-      await webview.postMessage({ type: 'rejected', reason: update.error ?? 'The edit could not be applied.' });
+    try {
+      runtime.load(encodeText(document.getText()));
+    } catch {
+      await webview.postMessage({ type: 'rejected', reason: 'The Flight document is invalid.' });
       return;
     }
+    if (!runtime.updateNode(message.path, message.property, message.value)) {
+      await webview.postMessage({ type: 'rejected', reason: 'The shared editor rejected this edit.' });
+      return;
+    }
+    const updatedText = `${decodeData(runtime.serialize())}\n`;
     const range = new vscode.Range(document.positionAt(0), document.positionAt(document.getText().length));
     const edit = new vscode.WorkspaceEdit();
-    edit.replace(document.uri, range, update.text);
+    edit.replace(document.uri, range, updatedText);
     if (!(await vscode.workspace.applyEdit(edit))) {
       await webview.postMessage({ type: 'rejected', reason: 'VS Code rejected the document edit.' });
     }
@@ -99,9 +116,24 @@ async function openVisual(candidate?: unknown): Promise<void> {
 async function validateActiveDocument(): Promise<void> {
   const document = vscode.window.activeTextEditor?.document;
   if (!document || document.languageId !== 'flight') return;
-  const result = parseFlightDocument(document.getText());
-  if (result.error) await vscode.window.showErrorMessage(`Flight: ${result.error}`);
-  else await vscode.window.showInformationMessage('Flight scene is valid.');
+  const runtime = createEditorRuntime({ autoCreateScene: false });
+  try {
+    runtime.load(encodeText(document.getText()));
+    await vscode.window.showInformationMessage('Flight scene is valid.');
+  } catch {
+    await vscode.window.showErrorMessage('Flight: Invalid or unsupported scene document.');
+  } finally {
+    runtime.dispose();
+  }
+}
+
+function encodeText(text: string): ArrayBuffer {
+  const bytes = new TextEncoder().encode(text);
+  return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
+}
+
+function decodeData(data: ArrayBuffer): string {
+  return new TextDecoder().decode(new Uint8Array(data));
 }
 
 export function activate(context: vscode.ExtensionContext): void {

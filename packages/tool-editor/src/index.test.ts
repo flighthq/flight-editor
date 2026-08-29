@@ -73,9 +73,11 @@ import {
   parseShortcutString,
   shortcutMatchesEvent,
   createEditorApplication,
+  createEditorRuntime,
   getApplicationEditorState,
   getApplicationLayout,
   getApplicationTheme,
+  getRuntimeNode,
   cloneNode,
   deepCloneNode,
   cloneNodeWithOffset,
@@ -247,6 +249,11 @@ describe('tool-editor', () => {
     expect(getApplicationEditorState).toBeTypeOf('function');
     expect(getApplicationLayout).toBeTypeOf('function');
     expect(getApplicationTheme).toBeTypeOf('function');
+  });
+
+  it('exports shared embeddable editor runtime utilities', () => {
+    expect(createEditorRuntime).toBeTypeOf('function');
+    expect(getRuntimeNode).toBeTypeOf('function');
   });
 
   it('exports node clone utilities', () => {

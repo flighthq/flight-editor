@@ -1,19 +1,16 @@
 import type { HostAdapter, HostCallbacks } from '@flighthq/editor-host';
 
 import type { EditorState } from './editorState';
+import type { EditorRuntime } from './editorRuntime';
 import type { EditorLoopState } from './editorLoop';
 import type { DefaultToolsOptions } from './registerDefaultTools';
 import type { SessionCallbacks, ConfirmResult } from './sessionController';
 import type { SaveResult } from './fileOperations';
 
-import { setHostCallbacks } from '@flighthq/editor-host';
-
 import { createEditorLoopState, tickEditor } from './editorLoop';
-import { initEditor } from './initEditor';
-import { registerDefaultContextMenuItems } from './contextMenuManager';
-import { createNewScene } from './sceneManager';
+import { createEditorRuntime } from './editorRuntime';
 import { updateWindowTitle } from './windowTitle';
-import { fitToScene, resizeViewport } from './viewportOps';
+import { resizeViewport } from './viewportOps';
 import {
   closeDocument,
   isDocumentModified,
@@ -24,6 +21,7 @@ import {
 } from './sessionController';
 
 export interface DesktopEditor {
+  readonly runtime: EditorRuntime;
   readonly state: EditorState;
   readonly loop: EditorLoopState;
   tick(): void;
@@ -64,23 +62,18 @@ export function createDesktopEditor(options: Readonly<DesktopEditorOptions>): De
     appName = 'Flight Editor',
   } = options;
 
-  const state = initEditor({
+  const runtime = createEditorRuntime({
     viewportWidth,
     viewportHeight,
     hostAdapter: options.hostAdapter,
+    callbacks: options.callbacks,
     tools: options.tools,
+    autoCreateScene,
+    sceneWidth,
+    sceneHeight,
+    sceneName,
   });
-
-  if (options.callbacks) {
-    setHostCallbacks(state.host, options.callbacks);
-  }
-
-  registerDefaultContextMenuItems(state);
-
-  if (autoCreateScene) {
-    createNewScene(state, sceneWidth, sceneHeight, sceneName);
-    fitToScene(state);
-  }
+  const state = runtime.state;
 
   const loop = createEditorLoopState(state, { appName });
 
@@ -91,6 +84,7 @@ export function createDesktopEditor(options: Readonly<DesktopEditorOptions>): De
   };
 
   return {
+    runtime,
     state,
     loop,
     tick() {
@@ -118,7 +112,7 @@ export function createDesktopEditor(options: Readonly<DesktopEditorOptions>): De
       updateWindowTitle(state, { appName });
     },
     dispose() {
-      state.scene = null;
+      runtime.dispose();
     },
   };
 }

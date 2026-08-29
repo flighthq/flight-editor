@@ -25,6 +25,7 @@ describe('createDesktopEditor', () => {
   it('creates an editor with a scene', () => {
     const editor = createDesktopEditor({ hostAdapter: createMockAdapter() });
     expect(editor.state.scene).not.toBeNull();
+    expect(editor.state).toBe(editor.runtime.state);
   });
 
   it('creates without scene when autoCreateScene is false', () => {

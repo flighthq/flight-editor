@@ -61,6 +61,7 @@ function renderTree() {
 }
 function select(path) {
   selected = path;
+  vscode.postMessage({ type: 'selectNode', path });
   renderTree();
   renderInspector();
   draw();

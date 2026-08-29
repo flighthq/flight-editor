@@ -34,4 +34,6 @@ Open the same directory in VS Code and run **Run Flight Extension**. The include
 
 The custom text editor deliberately lets VS Code own document persistence and history. A revisioned message protocol sends immutable snapshots to the webview. Inspector edits include the revision they were based on; the extension validates the scene and revision before applying one `WorkspaceEdit`.
 
-The current canvas is a format-compatible scene preview, not the full Flight renderer. It covers hierarchy, transforms, bounds, and editor interaction without duplicating document ownership. A future browser bootstrap exported by `@flighthq/tool-editor` can replace the preview behind the same document protocol.
+The extension bundles and creates the same `EditorRuntime` from `@flighthq/tool-editor` used underneath the desktop editor. The VS Code hierarchy, canvas, and inspector are a pluggable presentation: selection, validation, scene mutation, commands, and serialization go through the shared runtime, while VS Code owns document persistence.
+
+The current canvas presentation is bounds-oriented rather than the desktop WebGL renderer. Rendering can evolve independently without creating a second editor model.
