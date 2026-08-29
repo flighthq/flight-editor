@@ -7,6 +7,7 @@ import {
   setCurrentFilePath,
 } from '@flighthq/editor-file';
 import { setHostAdapter } from '@flighthq/editor-host';
+import { parseFlightScene } from '@flighthq/scene-format';
 import { describe, expect, it, vi } from 'vitest';
 
 import { createEditorState } from './editorState';
@@ -74,7 +75,7 @@ describe('saveFile', () => {
 
     await expect(saveFile(editor)).resolves.toEqual({ saved: true, path: '/tmp/default.flight' });
     const data = writeFile.mock.calls[0]![1] as ArrayBuffer;
-    expect(JSON.parse(new TextDecoder().decode(data))).toMatchObject({ name: 'Saved Scene' });
+    expect(parseFlightScene(new TextDecoder().decode(data))).toMatchObject({ name: 'Saved Scene' });
   });
 });
 

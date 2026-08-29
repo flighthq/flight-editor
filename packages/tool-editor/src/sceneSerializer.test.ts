@@ -73,7 +73,7 @@ describe('deserializeScene', () => {
     createNewScene(editor);
     const scene = editor.scene;
     const malformed = new TextEncoder().encode('format: other\n').buffer as ArrayBuffer;
-    expect(() => deserializeScene(editor, malformed)).toThrow('Invalid Flight scene data');
+    expect(() => deserializeScene(editor, malformed)).toThrow('Invalid Flight scene document');
     expect(editor.scene).toBe(scene);
   });
 
