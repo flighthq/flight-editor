@@ -2,6 +2,8 @@
 
 Authoritative reference for all keyboard shortcuts in Macromedia Flash Professional 8 (Windows). Mac users substitute Cmd for Ctrl and Option for Alt.
 
+For Flight implementation decisions, this historical reference is subordinate to the [Flash 8-inspired implementation contract](./flash8-implementation-contract.md).
+
 ## Tool Selection
 
 | Shortcut | Tool |
@@ -276,3 +278,16 @@ Edit > Customize Keyboard Shortcuts opens a dialog that allows:
 - Assigning custom shortcuts to any menu item, tool, or action
 - Viewing and resolving conflicts
 - Exporting/importing shortcut sets
+
+## Flight Adaptation Notes
+
+Use this table as a discoverability reference, not as an unconditional global keymap. Flight shortcut routing uses [the shared implementation contract](./flash8-implementation-contract.md#focus-input-and-shortcut-routing).
+
+- A shortcut invokes the same shared command as its menu and toolbar representations.
+- Tool-letter shortcuts apply only when the stage owns keyboard context. They never fire while editing text, entering a property value, using an IME, or interacting with a modal or popup.
+- Resolve the primary modifier per platform and display the resolved shortcut in menus and tooltips. Do not treat macOS support as a blind Ctrl-to-Cmd substitution when the result conflicts with an OS or host shortcut.
+- Define precedence for collisions such as `F` (Gradient Transform versus Fit in the current prototype), `S` (Ink Bottle versus Scale), and `R` (Rectangle versus Rotate). One key cannot select two tools in the same context.
+- Key-repeat nudges may coalesce into one history transaction; a new key press after release starts another transaction.
+- Temporary Hand/Zoom modes restore the prior tool on keyup, blur, pointer cancellation, or lost webview focus.
+- Commands for unsupported timeline, symbol, ActionScript, or publishing features remain unbound. Reserved shortcuts must not lead to inert UI.
+- Add automated coverage for editable-element suppression, platform modifiers, repeat/coalescing, temporary-tool restoration, and Escape cancellation.

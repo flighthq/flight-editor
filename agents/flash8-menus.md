@@ -2,6 +2,8 @@
 
 Authoritative reference for all menu bar entries in Macromedia Flash Professional 8 (Windows). Mac equivalents use Cmd instead of Ctrl and place Preferences under the Flash menu instead of Edit.
 
+For Flight implementation decisions, this historical reference is subordinate to the [Flash 8-inspired implementation contract](./flash8-implementation-contract.md).
+
 ## File Menu
 
 | Item | Shortcut | Description |
@@ -487,3 +489,16 @@ Creating guides: Drag from the horizontal ruler (creates a horizontal guide) or 
 - Edit in New Window
 - Actions
 - Properties...
+
+## Flight Adaptation Notes
+
+Menus are projections of the shared command registry described in [the implementation contract](./flash8-implementation-contract.md#capability-and-command-model).
+
+- Each item needs a stable command ID, resolved label/shortcut, visibility rule, enablement rule, checked/radio state where relevant, and disabled reason.
+- Native desktop menus, VS Code commands, web menus, context menus, and keyboard shortcuts call the same command. Host code must not duplicate scene mutations.
+- Recompute state when document validity, dirty state, selection, lock state, history, clipboard capability, editing scope, or host capability changes.
+- Destructive or lossy commands require an explicit confirmation policy. Revert, close, reload, and external-change flows must account for unsaved edits.
+- An ellipsis means the command opens a dialog or requires more input; do not use it for immediately executed actions.
+- Unsupported Flash-specific items are omitted or disabled with a clear explanation. The menu topology is not a promise that all historical entries exist in Flight.
+- Async commands expose pending state and prevent accidental duplicate invocation. Errors surface through host diagnostics/messages and do not leave history transactions open.
+- Context menus are selected from the invocation target, not merely the previous selection. Keyboard invocation uses the focused or primary selection target.

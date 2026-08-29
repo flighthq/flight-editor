@@ -2,6 +2,8 @@
 
 Authoritative reference for the Status Bar and Edit Bar in Macromedia Flash Professional 8.
 
+For Flight implementation decisions, this historical reference is subordinate to the [Flash 8-inspired implementation contract](./flash8-implementation-contract.md).
+
 ## Edit Bar
 
 The Edit Bar sits directly above the Stage (between the Timeline and the document area). It is always visible by default and can be toggled via Window > Toolbars > Edit Bar.
@@ -152,3 +154,15 @@ Macromedia Flash Professional 8 - [filename.fla *]
 - **Filename**: Current document name (e.g., "Untitled-1", "myAnimation.fla")
 - **Asterisk (*)**: Appears when the document has unsaved changes
 - When editing inside a symbol, the title bar may update to reflect the editing context
+
+## Flight Adaptation Notes
+
+Flight may intentionally show more operational state than Flash 8. Historical absence of coordinates or zoom is not a prohibition; use [the implementation contract](./flash8-implementation-contract.md) to keep those additions consistent.
+
+- Define status fields as pluggable contributions with priority and narrow-width collapse behavior. Suggested fields are active tool, zoom, selection summary, cursor scene coordinates, snap state, document validity or staleness, and transient operation feedback.
+- Label coordinates by space when ambiguity matters. Pointer coordinates shown to users are scene coordinates, not CSS or backing-store pixels.
+- High-frequency values update visually without entering the accessibility live region. Announce important state such as rejected edits, invalid source, completed export, or mode changes politely.
+- Transient messages have deterministic timeout and clearing rules and must not permanently replace persistent validity or save-state warnings.
+- Edit-bar zoom is bound to shared viewport state. Typed values validate and clamp to supported limits; Fit, Frame, and Selection commands remain distinct.
+- Host ownership wins: VS Code owns file tabs and dirty markers, while desktop may render its own title and document tabs.
+- Test resizing/collapse, invalid-document state, operation precedence, coordinate conversion, zoom synchronization, and accessibility announcements.

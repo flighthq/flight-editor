@@ -2,6 +2,8 @@
 
 Authoritative reference for the default workspace arrangement in Macromedia Flash Professional 8 (Windows). Mac layout follows the same structure with standard platform menu bar differences.
 
+For Flight implementation decisions, this historical reference is subordinate to the [Flash 8-inspired implementation contract](./flash8-implementation-contract.md).
+
 ## Top-Level Frame
 
 The application window contains, from top to bottom:
@@ -103,3 +105,15 @@ When multiple FLA files are open, document tabs appear below the Edit Bar (above
 │  Status Bar                                                         │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
+## Flight Adaptation Notes
+
+This is the historical Flash default, not a fixed layout for every Flight host. Apply [the shared layout contract](./flash8-implementation-contract.md#layout-and-responsive-behavior).
+
+- Desktop may use the complete arrangement. VS Code should respect editor-area constraints and can contribute hierarchy/properties through native views. An in-app editor may start with only stage, tools, and a compact inspector.
+- Timeline, Library, and symbol breadcrumbs appear only after corresponding shared domain models exist. Do not reserve large empty regions for them.
+- Define minimum stage dimensions and panel collapse order. At narrow widths, collapse secondary panels into tabs or drawers before allowing them to cover the stage.
+- Treat menu bar, edit bar, panel sets, and status bar as layout contributions with stable IDs. Persist sizes, visibility, active tabs, and collapsed state per host/workspace.
+- Document tabs belong to the host when the host already owns document navigation, as in VS Code.
+- The pasteboard is a scene-space concept, while rulers and panel chrome are viewport-space. Zooming or panning must never scale the chrome.
+- The default layout must be resettable, keyboard navigable, and usable at 200% text zoom.

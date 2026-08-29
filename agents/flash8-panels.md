@@ -2,6 +2,8 @@
 
 Authoritative reference for all panels in Macromedia Flash Professional 8, excluding the Properties panel (covered in `flash8-properties-inspector.md`) and the Tools panel (covered in `flash8-tools-panel.md`).
 
+For Flight implementation decisions, this historical reference is subordinate to the [Flash 8-inspired implementation contract](./flash8-implementation-contract.md).
+
 ## Timeline Panel
 
 **Default position:** Docked horizontally, spanning full width, between the Edit Bar and the Stage.
@@ -536,3 +538,16 @@ Accessible via Window > Common Libraries. These open as read-only Library panels
 - **Learning Interactions** — drag-and-drop, fill-in-the-blank, hot-spot, and quiz interaction templates
 
 To use an item, drag it from the common library into your document's Library or directly onto the Stage.
+
+## Flight Adaptation Notes
+
+Panels are pluggable presentations over shared editor state. Follow [the shared architecture and layout contracts](./flash8-implementation-contract.md#shared-architecture-boundary).
+
+- Every panel contribution declares a stable ID, title, icon, preferred/default region, minimum/preferred size, allowed host types, ordering, and state-serialization version.
+- Opening or moving a panel does not create document history. Panel layout is host/workspace preference state; scene-affecting actions inside a panel use shared commands and do create document history.
+- Panel instances subscribe to narrowly scoped state and dispose subscriptions when hidden or destroyed. Hiding a panel preserves its transient UI state unless the user explicitly resets the layout.
+- Tabs, trees, lists, splitters, and disclosure controls support keyboard navigation and expose semantic roles. Focus returns predictably after a panel closes or moves.
+- Empty, loading, invalid-document, unsupported-selection, and error states are first-class panel states. Do not leave a blank panel that looks broken.
+- Timeline, Actions, Components, Debugger, Strings, Web Services, and Project panels remain reference material until Flight defines their underlying models and capabilities.
+- Panel layout migration tolerates renamed or removed contributions and restores a usable default when saved geometry is off-screen or incompatible.
+- Add tests for registration conflicts, ordering, visibility toggles, persistence/reset, disposal, narrow layouts, and missing-plugin recovery.

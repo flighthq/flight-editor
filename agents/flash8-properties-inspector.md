@@ -2,6 +2,8 @@
 
 Authoritative reference for the Properties panel in Macromedia Flash Professional 8. The Properties panel is context-sensitive — its contents change based on what is currently selected.
 
+For Flight implementation decisions, this historical reference is subordinate to the [Flash 8-inspired implementation contract](./flash8-implementation-contract.md).
+
 ## Panel Chrome
 
 **Default position:** Docked at the bottom of the workspace, spanning full width.
@@ -341,3 +343,17 @@ When multiple objects of **different types** are selected, the Properties panel 
 - Undo (Ctrl+Z) reverts Properties panel changes.
 - Position (X/Y) values reference the object's **registration point** for symbol instances, and the **top-left corner of the bounding box** for shapes and groups.
 - When editing a text field's content (cursor is inside the text), the Properties panel shows character-level formatting for the text at the cursor position.
+
+## Flight Adaptation Notes
+
+The Flight inspector is generated from shared property metadata rather than hard-coded per host. It uses [the selection and command contracts](./flash8-implementation-contract.md#coordinate-and-selection-semantics).
+
+- A property definition supplies stable ID, label, category, editor kind, value type, units, range/step, enum choices, applicability, validation, read-only reason, and serialization mapping.
+- The scene root exposes scene dimensions, background, and viewport settings but no X/Y transform unless the scene model explicitly adds one.
+- Multiple selection shows a mixed value without inventing a concrete value. Committing a field applies to all eligible nodes in one history transaction and reports skipped locked or inapplicable nodes.
+- Text edits commit on Enter or blur, cancel on Escape, and retain the invalid draft with a validation message instead of coercing silently. Arrow-key scrubbing and sliders coalesce into one transaction.
+- Numeric fields distinguish display units from stored values and define handling for expressions, locale decimal separators, clamping, NaN, and infinity.
+- External reload or hierarchy mutation re-resolves the inspected identity. A deleted or invalid target clears the inspector safely instead of writing to a stale node reference.
+- Extension or plugin properties survive canonical YAML round trips. A host-specific inspector cannot introduce a property the shared runtime cannot validate and apply.
+- Property changes update stage, hierarchy labels, dirty state, and other open inspectors from the same authoritative state notification.
+- Test empty, single, multi/mixed, locked, partially applicable, invalid draft, cancellation, undo/redo, reload, and plugin-property cases.

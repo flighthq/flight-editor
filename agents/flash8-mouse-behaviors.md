@@ -2,6 +2,8 @@
 
 Authoritative reference for all mouse interactions in Macromedia Flash Professional 8, organized by tool and context.
 
+For Flight implementation decisions, this historical reference is subordinate to the [Flash 8-inspired implementation contract](./flash8-implementation-contract.md).
+
 ## Cursor Vocabulary
 
 Flash uses distinct cursor shapes to communicate what action a click or drag will perform:
@@ -504,3 +506,17 @@ When Snap Align is enabled (View > Snapping > Snap Align), moving objects shows 
 - **Stage edge guides**: appear when an object nears the Stage boundary (configurable tolerance)
 
 These lines are temporary and disappear when the object is released or moved away from alignment.
+
+## Flight Adaptation Notes
+
+Pointer behavior must be implemented through shared tools and viewport transforms, following [the interaction and coordinate contracts](./flash8-implementation-contract.md#coordinate-and-selection-semantics).
+
+- Normalize mouse, pen, and touch into pointer gestures. Capture the pointer after a drag begins and release it on commit, cancellation, disposal, or lost capture.
+- Define a small CSS-pixel drag threshold so click selection is not accidentally converted into a move. The threshold is independent of scene zoom and device-pixel ratio.
+- Convert client coordinates to scene coordinates once through shared viewport helpers. Nested node edits then convert to parent-local coordinates; never apply raw canvas pixels to node transforms.
+- A continuous drag, scale, rotation, guide move, or property scrub is one undoable transaction. Escape and pointer cancellation restore the exact pre-gesture state.
+- Locked nodes, hidden non-targetable nodes, the scene root, and stale or invalid documents reject mutations consistently. Rejection supplies feedback rather than silently ignoring input.
+- Marquee direction semantics, intersection versus containment, modifier behavior, and selection of nested children must be explicitly configured and tested.
+- Snapping uses scene-space tolerances derived from a stable screen-pixel radius. Show which edge, center, grid line, or guide won; avoid jitter by retaining a snap target until the pointer exceeds a release threshold.
+- Autoscroll near viewport edges must be bounded and preserve the grabbed scene point under the pointer.
+- Double-click actions are target-specific and must not also commit the preceding single-click action twice.

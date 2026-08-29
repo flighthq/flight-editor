@@ -2,6 +2,8 @@
 
 Authoritative reference for the Tools panel in Macromedia Flash Professional 8. The Tools panel is a vertical toolbar docked on the left edge of the workspace.
 
+For Flight implementation decisions, this historical reference is subordinate to the [Flash 8-inspired implementation contract](./flash8-implementation-contract.md).
+
 ## Panel Structure
 
 The Tools panel is divided into four sections, separated by thin divider lines:
@@ -214,3 +216,17 @@ Some drawing tools (Oval, Rectangle, Pencil, Brush, Line) offer an **Object Draw
 | H | Hand |
 | Z / M | Zoom |
 | J | Toggle Object Drawing mode |
+
+## Flight Adaptation Notes
+
+The Flash list is a target vocabulary, not the current Flight capability list. Tools are shared runtime contributions governed by [the implementation contract](./flash8-implementation-contract.md#capability-and-command-model).
+
+- Each tool declares a stable ID, label, icon, shortcut candidate, cursor, compatible selection or document contexts, options contribution, and activation/deactivation hooks.
+- Tool selection is shared editor state. Desktop, VS Code, web, and in-app chrome may arrange tools differently but activate the same tool implementation.
+- Temporary Hand/Zoom overrides form a stack and always restore the prior persistent tool on release, blur, or cancellation.
+- The Options section is driven by active-tool metadata. Switching tools disposes the old options UI without discarding persistent preferences such as snap or drawing colors.
+- Disabled or unavailable tools expose a reason. Prototype buttons that only change visual active state are marked non-functional and are not presented as completed editor features.
+- Resolve shortcut collisions before registration. The present Flight prototype's Select/Scale/Rotate/Hand keys do not match Flash's complete tool map and must not coexist ambiguously.
+- Active, hover, keyboard-focus, temporary, and disabled states are visually distinct and do not rely on color alone.
+- Tool grouping and order are default-layout data, allowing hosts or plugins to add tools without changing core logic.
+- Test activation lifecycle, temporary overrides, option persistence, shortcut collisions, unsupported contexts, cursor changes, host parity, and disposal.
