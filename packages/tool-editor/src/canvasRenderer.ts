@@ -17,6 +17,7 @@ import {
   stepApplicationLoop,
 } from '@flighthq/application';
 import { createGlApplicationRenderView } from '@flighthq/application-gl';
+import { prepareScene2DRender } from '@flighthq/render';
 import { renderGlScene2D } from '@flighthq/scene2d-gl';
 
 import { registerGlRenderers } from './glRendererSetup';
@@ -42,6 +43,9 @@ export function createCanvasRenderer(config: Readonly<CanvasRendererConfig>): Ca
   const { canvas } = config;
   const app = createApplication();
   const win = createApplicationWindow();
+  win.width = canvas.width;
+  win.height = canvas.height;
+  win.devicePixelRatio = globalThis.devicePixelRatio ?? 1;
 
   registerApplicationWindow(app, win);
   setApplicationMainWindow(app, win);
@@ -76,6 +80,7 @@ export function createCanvasRenderer(config: Readonly<CanvasRendererConfig>): Ca
 
 export function renderScene(renderer: Readonly<CanvasRendererState>, scene: Scene2D): void {
   const state = renderer.renderView.renderState;
+  prepareScene2DRender(state, scene.root);
   renderGlScene2D(state, scene.root);
 }
 
