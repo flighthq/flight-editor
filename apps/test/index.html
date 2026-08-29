@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flight Editor — Test</title>
+    <style>
+      :root {
+        --bg: #1e1e1e;
+        --surface: #2d2d2d;
+        --surface-alt: #383838;
+        --border: #4a4a4a;
+        --text: #cccccc;
+        --text-muted: #888888;
+        --accent: #0078d4;
+        --accent-hover: #1a8ae8;
+        --selection: #264f78;
+        --error: #f44747;
+        --warning: #e8ab53;
+
+        --menu-bar-h: 28px;
+        --toolbar-h: 40px;
+        --status-bar-h: 24px;
+        --left-panel-w: 44px;
+        --right-panel-w: 280px;
+
+        --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-sm: 11px;
+        --font-md: 13px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        font-size: var(--font-md);
+        -webkit-font-smoothing: antialiased;
+        user-select: none;
+      }
+
+      /* ── Shell grid ─────────────────────────────────── */
+
+      .editor-shell {
+        display: grid;
+        grid-template-rows: var(--menu-bar-h) var(--toolbar-h) 1fr var(--status-bar-h);
+        grid-template-columns: var(--left-panel-w) 1fr var(--right-panel-w);
+        grid-template-areas:
+          'menu    menu    menu'
+          'toolbar toolbar toolbar'
+          'left    canvas  right'
+          'status  status  status';
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ── Menu bar ───────────────────────────────────── */
+
+      .menu-bar {
+        grid-area: menu;
+        display: flex;
+        align-items: center;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 4px;
+        gap: 0;
+      }
+
+      .menu-bar__item {
+        padding: 4px 10px;
+        font-size: var(--font-sm);
+        color: var(--text);
+        border-radius: 3px;
+        cursor: default;
+        white-space: nowrap;
+      }
+
+      .menu-bar__item:hover {
+        background: var(--surface-alt);
+      }
+
+      .menu-bar__item:active,
+      .menu-bar__item[aria-expanded='true'] {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .menu-bar__spacer {
+        flex: 1;
+      }
+
+      .menu-bar__title {
+        font-size: var(--font-sm);
+        color: var(--text-muted);
+        padding: 0 8px;
+      }
+
+      /* ── Toolbar ────────────────────────────────────── */
+
+      .toolbar {
+        grid-area: toolbar;
+        display: flex;
+        align-items: center;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 8px;
+        gap: 2px;
+      }
+
+      .toolbar__group {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .toolbar__separator {
+        width: 1px;
+        height: 24px;
+        background: var(--border);
+        margin: 0 6px;
+      }
+
+      .toolbar__btn {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        border-radius: 4px;
+        cursor: default;
+        font-size: 16px;
+        line-height: 1;
+      }
+
+      .toolbar__btn:hover {
+        background: var(--surface-alt);
+        color: var(--text);
+      }
+
+      .toolbar__btn.active {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .toolbar__btn svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+      }
+
+      .toolbar__spacer {
+        flex: 1;
+      }
+
+      .toolbar__label {
+        font-size: var(--font-sm);
+        color: var(--text-muted);
+        padding: 0 4px;
+      }
+
+      /* ── Left panel (tool strip) ────────────────────── */
+
+      .left-panel {
+        grid-area: left;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        padding: 6px 0;
+        gap: 2px;
+        overflow-y: auto;
+      }
+
+      .left-panel__tool {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        border-radius: 4px;
+        cursor: default;
+        font-size: 18px;
+      }
+
+      .left-panel__tool:hover {
+        background: var(--surface-alt);
+        color: var(--text);
+      }
+
+      .left-panel__tool.active {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .left-panel__separator {
+        width: 28px;
+        height: 1px;
+        background: var(--border);
+        margin: 4px 0;
+      }
+
+      .left-panel__swatch {
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        border: 2px solid var(--border);
+        margin-top: auto;
+        cursor: default;
+      }
+
+      /* ── Canvas area ────────────────────────────────── */
+
+      .canvas-area {
+        grid-area: canvas;
+        position: relative;
+        background: var(--bg);
+        overflow: hidden;
+      }
+
+      .canvas-area__canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .canvas-area__rulers-h {
+        position: absolute;
+        top: 0;
+        left: 20px;
+        right: 0;
+        height: 20px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        font-size: 9px;
+        color: var(--text-muted);
+        display: flex;
+        align-items: flex-end;
+        padding: 0 0 2px 4px;
+        pointer-events: none;
+      }
+
+      .canvas-area__rulers-v {
+        position: absolute;
+        top: 20px;
+        left: 0;
+        bottom: 0;
+        width: 20px;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        pointer-events: none;
+      }
+
+      .canvas-area__rulers-corner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        pointer-events: none;
+      }
+
+      /* ── Right panel (properties) ───────────────────── */
+
+      .right-panel {
+        grid-area: right;
+        display: flex;
+        flex-direction: column;
+        background: var(--surface);
+        border-left: 1px solid var(--border);
+        overflow-y: auto;
+      }
+
+      .right-panel__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--border);
+        font-size: var(--font-sm);
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .right-panel__section {
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .right-panel__section-title {
+        font-size: var(--font-sm);
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+        cursor: default;
+      }
+
+      .right-panel__row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+
+      .right-panel__label {
+        width: 24px;
+        font-size: var(--font-sm);
+        color: var(--text-muted);
+        flex-shrink: 0;
+      }
+
+      .right-panel__input {
+        flex: 1;
+        min-width: 0;
+        height: 24px;
+        background: var(--surface-alt);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        color: var(--text);
+        font-size: var(--font-sm);
+        font-family: var(--font);
+        padding: 0 6px;
+        outline: none;
+      }
+
+      .right-panel__input:focus {
+        border-color: var(--accent);
+      }
+
+      .right-panel__input--short {
+        width: 56px;
+        flex: none;
+      }
+
+      .right-panel__select {
+        flex: 1;
+        height: 24px;
+        background: var(--surface-alt);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        color: var(--text);
+        font-size: var(--font-sm);
+        font-family: var(--font);
+        padding: 0 4px;
+        outline: none;
+        appearance: none;
+        cursor: default;
+      }
+
+      .right-panel__checkbox-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 4px;
+        font-size: var(--font-sm);
+        color: var(--text);
+        cursor: default;
+      }
+
+      .right-panel__checkbox {
+        width: 14px;
+        height: 14px;
+        accent-color: var(--accent);
+      }
+
+      .right-panel__color-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+
+      .right-panel__color-swatch {
+        width: 24px;
+        height: 24px;
+        border-radius: 3px;
+        border: 1px solid var(--border);
+        cursor: default;
+      }
+
+      .right-panel__slider-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+
+      .right-panel__slider {
+        flex: 1;
+        height: 4px;
+        accent-color: var(--accent);
+      }
+
+      .right-panel__empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        color: var(--text-muted);
+        font-size: var(--font-sm);
+      }
+
+      /* ── Status bar ─────────────────────────────────── */
+
+      .status-bar {
+        grid-area: status;
+        display: flex;
+        align-items: center;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 0 12px;
+        gap: 16px;
+        font-size: var(--font-sm);
+        color: var(--text-muted);
+      }
+
+      .status-bar__tool {
+        white-space: nowrap;
+      }
+
+      .status-bar__separator {
+        width: 1px;
+        height: 14px;
+        background: var(--border);
+      }
+
+      .status-bar__spacer {
+        flex: 1;
+      }
+
+      .status-bar__zoom {
+        cursor: default;
+      }
+
+      .status-bar__selection {
+        white-space: nowrap;
+      }
+
+      .status-bar__coords {
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* ── Tooltip base ───────────────────────────────── */
+
+      [data-tooltip] {
+        position: relative;
+      }
+
+      [data-tooltip]:hover::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 8px;
+        padding: 4px 8px;
+        background: #111;
+        color: var(--text);
+        font-size: 11px;
+        border-radius: 3px;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 100;
+      }
+
+      /* ── Scrollbar styling ──────────────────────────── */
+
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="editor-shell">
+      <!-- ── Menu bar ────────────────────────────────── -->
+      <nav class="menu-bar">
+        <span class="menu-bar__item">File</span>
+        <span class="menu-bar__item">Edit</span>
+        <span class="menu-bar__item">View</span>
+        <span class="menu-bar__item">Insert</span>
+        <span class="menu-bar__item">Modify</span>
+        <span class="menu-bar__item">Window</span>
+        <span class="menu-bar__item">Help</span>
+        <span class="menu-bar__spacer"></span>
+        <span class="menu-bar__title">Flight Editor</span>
+      </nav>
+
+      <!-- ── Toolbar ─────────────────────────────────── -->
+      <div class="toolbar">
+        <div class="toolbar__group">
+          <button class="toolbar__btn" data-action="new" title="New">
+            <svg viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+            </svg>
+          </button>
+          <button class="toolbar__btn" data-action="open" title="Open">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
+            </svg>
+          </button>
+          <button class="toolbar__btn" data-action="save" title="Save">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4zm-5 16a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm3-10H5V5h10v4z" />
+            </svg>
+          </button>
+        </div>
+        <div class="toolbar__separator"></div>
+        <div class="toolbar__group">
+          <button class="toolbar__btn" data-action="undo" title="Undo">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
+            </svg>
+          </button>
+          <button class="toolbar__btn" data-action="redo" title="Redo">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" />
+            </svg>
+          </button>
+        </div>
+        <div class="toolbar__separator"></div>
+        <div class="toolbar__group">
+          <button class="toolbar__btn" data-action="zoom-in" title="Zoom In">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z" />
+            </svg>
+          </button>
+          <button class="toolbar__btn" data-action="zoom-out" title="Zoom Out">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z" />
+            </svg>
+          </button>
+          <span class="toolbar__label" id="toolbar-zoom">100%</span>
+        </div>
+        <div class="toolbar__spacer"></div>
+        <div class="toolbar__group">
+          <span class="toolbar__label">800 &times; 600</span>
+        </div>
+      </div>
+
+      <!-- ── Left tool strip ─────────────────────────── -->
+      <aside class="left-panel">
+        <button class="left-panel__tool active" data-tool="pointer" data-tooltip="Pointer (V)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7 2l12 11.2-5.8.5 3.3 7.3-2.2 1-3.2-7.4L7 18.5z" />
+          </svg>
+        </button>
+        <button class="left-panel__tool" data-tool="hand" data-tooltip="Hand (H)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18 6V3.5a1.5 1.5 0 0 0-3 0V6h-1V2.5a1.5 1.5 0 0 0-3 0V6h-1V3.5a1.5 1.5 0 0 0-3 0V6H6V4.5a1.5 1.5 0 0 0-3 0v8A7.5 7.5 0 0 0 10.5 20h1A7.5 7.5 0 0 0 19 12.5V7.5A1.5 1.5 0 0 0 17.5 6H18z" />
+          </svg>
+        </button>
+        <button class="left-panel__tool" data-tool="zoom" data-tooltip="Zoom (Z)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+          </svg>
+        </button>
+        <div class="left-panel__separator"></div>
+        <button class="left-panel__tool" data-tool="select" data-tooltip="Marquee (M)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M3 5h2V3H3v2zm0 8h2v-2H3v2zm4 8h2v-2H7v2zM3 9h2V7H3v2zm10-6h-2v2h2V3zm6 0v2h2V3h-2zM5 21v-2H3v2h2zm-2-4h2v-2H3v2zM9 3H7v2h2V3zm2 18h2v-2h-2v2zm8-8h2v-2h-2v2zm0 8v-2h-2v2h2zm0-12h2V7h-2v2zm0 8h2v-2h-2v2zm-4 4h2v-2h-2v2zm0-16h2V3h-2v2z" />
+          </svg>
+        </button>
+        <button class="left-panel__tool" data-tool="move" data-tooltip="Move (G)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z" />
+          </svg>
+        </button>
+        <button class="left-panel__tool" data-tool="scale" data-tooltip="Scale (S)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M21 15h2v2h-2zm0-4h2v2h-2zm0 8h2v2h-2zm-8-8h2v2h-2zm0-4h2v2h-2zm4 4h2v2h-2zm0-4h2v2h-2zm4 0h2v2h-2zM1 7h2v2H1zm0-4h2v2H1zm0 8h2v2H1zm0 4h2v2H1zm0 4h2v2H1zm8 0h2v2H9zm-4 0h2v2H5zm4-16h2v2H9zM5 3h2v2H5zm8 0h2v2h-2z" />
+          </svg>
+        </button>
+        <button class="left-panel__tool" data-tool="rotate" data-tooltip="Rotate (R)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
+          </svg>
+        </button>
+        <div class="left-panel__separator"></div>
+        <button class="left-panel__tool" data-tool="rectangle" data-tooltip="Rectangle (U)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 3h18v18H3V3zm2 2v14h14V5H5z" />
+          </svg>
+        </button>
+        <button class="left-panel__tool" data-tool="line" data-tooltip="Line (N)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.5 3.5L3.5 19.5l1 1 16-16z" />
+          </svg>
+        </button>
+        <button class="left-panel__tool" data-tool="eyedropper" data-tooltip="Eyedropper (I)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M20.71 5.63l-2.34-2.34a1 1 0 0 0-1.41 0l-3.12 3.12-1.42-1.41-1.41 1.41 1.41 1.42L3 17.25V21h3.75l9.42-9.42 1.41 1.41 1.42-1.41-1.42-1.42 3.13-3.12a1 1 0 0 0 0-1.41zM6.92 19L5 17.08l8.06-8.06 1.92 1.92L6.92 19z" />
+          </svg>
+        </button>
+        <button class="left-panel__tool" data-tool="measure" data-tooltip="Measure (K)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 6H3v12h18V6zm-2 10H5V8h14v8zM7 9v6l2-2v-2l-2-2zm8 0l2 2v2l-2 2V9z" />
+          </svg>
+        </button>
+        <div class="left-panel__separator"></div>
+        <div class="left-panel__swatch" style="background: #0078d4" title="Foreground color"></div>
+      </aside>
+
+      <!-- ── Canvas (Flight editor renders here) ─────── -->
+      <main class="canvas-area">
+        <div class="canvas-area__rulers-corner"></div>
+        <div class="canvas-area__rulers-h">
+          <span style="position: absolute; left: 20px">0</span>
+          <span style="position: absolute; left: 120px">100</span>
+          <span style="position: absolute; left: 220px">200</span>
+          <span style="position: absolute; left: 320px">300</span>
+          <span style="position: absolute; left: 420px">400</span>
+          <span style="position: absolute; left: 520px">500</span>
+          <span style="position: absolute; left: 620px">600</span>
+          <span style="position: absolute; left: 720px">700</span>
+          <span style="position: absolute; left: 820px">800</span>
+        </div>
+        <div class="canvas-area__rulers-v"></div>
+        <canvas id="editor-canvas" class="canvas-area__canvas"></canvas>
+      </main>
+
+      <!-- ── Right panel (properties inspector) ─────── -->
+      <aside class="right-panel">
+        <div class="right-panel__header">
+          <span>Properties</span>
+        </div>
+
+        <div class="right-panel__section">
+          <div class="right-panel__section-title">Transform</div>
+          <div class="right-panel__row">
+            <span class="right-panel__label">X</span>
+            <input class="right-panel__input" type="text" value="0" />
+            <span class="right-panel__label">Y</span>
+            <input class="right-panel__input" type="text" value="0" />
+          </div>
+          <div class="right-panel__row">
+            <span class="right-panel__label">W</span>
+            <input class="right-panel__input" type="text" value="800" />
+            <span class="right-panel__label">H</span>
+            <input class="right-panel__input" type="text" value="600" />
+          </div>
+          <div class="right-panel__row">
+            <span class="right-panel__label" title="Rotation">&ang;</span>
+            <input class="right-panel__input" type="text" value="0.0&deg;" />
+          </div>
+        </div>
+
+        <div class="right-panel__section">
+          <div class="right-panel__section-title">Appearance</div>
+          <div class="right-panel__color-row">
+            <span class="right-panel__label">Fill</span>
+            <div class="right-panel__color-swatch" style="background: #ffffff"></div>
+            <input class="right-panel__input" type="text" value="#FFFFFF" />
+          </div>
+          <div class="right-panel__slider-row">
+            <span class="right-panel__label">&alpha;</span>
+            <input class="right-panel__slider" type="range" min="0" max="100" value="100" />
+            <input class="right-panel__input right-panel__input--short" type="text" value="100%" />
+          </div>
+          <div class="right-panel__row">
+            <span class="right-panel__label">Blend</span>
+            <select class="right-panel__select">
+              <option selected>Normal</option>
+              <option>Multiply</option>
+              <option>Screen</option>
+              <option>Overlay</option>
+              <option>Darken</option>
+              <option>Lighten</option>
+              <option>Add</option>
+              <option>Subtract</option>
+              <option>Difference</option>
+              <option>Invert</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="right-panel__section">
+          <div class="right-panel__section-title">Scene</div>
+          <div class="right-panel__row">
+            <span class="right-panel__label">Name</span>
+            <input class="right-panel__input" type="text" value="Untitled" />
+          </div>
+          <div class="right-panel__row">
+            <span class="right-panel__label">BG</span>
+            <div class="right-panel__color-swatch" style="background: #ffffff"></div>
+            <input class="right-panel__input" type="text" value="#FFFFFF" />
+          </div>
+        </div>
+
+        <div class="right-panel__section">
+          <div class="right-panel__section-title">Export</div>
+          <div class="right-panel__checkbox-row">
+            <input class="right-panel__checkbox" type="checkbox" />
+            <span>Enable export</span>
+          </div>
+          <div class="right-panel__row">
+            <span class="right-panel__label">Fmt</span>
+            <select class="right-panel__select">
+              <option selected>PNG</option>
+              <option>JPEG</option>
+              <option>SVG</option>
+              <option>WebP</option>
+            </select>
+          </div>
+          <div class="right-panel__row">
+            <span class="right-panel__label">Scale</span>
+            <select class="right-panel__select">
+              <option>0.5x</option>
+              <option selected>1x</option>
+              <option>2x</option>
+              <option>3x</option>
+            </select>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ── Status bar ──────────────────────────────── -->
+      <footer class="status-bar">
+        <span class="status-bar__tool">Pointer Tool</span>
+        <span class="status-bar__separator"></span>
+        <span class="status-bar__zoom" id="status-zoom">100%</span>
+        <span class="status-bar__separator"></span>
+        <span class="status-bar__selection">No selection</span>
+        <span class="status-bar__spacer"></span>
+        <span class="status-bar__coords" id="status-coords">X: 0 Y: 0</span>
+      </footer>
+    </div>
+
+    <script type="module" src="./src/entry.ts"></script>
+  </body>
+</html>

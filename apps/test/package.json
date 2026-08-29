@@ -1,0 +1,21 @@
+{
+  "name": "@flighthq/test",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Flight Editor web test harness — HTML/CSS layout prototype with tool-editor canvas",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest run --config ../../vitest.config.ts src"
+  },
+  "dependencies": {
+    "@flighthq/editor-host": "0.1.0",
+    "@flighthq/tool-editor": "0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}
