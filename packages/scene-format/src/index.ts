@@ -1,2 +1,15 @@
-export { parseFlightScene, stringifyFlightScene } from './sceneFormat';
-export type { FlightSceneDocument, FlightSceneNode, FlightSceneValue } from './sceneFormat';
+export {
+  inspectFlightScene,
+  migrateFlightSceneIdentities,
+  parseFlightScene,
+  stringifyFlightScene,
+  validateFlightScene,
+} from './sceneFormat';
+export type {
+  FlightSceneDiagnostic,
+  FlightSceneDocument,
+  FlightSceneMigrationResult,
+  FlightSceneNode,
+  FlightSceneParseResult,
+  FlightSceneValue,
+} from './sceneFormat';
