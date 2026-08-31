@@ -1,0 +1,28 @@
+{
+  "name": "@flighthq/ui-test",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal Flight scene viewer — loads a .flight file and renders it fullscreen",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@flighthq/application": "*",
+    "@flighthq/application-gl": "*",
+    "@flighthq/node": "*",
+    "@flighthq/render": "*",
+    "@flighthq/render-gl": "*",
+    "@flighthq/scene-format": "0.1.0",
+    "@flighthq/scene2d": "*",
+    "@flighthq/scene2d-gl": "*",
+    "@flighthq/shape": "*",
+    "@flighthq/types": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}
