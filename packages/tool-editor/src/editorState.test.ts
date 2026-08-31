@@ -17,6 +17,7 @@ describe('createEditorState', () => {
     expect(state.gesture.active).toBeNull();
     expect(state.nodeFactory.entries.size).toBe(0);
     expect(state.pages.pages).toHaveLength(0);
+    expect(state.preview.phase).toBe('stopped');
     expect(state.selection.nodes).toHaveLength(0);
     expect(state.session.documents.size).toBe(0);
     expect(state.rulers.visible).toBe(true);

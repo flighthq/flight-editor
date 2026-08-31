@@ -35,6 +35,7 @@
     { "path": "./packages/editor-page" },
     { "path": "./packages/editor-preferences" },
     { "path": "./packages/editor-properties" },
+    { "path": "./packages/editor-preview" },
     { "path": "./packages/editor-prototype" },
     { "path": "./packages/editor-rulers" },
     { "path": "./packages/editor-scene-io" },

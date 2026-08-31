@@ -33,6 +33,7 @@
     { "path": "../editor-page" },
     { "path": "../editor-preferences" },
     { "path": "../editor-properties" },
+    { "path": "../editor-preview" },
     { "path": "../editor-rulers" },
     { "path": "../editor-scene-state" },
     { "path": "../editor-session" },

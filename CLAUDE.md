@@ -62,6 +62,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-node-factory` — node kind registry: register creation functions by category, create nodes from registered kinds
 - `editor-page` — ordered page/artboard definitions with active-page tracking
 - `editor-properties` — property panel state: property definitions, categories, edit state, mixed-value detection
+- `editor-preview` — host-neutral runtime preview lifecycle, revision coordination, and runtime override inspection
 - `editor-prototype` — prototype/interaction wiring state: triggers, actions, transitions, flows, preview mode
 - `editor-rulers` — ruler display state: visibility, units (pixels/inches/cm), origin, tick spacing, subdivisions
 - `editor-scene-state` — scene metadata: name, dimensions, background color, dirty/version tracking

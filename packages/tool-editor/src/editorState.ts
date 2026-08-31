@@ -22,6 +22,7 @@ import type { PanelState } from '@flighthq/editor-panel';
 import type { PageState } from '@flighthq/editor-page';
 import type { PreferencesState } from '@flighthq/editor-preferences';
 import type { PropertyPanelState } from '@flighthq/editor-properties';
+import type { PreviewState } from '@flighthq/editor-preview';
 import type { RulerState } from '@flighthq/editor-rulers';
 import type { SceneState } from '@flighthq/editor-scene-state';
 import type { SelectionState } from '@flighthq/editor-selection';
@@ -62,6 +63,7 @@ import { createPanelState } from '@flighthq/editor-panel';
 import { createPageState } from '@flighthq/editor-page';
 import { createPreferencesState } from '@flighthq/editor-preferences';
 import { createPropertyPanelState } from '@flighthq/editor-properties';
+import { createPreviewState } from '@flighthq/editor-preview';
 import { createRulerState } from '@flighthq/editor-rulers';
 import { createSceneState } from '@flighthq/editor-scene-state';
 import { createSelectionState } from '@flighthq/editor-selection';
@@ -101,6 +103,7 @@ export interface EditorState {
   readonly pages: PageState;
   readonly preferences: PreferencesState;
   readonly properties: PropertyPanelState;
+  readonly preview: PreviewState;
   readonly rulers: RulerState;
   readonly sceneState: SceneState;
   readonly selection: SelectionState;
@@ -143,6 +146,7 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
     pages: createPageState(),
     preferences: createPreferencesState(),
     properties: createPropertyPanelState(),
+    preview: createPreviewState(),
     rulers: createRulerState(),
     sceneState: createSceneState(),
     selection: createSelectionState(),

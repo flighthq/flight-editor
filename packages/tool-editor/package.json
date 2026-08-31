@@ -57,6 +57,7 @@
     "@flighthq/editor-page": "*",
     "@flighthq/editor-preferences": "*",
     "@flighthq/editor-properties": "*",
+    "@flighthq/editor-preview": "*",
     "@flighthq/editor-rulers": "*",
     "@flighthq/editor-scene-state": "*",
     "@flighthq/editor-session": "*",
