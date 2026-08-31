@@ -25,7 +25,7 @@ import { addNodeChild, computeScene2DFitTransform } from '@flighthq/node';
 import { prepareScene2DRender, registerRenderer } from '@flighthq/render';
 import { renderGlBackground } from '@flighthq/render-gl';
 import { parseFlightScene } from '@flighthq/scene-format';
-import { createNode2D, createScene2D } from '@flighthq/scene2d';
+import { createDisplayObject, createScene2D, createSprite } from '@flighthq/scene2d';
 import {
   defaultGlShapeCommands,
   defaultGlShapeRenderer,
@@ -36,7 +36,8 @@ import {
   registerGlStandardMaterial,
   renderGlScene2D,
 } from '@flighthq/scene2d-gl';
-import { registerDefaultShapeBoundsCommands } from '@flighthq/shape';
+import { createShape, registerDefaultShapeBoundsCommands } from '@flighthq/shape';
+import { createTextLabel } from '@flighthq/text';
 import { ShapeKind, SpriteKind, TextLabelKind } from '@flighthq/types';
 
 // ── Canvas setup ───────────────────────────────────────────
@@ -116,9 +117,22 @@ function applyNodeTraits(node: Record<string, unknown>, traits: Readonly<Record<
   }
 }
 
+function createNodeForKind(kind: string): Node2D {
+  switch (kind) {
+    case ShapeKind:
+      return createShape();
+    case SpriteKind:
+      return createSprite();
+    case TextLabelKind:
+      return createTextLabel();
+    default:
+      return createDisplayObject();
+  }
+}
+
 function restoreChildren(parent: Node2D, children: readonly FlightSceneNode[]): void {
   for (const child of children) {
-    const node = createNode2D(child.kind);
+    const node = createNodeForKind(child.kind);
     applyNodeTraits(node as unknown as Record<string, unknown>, child.traits);
     addNodeChild(parent, node);
     restoreChildren(node, child.children);

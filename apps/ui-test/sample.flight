@@ -1,7 +1,7 @@
 format: flight-scene
 version: 1
 name: Flash 8 Workspace Mockup
-backgroundColor: 1397969919
+backgroundColor: 4294967295
 scene:
   align: center
   color: null
@@ -13,457 +13,571 @@ scene:
     traits:
       name: Scene
     children:
-      - kind: DisplayObject
+      - kind: Shape
         traits:
-          name: MenuBar
-        children:
-          - kind: Sprite
-            traits:
-              name: MenuBarBg
-              x: 0
-              y: 0
-              width: 1280
-              height: 24
-              color: 993737727
-              alpha: 1
-              visible: true
-            children: []
-      - kind: DisplayObject
+          name: MenuBarBg
+          x: 0
+          y: 0
+          data:
+            commands:
+              - beginFill
+              - 2
+              - 993737727
+              - 1
+              - drawRectangle
+              - 4
+              - 0
+              - 0
+              - 1280
+              - 24
+              - endFill
+              - 0
+        children: []
+      - kind: Shape
         traits:
-          name: EditBar
-        children:
-          - kind: Sprite
-            traits:
-              name: EditBarBg
-              x: 0
-              y: 24
-              width: 1280
-              height: 28
-              color: 1246382847
-              alpha: 1
-              visible: true
-            children: []
+          name: EditBarBg
+          x: 0
+          y: 24
+          data:
+            commands:
+              - beginFill
+              - 2
+              - 1246382847
+              - 1
+              - drawRectangle
+              - 4
+              - 0
+              - 0
+              - 1280
+              - 28
+              - endFill
+              - 0
+        children: []
       - kind: DisplayObject
         traits:
           name: Timeline
         children:
-          - kind: Sprite
+          - kind: Shape
             traits:
               name: TimelineLayersBg
               x: 0
               y: 53
-              width: 200
-              height: 138
-              color: 1212696831
-              alpha: 1
-              visible: true
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1212696831
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 200
+                  - 138
+                  - endFill
+                  - 0
             children: []
-          - kind: Sprite
+          - kind: Shape
             traits:
               name: TimelineFramesBg
               x: 201
               y: 53
-              width: 1079
-              height: 138
-              color: 976894719
-              alpha: 1
-              visible: true
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 976894719
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1079
+                  - 138
+                  - endFill
+                  - 0
             children: []
-          - kind: Sprite
+          - kind: Shape
             traits:
               name: TimelineDivider
               x: 200
               y: 53
-              width: 1
-              height: 138
-              color: 707406591
-              alpha: 1
-              visible: true
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 707406591
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 138
+                  - endFill
+                  - 0
             children: []
-          - kind: Sprite
+          - kind: Shape
             traits:
               name: LayerRow1
               x: 4
               y: 57
-              width: 192
-              height: 22
-              color: 1347440895
-              alpha: 1
-              visible: true
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1347440895
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 192
+                  - 22
+                  - endFill
+                  - 0
             children: []
-          - kind: Sprite
+          - kind: Shape
             traits:
               name: LayerRow2
               x: 4
               y: 81
-              width: 192
-              height: 22
-              color: 1431655935
-              alpha: 1
-              visible: true
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1431655935
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 192
+                  - 22
+                  - endFill
+                  - 0
             children: []
-          - kind: Sprite
+          - kind: Shape
             traits:
               name: LayerRow3
               x: 4
               y: 105
-              width: 192
-              height: 22
-              color: 1347440895
-              alpha: 1
-              visible: true
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1347440895
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 192
+                  - 22
+                  - endFill
+                  - 0
             children: []
-          - kind: Sprite
+          - kind: Shape
             traits:
               name: PlayheadLine
               x: 260
               y: 53
-              width: 2
-              height: 138
-              color: 4283782655
-              alpha: 1
-              visible: true
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4283782655
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 2
+                  - 138
+                  - endFill
+                  - 0
             children: []
       - kind: DisplayObject
         traits:
           name: DocumentArea
         children:
-          - kind: DisplayObject
+          - kind: Shape
             traits:
-              name: ToolsPanel
-            children:
-              - kind: Sprite
-                traits:
-                  name: ToolsPanelBg
-                  x: 0
-                  y: 192
-                  width: 44
-                  height: 458
-                  color: 1145324799
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ToolIcon1
-                  x: 6
-                  y: 200
-                  width: 32
-                  height: 32
-                  color: 2290649343
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ToolIcon2
-                  x: 6
-                  y: 236
-                  width: 32
-                  height: 32
-                  color: 2290649343
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ToolIcon3
-                  x: 6
-                  y: 272
-                  width: 32
-                  height: 32
-                  color: 2290649343
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ToolIcon4
-                  x: 6
-                  y: 308
-                  width: 32
-                  height: 32
-                  color: 2290649343
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ToolIcon5
-                  x: 6
-                  y: 344
-                  width: 32
-                  height: 32
-                  color: 2290649343
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ToolIcon6
-                  x: 6
-                  y: 380
-                  width: 32
-                  height: 32
-                  color: 2290649343
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ToolsDivider
-                  x: 6
-                  y: 430
-                  width: 32
-                  height: 1
-                  color: 707406591
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ViewTool1
-                  x: 6
-                  y: 440
-                  width: 32
-                  height: 32
-                  color: 2290649343
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ViewTool2
-                  x: 6
-                  y: 476
-                  width: 32
-                  height: 32
-                  color: 2290649343
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ColorsDivider
-                  x: 6
-                  y: 520
-                  width: 32
-                  height: 1
-                  color: 707406591
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: StrokeColor
-                  x: 8
-                  y: 530
-                  width: 20
-                  height: 20
-                  color: 4294967295
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: FillColor
-                  x: 16
-                  y: 538
-                  width: 20
-                  height: 20
-                  color: 255
-                  alpha: 1
-                  visible: true
-                children: []
-          - kind: DisplayObject
+              name: ToolsPanelBg
+              x: 0
+              y: 192
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1145324799
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 44
+                  - 458
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
             traits:
-              name: StageArea
-            children:
-              - kind: Sprite
-                traits:
-                  name: Pasteboard
-                  x: 44
-                  y: 192
-                  width: 1036
-                  height: 458
-                  color: 1717987071
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: Stage
-                  x: 287
-                  y: 221
-                  width: 550
-                  height: 400
-                  color: 4294967295
-                  alpha: 1
-                  visible: true
-                children: []
-          - kind: DisplayObject
+              name: ToolIcon1
+              x: 6
+              y: 200
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 2290649343
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 32
+                  - 32
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
             traits:
-              name: SidePanels
-            children:
-              - kind: Sprite
-                traits:
-                  name: SidePanelsBg
-                  x: 1080
-                  y: 192
-                  width: 200
-                  height: 458
-                  color: 1077952767
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: LibraryHeader
-                  x: 1080
-                  y: 192
-                  width: 200
-                  height: 22
-                  color: 1431655935
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: LibraryContent
-                  x: 1080
-                  y: 214
-                  width: 200
-                  height: 130
-                  color: 1212696831
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ColorMixerHeader
-                  x: 1080
-                  y: 348
-                  width: 200
-                  height: 22
-                  color: 1431655935
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: ColorMixerContent
-                  x: 1080
-                  y: 370
-                  width: 200
-                  height: 100
-                  color: 1212696831
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: AlignInfoHeader
-                  x: 1080
-                  y: 474
-                  width: 200
-                  height: 22
-                  color: 1431655935
-                  alpha: 1
-                  visible: true
-                children: []
-              - kind: Sprite
-                traits:
-                  name: AlignInfoContent
-                  x: 1080
-                  y: 496
-                  width: 200
-                  height: 154
-                  color: 1212696831
-                  alpha: 1
-                  visible: true
-                children: []
-      - kind: DisplayObject
+              name: ToolIcon2
+              x: 6
+              y: 236
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 2290649343
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 32
+                  - 32
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: ToolIcon3
+              x: 6
+              y: 272
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 2290649343
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 32
+                  - 32
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: ToolIcon4
+              x: 6
+              y: 308
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 2290649343
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 32
+                  - 32
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: ToolIcon5
+              x: 6
+              y: 344
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 2290649343
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 32
+                  - 32
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: ToolIcon6
+              x: 6
+              y: 380
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 2290649343
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 32
+                  - 32
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Pasteboard
+              x: 44
+              y: 192
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1717987071
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1036
+                  - 458
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Stage
+              x: 287
+              y: 221
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4294967295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 550
+                  - 400
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: SidePanelsBg
+              x: 1080
+              y: 192
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1077952767
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 200
+                  - 458
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: LibraryHeader
+              x: 1080
+              y: 192
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1431655935
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 200
+                  - 22
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: LibraryContent
+              x: 1080
+              y: 214
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1212696831
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 200
+                  - 130
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: ColorMixerHeader
+              x: 1080
+              y: 348
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1431655935
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 200
+                  - 22
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: ColorMixerContent
+              x: 1080
+              y: 370
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1212696831
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 200
+                  - 100
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: AlignInfoHeader
+              x: 1080
+              y: 474
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1431655935
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 200
+                  - 22
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: AlignInfoContent
+              x: 1080
+              y: 496
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1212696831
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 200
+                  - 154
+                  - endFill
+                  - 0
+            children: []
+      - kind: Shape
         traits:
-          name: PropertiesPanel
-        children:
-          - kind: Sprite
-            traits:
-              name: PropertiesBg
-              x: 0
-              y: 650
-              width: 1280
-              height: 130
-              color: 993737727
-              alpha: 1
-              visible: true
-            children: []
-          - kind: Sprite
-            traits:
-              name: PropertiesHeader
-              x: 0
-              y: 650
-              width: 1280
-              height: 22
-              color: 1431655935
-              alpha: 1
-              visible: true
-            children: []
-          - kind: Sprite
-            traits:
-              name: PropertiesField1
-              x: 10
-              y: 680
-              width: 180
-              height: 20
-              color: 1212696831
-              alpha: 1
-              visible: true
-            children: []
-          - kind: Sprite
-            traits:
-              name: PropertiesField2
-              x: 200
-              y: 680
-              width: 180
-              height: 20
-              color: 1212696831
-              alpha: 1
-              visible: true
-            children: []
-          - kind: Sprite
-            traits:
-              name: PropertiesField3
-              x: 10
-              y: 710
-              width: 180
-              height: 20
-              color: 1212696831
-              alpha: 1
-              visible: true
-            children: []
-          - kind: Sprite
-            traits:
-              name: PropertiesField4
-              x: 200
-              y: 710
-              width: 180
-              height: 20
-              color: 1212696831
-              alpha: 1
-              visible: true
-            children: []
-      - kind: DisplayObject
+          name: PropertiesBg
+          x: 0
+          y: 650
+          data:
+            commands:
+              - beginFill
+              - 2
+              - 993737727
+              - 1
+              - drawRectangle
+              - 4
+              - 0
+              - 0
+              - 1280
+              - 130
+              - endFill
+              - 0
+        children: []
+      - kind: Shape
         traits:
-          name: StatusBar
-        children:
-          - kind: Sprite
-            traits:
-              name: StatusBarBg
-              x: 0
-              y: 780
-              width: 1280
-              height: 20
-              color: 858993663
-              alpha: 1
-              visible: true
-            children: []
+          name: PropertiesHeader
+          x: 0
+          y: 650
+          data:
+            commands:
+              - beginFill
+              - 2
+              - 1431655935
+              - 1
+              - drawRectangle
+              - 4
+              - 0
+              - 0
+              - 1280
+              - 22
+              - endFill
+              - 0
+        children: []
+      - kind: Shape
+        traits:
+          name: StatusBarBg
+          x: 0
+          y: 780
+          data:
+            commands:
+              - beginFill
+              - 2
+              - 858993663
+              - 1
+              - drawRectangle
+              - 4
+              - 0
+              - 0
+              - 1280
+              - 20
+              - endFill
+              - 0
+        children: []
