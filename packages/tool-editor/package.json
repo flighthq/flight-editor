@@ -70,6 +70,7 @@
     "@flighthq/editor-transform-origin": "*",
     "@flighthq/editor-viewport": "*",
     "@flighthq/editor-zoom-presets": "*",
+    "@flighthq/entity": "*",
     "@flighthq/application": "*",
     "@flighthq/application-gl": "*",
     "@flighthq/node": "*",

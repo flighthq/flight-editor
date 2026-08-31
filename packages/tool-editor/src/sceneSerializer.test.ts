@@ -1,4 +1,5 @@
 import { addToSelection, getSelectionCount } from '@flighthq/editor-selection';
+import { getEntityUid } from '@flighthq/entity';
 import { addNodeChild, getNodeChildAt, getNodeChildCount } from '@flighthq/node';
 import { createNode2D } from '@flighthq/scene2d';
 import { parseFlightScene } from '@flighthq/scene-format';
@@ -31,10 +32,12 @@ describe('serializeScene', () => {
       scene: { align: 'top', color: 0x123456ff, scaleMode: 'showall', width: 640, height: 480 },
     });
     expect(value.scene.root.children[0]).toMatchObject({
+      id: getEntityUid(parent),
       kind: DisplayObjectKind,
       traits: { alpha: 0.5, name: 'parent', x: 12, y: 34 },
     });
     expect(value.scene.root.children[0].children[0].traits.name).toBe('child');
+    expect(value.scene.root.children[0].children[0].id).toBe(getEntityUid(child));
   });
 
   it('rejects serialization when the editor has no scene', () => {
@@ -65,7 +68,43 @@ describe('deserializeScene', () => {
     expect(getNodeChildCount(target.scene!.root)).toBe(1);
     const restoredParent = getNodeChildAt(target.scene!.root, 0)!;
     expect(restoredParent).toMatchObject({ name: 'parent', rotation: 0.25, x: 20 });
+    expect(getEntityUid(restoredParent)).toBe(getEntityUid(parent));
     expect(getNodeChildAt(restoredParent, 0)).toMatchObject({ name: 'nested', visible: false });
+  });
+
+  it('restores serialized identities and mints stable identities for legacy nodes', () => {
+    const source = `format: flight-scene
+version: 1
+name: Legacy
+backgroundColor: 4294967295
+scene:
+  align: center
+  color: null
+  scaleMode: showall
+  width: 800
+  height: 600
+  root:
+    id: root-stable
+    kind: ${DisplayObjectKind}
+    traits: {}
+    children:
+      - kind: ${DisplayObjectKind}
+        traits:
+          name: legacy
+        children: []
+`;
+    const editor = createEditorState();
+    deserializeScene(editor, new TextEncoder().encode(source).buffer as ArrayBuffer);
+
+    const child = getNodeChildAt(editor.scene!.root, 0)!;
+    const minted = getEntityUid(child);
+    expect(getEntityUid(editor.scene!.root)).toBe('root-stable');
+
+    const first = parseFlightScene(new TextDecoder().decode(serializeScene(editor)));
+    const second = parseFlightScene(new TextDecoder().decode(serializeScene(editor)));
+    expect(first.scene.root.id).toBe('root-stable');
+    expect(first.scene.root.children[0].id).toBe(minted);
+    expect(second.scene.root.children[0].id).toBe(minted);
   });
 
   it('rejects malformed or unsupported data without replacing the current scene', () => {

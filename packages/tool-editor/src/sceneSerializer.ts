@@ -5,6 +5,7 @@ import type { Node2D, Scene2D } from '@flighthq/types';
 import type { EditorState } from './editorState';
 
 import { clearCommandHistory } from '@flighthq/editor-command';
+import { getEntityUid, setEntityUid } from '@flighthq/entity';
 import { collapseHierarchyAll } from '@flighthq/editor-hierarchy';
 import { clearLocks } from '@flighthq/editor-lock';
 import {
@@ -65,6 +66,7 @@ export function deserializeScene(editor: EditorState, data: ArrayBuffer): void {
     scene2dWidth: serialized.width,
     scene2dHeight: serialized.height,
   });
+  if (serialized.root.id !== undefined) setEntityUid(scene.root, serialized.root.id);
   applyNodeTraits(scene.root, serialized.root.traits);
   restoreNodeChildren(scene.root, serialized.root.children);
 
@@ -95,11 +97,12 @@ function serializeNode(node: Readonly<Node2D>): FlightSceneNode {
     const child = getNodeChildAt(node, index);
     if (child !== null) children.push(serializeNode(child));
   }
-  return { kind: node.kind, traits, children };
+  return { id: getEntityUid(node), kind: node.kind, traits, children };
 }
 
 function restoreNode(serialized: FlightSceneNode): Node2D {
   const node = createNode2D(serialized.kind);
+  if (serialized.id !== undefined) setEntityUid(node, serialized.id);
   applyNodeTraits(node, serialized.traits);
   restoreNodeChildren(node, serialized.children);
   return node;
