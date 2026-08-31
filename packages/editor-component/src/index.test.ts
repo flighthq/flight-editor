@@ -6,6 +6,8 @@ describe('@flighthq/editor-component exports', () => {
       'addComponentInstance',
       'clearInstanceOverrides',
       'createComponentState',
+      'detachComponentInstance',
+      'getBrokenComponentInstances',
       'getComponentDefinition',
       'getComponentDefinitionCount',
       'getComponentDefinitions',
@@ -13,9 +15,12 @@ describe('@flighthq/editor-component exports', () => {
       'getComponentVersion',
       'getInstancesOfDefinition',
       'registerComponent',
+      'relinkComponentDefinition',
       'removeComponentInstance',
       'setInstanceOverrides',
+      'swapComponentInstance',
       'unregisterComponent',
+      'validateComponentState',
     ]);
   });
 });
