@@ -13,9 +13,12 @@ import {
   getLibrarySearchFilter,
   getLibrarySessionVersion,
   getLibraryVersion,
+  markLibrarySourceMissing,
+  reconcileLibrarySource,
   removeLibraryItem,
   setActiveCategory,
   setLibrarySearchFilter,
+  validateLibraryState,
 } from './libraryState';
 
 import type { LibraryItem } from './libraryState';
@@ -198,4 +201,20 @@ describe('clearLibrary', () => {
 
 describe('getLibraryVersion', () => {
   it('is exported', () => expect(getLibraryVersion).toBeTypeOf('function'));
+});
+
+describe('getLibrarySessionVersion', () => {
+  it('is exported', () => expect(getLibrarySessionVersion).toBeTypeOf('function'));
+});
+
+describe('markLibrarySourceMissing', () => {
+  it('is exported', () => expect(markLibrarySourceMissing).toBeTypeOf('function'));
+});
+
+describe('reconcileLibrarySource', () => {
+  it('is exported', () => expect(reconcileLibrarySource).toBeTypeOf('function'));
+});
+
+describe('validateLibraryState', () => {
+  it('is exported', () => expect(validateLibraryState).toBeTypeOf('function'));
 });

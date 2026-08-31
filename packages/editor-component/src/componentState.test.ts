@@ -4,6 +4,8 @@ import {
   addComponentInstance,
   clearInstanceOverrides,
   createComponentState,
+  detachComponentInstance,
+  getBrokenComponentInstances,
   getComponentDefinition,
   getComponentDefinitionCount,
   getComponentDefinitions,
@@ -11,9 +13,12 @@ import {
   getComponentVersion,
   getInstancesOfDefinition,
   registerComponent,
+  relinkComponentDefinition,
   removeComponentInstance,
   setInstanceOverrides,
+  swapComponentInstance,
   unregisterComponent,
+  validateComponentState,
 } from './componentState';
 
 import type { ComponentDefinition, ComponentInstance, ComponentOverride } from './componentState';
@@ -187,4 +192,24 @@ describe('clearInstanceOverrides', () => {
 
 describe('getComponentVersion', () => {
   it('is exported', () => expect(getComponentVersion).toBeTypeOf('function'));
+});
+
+describe('detachComponentInstance', () => {
+  it('is exported', () => expect(detachComponentInstance).toBeTypeOf('function'));
+});
+
+describe('getBrokenComponentInstances', () => {
+  it('is exported', () => expect(getBrokenComponentInstances).toBeTypeOf('function'));
+});
+
+describe('relinkComponentDefinition', () => {
+  it('is exported', () => expect(relinkComponentDefinition).toBeTypeOf('function'));
+});
+
+describe('swapComponentInstance', () => {
+  it('is exported', () => expect(swapComponentInstance).toBeTypeOf('function'));
+});
+
+describe('validateComponentState', () => {
+  it('is exported', () => expect(validateComponentState).toBeTypeOf('function'));
 });
