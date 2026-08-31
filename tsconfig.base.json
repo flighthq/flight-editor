@@ -118,6 +118,8 @@
       "@flighthq/editor-component/*": ["./packages/editor-component/src/*"],
       "@flighthq/editor-component-inspector": ["./packages/editor-component-inspector/src/index.ts"],
       "@flighthq/editor-component-inspector/*": ["./packages/editor-component-inspector/src/*"],
+      "@flighthq/editor-conformance": ["./packages/editor-conformance/src/index.ts"],
+      "@flighthq/editor-conformance/*": ["./packages/editor-conformance/src/*"],
       "@flighthq/editor-library": ["./packages/editor-library/src/index.ts"],
       "@flighthq/editor-library/*": ["./packages/editor-library/src/*"],
       "@flighthq/editor-prototype": ["./packages/editor-prototype/src/index.ts"],

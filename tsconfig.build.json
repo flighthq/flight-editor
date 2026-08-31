@@ -11,6 +11,7 @@
     { "path": "./packages/editor-command" },
     { "path": "./packages/editor-component" },
     { "path": "./packages/editor-component-inspector" },
+    { "path": "./packages/editor-conformance" },
     { "path": "./packages/editor-cursor" },
     { "path": "./packages/editor-document" },
     { "path": "./packages/editor-diagnostics" },
