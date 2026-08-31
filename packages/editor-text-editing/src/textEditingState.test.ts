@@ -2,16 +2,24 @@ import { describe, expect, it } from 'vitest';
 
 import {
   beginTextEditing,
+  cancelTextEditing,
+  clampTextOffset,
   clearTextSelection,
+  commitTextEditing,
   createTextEditingState,
   endTextEditing,
   getCaretPosition,
   getTextEditingTargetId,
   getTextEditingVersion,
+  getTextDraft,
   getTextSelection,
+  hasTextExternalConflict,
   hasTextSelection,
   isComposing,
+  isTextDraftDirty,
   isTextEditingActive,
+  reconcileExternalText,
+  replaceTextSelection,
   setCaretPosition,
   setComposing,
   setTextSelection,
@@ -188,4 +196,105 @@ describe('setComposing', () => {
 
 describe('getTextEditingVersion', () => {
   it('is exported', () => expect(getTextEditingVersion).toBeTypeOf('function'));
+});
+
+describe('clampTextOffset', () => {
+  it('never places a caret inside a grapheme cluster', () => {
+    expect(clampTextOffset('A👩‍🚀B', 3)).toBe(1);
+    expect(clampTextOffset('A👩‍🚀B', 5)).toBe(6);
+    expect(clampTextOffset('abc', 99)).toBe(3);
+  });
+});
+
+describe('getTextDraft', () => {
+  it('returns the active draft content', () => {
+    const state = createTextEditingState();
+    beginTextEditing(state, 'text', 0, 'Hello', 2);
+    expect(getTextDraft(state)).toBe('Hello');
+  });
+});
+
+describe('isTextDraftDirty', () => {
+  it('distinguishes draft changes from selection-only changes', () => {
+    const state = createTextEditingState();
+    beginTextEditing(state, 'text', 0, 'Hello');
+    setTextSelection(state, 0, 2);
+    expect(isTextDraftDirty(state)).toBe(false);
+    replaceTextSelection(state, 'Ye');
+    expect(isTextDraftDirty(state)).toBe(true);
+  });
+});
+
+describe('replaceTextSelection', () => {
+  it('replaces a grapheme-safe selection and collapses at the insertion end', () => {
+    const state = createTextEditingState();
+    beginTextEditing(state, 'text', 0, 'Hello');
+    setTextSelection(state, 0, 2);
+    replaceTextSelection(state, 'Ye');
+    expect(getTextDraft(state)).toBe('Yello');
+    expect(getCaretPosition(state)).toBe(2);
+    expect(getTextSelection(state)).toBeNull();
+  });
+});
+
+describe('reconcileExternalText', () => {
+  it('adopts external changes when clean and detects them when locally dirty', () => {
+    const state = createTextEditingState();
+    beginTextEditing(state, 'text', 5, 'Hello', 1);
+    expect(reconcileExternalText(state, 'Hello!', 2)).toBe('updated');
+    replaceTextSelection(state, '?');
+    expect(reconcileExternalText(state, 'Remote', 3)).toBe('conflict');
+    expect(hasTextExternalConflict(state)).toBe(true);
+  });
+
+  it('rejects stale external revisions', () => {
+    const state = createTextEditingState();
+    beginTextEditing(state, 'text', 0, 'Hello', 4);
+    expect(reconcileExternalText(state, 'Old', 3)).toBe('stale');
+  });
+});
+
+describe('hasTextExternalConflict', () => {
+  it('is false for a fresh session', () => {
+    const state = createTextEditingState();
+    beginTextEditing(state, 'text', 0, '');
+    expect(hasTextExternalConflict(state)).toBe(false);
+  });
+});
+
+describe('commitTextEditing', () => {
+  it('returns command-ready before/after content and closes the session', () => {
+    const state = createTextEditingState();
+    beginTextEditing(state, 'text', 5, 'Hello', 7);
+    replaceTextSelection(state, '!');
+    expect(commitTextEditing(state)).toEqual({
+      targetId: 'text',
+      before: 'Hello',
+      after: 'Hello!',
+      baseRevision: 7,
+    });
+    expect(isTextEditingActive(state)).toBe(false);
+  });
+
+  it('refuses to commit composition or an external conflict', () => {
+    const state = createTextEditingState();
+    beginTextEditing(state, 'text', 0, 'Hello', 1);
+    setComposing(state, true);
+    expect(() => commitTextEditing(state)).toThrow('composition');
+    setComposing(state, false);
+    replaceTextSelection(state, 'x');
+    reconcileExternalText(state, 'Remote', 2);
+    expect(() => commitTextEditing(state)).toThrow('conflict');
+  });
+});
+
+describe('cancelTextEditing', () => {
+  it('discards the draft and closes exactly once', () => {
+    const state = createTextEditingState();
+    beginTextEditing(state, 'text', 0, 'Hello');
+    replaceTextSelection(state, 'x');
+    expect(cancelTextEditing(state)).toBe(true);
+    expect(cancelTextEditing(state)).toBe(false);
+    expect(getTextDraft(state)).toBe('');
+  });
 });
