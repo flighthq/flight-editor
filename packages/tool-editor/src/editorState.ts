@@ -4,10 +4,13 @@ import type { ColorState } from '@flighthq/editor-color';
 import type { CommandHistory } from '@flighthq/editor-command';
 import type { ContextMenuState } from '@flighthq/editor-context-menu';
 import type { DocumentState } from '@flighthq/editor-document';
+import type { DiagnosticState } from '@flighthq/editor-diagnostics';
 import type { DragDropState } from '@flighthq/editor-drag-drop';
+import type { EditingScopeState } from '@flighthq/editor-editing-scope';
 import type { ExportSettingsState } from '@flighthq/editor-export-settings';
 import type { FileState } from '@flighthq/editor-file';
 import type { GuidesState } from '@flighthq/editor-guides';
+import type { GestureState } from '@flighthq/editor-gesture';
 import type { HierarchyState } from '@flighthq/editor-hierarchy';
 import type { HistoryState } from '@flighthq/editor-history-state';
 import type { HostAdapterState } from '@flighthq/editor-host';
@@ -22,6 +25,7 @@ import type { PropertyPanelState } from '@flighthq/editor-properties';
 import type { RulerState } from '@flighthq/editor-rulers';
 import type { SceneState } from '@flighthq/editor-scene-state';
 import type { SelectionState } from '@flighthq/editor-selection';
+import type { SessionState } from '@flighthq/editor-session';
 import type { SnapConfig } from '@flighthq/editor-snap';
 import type { StatusBarState } from '@flighthq/editor-status';
 import type { TextStyleState } from '@flighthq/editor-text-style';
@@ -40,10 +44,13 @@ import { createColorState } from '@flighthq/editor-color';
 import { createCommandHistory } from '@flighthq/editor-command';
 import { createContextMenuState } from '@flighthq/editor-context-menu';
 import { createDocumentState } from '@flighthq/editor-document';
+import { createDiagnosticState } from '@flighthq/editor-diagnostics';
 import { createDragDropState } from '@flighthq/editor-drag-drop';
+import { createEditingScopeState } from '@flighthq/editor-editing-scope';
 import { createExportSettingsState } from '@flighthq/editor-export-settings';
 import { createFileState } from '@flighthq/editor-file';
 import { createGuidesState } from '@flighthq/editor-guides';
+import { createGestureState } from '@flighthq/editor-gesture';
 import { createHierarchyState } from '@flighthq/editor-hierarchy';
 import { createHistoryState } from '@flighthq/editor-history-state';
 import { createHostAdapterState } from '@flighthq/editor-host';
@@ -58,6 +65,7 @@ import { createPropertyPanelState } from '@flighthq/editor-properties';
 import { createRulerState } from '@flighthq/editor-rulers';
 import { createSceneState } from '@flighthq/editor-scene-state';
 import { createSelectionState } from '@flighthq/editor-selection';
+import { createSessionState } from '@flighthq/editor-session';
 import { createSnapConfig } from '@flighthq/editor-snap';
 import { createStatusBarState } from '@flighthq/editor-status';
 import { createTextStyleState } from '@flighthq/editor-text-style';
@@ -75,10 +83,13 @@ export interface EditorState {
   readonly commandHistory: CommandHistory;
   readonly contextMenu: ContextMenuState;
   readonly document: DocumentState;
+  readonly diagnostics: DiagnosticState;
   readonly dragDrop: DragDropState;
+  readonly editingScope: EditingScopeState;
   readonly exportSettings: ExportSettingsState;
   readonly file: FileState;
   readonly guides: GuidesState;
+  readonly gesture: GestureState<unknown>;
   readonly hierarchy: HierarchyState;
   readonly historyPanel: HistoryState;
   readonly host: HostAdapterState;
@@ -93,6 +104,7 @@ export interface EditorState {
   readonly rulers: RulerState;
   readonly sceneState: SceneState;
   readonly selection: SelectionState;
+  readonly session: SessionState;
   readonly snap: SnapConfig;
   readonly statusBar: StatusBarState;
   readonly textStyle: TextStyleState;
@@ -113,10 +125,13 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
     commandHistory: createCommandHistory(),
     contextMenu: createContextMenuState(),
     document: createDocumentState(),
+    diagnostics: createDiagnosticState(),
     dragDrop: createDragDropState(),
+    editingScope: createEditingScopeState({ identity: 'document', kind: 'document', label: 'Document' }),
     exportSettings: createExportSettingsState(),
     file: createFileState(),
     guides: createGuidesState(),
+    gesture: createGestureState(),
     hierarchy: createHierarchyState(),
     historyPanel: createHistoryState(),
     host: createHostAdapterState(),
@@ -131,6 +146,7 @@ export function createEditorState(viewportWidth = 800, viewportHeight = 600): Ed
     rulers: createRulerState(),
     sceneState: createSceneState(),
     selection: createSelectionState(),
+    session: createSessionState(),
     snap: createSnapConfig(),
     statusBar: createStatusBarState(),
     textStyle: createTextStyleState(),

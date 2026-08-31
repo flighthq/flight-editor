@@ -43,11 +43,14 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-context-menu` — hierarchical context-menu registry with enabled state, open position, and active item selection
 - `editor-cursor` — cursor display state: tool default, override stack with source-based push/pop
 - `editor-document` — document lifecycle state: serialization format, load/save coordination, metadata
+- `editor-diagnostics` — revision-aware structured diagnostics with source ownership and mutation/visualization blocking
 - `editor-drag-drop` — drag-and-drop state: tracks drag operations from library/hierarchy/external into the scene
+- `editor-editing-scope` — stable identity-based nested editing scopes, breadcrumbs, and reload reconciliation
 - `editor-export-settings` — per-node export format, scale, suffix, and enabled state
 - `editor-file` — file state: current file path, recent files, dirty tracking, save state
 - `editor-grid` — grid configuration state: cell size, subdivisions, visibility, opacity
 - `editor-guides` — guide state: horizontal/vertical ruler guides with add/remove/lock/move and snap positions
+- `editor-gesture` — cancellable begin/preview/commit transactions shared by tools and inspector scrubbing
 - `editor-hierarchy` — hierarchy tree state: expand/collapse tracking, flattened visible rows for tree views
 - `editor-host` — host adapter interface: abstract contract between editor core and GUI embedding layer
 - `editor-history-state` — user-facing history panel checkpoints: labeled snapshot data, browsing, removal, version tracking
@@ -62,6 +65,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-prototype` — prototype/interaction wiring state: triggers, actions, transitions, flows, preview mode
 - `editor-rulers` — ruler display state: visibility, units (pixels/inches/cm), origin, tick spacing, subdivisions
 - `editor-scene-state` — scene metadata: name, dimensions, background color, dirty/version tracking
+- `editor-session` — multi-document session state: activation, dirty-close policy, external revisions, last-known-good tracking
 - `editor-selection` — selection state: multi-select, filters by kind/hierarchy, version tracking
 - `editor-smart-guides` — ephemeral alignment guides during drag: edge, center, spacing, dimension, parent-bounds
 - `editor-snap` — snap configuration: grid and guide management, position snapping

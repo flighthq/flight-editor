@@ -10,11 +10,15 @@ describe('createEditorState', () => {
     expect(state.commandRegistry.size).toBe(0);
     expect(state.commandHistory.undoStack).toHaveLength(0);
     expect(state.contextMenu.registeredItems.size).toBe(0);
+    expect(state.diagnostics.batches.size).toBe(0);
+    expect(state.editingScope.stack.map((scope) => scope.identity)).toEqual(['document']);
     expect(state.exportSettings.slices.size).toBe(0);
     expect(state.hierarchy.expanded.size).toBe(0);
+    expect(state.gesture.active).toBeNull();
     expect(state.nodeFactory.entries.size).toBe(0);
     expect(state.pages.pages).toHaveLength(0);
     expect(state.selection.nodes).toHaveLength(0);
+    expect(state.session.documents.size).toBe(0);
     expect(state.rulers.visible).toBe(true);
     expect(state.textStyle.fontSize).toBe(16);
     expect(state.toolRegistry.activeToolId).toBeNull();
