@@ -4,6 +4,14 @@ export interface ComponentDefinition {
   readonly sourceNodeId: string;
   /** Stable definition identities directly nested by the source. */
   readonly nestedDefinitionIds?: readonly string[];
+  readonly descendantIds?: readonly string[];
+  readonly variantDimensions?: readonly ComponentVariantDimension[];
+}
+
+export interface ComponentVariantDimension {
+  readonly id: string;
+  readonly values: readonly string[];
+  readonly defaultValue: string;
 }
 
 export type ComponentOverrideKind = 'property' | 'added-descendant' | 'removed-descendant' | 'component';
@@ -19,6 +27,7 @@ export interface ComponentInstance {
   readonly instanceId: string;
   readonly definitionId: string;
   readonly overrides: ComponentOverride[];
+  readonly variants?: Readonly<Record<string, string>>;
 }
 
 export interface ComponentState {
@@ -45,6 +54,12 @@ export interface DetachedComponentInstance {
   readonly overrides: readonly ComponentOverride[];
 }
 
+export interface ComponentPropagationReport {
+  readonly definitionId: string;
+  readonly migratedInstances: readonly string[];
+  readonly orphanedOverrides: readonly { readonly instanceId: string; readonly propertyPath: string }[];
+}
+
 function assertIdentity(value: string, label: string): void {
   if (value.trim() === '') throw new TypeError(`${label} must not be empty`);
 }
@@ -64,6 +79,22 @@ function copyOverrides(overrides: readonly ComponentOverride[]): ComponentOverri
   });
 }
 
+function validateVariantDimensions(dimensions: readonly ComponentVariantDimension[] | undefined): void {
+  const ids = new Set<string>();
+  for (const dimension of dimensions ?? []) {
+    if (dimension.id.trim() === '' || ids.has(dimension.id)) {
+      throw new Error(`Invalid or duplicate variant dimension: ${dimension.id}`);
+    }
+    if (dimension.values.length === 0 || new Set(dimension.values).size !== dimension.values.length) {
+      throw new Error(`Variant dimension values must be non-empty and unique: ${dimension.id}`);
+    }
+    if (!dimension.values.includes(dimension.defaultValue)) {
+      throw new Error(`Variant default is not a declared value: ${dimension.id}`);
+    }
+    ids.add(dimension.id);
+  }
+}
+
 export function createComponentState(): ComponentState {
   return { definitions: new Map(), instances: new Map(), version: 0 };
 }
@@ -72,10 +103,16 @@ export function registerComponent(state: ComponentState, definition: ComponentDe
   assertIdentity(definition.id, 'Component definition id');
   assertIdentity(definition.name, 'Component definition name');
   assertIdentity(definition.sourceNodeId, 'Component source node id');
+  validateVariantDimensions(definition.variantDimensions);
   if (state.definitions.has(definition.id)) throw new Error(`Component definition already exists: ${definition.id}`);
   state.definitions.set(definition.id, {
     ...definition,
     nestedDefinitionIds: definition.nestedDefinitionIds?.slice(),
+    descendantIds: definition.descendantIds?.slice(),
+    variantDimensions: definition.variantDimensions?.map((dimension) => ({
+      ...dimension,
+      values: dimension.values.slice(),
+    })),
   });
   state.version++;
 }
@@ -108,7 +145,11 @@ export function addComponentInstance(state: ComponentState, instance: ComponentI
   assertIdentity(instance.definitionId, 'Component definition id');
   if (state.instances.has(instance.instanceId))
     throw new Error(`Component instance already exists: ${instance.instanceId}`);
-  state.instances.set(instance.instanceId, { ...instance, overrides: copyOverrides(instance.overrides) });
+  state.instances.set(instance.instanceId, {
+    ...instance,
+    overrides: copyOverrides(instance.overrides),
+    variants: instance.variants === undefined ? undefined : { ...instance.variants },
+  });
   state.version++;
 }
 
@@ -297,4 +338,85 @@ export function validateComponentState(state: Readonly<ComponentState>): readonl
     }
   }
   return diagnostics;
+}
+
+export function setInstanceVariant(
+  state: ComponentState,
+  instanceId: string,
+  dimensionId: string,
+  value: string,
+): boolean {
+  const instance = state.instances.get(instanceId);
+  if (instance === undefined) return false;
+  const dimension = state.definitions
+    .get(instance.definitionId)
+    ?.variantDimensions?.find(({ id }) => id === dimensionId);
+  if (dimension === undefined) throw new Error(`Variant dimension does not exist: ${dimensionId}`);
+  if (!dimension.values.includes(value)) throw new Error(`Variant value does not exist: ${value}`);
+  if (instance.variants?.[dimensionId] === value) return false;
+  state.instances.set(instanceId, {
+    ...instance,
+    variants: { ...instance.variants, [dimensionId]: value },
+  });
+  state.version++;
+  return true;
+}
+
+export function updateComponentDefinition(
+  state: ComponentState,
+  definition: ComponentDefinition,
+): ComponentPropagationReport {
+  const previous = state.definitions.get(definition.id);
+  if (previous === undefined) throw new Error(`Component definition does not exist: ${definition.id}`);
+  assertIdentity(definition.name, 'Component definition name');
+  assertIdentity(definition.sourceNodeId, 'Component source node id');
+  validateVariantDimensions(definition.variantDimensions);
+  const next = {
+    ...definition,
+    nestedDefinitionIds: definition.nestedDefinitionIds?.slice(),
+    descendantIds: definition.descendantIds?.slice(),
+    variantDimensions: definition.variantDimensions?.map((dimension) => ({
+      ...dimension,
+      values: dimension.values.slice(),
+    })),
+  };
+  state.definitions.set(definition.id, next);
+  if (validateComponentState(state).some(({ code }) => code === 'definition-cycle')) {
+    state.definitions.set(definition.id, previous);
+    throw new Error('Component definition update would introduce a nesting cycle');
+  }
+  const migratedInstances: string[] = [];
+  const orphanedOverrides: { instanceId: string; propertyPath: string }[] = [];
+  const descendants = new Set(definition.descendantIds ?? []);
+  const dimensions = new Map((definition.variantDimensions ?? []).map((dimension) => [dimension.id, dimension]));
+  for (const [instanceId, instance] of state.instances) {
+    if (instance.definitionId !== definition.id) continue;
+    const variants: Record<string, string> = {};
+    for (const [dimensionId, dimension] of dimensions) {
+      const selected = instance.variants?.[dimensionId];
+      variants[dimensionId] =
+        selected !== undefined && dimension.values.includes(selected) ? selected : dimension.defaultValue;
+    }
+    if (JSON.stringify(variants) !== JSON.stringify(instance.variants ?? {})) {
+      state.instances.set(instanceId, { ...instance, variants });
+      migratedInstances.push(instanceId);
+    }
+    for (const override of instance.overrides) {
+      if (
+        override.descendantId !== undefined &&
+        override.kind !== 'added-descendant' &&
+        !descendants.has(override.descendantId)
+      ) {
+        orphanedOverrides.push({ instanceId, propertyPath: override.propertyPath });
+      }
+    }
+  }
+  state.version++;
+  return {
+    definitionId: definition.id,
+    migratedInstances: migratedInstances.sort(),
+    orphanedOverrides: orphanedOverrides.sort(
+      (a, b) => a.instanceId.localeCompare(b.instanceId) || a.propertyPath.localeCompare(b.propertyPath),
+    ),
+  };
 }

@@ -16,8 +16,10 @@ import {
   relinkComponentDefinition,
   removeComponentInstance,
   setInstanceOverrides,
+  setInstanceVariant,
   swapComponentInstance,
   unregisterComponent,
+  updateComponentDefinition,
   validateComponentState,
 } from './componentState';
 
@@ -212,4 +214,55 @@ describe('swapComponentInstance', () => {
 
 describe('validateComponentState', () => {
   it('is exported', () => expect(validateComponentState).toBeTypeOf('function'));
+});
+
+describe('setInstanceVariant', () => {
+  it('sets only declared dimension values', () => {
+    const state = createComponentState();
+    registerComponent(state, {
+      ...defA,
+      variantDimensions: [{ id: 'size', values: ['small', 'large'], defaultValue: 'small' }],
+    });
+    addComponentInstance(state, inst1);
+    expect(setInstanceVariant(state, 'inst-1', 'size', 'large')).toBe(true);
+    expect(getComponentInstance(state, 'inst-1')?.variants).toEqual({ size: 'large' });
+    expect(() => setInstanceVariant(state, 'inst-1', 'size', 'missing')).toThrow('does not exist');
+  });
+});
+
+describe('updateComponentDefinition', () => {
+  it('migrates variants and reports preserved orphan overrides after source changes', () => {
+    const state = createComponentState();
+    registerComponent(state, {
+      ...defA,
+      descendantIds: ['label', 'icon'],
+      variantDimensions: [{ id: 'size', values: ['small', 'large'], defaultValue: 'small' }],
+    });
+    addComponentInstance(state, {
+      instanceId: 'inst-1',
+      definitionId: 'def-a',
+      variants: { size: 'large', removed: 'x' },
+      overrides: [{ descendantId: 'icon', propertyPath: 'visible', value: false }],
+    });
+    const report = updateComponentDefinition(state, {
+      ...defA,
+      descendantIds: ['label'],
+      variantDimensions: [{ id: 'size', values: ['small'], defaultValue: 'small' }],
+    });
+    expect(report).toEqual({
+      definitionId: 'def-a',
+      migratedInstances: ['inst-1'],
+      orphanedOverrides: [{ instanceId: 'inst-1', propertyPath: 'visible' }],
+    });
+    expect(getComponentInstance(state, 'inst-1')?.variants).toEqual({ size: 'small' });
+    expect(getComponentInstance(state, 'inst-1')?.overrides).toHaveLength(1);
+  });
+
+  it('rejects a source update that introduces a nesting cycle', () => {
+    const state = createComponentState();
+    registerComponent(state, defA);
+    registerComponent(state, { ...defB, nestedDefinitionIds: ['def-a'] });
+    expect(() => updateComponentDefinition(state, { ...defA, nestedDefinitionIds: ['def-b'] })).toThrow('cycle');
+    expect(getComponentDefinition(state, 'def-a')?.nestedDefinitionIds).toBeUndefined();
+  });
 });

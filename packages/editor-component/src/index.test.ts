@@ -19,8 +19,10 @@ describe('@flighthq/editor-component exports', () => {
       'relinkComponentDefinition',
       'removeComponentInstance',
       'setInstanceOverrides',
+      'setInstanceVariant',
       'swapComponentInstance',
       'unregisterComponent',
+      'updateComponentDefinition',
       'validateComponentState',
     ]);
   });

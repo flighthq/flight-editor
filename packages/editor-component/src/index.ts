@@ -14,8 +14,10 @@ export {
   relinkComponentDefinition,
   removeComponentInstance,
   setInstanceOverrides,
+  setInstanceVariant,
   swapComponentInstance,
   unregisterComponent,
+  updateComponentDefinition,
   validateComponentState,
 } from './componentState';
 export { createComponentCommand } from './componentCommand';
@@ -26,6 +28,8 @@ export type {
   ComponentInstance,
   ComponentOverride,
   ComponentOverrideKind,
+  ComponentPropagationReport,
   ComponentState,
+  ComponentVariantDimension,
   DetachedComponentInstance,
 } from './componentState';

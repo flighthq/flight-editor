@@ -20,18 +20,41 @@ export function createComponentCommand(
         definitions: Array.from(state.definitions.values()).map((definition) => ({
           ...definition,
           nestedDefinitionIds: definition.nestedDefinitionIds?.slice(),
+          descendantIds: definition.descendantIds?.slice(),
+          variantDimensions: definition.variantDimensions?.map((dimension) => ({
+            ...dimension,
+            values: dimension.values.slice(),
+          })),
         })),
         instances: Array.from(state.instances.values()).map((instance) => ({
           ...instance,
           overrides: instance.overrides.map((override) => ({ ...override })),
+          variants: instance.variants === undefined ? undefined : { ...instance.variants },
         })),
       }),
       restore(snapshot) {
-        state.definitions = new Map(snapshot.definitions.map((definition) => [definition.id, { ...definition }]));
+        state.definitions = new Map(
+          snapshot.definitions.map((definition) => [
+            definition.id,
+            {
+              ...definition,
+              nestedDefinitionIds: definition.nestedDefinitionIds?.slice(),
+              descendantIds: definition.descendantIds?.slice(),
+              variantDimensions: definition.variantDimensions?.map((dimension) => ({
+                ...dimension,
+                values: dimension.values.slice(),
+              })),
+            },
+          ]),
+        );
         state.instances = new Map(
           snapshot.instances.map((instance) => [
             instance.instanceId,
-            { ...instance, overrides: instance.overrides.map((override) => ({ ...override })) },
+            {
+              ...instance,
+              overrides: instance.overrides.map((override) => ({ ...override })),
+              variants: instance.variants === undefined ? undefined : { ...instance.variants },
+            },
           ]),
         );
         state.version++;
