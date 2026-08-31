@@ -37,6 +37,7 @@
     { "path": "./packages/editor-panel" },
     { "path": "./packages/editor-page" },
     { "path": "./packages/editor-preferences" },
+    { "path": "./packages/editor-plugin" },
     { "path": "./packages/editor-properties" },
     { "path": "./packages/editor-preview" },
     { "path": "./packages/editor-prototype" },

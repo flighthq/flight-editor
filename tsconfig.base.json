@@ -48,6 +48,8 @@
       "@flighthq/editor-page/*": ["./packages/editor-page/src/*"],
       "@flighthq/editor-preferences": ["./packages/editor-preferences/src/index.ts"],
       "@flighthq/editor-preferences/*": ["./packages/editor-preferences/src/*"],
+      "@flighthq/editor-plugin": ["./packages/editor-plugin/src/index.ts"],
+      "@flighthq/editor-plugin/*": ["./packages/editor-plugin/src/*"],
       "@flighthq/editor-properties": ["./packages/editor-properties/src/index.ts"],
       "@flighthq/editor-properties/*": ["./packages/editor-properties/src/*"],
       "@flighthq/editor-preview": ["./packages/editor-preview/src/index.ts"],
