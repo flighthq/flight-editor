@@ -40,6 +40,7 @@
     { "path": "./packages/editor-preview" },
     { "path": "./packages/editor-prototype" },
     { "path": "./packages/editor-rulers" },
+    { "path": "./packages/editor-responsive-layout" },
     { "path": "./packages/editor-scene-io" },
     { "path": "./packages/editor-scene-state" },
     { "path": "./packages/editor-session" },

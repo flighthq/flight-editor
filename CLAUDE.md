@@ -67,6 +67,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-preview` — host-neutral runtime preview lifecycle, revision coordination, and runtime override inspection
 - `editor-prototype` — prototype/interaction wiring state: triggers, actions, transitions, flows, preview mode
 - `editor-rulers` — ruler display state: visibility, units (pixels/inches/cm), origin, tick spacing, subdivisions
+- `editor-responsive-layout` — host-neutral responsive/auto-layout declarations, inference, validation, ordering, and command authoring
 - `editor-scene-state` — scene metadata: name, dimensions, background color, dirty/version tracking
 - `editor-session` — multi-document session state: activation, dirty-close policy, external revisions, last-known-good tracking
 - `editor-selection` — selection state: multi-select, filters by kind/hierarchy, version tracking
