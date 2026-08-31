@@ -35,6 +35,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 
 - `editor-align` — alignment and distribution configuration: target mode, distribute mode, key object, axis tracking
 - `editor-animation` — animation timeline state: keyframes, playhead, playback, looping, easing, duration
+- `editor-assets` — asset authoring registry: import/reimport lifecycle, metadata, references, relinking, and cross-document transfer
 - `editor-boolean` — boolean operation state: union, subtract, intersect, exclude with operand tracking
 - `editor-clipboard` — clipboard state: copy/cut entries, paste-ready node references
 - `editor-color` — color picker state: active packed color, saved swatches, bounded recent-color history

@@ -3,6 +3,7 @@
   "references": [
     { "path": "./packages/editor-align" },
     { "path": "./packages/editor-animation" },
+    { "path": "./packages/editor-assets" },
     { "path": "./packages/editor-boolean" },
     { "path": "./packages/editor-canvas" },
     { "path": "./packages/editor-clipboard" },
