@@ -42,14 +42,17 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-command` — command history: `Command` interface, execute/undo/redo, clean tracking
 - `editor-component` — component/symbol instance state: definitions, instances, overrides
 - `editor-component-inspector` — pluggable typed component schemas, mixed-value inspection, migrations, and command mutations
+- `editor-conformance` — reusable mandatory, capability-gated, and target-specific behavioral host scenarios
 - `editor-context-menu` — hierarchical context-menu registry with enabled state, open position, and active item selection
 - `editor-cursor` — cursor display state: tool default, override stack with source-based push/pop
 - `editor-document` — document lifecycle state: serialization format, load/save coordination, metadata
 - `editor-diagnostics` — revision-aware structured diagnostics with source ownership and mutation/visualization blocking
+- `editor-dev-mode` — read-only resolved inspection projections, revision comparison, and code-generator contributions
 - `editor-design-tokens` — typed design-system collections, modes, aliases, scopes, bindings, and authoring resolution
 - `editor-drag-drop` — drag-and-drop state: tracks drag operations from library/hierarchy/external into the scene
 - `editor-editing-scope` — stable identity-based nested editing scopes, breadcrumbs, and reload reconciliation
 - `editor-export-settings` — per-node export format, scale, suffix, and enabled state
+- `editor-export-pipeline` — deterministic exporter registry, dependency planning, cancellation, and reproducibility reports
 - `editor-file` — file state: current file path, recent files, dirty tracking, save state
 - `editor-grid` — grid configuration state: cell size, subdivisions, visibility, opacity
 - `editor-guides` — guide state: horizontal/vertical ruler guides with add/remove/lock/move and snap positions
@@ -66,6 +69,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-page` — ordered page/artboard definitions with active-page tracking
 - `editor-properties` — property panel state: property definitions, categories, edit state, mixed-value detection
 - `editor-preview` — host-neutral runtime preview lifecycle, revision coordination, and runtime override inspection
+- `editor-plugin` — versioned contribution lifecycle, capabilities, disposal, document data, and migrations
 - `editor-prototype` — prototype/interaction wiring state: triggers, actions, transitions, flows, preview mode
 - `editor-rulers` — ruler display state: visibility, units (pixels/inches/cm), origin, tick spacing, subdivisions
 - `editor-responsive-layout` — host-neutral responsive/auto-layout declarations, inference, validation, ordering, and command authoring
@@ -81,6 +85,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-tool` — tool registry: register/activate/deactivate tools, pointer dispatch lifecycle
 - `editor-transform-origin` — transform-origin mode and scene-space origin computation for node bounds
 - `editor-viewport` — viewport management: Camera2D wrapper with zoom limits, pan, fit-to-rect, coordinate conversion
+- `editor-version-history` — immutable canonical revision storage, preview, comparison, duplication, and restore orchestration
 - `editor-zoom-presets` — named viewport zoom levels and scene-fit calculations
 
 **Composition:**

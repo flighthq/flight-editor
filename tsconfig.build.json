@@ -59,6 +59,7 @@
     { "path": "./packages/editor-toolbar" },
     { "path": "./packages/editor-transform-origin" },
     { "path": "./packages/editor-viewport" },
+    { "path": "./packages/editor-version-history" },
     { "path": "./packages/editor-zoom-presets" },
     { "path": "./packages/scene-format" },
     { "path": "./packages/tool-editor" }

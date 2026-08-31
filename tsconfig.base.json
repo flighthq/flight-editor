@@ -130,6 +130,8 @@
       "@flighthq/editor-prototype/*": ["./packages/editor-prototype/src/*"],
       "@flighthq/editor-viewport": ["./packages/editor-viewport/src/index.ts"],
       "@flighthq/editor-viewport/*": ["./packages/editor-viewport/src/*"],
+      "@flighthq/editor-version-history": ["./packages/editor-version-history/src/index.ts"],
+      "@flighthq/editor-version-history/*": ["./packages/editor-version-history/src/*"],
       "@flighthq/editor-zoom-presets": ["./packages/editor-zoom-presets/src/index.ts"],
       "@flighthq/editor-zoom-presets/*": ["./packages/editor-zoom-presets/src/*"],
       "@flighthq/scene-format": ["./packages/scene-format/src/index.ts"],
