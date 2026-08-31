@@ -1,11 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
-import type { Command } from './commandHistory';
+import type { CoalescingCommand, Command } from './commandHistory';
 
 import {
   clearCommandHistory,
   createCommandHistory,
+  createCommandBatch,
+  executeCoalescingCommand,
   executeCommand,
+  executeCommandBatch,
   getCommandHistoryRedoCount,
   getCommandHistoryRedoLabel,
   getCommandHistoryUndoCount,
@@ -70,6 +73,20 @@ describe('executeCommand', () => {
     expect(getCommandHistoryUndoCount(history)).toBe(1);
   });
 
+  it('does not record a command whose execution fails', () => {
+    const history = createCommandHistory();
+    expect(() =>
+      executeCommand(history, {
+        label: 'fail',
+        execute: () => {
+          throw new Error('no');
+        },
+        undo() {},
+      }),
+    ).toThrow('no');
+    expect(getCommandHistoryUndoCount(history)).toBe(0);
+  });
+
   it('clears redo stack', () => {
     const history = createCommandHistory();
     const state = { value: 0 };
@@ -116,6 +133,17 @@ describe('isCommandHistoryClean', () => {
     expect(isCommandHistoryClean(history)).toBe(false);
   });
 
+  it('cannot become falsely clean after branching away from saved history', () => {
+    const history = createCommandHistory();
+    const state = { value: 0 };
+    executeCommand(history, createTestCommand('a', state, 1));
+    executeCommand(history, createTestCommand('b', state, 2));
+    markCommandHistoryClean(history);
+    undo(history);
+    executeCommand(history, createTestCommand('replacement', state, 3));
+    expect(isCommandHistoryClean(history)).toBe(false);
+  });
+
   it('returns clean after mark and no further edits', () => {
     const history = createCommandHistory();
     const state = { value: 0 };
@@ -155,6 +183,20 @@ describe('undo', () => {
     expect(undo(createCommandHistory())).toBe(false);
   });
 
+  it('retains history when command rollback fails', () => {
+    const history = createCommandHistory();
+    executeCommand(history, {
+      label: 'fragile',
+      execute() {},
+      undo() {
+        throw new Error('blocked');
+      },
+    });
+    expect(() => undo(history)).toThrow('blocked');
+    expect(getCommandHistoryUndoCount(history)).toBe(1);
+    expect(getCommandHistoryRedoCount(history)).toBe(0);
+  });
+
   it('reverses the command', () => {
     const history = createCommandHistory();
     const state = { value: 0 };
@@ -175,6 +217,83 @@ describe('undo', () => {
     expect(state.value).toBe(0);
     redo(history);
     expect(state.value).toBe(1);
+  });
+});
+
+describe('createCommandBatch', () => {
+  it('executes in order, undoes in reverse, and rolls back partial failures', () => {
+    const values: number[] = [];
+    const command = (value: number): Command => ({
+      label: `add ${value}`,
+      execute: () => {
+        values.push(value);
+      },
+      undo: () => {
+        values.pop();
+      },
+    });
+    const batch = createCommandBatch('Add values', [command(1), command(2)]);
+    batch.execute();
+    expect(values).toEqual([1, 2]);
+    batch.undo();
+    expect(values).toEqual([]);
+    const failure = createCommandBatch('Fail', [
+      command(1),
+      {
+        label: 'explode',
+        execute: () => {
+          throw new Error('boom');
+        },
+        undo() {},
+      },
+    ]);
+    expect(() => failure.execute()).toThrow('boom');
+    expect(values).toEqual([]);
+  });
+});
+
+describe('executeCommandBatch', () => {
+  it('records a non-empty batch as one undo boundary', () => {
+    const history = createCommandHistory();
+    const state = { value: 0 };
+    expect(
+      executeCommandBatch(history, 'Set twice', [
+        createTestCommand('one', state, 1),
+        createTestCommand('two', state, 2),
+      ]),
+    ).toBe(true);
+    expect(getCommandHistoryUndoCount(history)).toBe(1);
+    undo(history);
+    expect(state.value).toBe(0);
+    expect(executeCommandBatch(history, 'Empty', [])).toBe(false);
+  });
+});
+
+describe('executeCoalescingCommand', () => {
+  it('merges compatible continuous edits into one undo boundary', () => {
+    const history = createCommandHistory();
+    const state = { value: 0 };
+    const make = (before: number, after: number): CoalescingCommand =>
+      ({
+        label: 'Change value',
+        coalesceKey: 'node.x',
+        execute: () => {
+          state.value = after;
+        },
+        undo: () => {
+          state.value = before;
+        },
+        mergeWith(next) {
+          return make(before, (next as CoalescingCommand & { readonly after?: number }).after ?? state.value);
+        },
+        after,
+      }) as CoalescingCommand & { readonly after: number };
+    executeCoalescingCommand(history, make(0, 1));
+    executeCoalescingCommand(history, make(1, 2));
+    expect(state.value).toBe(2);
+    expect(getCommandHistoryUndoCount(history)).toBe(1);
+    undo(history);
+    expect(state.value).toBe(0);
   });
 });
 

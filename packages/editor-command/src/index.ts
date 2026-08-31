@@ -1,7 +1,10 @@
 export {
   clearCommandHistory,
   createCommandHistory,
+  createCommandBatch,
+  executeCoalescingCommand,
   executeCommand,
+  executeCommandBatch,
   getCommandHistoryRedoCount,
   getCommandHistoryUndoCount,
   getCommandHistoryUndoLabel,
@@ -12,4 +15,4 @@ export {
   undo,
 } from './commandHistory';
 
-export type { Command, CommandHistory } from './commandHistory';
+export type { CoalescingCommand, Command, CommandHistory } from './commandHistory';

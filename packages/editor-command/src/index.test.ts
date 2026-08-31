@@ -4,8 +4,11 @@ describe('@flighthq/editor-command exports', () => {
   it('exposes the public runtime API', () => {
     expect(Object.keys(command).sort()).toEqual([
       'clearCommandHistory',
+      'createCommandBatch',
       'createCommandHistory',
+      'executeCoalescingCommand',
       'executeCommand',
+      'executeCommandBatch',
       'getCommandHistoryRedoCount',
       'getCommandHistoryRedoLabel',
       'getCommandHistoryUndoCount',
