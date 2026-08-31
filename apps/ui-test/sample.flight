@@ -13,55 +13,329 @@ scene:
     traits:
       name: Scene
     children:
-      - kind: Shape
+      - kind: DisplayObject
         traits:
-          name: MenuBarBg
-          x: 0
-          y: 0
-          data:
-            commands:
-              - beginFill
-              - 2
-              - 993737727
-              - 1
-              - drawRectangle
-              - 4
-              - 0
-              - 0
-              - 1280
-              - 24
-              - endFill
-              - 0
-        children: []
-      - kind: Shape
+          name: MenuBar
+        children:
+          - kind: Shape
+            traits:
+              name: MenuBarBg
+              x: 0
+              y: 0
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 993737727
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1280
+                  - 24
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Menu_File
+              x: 8
+              y: 4
+              data:
+                text: "File"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 31
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Menu_Edit
+              x: 50
+              y: 4
+              data:
+                text: "Edit"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 31
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Menu_View
+              x: 92
+              y: 4
+              data:
+                text: "View"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 31
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Menu_Insert
+              x: 134
+              y: 4
+              data:
+                text: "Insert"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 46
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Menu_Modify
+              x: 190
+              y: 4
+              data:
+                text: "Modify"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 46
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Menu_Text
+              x: 246
+              y: 4
+              data:
+                text: "Text"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 31
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Menu_Commands
+              x: 288
+              y: 4
+              data:
+                text: "Commands"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 62
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Menu_Control
+              x: 358
+              y: 4
+              data:
+                text: "Control"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 54
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Menu_Window
+              x: 421
+              y: 4
+              data:
+                text: "Window"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 46
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Menu_Help
+              x: 477
+              y: 4
+              data:
+                text: "Help"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 31
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+      - kind: DisplayObject
         traits:
-          name: EditBarBg
-          x: 0
-          y: 24
-          data:
-            commands:
-              - beginFill
-              - 2
-              - 1246382847
-              - 1
-              - drawRectangle
-              - 4
-              - 0
-              - 0
-              - 1280
-              - 28
-              - endFill
-              - 0
-        children: []
+          name: EditBar
+        children:
+          - kind: Shape
+            traits:
+              name: EditBarBg
+              x: 0
+              y: 24
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1246382847
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1280
+                  - 28
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: EditBar_SceneName
+              x: 10
+              y: 30
+              data:
+                text: "Scene 1"
+                textFormat:
+                  font: Arial
+                  size: 12
+                  color: 4294967295
+                  bold: true
+                width: 59
+                height: 18
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: EditBar_ZoomBg
+              x: 1180
+              y: 28
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 842150655
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 80
+                  - 20
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: EditBar_Zoom
+              x: 1188
+              y: 31
+              data:
+                text: "100%"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 3435973887
+                width: 60
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: EditBar_SnapLabel
+              x: 100
+              y: 32
+              data:
+                text: "Snap to Objects"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 100
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
       - kind: DisplayObject
         traits:
           name: Timeline
         children:
           - kind: Shape
             traits:
-              name: TimelineLayersBg
+              name: TimelineHeaderBg
               x: 0
               y: 53
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1431655935
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1280
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: TimelineHeaderLabel
+              x: 6
+              y: 55
+              data:
+                text: "Timeline"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 4294967295
+                  bold: true
+                width: 56
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: TimelineLayersBg
+              x: 0
+              y: 71
               data:
                 commands:
                   - beginFill
@@ -73,7 +347,7 @@ scene:
                   - 0
                   - 0
                   - 200
-                  - 138
+                  - 120
                   - endFill
                   - 0
             children: []
@@ -81,7 +355,7 @@ scene:
             traits:
               name: TimelineFramesBg
               x: 201
-              y: 53
+              y: 71
               data:
                 commands:
                   - beginFill
@@ -93,7 +367,7 @@ scene:
                   - 0
                   - 0
                   - 1079
-                  - 138
+                  - 120
                   - endFill
                   - 0
             children: []
@@ -101,7 +375,7 @@ scene:
             traits:
               name: TimelineDivider
               x: 200
-              y: 53
+              y: 71
               data:
                 commands:
                   - beginFill
@@ -113,99 +387,63 @@ scene:
                   - 0
                   - 0
                   - 1
-                  - 138
+                  - 120
                   - endFill
                   - 0
             children: []
-          - kind: Shape
+          - kind: TextLabel
             traits:
-              name: LayerRow1
-              x: 4
-              y: 57
+              name: TimelineCol_Visibility
+              x: 148
+              y: 73
               data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 1347440895
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 192
-                  - 22
-                  - endFill
-                  - 0
+                text: "👁"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 14
+                height: 15
+                autoSize: left
+                verticalAlign: top
             children: []
-          - kind: Shape
+          - kind: TextLabel
             traits:
-              name: LayerRow2
-              x: 4
-              y: 81
+              name: TimelineCol_Lock
+              x: 166
+              y: 73
               data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 1431655935
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 192
-                  - 22
-                  - endFill
-                  - 0
+                text: "🔒"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 14
+                height: 15
+                autoSize: left
+                verticalAlign: top
             children: []
-          - kind: Shape
+          - kind: TextLabel
             traits:
-              name: LayerRow3
-              x: 4
-              y: 105
+              name: TimelineCol_Outline
+              x: 184
+              y: 73
               data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 1347440895
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 192
-                  - 22
-                  - endFill
-                  - 0
+                text: "□"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 14
+                height: 15
+                autoSize: left
+                verticalAlign: top
             children: []
           - kind: Shape
             traits:
-              name: PlayheadLine
-              x: 260
-              y: 53
-              data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 4283782655
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 2
-                  - 138
-                  - endFill
-                  - 0
-            children: []
-      - kind: DisplayObject
-        traits:
-          name: DocumentArea
-        children:
-          - kind: Shape
-            traits:
-              name: ToolsPanelBg
-              x: 0
-              y: 192
+              name: FrameHeaderBg
+              x: 201
+              y: 71
               data:
                 commands:
                   - beginFill
@@ -216,131 +454,3664 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 44
-                  - 458
+                  - 1079
+                  - 16
                   - endFill
                   - 0
             children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_1
+              x: 203
+              y: 73
+              data:
+                text: "1"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_5
+              x: 235
+              y: 73
+              data:
+                text: "5"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_10
+              x: 275
+              y: 73
+              data:
+                text: "10"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_15
+              x: 315
+              y: 73
+              data:
+                text: "15"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_20
+              x: 355
+              y: 73
+              data:
+                text: "20"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_25
+              x: 395
+              y: 73
+              data:
+                text: "25"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_30
+              x: 435
+              y: 73
+              data:
+                text: "30"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_35
+              x: 475
+              y: 73
+              data:
+                text: "35"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_40
+              x: 515
+              y: 73
+              data:
+                text: "40"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_45
+              x: 555
+              y: 73
+              data:
+                text: "45"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_50
+              x: 595
+              y: 73
+              data:
+                text: "50"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_55
+              x: 635
+              y: 73
+              data:
+                text: "55"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Frame_60
+              x: 675
+              y: 73
+              data:
+                text: "60"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 2576980479
+                width: 20
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
           - kind: Shape
             traits:
-              name: ToolIcon1
-              x: 6
-              y: 200
+              name: FrameTick_0
+              x: 205
+              y: 85
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 2290649343
+                  - 1515870975
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
-                  - 32
-                  - 32
+                  - 1
+                  - 2
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: ToolIcon2
-              x: 6
-              y: 236
+              name: FrameTick_1
+              x: 213
+              y: 85
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 2290649343
+                  - 1515870975
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
-                  - 32
-                  - 32
+                  - 1
+                  - 2
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: ToolIcon3
-              x: 6
-              y: 272
+              name: FrameTick_2
+              x: 221
+              y: 85
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 2290649343
+                  - 1515870975
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
-                  - 32
-                  - 32
+                  - 1
+                  - 2
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: ToolIcon4
-              x: 6
-              y: 308
+              name: FrameTick_3
+              x: 229
+              y: 85
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 2290649343
+                  - 1515870975
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
-                  - 32
-                  - 32
+                  - 1
+                  - 2
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: ToolIcon5
-              x: 6
-              y: 344
+              name: FrameTick_4
+              x: 237
+              y: 85
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 2290649343
+                  - 1515870975
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
-                  - 32
-                  - 32
+                  - 1
+                  - 2
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: ToolIcon6
-              x: 6
-              y: 380
+              name: FrameTick_5
+              x: 245
+              y: 85
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 2290649343
+                  - 1515870975
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
-                  - 32
-                  - 32
+                  - 1
+                  - 2
                   - endFill
                   - 0
             children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_6
+              x: 253
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_7
+              x: 261
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_8
+              x: 269
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_9
+              x: 277
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_10
+              x: 285
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_11
+              x: 293
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_12
+              x: 301
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_13
+              x: 309
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_14
+              x: 317
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_15
+              x: 325
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_16
+              x: 333
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_17
+              x: 341
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_18
+              x: 349
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_19
+              x: 357
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_20
+              x: 365
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_21
+              x: 373
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_22
+              x: 381
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_23
+              x: 389
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_24
+              x: 397
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_25
+              x: 405
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_26
+              x: 413
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_27
+              x: 421
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_28
+              x: 429
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_29
+              x: 437
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_30
+              x: 445
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_31
+              x: 453
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_32
+              x: 461
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_33
+              x: 469
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_34
+              x: 477
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_35
+              x: 485
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_36
+              x: 493
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_37
+              x: 501
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_38
+              x: 509
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_39
+              x: 517
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_40
+              x: 525
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_41
+              x: 533
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_42
+              x: 541
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_43
+              x: 549
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_44
+              x: 557
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_45
+              x: 565
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_46
+              x: 573
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_47
+              x: 581
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_48
+              x: 589
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_49
+              x: 597
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_50
+              x: 605
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_51
+              x: 613
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_52
+              x: 621
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_53
+              x: 629
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_54
+              x: 637
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_55
+              x: 645
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_56
+              x: 653
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_57
+              x: 661
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_58
+              x: 669
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_59
+              x: 677
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_60
+              x: 685
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_61
+              x: 693
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_62
+              x: 701
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_63
+              x: 709
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_64
+              x: 717
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_65
+              x: 725
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_66
+              x: 733
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_67
+              x: 741
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_68
+              x: 749
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_69
+              x: 757
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_70
+              x: 765
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_71
+              x: 773
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_72
+              x: 781
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_73
+              x: 789
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_74
+              x: 797
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_75
+              x: 805
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_76
+              x: 813
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_77
+              x: 821
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_78
+              x: 829
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameTick_79
+              x: 837
+              y: 85
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: LayerRow_Actions_Bg
+              x: 2
+              y: 88
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1347440895
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 196
+                  - 20
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: LayerRow_Actions_Icon
+              x: 8
+              y: 92
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 3358733055
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 6
+                  - 6
+                  - 5
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Layer_Actions
+              x: 22
+              y: 90
+              data:
+                text: "Actions"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 4294967295
+                width: 80
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Layer_Actions_Eye
+              x: 150
+              y: 90
+              data:
+                text: "•"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 12
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Layer_Actions_Lock
+              x: 168
+              y: 90
+              data:
+                text: "•"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 12
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: LayerRow_Labels_Bg
+              x: 2
+              y: 110
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1431655935
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 196
+                  - 20
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: LayerRow_Labels_Icon
+              x: 8
+              y: 114
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1687603455
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 6
+                  - 6
+                  - 5
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Layer_Labels
+              x: 22
+              y: 112
+              data:
+                text: "Labels"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 4294967295
+                width: 80
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Layer_Labels_Eye
+              x: 150
+              y: 112
+              data:
+                text: "•"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 12
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Layer_Labels_Lock
+              x: 168
+              y: 112
+              data:
+                text: "•"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 12
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: LayerRow_Layer1_Bg
+              x: 2
+              y: 132
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 862375167
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 196
+                  - 20
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: LayerRow_Layer1_Icon
+              x: 8
+              y: 136
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1690854655
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 6
+                  - 6
+                  - 5
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Layer_Layer1
+              x: 22
+              y: 134
+              data:
+                text: "Layer 1"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 4294967295
+                width: 80
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Layer_Layer1_Eye
+              x: 150
+              y: 134
+              data:
+                text: "•"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 4294967295
+                width: 12
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Layer_Layer1_Lock
+              x: 168
+              y: 134
+              data:
+                text: "•"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 4294967295
+                width: 12
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Keyframe_L1_F1
+              x: 205
+              y: 139
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 255
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 3
+                  - 3
+                  - 2
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: KeyframeSpan_L1
+              x: 207
+              y: 132
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 3201495295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 30
+                  - 20
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: PlayheadLine
+              x: 225
+              y: 88
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4282664191
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 2
+                  - 100
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: PlayheadMarker
+              x: 221
+              y: 84
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4282664191
+                  - 1
+                  - moveTo
+                  - 2
+                  - 0
+                  - 0
+                  - lineTo
+                  - 2
+                  - 10
+                  - 0
+                  - lineTo
+                  - 2
+                  - 5
+                  - 6
+                  - lineTo
+                  - 2
+                  - 0
+                  - 0
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: TimelineBottomBg
+              x: 0
+              y: 153
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1431655935
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 200
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: TimelineBtn_AddLayer
+              x: 6
+              y: 155
+              data:
+                text: "+"
+                textFormat:
+                  font: Arial
+                  size: 12
+                  color: 3435973887
+                  bold: true
+                width: 14
+                height: 18
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: TimelineBtn_AddGuide
+              x: 24
+              y: 155
+              data:
+                text: "≡"
+                textFormat:
+                  font: Arial
+                  size: 12
+                  color: 3435973887
+                width: 14
+                height: 18
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: TimelineBtn_AddFolder
+              x: 42
+              y: 155
+              data:
+                text: "📁"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 14
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: TimelineBtn_DeleteLayer
+              x: 62
+              y: 155
+              data:
+                text: "🗑"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 14
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: FrameStatusBg
+              x: 201
+              y: 153
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1431655935
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1079
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: FrameStatus_Current
+              x: 210
+              y: 156
+              data:
+                text: "1"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 3435973887
+                width: 20
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: FrameStatus_Rate
+              x: 240
+              y: 156
+              data:
+                text: "24.0 fps"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 50
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: FrameStatus_Time
+              x: 300
+              y: 156
+              data:
+                text: "0.0s"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 40
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+      - kind: DisplayObject
+        traits:
+          name: DocumentArea
+        children:
+          - kind: DisplayObject
+            traits:
+              name: ToolsPanel
+            children:
+              - kind: Shape
+                traits:
+                  name: ToolsPanelBg
+                  x: 0
+                  y: 192
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1145324799
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 44
+                      - 458
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Selection_Bg
+                  x: 3
+                  y: 196
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 862375167
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Selection_Icon
+                  x: 3
+                  y: 196
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 255
+                      - 1
+                      - moveTo
+                      - 2
+                      - 3
+                      - 2
+                      - lineTo
+                      - 2
+                      - 3
+                      - 14
+                      - lineTo
+                      - 2
+                      - 7
+                      - 10
+                      - lineTo
+                      - 2
+                      - 11
+                      - 14
+                      - lineTo
+                      - 2
+                      - 13
+                      - 12
+                      - lineTo
+                      - 2
+                      - 9
+                      - 8
+                      - lineTo
+                      - 2
+                      - 14
+                      - 5
+                      - lineTo
+                      - 2
+                      - 3
+                      - 2
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Subselection_Bg
+                  x: 23
+                  y: 196
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Subselection_Icon
+                  x: 23
+                  y: 196
+                  data:
+                    commands:
+                      - lineStyle
+                      - 8
+                      - 1.5
+                      - 3705462015
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - moveTo
+                      - 2
+                      - 4
+                      - 2
+                      - lineTo
+                      - 2
+                      - 4
+                      - 13
+                      - lineTo
+                      - 2
+                      - 8
+                      - 9
+                      - lineTo
+                      - 2
+                      - 13
+                      - 5
+                      - lineTo
+                      - 2
+                      - 4
+                      - 2
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_FreeTransform_Bg
+                  x: 3
+                  y: 216
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_FreeTransform_Icon
+                  x: 3
+                  y: 216
+                  data:
+                    commands:
+                      - lineStyle
+                      - 8
+                      - 1
+                      - 3705462015
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - drawRectangle
+                      - 4
+                      - 3
+                      - 3
+                      - 12
+                      - 12
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 2
+                      - 2
+                      - 3
+                      - 3
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 13
+                      - 2
+                      - 3
+                      - 3
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 2
+                      - 13
+                      - 3
+                      - 3
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 13
+                      - 13
+                      - 3
+                      - 3
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_GradientTrans_Bg
+                  x: 23
+                  y: 216
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: TextLabel
+                traits:
+                  name: Tool_GradientTrans_Letter
+                  x: 26
+                  y: 218
+                  data:
+                    text: "F"
+                    textFormat:
+                      font: Arial
+                      size: 11
+                      color: 3705462015
+                      bold: true
+                    width: 12
+                    height: 14
+                    autoSize: left
+                    verticalAlign: top
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Line_Bg
+                  x: 3
+                  y: 236
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Line_Icon
+                  x: 3
+                  y: 236
+                  data:
+                    commands:
+                      - lineStyle
+                      - 8
+                      - 2
+                      - 3705462015
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - moveTo
+                      - 2
+                      - 3
+                      - 14
+                      - lineTo
+                      - 2
+                      - 14
+                      - 3
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Lasso_Bg
+                  x: 23
+                  y: 236
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Lasso_Icon
+                  x: 23
+                  y: 236
+                  data:
+                    commands:
+                      - lineStyle
+                      - 8
+                      - 1.5
+                      - 3705462015
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - moveTo
+                      - 2
+                      - 5
+                      - 14
+                      - lineTo
+                      - 2
+                      - 3
+                      - 8
+                      - lineTo
+                      - 2
+                      - 5
+                      - 3
+                      - lineTo
+                      - 2
+                      - 12
+                      - 3
+                      - lineTo
+                      - 2
+                      - 14
+                      - 8
+                      - lineTo
+                      - 2
+                      - 10
+                      - 12
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Pen_Bg
+                  x: 3
+                  y: 256
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Pen_Icon
+                  x: 3
+                  y: 256
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - moveTo
+                      - 2
+                      - 9
+                      - 2
+                      - lineTo
+                      - 2
+                      - 13
+                      - 12
+                      - lineTo
+                      - 2
+                      - 9
+                      - 15
+                      - lineTo
+                      - 2
+                      - 5
+                      - 12
+                      - lineTo
+                      - 2
+                      - 9
+                      - 2
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Text_Bg
+                  x: 23
+                  y: 256
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: TextLabel
+                traits:
+                  name: Tool_Text_Icon
+                  x: 25
+                  y: 257
+                  data:
+                    text: "T"
+                    textFormat:
+                      font: Arial
+                      size: 13
+                      color: 3705462015
+                      bold: true
+                    width: 14
+                    height: 16
+                    autoSize: left
+                    verticalAlign: top
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Oval_Bg
+                  x: 3
+                  y: 276
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Oval_Icon
+                  x: 3
+                  y: 276
+                  data:
+                    commands:
+                      - lineStyle
+                      - 8
+                      - 1.5
+                      - 3705462015
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - drawCircle
+                      - 3
+                      - 9
+                      - 9
+                      - 6
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Rectangle_Bg
+                  x: 23
+                  y: 276
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Rectangle_Icon
+                  x: 23
+                  y: 276
+                  data:
+                    commands:
+                      - lineStyle
+                      - 8
+                      - 1.5
+                      - 3705462015
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - drawRectangle
+                      - 4
+                      - 3
+                      - 3
+                      - 12
+                      - 12
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Pencil_Bg
+                  x: 3
+                  y: 296
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Pencil_Icon
+                  x: 3
+                  y: 296
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - moveTo
+                      - 2
+                      - 12
+                      - 2
+                      - lineTo
+                      - 2
+                      - 14
+                      - 4
+                      - lineTo
+                      - 2
+                      - 6
+                      - 14
+                      - lineTo
+                      - 2
+                      - 4
+                      - 14
+                      - lineTo
+                      - 2
+                      - 12
+                      - 2
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Brush_Bg
+                  x: 23
+                  y: 296
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Brush_Icon
+                  x: 23
+                  y: 296
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawEllipse
+                      - 4
+                      - 2
+                      - 8
+                      - 10
+                      - 8
+                      - endFill
+                      - 0
+                      - lineStyle
+                      - 8
+                      - 2
+                      - 3705462015
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - moveTo
+                      - 2
+                      - 9
+                      - 8
+                      - lineTo
+                      - 2
+                      - 14
+                      - 2
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_InkBottle_Bg
+                  x: 3
+                  y: 316
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_InkBottle_Icon
+                  x: 3
+                  y: 316
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 4
+                      - 7
+                      - 10
+                      - 8
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 6
+                      - 3
+                      - 6
+                      - 5
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_PaintBucket_Bg
+                  x: 23
+                  y: 316
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_PaintBucket_Icon
+                  x: 23
+                  y: 316
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - moveTo
+                      - 2
+                      - 3
+                      - 14
+                      - lineTo
+                      - 2
+                      - 5
+                      - 5
+                      - lineTo
+                      - 2
+                      - 13
+                      - 5
+                      - lineTo
+                      - 2
+                      - 15
+                      - 14
+                      - lineTo
+                      - 2
+                      - 3
+                      - 14
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 4291297535
+                      - 1
+                      - moveTo
+                      - 2
+                      - 11
+                      - 5
+                      - lineTo
+                      - 2
+                      - 13
+                      - 2
+                      - lineTo
+                      - 2
+                      - 15
+                      - 5
+                      - lineTo
+                      - 2
+                      - 11
+                      - 5
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Eyedropper_Bg
+                  x: 3
+                  y: 336
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Eyedropper_Icon
+                  x: 3
+                  y: 336
+                  data:
+                    commands:
+                      - lineStyle
+                      - 8
+                      - 2
+                      - 3705462015
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - moveTo
+                      - 2
+                      - 4
+                      - 14
+                      - lineTo
+                      - 2
+                      - 13
+                      - 5
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawCircle
+                      - 3
+                      - 14
+                      - 4
+                      - 3
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Eraser_Bg
+                  x: 23
+                  y: 336
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Eraser_Icon
+                  x: 23
+                  y: 336
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRoundRectangle
+                      - 6
+                      - 2
+                      - 5
+                      - 14
+                      - 8
+                      - 3
+                      - 3
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Hand_Bg
+                  x: 3
+                  y: 356
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Hand_Icon
+                  x: 3
+                  y: 356
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRoundRectangle
+                      - 6
+                      - 3
+                      - 6
+                      - 12
+                      - 10
+                      - 4
+                      - 4
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 4
+                      - 2
+                      - 3
+                      - 6
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 8
+                      - 2
+                      - 3
+                      - 6
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 3705462015
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 12
+                      - 3
+                      - 3
+                      - 5
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Zoom_Bg
+                  x: 23
+                  y: 356
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 18
+                      - 18
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: Tool_Zoom_Icon
+                  x: 23
+                  y: 356
+                  data:
+                    commands:
+                      - lineStyle
+                      - 8
+                      - 1.5
+                      - 3705462015
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - drawCircle
+                      - 3
+                      - 7
+                      - 7
+                      - 5
+                      - endFill
+                      - 0
+                      - lineStyle
+                      - 8
+                      - 2.5
+                      - 3705462015
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - moveTo
+                      - 2
+                      - 11
+                      - 11
+                      - lineTo
+                      - 2
+                      - 16
+                      - 16
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: ToolsDivider1
+                  x: 3
+                  y: 378
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 707406591
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 38
+                      - 1
+                      - endFill
+                      - 0
+                children: []
+              - kind: TextLabel
+                traits:
+                  name: ToolsLabel_Colors
+                  x: 4
+                  y: 382
+                  data:
+                    text: "Colors"
+                    textFormat:
+                      font: Arial
+                      size: 8
+                      color: 2576980479
+                    width: 36
+                    height: 14
+                    autoSize: left
+                    verticalAlign: top
+                children: []
+              - kind: Shape
+                traits:
+                  name: StrokeColorChip
+                  x: 6
+                  y: 394
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 255
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 16
+                      - 16
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 4294967295
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 1
+                      - 1
+                      - 14
+                      - 14
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 255
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 3
+                      - 3
+                      - 10
+                      - 10
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: FillColorChip
+                  x: 16
+                  y: 402
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 255
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 16
+                      - 16
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 4294967295
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 1
+                      - 1
+                      - 14
+                      - 14
+                      - endFill
+                      - 0
+                children: []
+              - kind: TextLabel
+                traits:
+                  name: SwapColorsIcon
+                  x: 28
+                  y: 392
+                  data:
+                    text: "⇄"
+                    textFormat:
+                      font: Arial
+                      size: 9
+                      color: 2576980479
+                    width: 14
+                    height: 15
+                    autoSize: left
+                    verticalAlign: top
+                children: []
+              - kind: Shape
+                traits:
+                  name: DefaultColorsIcon
+                  x: 4
+                  y: 416
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 255
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 8
+                      - 8
+                      - endFill
+                      - 0
+                      - beginFill
+                      - 2
+                      - 4294967295
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 4
+                      - 4
+                      - 8
+                      - 8
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: NoColorIcon
+                  x: 20
+                  y: 416
+                  data:
+                    commands:
+                      - lineStyle
+                      - 8
+                      - 1
+                      - 3358733055
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 10
+                      - 10
+                      - endFill
+                      - 0
+                      - lineStyle
+                      - 8
+                      - 1
+                      - 3358733055
+                      - 1
+                      - 0
+                      - 0
+                      - 0
+                      - 0
+                      - 4
+                      - moveTo
+                      - 2
+                      - 0
+                      - 10
+                      - lineTo
+                      - 2
+                      - 10
+                      - 0
+                      - endFill
+                      - 0
+                children: []
+              - kind: Shape
+                traits:
+                  name: ToolsDivider2
+                  x: 3
+                  y: 432
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 707406591
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 38
+                      - 1
+                      - endFill
+                      - 0
+                children: []
+              - kind: TextLabel
+                traits:
+                  name: ToolsLabel_Options
+                  x: 4
+                  y: 436
+                  data:
+                    text: "Options"
+                    textFormat:
+                      font: Arial
+                      size: 8
+                      color: 2576980479
+                    width: 40
+                    height: 14
+                    autoSize: left
+                    verticalAlign: top
+                children: []
+              - kind: Shape
+                traits:
+                  name: SnapMagnet
+                  x: 14
+                  y: 450
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1684301055
+                      - 1
+                      - drawCircle
+                      - 3
+                      - 8
+                      - 8
+                      - 6
+                      - endFill
+                      - 0
+                children: []
+              - kind: TextLabel
+                traits:
+                  name: SnapMagnetLabel
+                  x: 8
+                  y: 448
+                  data:
+                    text: "🧲"
+                    textFormat:
+                      font: Arial
+                      size: 10
+                      color: 3705462015
+                    width: 16
+                    height: 16
+                    autoSize: left
+                    verticalAlign: top
+                children: []
           - kind: Shape
             traits:
               name: Pasteboard
@@ -381,91 +4152,1661 @@ scene:
                   - endFill
                   - 0
             children: []
+          - kind: DisplayObject
+            traits:
+              name: SidePanels
+            children:
+              - kind: Shape
+                traits:
+                  name: SidePanelsBg
+                  x: 1080
+                  y: 192
+                  data:
+                    commands:
+                      - beginFill
+                      - 2
+                      - 1077952767
+                      - 1
+                      - drawRectangle
+                      - 4
+                      - 0
+                      - 0
+                      - 200
+                      - 458
+                      - endFill
+                      - 0
+                children: []
+              - kind: DisplayObject
+                traits:
+                  name: LibraryPanel
+                children:
+                  - kind: Shape
+                    traits:
+                      name: LibraryHeaderBg
+                      x: 1080
+                      y: 192
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1431655935
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibraryHeaderLabel
+                      x: 1086
+                      y: 194
+                      data:
+                        text: "Library - Untitled-1"
+                        textFormat:
+                          font: Arial
+                          size: 10
+                          color: 4294967295
+                          bold: true
+                        width: 160
+                        height: 16
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibraryToolbar
+                      x: 1080
+                      y: 212
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 926365695
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 18
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibrarySearch_Placeholder
+                      x: 1086
+                      y: 215
+                      data:
+                        text: "Search..."
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 1684301055
+                        width: 80
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibraryContentBg
+                      x: 1080
+                      y: 230
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1212696831
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 110
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibCol_Name
+                      x: 1086
+                      y: 232
+                      data:
+                        text: "Name"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                          bold: true
+                        width: 80
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibCol_Kind
+                      x: 1210
+                      y: 232
+                      data:
+                        text: "Kind"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                          bold: true
+                        width: 40
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibCol_Date
+                      x: 1250
+                      y: 232
+                      data:
+                        text: "Date"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                          bold: true
+                        width: 30
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibItem1Bg
+                      x: 1080
+                      y: 244
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1347440895
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 18
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibItem1_Icon
+                      x: 1086
+                      y: 246
+                      data:
+                        text: "🎬"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 3435973887
+                        width: 14
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibItem1_Name
+                      x: 1102
+                      y: 246
+                      data:
+                        text: "logo_anim"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 4294967295
+                        width: 80
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibItem1_Kind
+                      x: 1210
+                      y: 246
+                      data:
+                        text: "Movie Clip"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 50
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibItem2Bg
+                      x: 1080
+                      y: 262
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1431655935
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 18
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibItem2_Icon
+                      x: 1086
+                      y: 264
+                      data:
+                        text: "●"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 3435973887
+                        width: 14
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibItem2_Name
+                      x: 1102
+                      y: 264
+                      data:
+                        text: "btn_submit"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 4294967295
+                        width: 80
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibItem2_Kind
+                      x: 1210
+                      y: 264
+                      data:
+                        text: "Button"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 50
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibItem3Bg
+                      x: 1080
+                      y: 280
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1347440895
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 18
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibItem3_Icon
+                      x: 1086
+                      y: 282
+                      data:
+                        text: "🖼"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 3435973887
+                        width: 14
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibItem3_Name
+                      x: 1102
+                      y: 282
+                      data:
+                        text: "bg_image.png"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 4294967295
+                        width: 80
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibItem3_Kind
+                      x: 1210
+                      y: 282
+                      data:
+                        text: "Bitmap"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 50
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibPreviewBg
+                      x: 1080
+                      y: 300
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 673720575
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 40
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibPreview_Placeholder
+                      x: 1140
+                      y: 314
+                      data:
+                        text: "Preview"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 1684301055
+                          align: center
+                        width: 60
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+              - kind: DisplayObject
+                traits:
+                  name: ColorMixerPanel
+                children:
+                  - kind: Shape
+                    traits:
+                      name: ColorMixerHeaderBg
+                      x: 1080
+                      y: 344
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1431655935
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixerHeaderLabel
+                      x: 1086
+                      y: 346
+                      data:
+                        text: "Color Mixer"
+                        textFormat:
+                          font: Arial
+                          size: 10
+                          color: 4294967295
+                          bold: true
+                        width: 100
+                        height: 16
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixerContentBg
+                      x: 1080
+                      y: 364
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1212696831
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 100
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_FillType
+                      x: 1086
+                      y: 368
+                      data:
+                        text: "Solid"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 3435973887
+                        width: 50
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_SwatchBg
+                      x: 1086
+                      y: 382
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 255
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 30
+                          - 30
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_Swatch
+                      x: 1087
+                      y: 383
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 4294967295
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 28
+                          - 28
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_RLabel
+                      x: 1124
+                      y: 384
+                      data:
+                        text: "R:"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 16
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_RTrack
+                      x: 1142
+                      y: 388
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 842150655
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 80
+                          - 6
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_RFill
+                      x: 1142
+                      y: 388
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1687608575
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 80
+                          - 6
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_RValue
+                      x: 1228
+                      y: 384
+                      data:
+                        text: "255"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 3435973887
+                        width: 30
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_GLabel
+                      x: 1124
+                      y: 402
+                      data:
+                        text: "G:"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 16
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_GTrack
+                      x: 1142
+                      y: 406
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 842150655
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 80
+                          - 6
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_GFill
+                      x: 1142
+                      y: 406
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1687608575
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 80
+                          - 6
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_GValue
+                      x: 1228
+                      y: 402
+                      data:
+                        text: "255"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 3435973887
+                        width: 30
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_BLabel
+                      x: 1124
+                      y: 420
+                      data:
+                        text: "B:"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 16
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_BTrack
+                      x: 1142
+                      y: 424
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 842150655
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 80
+                          - 6
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_BFill
+                      x: 1142
+                      y: 424
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1687608575
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 80
+                          - 6
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_BValue
+                      x: 1228
+                      y: 420
+                      data:
+                        text: "255"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 3435973887
+                        width: 30
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_ALabel
+                      x: 1124
+                      y: 438
+                      data:
+                        text: "A:"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 16
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_ATrack
+                      x: 1142
+                      y: 442
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 842150655
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 80
+                          - 6
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_AFill
+                      x: 1142
+                      y: 442
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 80
+                          - 6
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_AValue
+                      x: 1228
+                      y: 438
+                      data:
+                        text: "100%"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 3435973887
+                        width: 30
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_HexLabel
+                      x: 1086
+                      y: 452
+                      data:
+                        text: "Hex:"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 26
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: ColorMixer_HexFieldBg
+                      x: 1114
+                      y: 450
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 842150655
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 60
+                          - 16
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: ColorMixer_HexValue
+                      x: 1118
+                      y: 452
+                      data:
+                        text: "#FFFFFF"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 3435973887
+                        width: 52
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+              - kind: DisplayObject
+                traits:
+                  name: AlignPanel
+                children:
+                  - kind: Shape
+                    traits:
+                      name: AlignHeaderBg
+                      x: 1080
+                      y: 468
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1431655935
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: AlignHeaderLabel
+                      x: 1086
+                      y: 470
+                      data:
+                        text: "Align"
+                        textFormat:
+                          font: Arial
+                          size: 10
+                          color: 4294967295
+                          bold: true
+                        width: 60
+                        height: 16
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: AlignContentBg
+                      x: 1080
+                      y: 488
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1212696831
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 200
+                          - 162
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_AlignLabel
+                      x: 1086
+                      y: 492
+                      data:
+                        text: "Align:"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 40
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_Left_Bg
+                      x: 1090
+                      y: 506
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_Left_Icon
+                      x: 1094
+                      y: 508
+                      data:
+                        text: "←"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_CenterH_Bg
+                      x: 1116
+                      y: 506
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_CenterH_Icon
+                      x: 1120
+                      y: 508
+                      data:
+                        text: "↔"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_Right_Bg
+                      x: 1142
+                      y: 506
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_Right_Icon
+                      x: 1146
+                      y: 508
+                      data:
+                        text: "→"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_Top_Bg
+                      x: 1168
+                      y: 506
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_Top_Icon
+                      x: 1172
+                      y: 508
+                      data:
+                        text: "↑"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_CenterV_Bg
+                      x: 1194
+                      y: 506
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_CenterV_Icon
+                      x: 1198
+                      y: 508
+                      data:
+                        text: "↕"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_Bottom_Bg
+                      x: 1220
+                      y: 506
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_Bottom_Icon
+                      x: 1224
+                      y: 508
+                      data:
+                        text: "↓"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_DistLabel
+                      x: 1086
+                      y: 532
+                      data:
+                        text: "Distribute:"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 60
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_DLeft_Bg
+                      x: 1090
+                      y: 546
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_DLeft_Icon
+                      x: 1094
+                      y: 548
+                      data:
+                        text: "│"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_DCenterH_Bg
+                      x: 1116
+                      y: 546
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_DCenterH_Icon
+                      x: 1120
+                      y: 548
+                      data:
+                        text: "│"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_DRight_Bg
+                      x: 1142
+                      y: 546
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_DRight_Icon
+                      x: 1146
+                      y: 548
+                      data:
+                        text: "│"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_DTop_Bg
+                      x: 1168
+                      y: 546
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_DTop_Icon
+                      x: 1172
+                      y: 548
+                      data:
+                        text: "─"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_DCenterV_Bg
+                      x: 1194
+                      y: 546
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_DCenterV_Icon
+                      x: 1198
+                      y: 548
+                      data:
+                        text: "─"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_DBottom_Bg
+                      x: 1220
+                      y: 546
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 22
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_DBottom_Icon
+                      x: 1224
+                      y: 548
+                      data:
+                        text: "─"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_MatchLabel
+                      x: 1086
+                      y: 572
+                      data:
+                        text: "Match size:"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 60
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_MatchW_Bg
+                      x: 1090
+                      y: 586
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 40
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_MatchW_Label
+                      x: 1094
+                      y: 588
+                      data:
+                        text: "W"
+                        textFormat:
+                          font: Arial
+                          size: 10
+                          color: 3705462015
+                          bold: true
+                        width: 14
+                        height: 16
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_MatchH_Bg
+                      x: 1134
+                      y: 586
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 40
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_MatchH_Label
+                      x: 1138
+                      y: 588
+                      data:
+                        text: "H"
+                        textFormat:
+                          font: Arial
+                          size: 10
+                          color: 3705462015
+                          bold: true
+                        width: 14
+                        height: 16
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_MatchBoth_Bg
+                      x: 1178
+                      y: 586
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 40
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_MatchBoth_Label
+                      x: 1182
+                      y: 588
+                      data:
+                        text: "WH"
+                        textFormat:
+                          font: Arial
+                          size: 10
+                          color: 3705462015
+                          bold: true
+                        width: 20
+                        height: 16
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_SpaceLabel
+                      x: 1086
+                      y: 612
+                      data:
+                        text: "Space:"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 2576980479
+                        width: 40
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_SpaceH_Bg
+                      x: 1090
+                      y: 626
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 40
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_SpaceH_Label
+                      x: 1094
+                      y: 628
+                      data:
+                        text: "↔"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: Align_SpaceV_Bg
+                      x: 1134
+                      y: 626
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1684301055
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 40
+                          - 20
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_SpaceV_Label
+                      x: 1138
+                      y: 628
+                      data:
+                        text: "↕"
+                        textFormat:
+                          font: Arial
+                          size: 12
+                          color: 3705462015
+                        width: 14
+                        height: 18
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: Align_ToStage
+                      x: 1086
+                      y: 640
+                      data:
+                        text: "☑ To Stage"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 3435973887
+                        width: 70
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+      - kind: DisplayObject
+        traits:
+          name: PropertiesPanel
+        children:
           - kind: Shape
             traits:
-              name: SidePanelsBg
-              x: 1080
-              y: 192
+              name: PropertiesBg
+              x: 0
+              y: 650
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 1077952767
+                  - 993737727
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
-                  - 200
-                  - 458
-                  - endFill
-                  - 0
-            children: []
-          - kind: Shape
-            traits:
-              name: LibraryHeader
-              x: 1080
-              y: 192
-              data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 1431655935
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 200
-                  - 22
-                  - endFill
-                  - 0
-            children: []
-          - kind: Shape
-            traits:
-              name: LibraryContent
-              x: 1080
-              y: 214
-              data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 1212696831
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 200
+                  - 1280
                   - 130
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: ColorMixerHeader
-              x: 1080
-              y: 348
-              data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 1431655935
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 200
-                  - 22
-                  - endFill
-                  - 0
-            children: []
-          - kind: Shape
-            traits:
-              name: ColorMixerContent
-              x: 1080
-              y: 370
+              name: PropTab_Properties_Bg
+              x: 0
+              y: 650
               data:
                 commands:
                   - beginFill
@@ -476,108 +5817,690 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 200
-                  - 100
+                  - 80
+                  - 20
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: PropTab_Properties
+              x: 8
+              y: 652
+              data:
+                text: "Properties"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 4294967295
+                  bold: true
+                width: 70
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: PropTab_Filters_Bg
+              x: 80
+              y: 650
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 926365695
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 60
+                  - 20
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: PropTab_Filters
+              x: 88
+              y: 652
+              data:
+                text: "Filters"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 50
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: PropTab_Parameters_Bg
+              x: 140
+              y: 650
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 926365695
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 80
+                  - 20
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: PropTab_Parameters
+              x: 148
+              y: 652
+              data:
+                text: "Parameters"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 70
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: PropTabDivider
+              x: 0
+              y: 670
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 707406591
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1280
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_TypeLabel
+              x: 10
+              y: 676
+              data:
+                text: "Document"
+                textFormat:
+                  font: Arial
+                  size: 11
+                  color: 4294967295
+                  bold: true
+                width: 80
+                height: 17
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_SizeLabel
+              x: 10
+              y: 696
+              data:
+                text: "Size:"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 40
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_SizeBtnBg
+              x: 52
+              y: 694
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 842150655
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 120
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_SizeValue
+              x: 56
+              y: 696
+              data:
+                text: "550 x 400 pixels"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 110
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_PublishBtnBg
+              x: 180
+              y: 694
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 842150655
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 110
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_PublishBtn
+              x: 186
+              y: 696
+              data:
+                text: "Publish Settings..."
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 3435973887
+                width: 100
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_BgLabel
+              x: 10
+              y: 718
+              data:
+                text: "Background:"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 75
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_BgSwatchBorder
+              x: 90
+              y: 716
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 255
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 18
+                  - 18
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: AlignInfoHeader
-              x: 1080
-              y: 474
+              name: Prop_BgSwatch
+              x: 91
+              y: 717
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 1431655935
+                  - 4294967295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 16
+                  - 16
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_BgHex
+              x: 112
+              y: 718
+              data:
+                text: "#FFFFFF"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 60
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_FpsLabel
+              x: 10
+              y: 740
+              data:
+                text: "Frame rate:"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 70
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_FpsFieldBg
+              x: 84
+              y: 738
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 842150655
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 50
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_FpsValue
+              x: 88
+              y: 740
+              data:
+                text: "24"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 30
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_FpsUnit
+              x: 138
+              y: 740
+              data:
+                text: "fps"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 24
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_PlayerLabel
+              x: 320
+              y: 676
+              data:
+                text: "Player:"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 50
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_PlayerDropBg
+              x: 374
+              y: 674
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 842150655
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 140
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_PlayerValue
+              x: 378
+              y: 676
+              data:
+                text: "Flash Player 8"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 120
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_ASLabel
+              x: 320
+              y: 696
+              data:
+                text: "Script:"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 50
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_ASDropBg
+              x: 374
+              y: 694
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 842150655
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 140
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_ASValue
+              x: 378
+              y: 696
+              data:
+                text: "ActionScript 2.0"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 120
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_InfoLabel
+              x: 560
+              y: 676
+              data:
+                text: "Accessibility:"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 80
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_TitleLabel
+              x: 560
+              y: 696
+              data:
+                text: "Title:"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 40
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_TitleFieldBg
+              x: 600
+              y: 694
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 842150655
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
                   - 200
-                  - 22
+                  - 18
                   - endFill
                   - 0
             children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_TitleValue
+              x: 604
+              y: 696
+              data:
+                text: "My Flash Document"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 180
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_DescLabel
+              x: 560
+              y: 718
+              data:
+                text: "Desc:"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 36
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
           - kind: Shape
             traits:
-              name: AlignInfoContent
-              x: 1080
-              y: 496
+              name: Prop_DescFieldBg
+              x: 600
+              y: 716
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 1212696831
+                  - 842150655
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
                   - 200
-                  - 154
+                  - 18
                   - endFill
                   - 0
             children: []
-      - kind: Shape
+          - kind: TextLabel
+            traits:
+              name: Prop_DescValue
+              x: 604
+              y: 718
+              data:
+                text: "A sample Flash document"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3435973887
+                width: 180
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+      - kind: DisplayObject
         traits:
-          name: PropertiesBg
-          x: 0
-          y: 650
-          data:
-            commands:
-              - beginFill
-              - 2
-              - 993737727
-              - 1
-              - drawRectangle
-              - 4
-              - 0
-              - 0
-              - 1280
-              - 130
-              - endFill
-              - 0
-        children: []
-      - kind: Shape
-        traits:
-          name: PropertiesHeader
-          x: 0
-          y: 650
-          data:
-            commands:
-              - beginFill
-              - 2
-              - 1431655935
-              - 1
-              - drawRectangle
-              - 4
-              - 0
-              - 0
-              - 1280
-              - 22
-              - endFill
-              - 0
-        children: []
-      - kind: Shape
-        traits:
-          name: StatusBarBg
-          x: 0
-          y: 780
-          data:
-            commands:
-              - beginFill
-              - 2
-              - 858993663
-              - 1
-              - drawRectangle
-              - 4
-              - 0
-              - 0
-              - 1280
-              - 20
-              - endFill
-              - 0
-        children: []
+          name: StatusBar
+        children:
+          - kind: Shape
+            traits:
+              name: StatusBarBg
+              x: 0
+              y: 780
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 858993663
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1280
+                  - 20
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Status_Selection
+              x: 8
+              y: 783
+              data:
+                text: "Selection Tool (V)"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 120
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Status_Ready
+              x: 200
+              y: 783
+              data:
+                text: "Ready"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 50
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Status_DocSize
+              x: 1050
+              y: 783
+              data:
+                text: "550 x 400 px"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 80
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Status_FrameRate
+              x: 1140
+              y: 783
+              data:
+                text: "24 fps"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 50
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Status_Zoom
+              x: 1200
+              y: 783
+              data:
+                text: "100%"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 40
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
