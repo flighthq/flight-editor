@@ -6,6 +6,7 @@ describe('@flighthq/editor-command exports', () => {
       'clearCommandHistory',
       'createCommandBatch',
       'createCommandHistory',
+      'createSnapshotCommand',
       'executeCoalescingCommand',
       'executeCommand',
       'executeCommandBatch',

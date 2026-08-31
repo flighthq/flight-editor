@@ -5,6 +5,7 @@ import type { CoalescingCommand, Command } from './commandHistory';
 import {
   clearCommandHistory,
   createCommandHistory,
+  createSnapshotCommand,
   createCommandBatch,
   executeCoalescingCommand,
   executeCommand,
@@ -294,6 +295,32 @@ describe('executeCoalescingCommand', () => {
     expect(getCommandHistoryUndoCount(history)).toBe(1);
     undo(history);
     expect(state.value).toBe(0);
+  });
+});
+
+describe('createSnapshotCommand', () => {
+  it('captures once, restores on undo/redo, and rolls back failed mutations', () => {
+    const state = { value: 0 };
+    const adapter = {
+      capture: () => state.value,
+      restore: (value: number) => {
+        state.value = value;
+      },
+    };
+    const command = createSnapshotCommand('Set value', adapter, () => {
+      state.value = 5;
+    });
+    command.execute();
+    command.undo();
+    expect(state.value).toBe(0);
+    command.execute();
+    expect(state.value).toBe(5);
+    const failing = createSnapshotCommand('Fail', adapter, () => {
+      state.value = 10;
+      throw new Error('no');
+    });
+    expect(() => failing.execute()).toThrow('no');
+    expect(state.value).toBe(5);
   });
 });
 

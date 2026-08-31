@@ -5,6 +5,7 @@ describe('@flighthq/editor-boolean exports', () => {
     expect(Object.keys(boolean).sort()).toEqual([
       'addBooleanEntry',
       'clearBooleanEntries',
+      'createBooleanCommand',
       'createBooleanState',
       'getActiveOperation',
       'getBooleanEntries',

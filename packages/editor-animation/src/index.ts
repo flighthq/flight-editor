@@ -22,5 +22,6 @@ export {
   updateKeyframe,
   validateAnimationState,
 } from './animationState';
+export { createAnimationCommand } from './animationCommand';
 
 export type { AnimationDiagnostic, AnimationState, EasingFunction, Keyframe } from './animationState';

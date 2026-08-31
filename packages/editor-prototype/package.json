@@ -32,6 +32,9 @@
     "test": "vitest run --config ../../vitest.config.ts"
   },
   "sideEffects": false,
+  "dependencies": {
+    "@flighthq/editor-command": "*"
+  },
   "devDependencies": {
     "typescript": "^5.9.3"
   },

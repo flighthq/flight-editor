@@ -10,6 +10,6 @@ Implemented foundation:
 
 Remaining maturity:
 
-- Command integration with upstream vector boolean execution.
+- Atomic snapshot commands cover compound state changes; upstream vector boolean execution remains.
 - Live/non-destructive compound expansion, release, and operand reordering.
 - Geometry failure diagnostics and selection restoration across undo.

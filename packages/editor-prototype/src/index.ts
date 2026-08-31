@@ -20,6 +20,7 @@ export {
   setPreviewActive,
   validatePrototypeState,
 } from './prototypeState';
+export { createPrototypeCommand } from './prototypeCommand';
 
 export type {
   CompiledPrototype,

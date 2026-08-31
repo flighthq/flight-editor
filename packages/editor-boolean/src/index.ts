@@ -13,5 +13,6 @@ export {
   setActiveOperation,
   validateBooleanState,
 } from './booleanState';
+export { createBooleanCommand } from './booleanCommand';
 
 export type { BooleanEntry, BooleanOperand, BooleanOperation, BooleanState } from './booleanState';

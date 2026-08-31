@@ -17,7 +17,7 @@ Implemented foundation:
 Remaining maturity:
 
 - Variant sets, dimensions, typed component properties, preferred swaps, and named states.
-- Apply-to-source and revert commands integrated with editing scope and undo.
+- Component snapshot commands provide atomic undo for swaps, override resets, and future propagation; apply-to-source/revert policy and editing-scope integration remain.
 - Upstream reusable-scene propagation and reordered-descendant reconciliation.
 - Clipboard dependency transfer and YAML round trips.
 - Component library presentation and cross-document source resolution.

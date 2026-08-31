@@ -4,6 +4,7 @@ describe('@flighthq/editor-animation exports', () => {
   it('exposes the public runtime API', () => {
     expect(Object.keys(animation).sort()).toEqual([
       'addKeyframe',
+      'createAnimationCommand',
       'createAnimationState',
       'deleteTime',
       'findKeyframeAt',

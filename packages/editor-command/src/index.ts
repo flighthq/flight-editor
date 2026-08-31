@@ -2,6 +2,7 @@ export {
   clearCommandHistory,
   createCommandHistory,
   createCommandBatch,
+  createSnapshotCommand,
   executeCoalescingCommand,
   executeCommand,
   executeCommandBatch,
@@ -15,4 +16,4 @@ export {
   undo,
 } from './commandHistory';
 
-export type { CoalescingCommand, Command, CommandHistory } from './commandHistory';
+export type { CoalescingCommand, Command, CommandHistory, SnapshotCommandAdapter } from './commandHistory';

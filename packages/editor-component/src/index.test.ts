@@ -5,6 +5,7 @@ describe('@flighthq/editor-component exports', () => {
     expect(Object.keys(component).sort()).toEqual([
       'addComponentInstance',
       'clearInstanceOverrides',
+      'createComponentCommand',
       'createComponentState',
       'detachComponentInstance',
       'getBrokenComponentInstances',

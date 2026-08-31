@@ -6,6 +6,7 @@ describe('@flighthq/editor-prototype exports', () => {
       'addFlow',
       'addInteraction',
       'compilePrototype',
+      'createPrototypeCommand',
       'createPrototypeState',
       'getActiveFlowId',
       'getFlow',

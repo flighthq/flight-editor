@@ -18,6 +18,7 @@ export {
   unregisterComponent,
   validateComponentState,
 } from './componentState';
+export { createComponentCommand } from './componentCommand';
 
 export type {
   ComponentDefinition,

@@ -9,6 +9,11 @@ export interface CoalescingCommand extends Command {
   mergeWith(next: CoalescingCommand): CoalescingCommand | null;
 }
 
+export interface SnapshotCommandAdapter<TSnapshot> {
+  capture(): TSnapshot;
+  restore(snapshot: TSnapshot): void;
+}
+
 export interface CommandHistory {
   undoStack: Command[];
   redoStack: Command[];
@@ -150,4 +155,38 @@ export function executeCoalescingCommand(history: CommandHistory, command: Coale
   invalidateCleanBranch(history);
   history.undoStack.push(command);
   history.redoStack.length = 0;
+}
+
+export function createSnapshotCommand<TSnapshot>(
+  label: string,
+  adapter: SnapshotCommandAdapter<TSnapshot>,
+  mutate: () => void,
+): Command {
+  if (label.trim() === '') throw new TypeError('Snapshot command label must not be empty');
+  let before: TSnapshot | undefined;
+  let after: TSnapshot | undefined;
+  let initialized = false;
+  return {
+    label,
+    execute() {
+      if (initialized) {
+        adapter.restore(after!);
+        return;
+      }
+      before = adapter.capture();
+      try {
+        mutate();
+        after = adapter.capture();
+        initialized = true;
+      } catch (error) {
+        adapter.restore(before);
+        before = undefined;
+        throw error;
+      }
+    },
+    undo() {
+      if (!initialized) throw new Error('Cannot undo a snapshot command before it executes');
+      adapter.restore(before!);
+    },
+  };
 }

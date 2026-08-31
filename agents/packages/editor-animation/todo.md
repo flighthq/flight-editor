@@ -16,6 +16,6 @@ Remaining maturity:
 - Editable layer and nested-timeline models.
 - Tween and motion-path validation backed by upstream interpolation primitives.
 - Frame-span clipboard transfer with dependency collection.
-- Command adapters for atomic undo/redo of ripple and multi-keyframe edits.
+- Snapshot command adapters now provide atomic undo/redo for ripple and multi-keyframe edits; gesture-specific coalescing remains.
 - Onion-skin presentation contributions and 3D transform channel metadata.
 - YAML round trips once the upstream animation schema is finalized.

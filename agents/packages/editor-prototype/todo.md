@@ -16,5 +16,5 @@ Remaining maturity:
 - Typed variable registry and condition operators.
 - Overlay geometry, scroll targets, URL validation, and navigation history.
 - Named object states and explicit auto-animation mappings.
-- Command/gesture adapters for connect, reconnect, cancel, and undo.
+- Snapshot command adapters cover graph mutations and reconnect undo; connect/reconnect gesture cancellation remains.
 - Component-scope target resolution, runtime preview compilation, and YAML round trips.
