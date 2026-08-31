@@ -3472,7 +3472,63 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 50
+                  - 45
+                  - 22
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Keyframe_Actions_F1
+              x: 210
+              y: 94
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 505290495
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 4
+                  - 4
+                  - 3
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Keyframe_Actions_Script
+              x: 218
+              y: 90
+              data:
+                text: "a"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 3359390975
+                  bold: true
+                width: 14
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: EmptyFrames_Actions
+              x: 253
+              y: 86
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1044266751
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 180
                   - 22
                   - endFill
                   - 0
@@ -3585,7 +3641,81 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 50
+                  - 45
+                  - 22
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: LabelFlag_F1
+              x: 210
+              y: 109
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 3694935295
+                  - 1
+                  - moveTo
+                  - 2
+                  - 0
+                  - 0
+                  - lineTo
+                  - 2
+                  - 18
+                  - 0
+                  - lineTo
+                  - 2
+                  - 14
+                  - 5
+                  - lineTo
+                  - 2
+                  - 18
+                  - 10
+                  - lineTo
+                  - 2
+                  - 0
+                  - 10
+                  - lineTo
+                  - 2
+                  - 0
+                  - 0
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: LabelText_F1
+              x: 212
+              y: 110
+              data:
+                text: "start"
+                textFormat:
+                  font: Arial
+                  size: 8
+                  color: 4294967295
+                width: 36
+                height: 14
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: EmptyFrames_Labels
+              x: 253
+              y: 108
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1044266751
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 180
                   - 22
                   - endFill
                   - 0
@@ -3724,26 +3854,149 @@ scene:
             children: []
           - kind: Shape
             traits:
+              name: MotionTweenSpan_L1
+              x: 253
+              y: 130
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 3369595135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 81
+                  - 22
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: MotionTweenArrow_L1
+              x: 262
+              y: 139
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1.5
+                  - 842163455
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - moveTo
+                  - 2
+                  - 0
+                  - 4
+                  - lineTo
+                  - 2
+                  - 52
+                  - 4
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 842163455
+                  - 1
+                  - moveTo
+                  - 2
+                  - 48
+                  - 0
+                  - lineTo
+                  - 2
+                  - 58
+                  - 4
+                  - lineTo
+                  - 2
+                  - 48
+                  - 8
+                  - lineTo
+                  - 2
+                  - 48
+                  - 0
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
               name: Keyframe_L1_F6
               x: 253
               y: 137
               data:
                 commands:
-                  - lineStyle
-                  - 8
-                  - 1
+                  - beginFill
+                  - 2
                   - 505290495
                   - 1
-                  - 0
-                  - 0
-                  - 0
-                  - 0
-                  - 4
                   - drawCircle
                   - 3
                   - 4
                   - 4
                   - 3
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Keyframe_L1_F15
+              x: 334
+              y: 137
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 505290495
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 4
+                  - 4
+                  - 3
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: ContentSpan_L1_2
+              x: 334
+              y: 130
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 3033065215
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 45
+                  - 22
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: EmptyFrames_L1
+              x: 379
+              y: 130
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1044266751
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 54
+                  - 22
                   - endFill
                   - 0
             children: []
@@ -5874,6 +6127,818 @@ scene:
             children: []
           - kind: Shape
             traits:
+              name: RulerCorner
+              x: 44
+              y: 172
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1313754879
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 16
+                  - 14
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHBg
+              x: 60
+              y: 172
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1313754879
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1020
+                  - 14
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHEdge
+              x: 60
+              y: 185
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 707406591
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1020
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_50
+              x: 87
+              y: 176
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 10
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_100
+              x: 137
+              y: 179
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_150
+              x: 187
+              y: 176
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 10
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_200
+              x: 237
+              y: 179
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_250
+              x: 287
+              y: 176
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 10
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerHNum_0
+              x: 289
+              y: 173
+              data:
+                text: "0"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 24
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_300
+              x: 337
+              y: 179
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_350
+              x: 387
+              y: 176
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 10
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerHNum_100
+              x: 389
+              y: 173
+              data:
+                text: "100"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 24
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_400
+              x: 437
+              y: 179
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_450
+              x: 487
+              y: 176
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 10
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerHNum_200
+              x: 489
+              y: 173
+              data:
+                text: "200"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 24
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_500
+              x: 537
+              y: 179
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_550
+              x: 587
+              y: 176
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 10
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerHNum_300
+              x: 589
+              y: 173
+              data:
+                text: "300"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 24
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_600
+              x: 637
+              y: 179
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_650
+              x: 687
+              y: 176
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 10
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerHNum_400
+              x: 689
+              y: 173
+              data:
+                text: "400"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 24
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_700
+              x: 737
+              y: 179
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_750
+              x: 787
+              y: 176
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 10
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerHNum_500
+              x: 789
+              y: 173
+              data:
+                text: "500"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 24
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_800
+              x: 837
+              y: 179
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerHTick_850
+              x: 887
+              y: 176
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 10
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerHNum_600
+              x: 889
+              y: 173
+              data:
+                text: "600"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 24
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVBg
+              x: 44
+              y: 186
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1313754879
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 16
+                  - 464
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVEdge
+              x: 59
+              y: 186
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 707406591
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 464
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVTick_50
+              x: 48
+              y: 221
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 12
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerVNum_0
+              x: 45
+              y: 223
+              data:
+                text: "0"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 14
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVTick_100
+              x: 51
+              y: 271
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 9
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVTick_150
+              x: 48
+              y: 321
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 12
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerVNum_100
+              x: 45
+              y: 323
+              data:
+                text: "100"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 14
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVTick_200
+              x: 51
+              y: 371
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 9
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVTick_250
+              x: 48
+              y: 421
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 12
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerVNum_200
+              x: 45
+              y: 423
+              data:
+                text: "200"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 14
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVTick_300
+              x: 51
+              y: 471
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 9
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVTick_350
+              x: 48
+              y: 521
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 12
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerVNum_300
+              x: 45
+              y: 523
+              data:
+                text: "300"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 14
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVTick_400
+              x: 51
+              y: 571
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 9
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: RulerVTick_450
+              x: 48
+              y: 621
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1852731135
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 12
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: RulerVNum_400
+              x: 45
+              y: 623
+              data:
+                text: "400"
+                textFormat:
+                  font: Arial
+                  size: 7
+                  color: 2189591295
+                width: 14
+                height: 13
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
               name: StageShadowRight
               x: 839
               y: 225
@@ -5949,6 +7014,642 @@ scene:
                   - 0
                   - 550
                   - 400
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: StageContent_Title
+              x: 412
+              y: 250
+              data:
+                text: "My Animation"
+                textFormat:
+                  font: Arial
+                  size: 26
+                  color: 255
+                  bold: true
+                  align: center
+                width: 300
+                height: 34
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: StageContent_Subtitle
+              x: 427
+              y: 284
+              data:
+                text: "A sample Flash document"
+                textFormat:
+                  font: Arial
+                  size: 13
+                  color: 2021161215
+                  align: center
+                width: 270
+                height: 18
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: StageContent_GreenRect
+              x: 340
+              y: 340
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1689543935
+                  - 1
+                  - drawRoundRectangle
+                  - 6
+                  - 0
+                  - 0
+                  - 80
+                  - 55
+                  - 6
+                  - 6
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: StageContent_RedCircle
+              x: 700
+              y: 265
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 3696251135
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 25
+                  - 25
+                  - 25
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: StageContent_Star
+              x: 695
+              y: 340
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 3870569215
+                  - 1
+                  - moveTo
+                  - 2
+                  - 12
+                  - 0
+                  - lineTo
+                  - 2
+                  - 15
+                  - 8
+                  - lineTo
+                  - 2
+                  - 24
+                  - 9
+                  - lineTo
+                  - 2
+                  - 17
+                  - 15
+                  - lineTo
+                  - 2
+                  - 19
+                  - 24
+                  - lineTo
+                  - 2
+                  - 12
+                  - 19
+                  - lineTo
+                  - 2
+                  - 5
+                  - 24
+                  - lineTo
+                  - 2
+                  - 7
+                  - 15
+                  - lineTo
+                  - 2
+                  - 0
+                  - 9
+                  - lineTo
+                  - 2
+                  - 9
+                  - 8
+                  - lineTo
+                  - 2
+                  - 12
+                  - 0
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: StageContent_Button
+              x: 462
+              y: 400
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 862375167
+                  - 1
+                  - drawRoundRectangle
+                  - 6
+                  - 0
+                  - 0
+                  - 200
+                  - 44
+                  - 8
+                  - 8
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 642554367
+                  - 1
+                  - drawRoundRectangle
+                  - 6
+                  - 0
+                  - 37
+                  - 200
+                  - 7
+                  - 0
+                  - 8
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: StageContent_BtnLabel
+              x: 512
+              y: 410
+              data:
+                text: "Click Me"
+                textFormat:
+                  font: Arial
+                  size: 15
+                  color: 4294967295
+                  bold: true
+                  align: center
+                width: 100
+                height: 20
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Selection_Top
+              x: 461
+              y: 399
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 6750207
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 202
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Selection_Bottom
+              x: 461
+              y: 445
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 6750207
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 202
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Selection_Left
+              x: 461
+              y: 399
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 6750207
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 46
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Selection_Right
+              x: 663
+              y: 399
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 6750207
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1
+                  - 47
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_TL_Fill
+              x: 461
+              y: 399
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4294967295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_TL_Border
+              x: 461
+              y: 399
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 6750207
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_TC_Fill
+              x: 558.5
+              y: 399
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4294967295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_TC_Border
+              x: 558.5
+              y: 399
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 6750207
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_TR_Fill
+              x: 657
+              y: 399
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4294967295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_TR_Border
+              x: 657
+              y: 399
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 6750207
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_ML_Fill
+              x: 461
+              y: 418.5
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4294967295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_ML_Border
+              x: 461
+              y: 418.5
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 6750207
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_MR_Fill
+              x: 657
+              y: 418.5
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4294967295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_MR_Border
+              x: 657
+              y: 418.5
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 6750207
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_BL_Fill
+              x: 461
+              y: 439
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4294967295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_BL_Border
+              x: 461
+              y: 439
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 6750207
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_BC_Fill
+              x: 558.5
+              y: 439
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4294967295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_BC_Border
+              x: 558.5
+              y: 439
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 6750207
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_BR_Fill
+              x: 657
+              y: 439
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 4294967295
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Handle_BR_Border
+              x: 657
+              y: 439
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 6750207
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 7
+                  - 7
                   - endFill
                   - 0
             children: []
@@ -7723,7 +9424,7 @@ scene:
                     traits:
                       name: Align_SectionLabel
                       x: 1088
-                      y: 515
+                      y: 513
                       data:
                         text: "Align:"
                         textFormat:
@@ -7739,7 +9440,7 @@ scene:
                     traits:
                       name: Align_Left_Bg
                       x: 1090
-                      y: 529
+                      y: 526
                       data:
                         commands:
                           - beginFill
@@ -7759,7 +9460,7 @@ scene:
                     traits:
                       name: Align_Left_Icon
                       x: 1092
-                      y: 530
+                      y: 527
                       data:
                         commands:
                           - beginFill
@@ -7803,7 +9504,7 @@ scene:
                     traits:
                       name: Align_CenterH_Bg
                       x: 1118
-                      y: 529
+                      y: 526
                       data:
                         commands:
                           - beginFill
@@ -7823,7 +9524,7 @@ scene:
                     traits:
                       name: Align_CenterH_Icon
                       x: 1120
-                      y: 530
+                      y: 527
                       data:
                         commands:
                           - beginFill
@@ -7867,7 +9568,7 @@ scene:
                     traits:
                       name: Align_Right_Bg
                       x: 1146
-                      y: 529
+                      y: 526
                       data:
                         commands:
                           - beginFill
@@ -7887,7 +9588,7 @@ scene:
                     traits:
                       name: Align_Right_Icon
                       x: 1148
-                      y: 530
+                      y: 527
                       data:
                         commands:
                           - beginFill
@@ -7931,7 +9632,7 @@ scene:
                     traits:
                       name: Align_Top_Bg
                       x: 1174
-                      y: 529
+                      y: 526
                       data:
                         commands:
                           - beginFill
@@ -7951,7 +9652,7 @@ scene:
                     traits:
                       name: Align_Top_Icon
                       x: 1176
-                      y: 530
+                      y: 527
                       data:
                         commands:
                           - beginFill
@@ -7995,7 +9696,7 @@ scene:
                     traits:
                       name: Align_CenterV_Bg
                       x: 1202
-                      y: 529
+                      y: 526
                       data:
                         commands:
                           - beginFill
@@ -8015,7 +9716,7 @@ scene:
                     traits:
                       name: Align_CenterV_Icon
                       x: 1204
-                      y: 530
+                      y: 527
                       data:
                         commands:
                           - beginFill
@@ -8059,7 +9760,7 @@ scene:
                     traits:
                       name: Align_Bottom_Bg
                       x: 1230
-                      y: 529
+                      y: 526
                       data:
                         commands:
                           - beginFill
@@ -8079,7 +9780,7 @@ scene:
                     traits:
                       name: Align_Bottom_Icon
                       x: 1232
-                      y: 530
+                      y: 527
                       data:
                         commands:
                           - beginFill
@@ -8123,7 +9824,7 @@ scene:
                     traits:
                       name: Align_DistLabel
                       x: 1088
-                      y: 555
+                      y: 549
                       data:
                         text: "Distribute:"
                         textFormat:
@@ -8139,7 +9840,7 @@ scene:
                     traits:
                       name: Align_DLeft_Bg
                       x: 1090
-                      y: 569
+                      y: 561
                       data:
                         commands:
                           - beginFill
@@ -8159,7 +9860,7 @@ scene:
                     traits:
                       name: Align_DLeft_Icon
                       x: 1092
-                      y: 570
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -8227,7 +9928,7 @@ scene:
                     traits:
                       name: Align_DCenterH_Bg
                       x: 1118
-                      y: 569
+                      y: 561
                       data:
                         commands:
                           - beginFill
@@ -8247,7 +9948,7 @@ scene:
                     traits:
                       name: Align_DCenterH_Icon
                       x: 1120
-                      y: 570
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -8351,7 +10052,7 @@ scene:
                     traits:
                       name: Align_DRight_Bg
                       x: 1146
-                      y: 569
+                      y: 561
                       data:
                         commands:
                           - beginFill
@@ -8371,7 +10072,7 @@ scene:
                     traits:
                       name: Align_DRight_Icon
                       x: 1148
-                      y: 570
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -8451,7 +10152,7 @@ scene:
                     traits:
                       name: Align_DTop_Bg
                       x: 1174
-                      y: 569
+                      y: 561
                       data:
                         commands:
                           - beginFill
@@ -8471,7 +10172,7 @@ scene:
                     traits:
                       name: Align_DTop_Icon
                       x: 1176
-                      y: 570
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -8539,7 +10240,7 @@ scene:
                     traits:
                       name: Align_DCenterV_Bg
                       x: 1202
-                      y: 569
+                      y: 561
                       data:
                         commands:
                           - beginFill
@@ -8559,7 +10260,7 @@ scene:
                     traits:
                       name: Align_DCenterV_Icon
                       x: 1204
-                      y: 570
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -8663,7 +10364,7 @@ scene:
                     traits:
                       name: Align_DBottom_Bg
                       x: 1230
-                      y: 569
+                      y: 561
                       data:
                         commands:
                           - beginFill
@@ -8683,7 +10384,7 @@ scene:
                     traits:
                       name: Align_DBottom_Icon
                       x: 1232
-                      y: 570
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -8763,7 +10464,7 @@ scene:
                     traits:
                       name: Align_MatchLabel
                       x: 1088
-                      y: 595
+                      y: 585
                       data:
                         text: "Match size:"
                         textFormat:
@@ -8779,7 +10480,7 @@ scene:
                     traits:
                       name: Align_MatchW_Bg
                       x: 1090
-                      y: 609
+                      y: 597
                       data:
                         commands:
                           - beginFill
@@ -8799,7 +10500,7 @@ scene:
                     traits:
                       name: Align_MatchW_Label
                       x: 1096
-                      y: 611
+                      y: 599
                       data:
                         text: "W"
                         textFormat:
@@ -8816,7 +10517,7 @@ scene:
                     traits:
                       name: Align_MatchH_Bg
                       x: 1134
-                      y: 609
+                      y: 597
                       data:
                         commands:
                           - beginFill
@@ -8836,7 +10537,7 @@ scene:
                     traits:
                       name: Align_MatchH_Label
                       x: 1140
-                      y: 611
+                      y: 599
                       data:
                         text: "H"
                         textFormat:
@@ -8853,7 +10554,7 @@ scene:
                     traits:
                       name: Align_MatchWH_Bg
                       x: 1178
-                      y: 609
+                      y: 597
                       data:
                         commands:
                           - beginFill
@@ -8873,7 +10574,7 @@ scene:
                     traits:
                       name: Align_MatchWH_Label
                       x: 1184
-                      y: 611
+                      y: 599
                       data:
                         text: "WH"
                         textFormat:
@@ -8890,7 +10591,7 @@ scene:
                     traits:
                       name: Align_SpaceLabel
                       x: 1088
-                      y: 631
+                      y: 619
                       data:
                         text: "Space:"
                         textFormat:
@@ -8906,7 +10607,7 @@ scene:
                     traits:
                       name: Align_SpaceH_Bg
                       x: 1090
-                      y: 641
+                      y: 631
                       data:
                         commands:
                           - beginFill
@@ -8918,7 +10619,7 @@ scene:
                           - 0
                           - 0
                           - 38
-                          - 18
+                          - 16
                           - endFill
                           - 0
                     children: []
@@ -8926,7 +10627,7 @@ scene:
                     traits:
                       name: Align_SpaceH_Icon
                       x: 1098
-                      y: 644
+                      y: 633
                       data:
                         commands:
                           - beginFill
@@ -8970,7 +10671,7 @@ scene:
                     traits:
                       name: Align_SpaceV_Bg
                       x: 1134
-                      y: 641
+                      y: 631
                       data:
                         commands:
                           - beginFill
@@ -8982,7 +10683,7 @@ scene:
                           - 0
                           - 0
                           - 38
-                          - 18
+                          - 16
                           - endFill
                           - 0
                     children: []
@@ -8990,7 +10691,7 @@ scene:
                     traits:
                       name: Align_SpaceV_Icon
                       x: 1142
-                      y: 644
+                      y: 633
                       data:
                         commands:
                           - beginFill
