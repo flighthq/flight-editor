@@ -46,6 +46,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-cursor` — cursor display state: tool default, override stack with source-based push/pop
 - `editor-document` — document lifecycle state: serialization format, load/save coordination, metadata
 - `editor-diagnostics` — revision-aware structured diagnostics with source ownership and mutation/visualization blocking
+- `editor-design-tokens` — typed design-system collections, modes, aliases, scopes, bindings, and authoring resolution
 - `editor-drag-drop` — drag-and-drop state: tracks drag operations from library/hierarchy/external into the scene
 - `editor-editing-scope` — stable identity-based nested editing scopes, breadcrumbs, and reload reconciliation
 - `editor-export-settings` — per-node export format, scale, suffix, and enabled state

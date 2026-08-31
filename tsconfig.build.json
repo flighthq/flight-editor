@@ -14,6 +14,7 @@
     { "path": "./packages/editor-cursor" },
     { "path": "./packages/editor-document" },
     { "path": "./packages/editor-diagnostics" },
+    { "path": "./packages/editor-design-tokens" },
     { "path": "./packages/editor-context-menu" },
     { "path": "./packages/editor-drag-drop" },
     { "path": "./packages/editor-editing-scope" },
