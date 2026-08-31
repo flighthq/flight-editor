@@ -4,13 +4,9 @@ import type { DesktopBootstrap } from './desktopBootstrap';
 
 import {
   attachApplicationRenderView,
-  attachWindowRenderContext,
-  attachWindowResize,
   createApplication,
   createApplicationWindow,
   detachApplicationRenderView,
-  detachWindowRenderContext,
-  detachWindowResize,
   registerApplicationWindow,
   setApplicationMainWindow,
   stopApplicationLoop,
@@ -18,6 +14,7 @@ import {
 } from '@flighthq/application';
 import { createGlApplicationRenderView } from '@flighthq/application-gl';
 import { prepareScene2DRender } from '@flighthq/render';
+import { createEmptyGlRegistries, createGlPipeline } from '@flighthq/render-gl';
 import { renderGlScene2D } from '@flighthq/scene2d-gl';
 
 import { registerGlRenderers } from './glRendererSetup';
@@ -50,13 +47,14 @@ export function createCanvasRenderer(config: Readonly<CanvasRendererConfig>): Ca
   registerApplicationWindow(app, win);
   setApplicationMainWindow(app, win);
 
-  attachWindowRenderContext(win, canvas);
-  attachWindowResize(win, canvas);
-
   const renderView = createGlApplicationRenderView(win, canvas, {
-    render: {
+    context: {
       antialias: config.antialias ?? true,
       powerPreference: config.powerPreference ?? 'high-performance',
+    },
+    pipeline: createGlPipeline(createEmptyGlRegistries()),
+    render: {
+      imageSmoothingEnabled: config.antialias ?? true,
     },
   });
 
@@ -126,7 +124,5 @@ export function resizeCanvasRenderer(
 export function disposeCanvasRenderer(renderer: CanvasRendererState): void {
   stopCanvasLoop(renderer);
   detachApplicationRenderView(renderer.renderView);
-  detachWindowRenderContext(renderer.window);
-  detachWindowResize(renderer.window);
   stopApplicationLoop(renderer.app);
 }
