@@ -3,6 +3,10 @@ export interface LibraryItem {
   readonly name: string;
   readonly category: string;
   readonly kind: string;
+  readonly sourceId?: string;
+  readonly description?: string;
+  readonly tags?: readonly string[];
+  readonly availability?: 'available' | 'missing' | 'loading';
 }
 
 export interface LibraryState {
@@ -10,10 +14,11 @@ export interface LibraryState {
   searchFilter: string;
   activeCategory: string | null;
   version: number;
+  sessionVersion: number;
 }
 
 export function createLibraryState(): LibraryState {
-  return { items: [], searchFilter: '', activeCategory: null, version: 0 };
+  return { items: [], searchFilter: '', activeCategory: null, version: 0, sessionVersion: 0 };
 }
 
 export function getLibraryItems(state: Readonly<LibraryState>): readonly LibraryItem[] {
@@ -25,7 +30,9 @@ export function getLibraryItemCount(state: Readonly<LibraryState>): number {
 }
 
 export function addLibraryItem(state: LibraryState, item: LibraryItem): void {
-  state.items.push(item);
+  assertLibraryItem(item);
+  if (state.items.some(({ id }) => id === item.id)) throw new Error(`Library item already exists: ${item.id}`);
+  state.items.push(copyLibraryItem(item));
   state.version++;
 }
 
@@ -46,9 +53,10 @@ export function getLibrarySearchFilter(state: Readonly<LibraryState>): string {
 }
 
 export function setLibrarySearchFilter(state: LibraryState, filter: string): void {
-  if (state.searchFilter === filter) return;
-  state.searchFilter = filter;
-  state.version++;
+  const normalized = filter.trim();
+  if (state.searchFilter === normalized) return;
+  state.searchFilter = normalized;
+  state.sessionVersion++;
 }
 
 export function getFilteredLibraryItems(state: Readonly<LibraryState>): readonly LibraryItem[] {
@@ -58,7 +66,12 @@ export function getFilteredLibraryItems(state: Readonly<LibraryState>): readonly
   }
   if (state.searchFilter !== '') {
     const lower = state.searchFilter.toLowerCase();
-    items = items.filter((item) => item.name.toLowerCase().includes(lower));
+    items = items.filter((item) =>
+      [item.name, item.category, item.kind, item.description ?? '', ...(item.tags ?? [])]
+        .join(' ')
+        .toLowerCase()
+        .includes(lower),
+    );
   }
   return items;
 }
@@ -70,7 +83,7 @@ export function getActiveCategory(state: Readonly<LibraryState>): string | null 
 export function setActiveCategory(state: LibraryState, category: string | null): void {
   if (state.activeCategory === category) return;
   state.activeCategory = category;
-  state.version++;
+  state.sessionVersion++;
 }
 
 export function getLibraryCategories(state: Readonly<LibraryState>): readonly string[] {
@@ -89,4 +102,65 @@ export function clearLibrary(state: LibraryState): void {
 
 export function getLibraryVersion(state: Readonly<LibraryState>): number {
   return state.version;
+}
+
+function assertLibraryItem(item: LibraryItem): void {
+  if (item.id.trim() === '' || item.name.trim() === '' || item.category.trim() === '' || item.kind.trim() === '') {
+    throw new TypeError('Library item identity, name, category, and kind must not be empty');
+  }
+}
+
+function copyLibraryItem(item: LibraryItem): LibraryItem {
+  return { ...item, tags: item.tags?.slice() };
+}
+
+export function getLibrarySessionVersion(state: Readonly<LibraryState>): number {
+  return state.sessionVersion;
+}
+
+export function reconcileLibrarySource(state: LibraryState, sourceId: string, items: readonly LibraryItem[]): void {
+  if (sourceId.trim() === '') throw new TypeError('Library source id must not be empty');
+  const incomingIds = new Set<string>();
+  const incoming = items.map((item) => {
+    assertLibraryItem(item);
+    if (incomingIds.has(item.id)) throw new Error(`Duplicate library item from source: ${item.id}`);
+    if (item.sourceId !== undefined && item.sourceId !== sourceId)
+      throw new Error(`Library item source mismatch: ${item.id}`);
+    incomingIds.add(item.id);
+    return copyLibraryItem({ ...item, sourceId });
+  });
+  const foreignIds = new Set(state.items.filter((item) => item.sourceId !== sourceId).map(({ id }) => id));
+  const collision = incoming.find(({ id }) => foreignIds.has(id));
+  if (collision !== undefined) throw new Error(`Library item id belongs to another source: ${collision.id}`);
+  const next = [...state.items.filter((item) => item.sourceId !== sourceId), ...incoming];
+  const unchanged =
+    next.length === state.items.length &&
+    next.every((item, index) => JSON.stringify(item) === JSON.stringify(state.items[index]));
+  if (unchanged) return;
+  state.items = next;
+  state.version++;
+}
+
+export function markLibrarySourceMissing(state: LibraryState, sourceId: string): number {
+  let changed = 0;
+  state.items = state.items.map((item) => {
+    if (item.sourceId !== sourceId || item.availability === 'missing') return item;
+    changed++;
+    return { ...item, availability: 'missing' };
+  });
+  if (changed > 0) state.version++;
+  return changed;
+}
+
+export function validateLibraryState(state: Readonly<LibraryState>): readonly string[] {
+  const diagnostics: string[] = [];
+  const ids = new Set<string>();
+  for (const item of state.items) {
+    if (ids.has(item.id)) diagnostics.push(`duplicate-id:${item.id}`);
+    ids.add(item.id);
+    if (item.id.trim() === '' || item.name.trim() === '' || item.category.trim() === '' || item.kind.trim() === '') {
+      diagnostics.push(`invalid-item:${item.id}`);
+    }
+  }
+  return diagnostics.sort();
 }

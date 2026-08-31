@@ -11,6 +11,7 @@ import {
   getLibraryItemCount,
   getLibraryItems,
   getLibrarySearchFilter,
+  getLibrarySessionVersion,
   getLibraryVersion,
   removeLibraryItem,
   setActiveCategory,
@@ -96,7 +97,8 @@ describe('setLibrarySearchFilter', () => {
     const state = createLibraryState();
     setLibrarySearchFilter(state, 'button');
     expect(getLibrarySearchFilter(state)).toBe('button');
-    expect(getLibraryVersion(state)).toBe(1);
+    expect(getLibraryVersion(state)).toBe(0);
+    expect(getLibrarySessionVersion(state)).toBe(1);
   });
 
   it('does not bump version when filter unchanged', () => {
@@ -152,7 +154,8 @@ describe('setActiveCategory', () => {
     const state = createLibraryState();
     setActiveCategory(state, 'UI');
     expect(getActiveCategory(state)).toBe('UI');
-    expect(getLibraryVersion(state)).toBe(1);
+    expect(getLibraryVersion(state)).toBe(0);
+    expect(getLibrarySessionVersion(state)).toBe(1);
   });
 
   it('does not bump version when value unchanged', () => {

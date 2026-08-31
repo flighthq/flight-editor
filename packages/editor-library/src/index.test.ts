@@ -13,10 +13,14 @@ describe('@flighthq/editor-library exports', () => {
       'getLibraryItemCount',
       'getLibraryItems',
       'getLibrarySearchFilter',
+      'getLibrarySessionVersion',
       'getLibraryVersion',
+      'markLibrarySourceMissing',
+      'reconcileLibrarySource',
       'removeLibraryItem',
       'setActiveCategory',
       'setLibrarySearchFilter',
+      'validateLibraryState',
     ]);
   });
 });
