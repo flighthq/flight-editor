@@ -14,7 +14,9 @@ describe('@flighthq/editor-grid exports', () => {
       'setGridSize',
       'setGridSubdivisions',
       'setGridVisible',
+      'snapPointToGrid',
       'toggleGridVisible',
+      'validateGridState',
     ]);
   });
 });

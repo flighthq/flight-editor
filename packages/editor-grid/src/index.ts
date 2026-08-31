@@ -10,7 +10,9 @@ export {
   setGridSize,
   setGridSubdivisions,
   setGridVisible,
+  snapPointToGrid,
   toggleGridVisible,
+  validateGridState,
 } from './gridState';
 
 export type { GridState } from './gridState';

@@ -1,6 +1,7 @@
 export {
   addFlow,
   addInteraction,
+  compilePrototype,
   createPrototypeState,
   getActiveFlowId,
   getFlow,
@@ -10,15 +11,20 @@ export {
   getInteractionCount,
   getInteractionsForNode,
   getPrototypeVersion,
+  getPrototypeSessionVersion,
   isPreviewActive,
   removeFlow,
   removeInteraction,
+  reconnectInteraction,
   setActiveFlowId,
   setPreviewActive,
+  validatePrototypeState,
 } from './prototypeState';
 
 export type {
+  CompiledPrototype,
   PrototypeAction,
+  PrototypeDiagnostic,
   PrototypeFlow,
   PrototypeInteraction,
   PrototypeState,

@@ -10,9 +10,12 @@ describe('@flighthq/editor-boolean exports', () => {
       'getBooleanEntries',
       'getBooleanEntry',
       'getBooleanEntryCount',
+      'getBooleanSessionVersion',
       'getBooleanVersion',
       'removeBooleanEntry',
+      'replaceBooleanEntry',
       'setActiveOperation',
+      'validateBooleanState',
     ]);
   });
 });

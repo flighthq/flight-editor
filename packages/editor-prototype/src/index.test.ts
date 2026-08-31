@@ -5,6 +5,7 @@ describe('@flighthq/editor-prototype exports', () => {
     expect(Object.keys(prototype).sort()).toEqual([
       'addFlow',
       'addInteraction',
+      'compilePrototype',
       'createPrototypeState',
       'getActiveFlowId',
       'getFlow',
@@ -13,12 +14,15 @@ describe('@flighthq/editor-prototype exports', () => {
       'getInteraction',
       'getInteractionCount',
       'getInteractionsForNode',
+      'getPrototypeSessionVersion',
       'getPrototypeVersion',
       'isPreviewActive',
+      'reconnectInteraction',
       'removeFlow',
       'removeInteraction',
       'setActiveFlowId',
       'setPreviewActive',
+      'validatePrototypeState',
     ]);
   });
 });

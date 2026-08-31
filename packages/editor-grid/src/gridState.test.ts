@@ -12,7 +12,9 @@ import {
   setGridSize,
   setGridSubdivisions,
   setGridVisible,
+  snapPointToGrid,
   toggleGridVisible,
+  validateGridState,
 } from './gridState';
 
 describe('createGridState', () => {
@@ -144,4 +146,32 @@ describe('getEffectiveCellSize', () => {
 
 describe('getGridVersion', () => {
   it('is exported', () => expect(getGridVersion).toBeTypeOf('function'));
+});
+
+describe('snapPointToGrid', () => {
+  it('snaps positive and negative coordinates to effective subdivisions', () => {
+    const state = createGridState();
+    setGridSize(state, 20, 10);
+    setGridSubdivisions(state, 2);
+    expect(snapPointToGrid(state, { x: 14, y: -8 })).toEqual({ x: 10, y: -10 });
+    expect(() => snapPointToGrid(state, { x: Number.NaN, y: 0 })).toThrow('finite');
+  });
+});
+
+describe('validateGridState', () => {
+  it('diagnoses invalid hydrated grid values', () => {
+    const state = createGridState();
+    state.sizeX = 0;
+    state.subdivisions = 0;
+    state.opacity = 2;
+    expect(validateGridState(state)).toEqual(['invalid-size-x', 'invalid-subdivisions', 'invalid-opacity']);
+  });
+});
+
+describe('setGridSize', () => {
+  it('rejects non-finite and non-positive geometry', () => {
+    const state = createGridState();
+    expect(() => setGridSize(state, 0, 10)).toThrow('greater than zero');
+    expect(() => setGridSize(state, Number.NaN, 10)).toThrow('finite');
+  });
 });

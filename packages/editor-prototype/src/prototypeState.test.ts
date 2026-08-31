@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   addFlow,
   addInteraction,
+  compilePrototype,
   createPrototypeState,
   getActiveFlowId,
   getFlow,
@@ -12,11 +13,14 @@ import {
   getInteractionCount,
   getInteractionsForNode,
   getPrototypeVersion,
+  getPrototypeSessionVersion,
   isPreviewActive,
   removeFlow,
   removeInteraction,
+  reconnectInteraction,
   setActiveFlowId,
   setPreviewActive,
+  validatePrototypeState,
 } from './prototypeState';
 
 import type { PrototypeFlow, PrototypeInteraction } from './prototypeState';
@@ -165,7 +169,7 @@ describe('getFlows', () => {
     const state = createPrototypeState();
     addFlow(state, flowA);
     addFlow(state, flowB);
-    expect(getFlows(state)).toEqual([flowA, flowB]);
+    expect(getFlows(state)).toEqual([flowB, flowA]);
   });
 });
 
@@ -201,7 +205,8 @@ describe('setPreviewActive', () => {
     const state = createPrototypeState();
     setPreviewActive(state, true);
     expect(isPreviewActive(state)).toBe(true);
-    expect(getPrototypeVersion(state)).toBe(1);
+    expect(getPrototypeVersion(state)).toBe(0);
+    expect(getPrototypeSessionVersion(state)).toBe(1);
   });
 
   it('does not bump version when unchanged', () => {
@@ -213,4 +218,56 @@ describe('setPreviewActive', () => {
 
 describe('getPrototypeVersion', () => {
   it('is exported', () => expect(getPrototypeVersion).toBeTypeOf('function'));
+});
+
+describe('getPrototypeSessionVersion', () => {
+  it('keeps active flow and preview changes out of the authored revision', () => {
+    const state = createPrototypeState();
+    addFlow(state, flowA);
+    const authored = getPrototypeVersion(state);
+    setActiveFlowId(state, flowA.id);
+    setPreviewActive(state, true);
+    expect(getPrototypeVersion(state)).toBe(authored);
+    expect(getPrototypeSessionVersion(state)).toBe(2);
+  });
+});
+
+describe('reconnectInteraction', () => {
+  it('updates a wire target without changing its stable identity', () => {
+    const state = createPrototypeState();
+    addInteraction(state, interA);
+    expect(reconnectInteraction(state, interA.id, 'node-9')).toBe(true);
+    expect(getInteraction(state, interA.id)?.targetNodeId).toBe('node-9');
+    expect(reconnectInteraction(state, interA.id, 'node-9')).toBe(false);
+  });
+});
+
+describe('validatePrototypeState', () => {
+  it('reports broken graph references and trigger ambiguity deterministically', () => {
+    const state = createPrototypeState();
+    addFlow(state, flowA);
+    addInteraction(state, interA);
+    addInteraction(state, interB);
+    const duplicate = { ...interA, id: 'ia-0', targetNodeId: 'missing' };
+    addInteraction(state, duplicate);
+    expect(validatePrototypeState(state, new Set(['node-1', 'node-3'])).map(({ code }) => code)).toEqual([
+      'broken-target',
+      'broken-target',
+      'duplicate-trigger',
+    ]);
+  });
+});
+
+describe('compilePrototype', () => {
+  it('produces a deterministic, revision-stamped snapshot', () => {
+    const state = createPrototypeState();
+    addInteraction(state, interB);
+    addInteraction(state, interA);
+    addFlow(state, flowB);
+    addFlow(state, flowA);
+    const compiled = compilePrototype(state);
+    expect(compiled.revision).toBe(getPrototypeVersion(state));
+    expect(compiled.interactions.map(({ id }) => id)).toEqual(['ia-1', 'ia-2']);
+    expect(compiled.flows.map(({ id }) => id)).toEqual(['flow-1', 'flow-2']);
+  });
 });

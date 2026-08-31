@@ -8,9 +8,12 @@ import {
   getBooleanEntries,
   getBooleanEntry,
   getBooleanEntryCount,
+  getBooleanSessionVersion,
   getBooleanVersion,
   removeBooleanEntry,
+  replaceBooleanEntry,
   setActiveOperation,
+  validateBooleanState,
 } from './booleanState';
 
 import type { BooleanEntry } from './booleanState';
@@ -51,7 +54,8 @@ describe('setActiveOperation', () => {
     const state = createBooleanState();
     setActiveOperation(state, 'intersect');
     expect(getActiveOperation(state)).toBe('intersect');
-    expect(getBooleanVersion(state)).toBe(1);
+    expect(getBooleanVersion(state)).toBe(0);
+    expect(getBooleanSessionVersion(state)).toBe(1);
   });
 
   it('does not bump version when unchanged', () => {
@@ -126,4 +130,60 @@ describe('clearBooleanEntries', () => {
 
 describe('getBooleanVersion', () => {
   it('is exported', () => expect(getBooleanVersion).toBeTypeOf('function'));
+});
+
+describe('getBooleanSessionVersion', () => {
+  it('separates tool choice from authored operations', () => {
+    const state = createBooleanState();
+    setActiveOperation(state, 'exclude');
+    expect(getBooleanSessionVersion(state)).toBe(1);
+    expect(getBooleanVersion(state)).toBe(0);
+  });
+});
+
+describe('replaceBooleanEntry', () => {
+  it('normalizes operand ordering and updates an existing result', () => {
+    const state = createBooleanState();
+    addBooleanEntry(state, entryA);
+    expect(
+      replaceBooleanEntry(state, {
+        ...entryA,
+        operation: 'subtract',
+        operands: [
+          { nodeId: 'n2', order: 9 },
+          { nodeId: 'n1', order: 2 },
+        ],
+      }),
+    ).toBe(true);
+    expect(getBooleanEntry(state, entryA.resultNodeId)?.operands).toEqual([
+      { nodeId: 'n1', order: 0 },
+      { nodeId: 'n2', order: 1 },
+    ]);
+  });
+});
+
+describe('validateBooleanState', () => {
+  it('diagnoses malformed hydrated entries', () => {
+    const state = createBooleanState();
+    state.entries.set('bad', { resultNodeId: 'bad', operation: 'union', operands: [] });
+    expect(validateBooleanState(state)[0]).toContain('at least two');
+  });
+});
+
+describe('addBooleanEntry', () => {
+  it('rejects duplicate results, operands, and self references', () => {
+    const state = createBooleanState();
+    addBooleanEntry(state, entryA);
+    expect(() => addBooleanEntry(state, entryA)).toThrow('already exists');
+    expect(() =>
+      addBooleanEntry(state, {
+        resultNodeId: 'bad',
+        operation: 'union',
+        operands: [
+          { nodeId: 'n1', order: 0 },
+          { nodeId: 'n1', order: 1 },
+        ],
+      }),
+    ).toThrow('Duplicate');
+  });
 });
