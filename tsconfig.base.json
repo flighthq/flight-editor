@@ -26,6 +26,8 @@
       "@flighthq/editor-document/*": ["./packages/editor-document/src/*"],
       "@flighthq/editor-diagnostics": ["./packages/editor-diagnostics/src/index.ts"],
       "@flighthq/editor-diagnostics/*": ["./packages/editor-diagnostics/src/*"],
+      "@flighthq/editor-dev-mode": ["./packages/editor-dev-mode/src/index.ts"],
+      "@flighthq/editor-dev-mode/*": ["./packages/editor-dev-mode/src/*"],
       "@flighthq/editor-design-tokens": ["./packages/editor-design-tokens/src/index.ts"],
       "@flighthq/editor-design-tokens/*": ["./packages/editor-design-tokens/src/*"],
       "@flighthq/editor-drag-drop": ["./packages/editor-drag-drop/src/index.ts"],
