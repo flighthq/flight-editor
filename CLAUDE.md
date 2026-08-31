@@ -41,6 +41,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-color` — color picker state: active packed color, saved swatches, bounded recent-color history
 - `editor-command` — command history: `Command` interface, execute/undo/redo, clean tracking
 - `editor-component` — component/symbol instance state: definitions, instances, overrides
+- `editor-component-inspector` — pluggable typed component schemas, mixed-value inspection, migrations, and command mutations
 - `editor-context-menu` — hierarchical context-menu registry with enabled state, open position, and active item selection
 - `editor-cursor` — cursor display state: tool default, override stack with source-based push/pop
 - `editor-document` — document lifecycle state: serialization format, load/save coordination, metadata
