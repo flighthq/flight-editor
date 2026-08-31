@@ -4296,6 +4296,241 @@ scene:
             children: []
           - kind: Shape
             traits:
+              name: OnionSkin_Btn
+              x: 92
+              y: 156
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 2576980479
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawCircle
+                  - 3
+                  - 5
+                  - 5
+                  - 5
+                  - endFill
+                  - 0
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 2576980479
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawCircle
+                  - 3
+                  - 5
+                  - 5
+                  - 3
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 2576980479
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 5
+                  - 5
+                  - 1.5
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: OnionOutlines_Btn
+              x: 112
+              y: 156
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 2576980479
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 10
+                  - 10
+                  - endFill
+                  - 0
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 2576980479
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 2
+                  - 2
+                  - 6
+                  - 6
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: EditMultiFrames_Btn
+              x: 132
+              y: 156
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 2576980479
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 2
+                  - 7
+                  - 8
+                  - endFill
+                  - 0
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 2576980479
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 3
+                  - 0
+                  - 7
+                  - 8
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: OnionMarkers_Btn
+              x: 152
+              y: 158
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 2576980479
+                  - 1
+                  - moveTo
+                  - 2
+                  - 0
+                  - 0
+                  - lineTo
+                  - 2
+                  - 8
+                  - 0
+                  - lineTo
+                  - 2
+                  - 4
+                  - 5
+                  - lineTo
+                  - 2
+                  - 0
+                  - 0
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: OnionBracketL
+              x: 206
+              y: 84
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 2
+                  - 1852731135
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - moveTo
+                  - 2
+                  - 4
+                  - 0
+                  - lineTo
+                  - 2
+                  - 0
+                  - 0
+                  - lineTo
+                  - 2
+                  - 0
+                  - 6
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: OnionBracketR
+              x: 248
+              y: 84
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 2
+                  - 1852731135
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - moveTo
+                  - 2
+                  - 0
+                  - 0
+                  - lineTo
+                  - 2
+                  - 4
+                  - 0
+                  - lineTo
+                  - 2
+                  - 4
+                  - 6
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
               name: FrameStatusBg
               x: 201
               y: 152
@@ -6272,6 +6507,109 @@ scene:
             children: []
           - kind: Shape
             traits:
+              name: TimelineHScrollTrack
+              x: 201
+              y: 168
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 926365695
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 1079
+                  - 4
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: TimelineHScrollThumb
+              x: 208
+              y: 168
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1684301055
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 200
+                  - 4
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: TimelineDragGrip
+              x: 620
+              y: 170
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 0
+                  - 1
+                  - 1
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 6
+                  - 1
+                  - 1
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 12
+                  - 1
+                  - 1
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 18
+                  - 1
+                  - 1
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 24
+                  - 1
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
               name: RulerCorner
               x: 44
               y: 172
@@ -7084,6 +7422,46 @@ scene:
             children: []
           - kind: Shape
             traits:
+              name: StageShadowRight2
+              x: 844
+              y: 228
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1179010815
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 3
+                  - 402
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: StageShadowBottom2
+              x: 292
+              y: 628
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1179010815
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 555
+                  - 3
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
               name: StageShadowRight
               x: 839
               y: 225
@@ -7139,6 +7517,26 @@ scene:
                   - 0
                   - 5
                   - 5
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: StageShadowCorner2
+              x: 844
+              y: 628
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1179010815
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 3
+                  - 3
                   - endFill
                   - 0
             children: []
@@ -8125,9 +8523,126 @@ scene:
                     children: []
                   - kind: Shape
                     traits:
-                      name: LibItem1_Bg
+                      name: LibFolder_Bg
                       x: 1081
                       y: 226
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 976894719
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 199
+                          - 18
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibFolder_Triangle
+                      x: 1086
+                      y: 231
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 3368601855
+                          - 1
+                          - moveTo
+                          - 2
+                          - 0
+                          - 0
+                          - lineTo
+                          - 2
+                          - 7
+                          - 4
+                          - lineTo
+                          - 2
+                          - 0
+                          - 8
+                          - lineTo
+                          - 2
+                          - 0
+                          - 0
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibFolder_Icon
+                      x: 1096
+                      y: 229
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 3367265535
+                          - 1
+                          - moveTo
+                          - 2
+                          - 0
+                          - 3
+                          - lineTo
+                          - 2
+                          - 4
+                          - 3
+                          - lineTo
+                          - 2
+                          - 5
+                          - 1
+                          - lineTo
+                          - 2
+                          - 8
+                          - 1
+                          - lineTo
+                          - 2
+                          - 8
+                          - 3
+                          - lineTo
+                          - 2
+                          - 12
+                          - 3
+                          - lineTo
+                          - 2
+                          - 12
+                          - 10
+                          - lineTo
+                          - 2
+                          - 0
+                          - 10
+                          - lineTo
+                          - 2
+                          - 0
+                          - 3
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: TextLabel
+                    traits:
+                      name: LibFolder_Name
+                      x: 1112
+                      y: 228
+                      data:
+                        text: "Symbols"
+                        textFormat:
+                          font: Arial
+                          size: 9
+                          color: 4042322175
+                          bold: true
+                        width: 80
+                        height: 15
+                        autoSize: left
+                        verticalAlign: top
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibItem1_Bg
+                      x: 1081
+                      y: 244
                       data:
                         commands:
                           - beginFill
@@ -8146,8 +8661,8 @@ scene:
                   - kind: Shape
                     traits:
                       name: LibItem1_Icon
-                      x: 1086
-                      y: 228
+                      x: 1098
+                      y: 246
                       data:
                         commands:
                           - lineStyle
@@ -8197,15 +8712,15 @@ scene:
                   - kind: TextLabel
                     traits:
                       name: LibItem1_Name
-                      x: 1102
-                      y: 228
+                      x: 1114
+                      y: 246
                       data:
                         text: "logo_anim"
                         textFormat:
                           font: Arial
                           size: 9
                           color: 4042322175
-                        width: 90
+                        width: 80
                         height: 15
                         autoSize: left
                         verticalAlign: top
@@ -8214,7 +8729,7 @@ scene:
                     traits:
                       name: LibItem1_Kind
                       x: 1200
-                      y: 228
+                      y: 246
                       data:
                         text: "Movie Clip"
                         textFormat:
@@ -8230,7 +8745,7 @@ scene:
                     traits:
                       name: LibItem2_Bg
                       x: 1081
-                      y: 244
+                      y: 262
                       data:
                         commands:
                           - beginFill
@@ -8249,8 +8764,8 @@ scene:
                   - kind: Shape
                     traits:
                       name: LibItem2_Icon
-                      x: 1086
-                      y: 247
+                      x: 1098
+                      y: 265
                       data:
                         commands:
                           - lineStyle
@@ -8277,15 +8792,15 @@ scene:
                   - kind: TextLabel
                     traits:
                       name: LibItem2_Name
-                      x: 1102
-                      y: 246
+                      x: 1114
+                      y: 264
                       data:
                         text: "btn_submit"
                         textFormat:
                           font: Arial
                           size: 9
                           color: 4042322175
-                        width: 90
+                        width: 80
                         height: 15
                         autoSize: left
                         verticalAlign: top
@@ -8294,7 +8809,7 @@ scene:
                     traits:
                       name: LibItem2_Kind
                       x: 1200
-                      y: 246
+                      y: 264
                       data:
                         text: "Button"
                         textFormat:
@@ -8310,7 +8825,7 @@ scene:
                     traits:
                       name: LibItem3_Bg
                       x: 1081
-                      y: 262
+                      y: 280
                       data:
                         commands:
                           - beginFill
@@ -8330,7 +8845,7 @@ scene:
                     traits:
                       name: LibItem3_Icon
                       x: 1086
-                      y: 265
+                      y: 283
                       data:
                         commands:
                           - beginFill
@@ -8386,7 +8901,7 @@ scene:
                     traits:
                       name: LibItem3_Name
                       x: 1102
-                      y: 264
+                      y: 282
                       data:
                         text: "bg_image.png"
                         textFormat:
@@ -8402,7 +8917,7 @@ scene:
                     traits:
                       name: LibItem3_Kind
                       x: 1200
-                      y: 264
+                      y: 282
                       data:
                         text: "Bitmap"
                         textFormat:
@@ -8418,7 +8933,7 @@ scene:
                     traits:
                       name: LibItem4_Bg
                       x: 1081
-                      y: 280
+                      y: 298
                       data:
                         commands:
                           - beginFill
@@ -8438,7 +8953,7 @@ scene:
                     traits:
                       name: LibItem4_Icon
                       x: 1086
-                      y: 283
+                      y: 301
                       data:
                         commands:
                           - beginFill
@@ -8475,12 +8990,36 @@ scene:
                           - 3
                           - endFill
                           - 0
+                          - lineStyle
+                          - 8
+                          - 1
+                          - 2576980479
+                          - 1
+                          - 0
+                          - 0
+                          - 0
+                          - 0
+                          - 4
+                          - moveTo
+                          - 2
+                          - 11
+                          - 3
+                          - lineTo
+                          - 2
+                          - 13
+                          - 5
+                          - lineTo
+                          - 2
+                          - 11
+                          - 7
+                          - endFill
+                          - 0
                     children: []
                   - kind: TextLabel
                     traits:
                       name: LibItem4_Name
                       x: 1102
-                      y: 282
+                      y: 300
                       data:
                         text: "click_sound.mp3"
                         textFormat:
@@ -8496,7 +9035,7 @@ scene:
                     traits:
                       name: LibItem4_Kind
                       x: 1200
-                      y: 282
+                      y: 300
                       data:
                         text: "Sound"
                         textFormat:
@@ -8512,7 +9051,7 @@ scene:
                     traits:
                       name: LibPreviewBg
                       x: 1081
-                      y: 300
+                      y: 318
                       data:
                         commands:
                           - beginFill
@@ -8532,7 +9071,7 @@ scene:
                     traits:
                       name: LibPreviewContent
                       x: 1150
-                      y: 308
+                      y: 326
                       data:
                         commands:
                           - beginFill
@@ -8554,7 +9093,7 @@ scene:
                     traits:
                       name: LibPreview_Label
                       x: 1150
-                      y: 314
+                      y: 332
                       data:
                         text: "No preview"
                         textFormat:
@@ -8567,11 +9106,224 @@ scene:
                         autoSize: left
                         verticalAlign: top
                     children: []
+                  - kind: Shape
+                    traits:
+                      name: LibBottomBarBg
+                      x: 1081
+                      y: 362
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 1431655935
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 0
+                          - 199
+                          - 18
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibBtn_NewSymbol
+                      x: 1090
+                      y: 365
+                      data:
+                        commands:
+                          - lineStyle
+                          - 8
+                          - 1.5
+                          - 3368601855
+                          - 1
+                          - 0
+                          - 0
+                          - 0
+                          - 0
+                          - 4
+                          - drawCircle
+                          - 3
+                          - 5
+                          - 5
+                          - 5
+                          - endFill
+                          - 0
+                          - beginFill
+                          - 2
+                          - 3368601855
+                          - 1
+                          - beginFill
+                          - 2
+                          - 3368601855
+                          - 1
+                          - moveTo
+                          - 2
+                          - 4
+                          - 3
+                          - lineTo
+                          - 2
+                          - 4
+                          - 8
+                          - lineTo
+                          - 2
+                          - 8
+                          - 5
+                          - lineTo
+                          - 2
+                          - 4
+                          - 3
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibBtn_NewFolder
+                      x: 1114
+                      y: 365
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 2576980479
+                          - 1
+                          - moveTo
+                          - 2
+                          - 0
+                          - 3
+                          - lineTo
+                          - 2
+                          - 4
+                          - 3
+                          - lineTo
+                          - 2
+                          - 5
+                          - 1
+                          - lineTo
+                          - 2
+                          - 8
+                          - 1
+                          - lineTo
+                          - 2
+                          - 8
+                          - 3
+                          - lineTo
+                          - 2
+                          - 12
+                          - 3
+                          - lineTo
+                          - 2
+                          - 12
+                          - 10
+                          - lineTo
+                          - 2
+                          - 0
+                          - 10
+                          - lineTo
+                          - 2
+                          - 0
+                          - 3
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibBtn_Properties
+                      x: 1138
+                      y: 365
+                      data:
+                        commands:
+                          - lineStyle
+                          - 8
+                          - 1
+                          - 2576980479
+                          - 1
+                          - 0
+                          - 0
+                          - 0
+                          - 0
+                          - 4
+                          - drawCircle
+                          - 3
+                          - 5
+                          - 5
+                          - 5
+                          - endFill
+                          - 0
+                          - beginFill
+                          - 2
+                          - 2576980479
+                          - 1
+                          - drawCircle
+                          - 3
+                          - 5
+                          - 3
+                          - 1
+                          - endFill
+                          - 0
+                          - beginFill
+                          - 2
+                          - 2576980479
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 4
+                          - 5
+                          - 2
+                          - 4
+                          - endFill
+                          - 0
+                    children: []
+                  - kind: Shape
+                    traits:
+                      name: LibBtn_Delete
+                      x: 1162
+                      y: 365
+                      data:
+                        commands:
+                          - beginFill
+                          - 2
+                          - 2576980479
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 2
+                          - 3
+                          - 8
+                          - 8
+                          - endFill
+                          - 0
+                          - beginFill
+                          - 2
+                          - 2576980479
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 0
+                          - 1
+                          - 12
+                          - 2
+                          - endFill
+                          - 0
+                          - beginFill
+                          - 2
+                          - 2576980479
+                          - 1
+                          - drawRectangle
+                          - 4
+                          - 4
+                          - 0
+                          - 4
+                          - 2
+                          - endFill
+                          - 0
+                    children: []
               - kind: Shape
                 traits:
                   name: PanelDivider1
                   x: 1081
-                  y: 344
+                  y: 380
                   data:
                     commands:
                       - beginFill
@@ -8595,7 +9347,7 @@ scene:
                     traits:
                       name: ColorMixerHeaderBg
                       x: 1081
-                      y: 345
+                      y: 381
                       data:
                         commands:
                           - beginFill
@@ -8615,7 +9367,7 @@ scene:
                     traits:
                       name: ColorMixerCollapseTriangle
                       x: 1086
-                      y: 351
+                      y: 387
                       data:
                         commands:
                           - beginFill
@@ -8645,7 +9397,7 @@ scene:
                     traits:
                       name: ColorMixerHeaderLabel
                       x: 1096
-                      y: 347
+                      y: 383
                       data:
                         text: "Color Mixer"
                         textFormat:
@@ -8662,7 +9414,7 @@ scene:
                     traits:
                       name: ColorMixerContentBg
                       x: 1081
-                      y: 365
+                      y: 401
                       data:
                         commands:
                           - beginFill
@@ -8682,7 +9434,7 @@ scene:
                     traits:
                       name: ColorMixer_TypeField_Border
                       x: 1086
-                      y: 369
+                      y: 405
                       data:
                         commands:
                           - beginFill
@@ -8702,7 +9454,7 @@ scene:
                     traits:
                       name: ColorMixer_TypeField_Bg
                       x: 1087
-                      y: 370
+                      y: 406
                       data:
                         commands:
                           - beginFill
@@ -8722,7 +9474,7 @@ scene:
                     traits:
                       name: ColorMixer_FillType
                       x: 1090
-                      y: 370
+                      y: 406
                       data:
                         text: "Solid"
                         textFormat:
@@ -8738,7 +9490,7 @@ scene:
                     traits:
                       name: ColorMixer_TypeArrow
                       x: 1154
-                      y: 374
+                      y: 410
                       data:
                         commands:
                           - beginFill
@@ -8768,7 +9520,7 @@ scene:
                     traits:
                       name: ColorMixer_SwatchBorder
                       x: 1086
-                      y: 390
+                      y: 426
                       data:
                         commands:
                           - beginFill
@@ -8788,7 +9540,7 @@ scene:
                     traits:
                       name: ColorMixer_Swatch
                       x: 1088
-                      y: 392
+                      y: 428
                       data:
                         commands:
                           - beginFill
@@ -8808,7 +9560,7 @@ scene:
                     traits:
                       name: ColorMixer_Spec0
                       x: 1120
-                      y: 390
+                      y: 426
                       data:
                         commands:
                           - beginFill
@@ -8828,7 +9580,7 @@ scene:
                     traits:
                       name: ColorMixer_Spec1
                       x: 1141
-                      y: 390
+                      y: 426
                       data:
                         commands:
                           - beginFill
@@ -8848,7 +9600,7 @@ scene:
                     traits:
                       name: ColorMixer_Spec2
                       x: 1162
-                      y: 390
+                      y: 426
                       data:
                         commands:
                           - beginFill
@@ -8868,7 +9620,7 @@ scene:
                     traits:
                       name: ColorMixer_Spec3
                       x: 1183
-                      y: 390
+                      y: 426
                       data:
                         commands:
                           - beginFill
@@ -8888,7 +9640,7 @@ scene:
                     traits:
                       name: ColorMixer_Spec4
                       x: 1204
-                      y: 390
+                      y: 426
                       data:
                         commands:
                           - beginFill
@@ -8908,7 +9660,7 @@ scene:
                     traits:
                       name: ColorMixer_Spec5
                       x: 1225
-                      y: 390
+                      y: 426
                       data:
                         commands:
                           - beginFill
@@ -8928,7 +9680,7 @@ scene:
                     traits:
                       name: ColorMixer_Spec6
                       x: 1246
-                      y: 390
+                      y: 426
                       data:
                         commands:
                           - beginFill
@@ -8948,7 +9700,7 @@ scene:
                     traits:
                       name: ColorMixer_SpecCursor
                       x: 1260
-                      y: 402
+                      y: 438
                       data:
                         commands:
                           - beginFill
@@ -8978,7 +9730,7 @@ scene:
                     traits:
                       name: ColorMixer_R_Label
                       x: 1122
-                      y: 408
+                      y: 444
                       data:
                         text: "R:"
                         textFormat:
@@ -8994,7 +9746,7 @@ scene:
                     traits:
                       name: ColorMixer_R_Track
                       x: 1140
-                      y: 412
+                      y: 448
                       data:
                         commands:
                           - beginFill
@@ -9014,7 +9766,7 @@ scene:
                     traits:
                       name: ColorMixer_R_Fill
                       x: 1140
-                      y: 411
+                      y: 447
                       data:
                         commands:
                           - beginFill
@@ -9034,7 +9786,7 @@ scene:
                     traits:
                       name: ColorMixer_R_Thumb
                       x: 1226
-                      y: 409
+                      y: 445
                       data:
                         commands:
                           - beginFill
@@ -9056,7 +9808,7 @@ scene:
                     traits:
                       name: ColorMixer_R_Value
                       x: 1240
-                      y: 408
+                      y: 444
                       data:
                         text: "255"
                         textFormat:
@@ -9072,7 +9824,7 @@ scene:
                     traits:
                       name: ColorMixer_G_Label
                       x: 1122
-                      y: 424
+                      y: 460
                       data:
                         text: "G:"
                         textFormat:
@@ -9088,7 +9840,7 @@ scene:
                     traits:
                       name: ColorMixer_G_Track
                       x: 1140
-                      y: 428
+                      y: 464
                       data:
                         commands:
                           - beginFill
@@ -9108,7 +9860,7 @@ scene:
                     traits:
                       name: ColorMixer_G_Fill
                       x: 1140
-                      y: 427
+                      y: 463
                       data:
                         commands:
                           - beginFill
@@ -9128,7 +9880,7 @@ scene:
                     traits:
                       name: ColorMixer_G_Thumb
                       x: 1226
-                      y: 425
+                      y: 461
                       data:
                         commands:
                           - beginFill
@@ -9150,7 +9902,7 @@ scene:
                     traits:
                       name: ColorMixer_G_Value
                       x: 1240
-                      y: 424
+                      y: 460
                       data:
                         text: "255"
                         textFormat:
@@ -9166,7 +9918,7 @@ scene:
                     traits:
                       name: ColorMixer_B_Label
                       x: 1122
-                      y: 440
+                      y: 476
                       data:
                         text: "B:"
                         textFormat:
@@ -9182,7 +9934,7 @@ scene:
                     traits:
                       name: ColorMixer_B_Track
                       x: 1140
-                      y: 444
+                      y: 480
                       data:
                         commands:
                           - beginFill
@@ -9202,7 +9954,7 @@ scene:
                     traits:
                       name: ColorMixer_B_Fill
                       x: 1140
-                      y: 443
+                      y: 479
                       data:
                         commands:
                           - beginFill
@@ -9222,7 +9974,7 @@ scene:
                     traits:
                       name: ColorMixer_B_Thumb
                       x: 1226
-                      y: 441
+                      y: 477
                       data:
                         commands:
                           - beginFill
@@ -9244,7 +9996,7 @@ scene:
                     traits:
                       name: ColorMixer_B_Value
                       x: 1240
-                      y: 440
+                      y: 476
                       data:
                         text: "255"
                         textFormat:
@@ -9260,7 +10012,7 @@ scene:
                     traits:
                       name: ColorMixer_A_Label
                       x: 1122
-                      y: 456
+                      y: 492
                       data:
                         text: "A:"
                         textFormat:
@@ -9276,7 +10028,7 @@ scene:
                     traits:
                       name: ColorMixer_A_Track
                       x: 1140
-                      y: 460
+                      y: 496
                       data:
                         commands:
                           - beginFill
@@ -9296,7 +10048,7 @@ scene:
                     traits:
                       name: ColorMixer_A_Fill
                       x: 1140
-                      y: 459
+                      y: 495
                       data:
                         commands:
                           - beginFill
@@ -9316,7 +10068,7 @@ scene:
                     traits:
                       name: ColorMixer_A_Thumb
                       x: 1226
-                      y: 457
+                      y: 493
                       data:
                         commands:
                           - beginFill
@@ -9338,7 +10090,7 @@ scene:
                     traits:
                       name: ColorMixer_A_Value
                       x: 1240
-                      y: 456
+                      y: 492
                       data:
                         text: "100"
                         textFormat:
@@ -9354,7 +10106,7 @@ scene:
                     traits:
                       name: ColorMixer_HexLabel
                       x: 1086
-                      y: 472
+                      y: 508
                       data:
                         text: "Hex:"
                         textFormat:
@@ -9370,7 +10122,7 @@ scene:
                     traits:
                       name: ColorMixer_HexField_Border
                       x: 1114
-                      y: 470
+                      y: 506
                       data:
                         commands:
                           - beginFill
@@ -9390,7 +10142,7 @@ scene:
                     traits:
                       name: ColorMixer_HexField_Bg
                       x: 1115
-                      y: 471
+                      y: 507
                       data:
                         commands:
                           - beginFill
@@ -9410,7 +10162,7 @@ scene:
                     traits:
                       name: ColorMixer_HexValue
                       x: 1118
-                      y: 472
+                      y: 508
                       data:
                         text: "#FFFFFF"
                         textFormat:
@@ -9426,7 +10178,7 @@ scene:
                     traits:
                       name: ColorMixer_AlphaLabel
                       x: 1186
-                      y: 472
+                      y: 508
                       data:
                         text: "Alpha:"
                         textFormat:
@@ -9442,7 +10194,7 @@ scene:
                     traits:
                       name: ColorMixer_AlphaValue
                       x: 1226
-                      y: 472
+                      y: 508
                       data:
                         text: "100%"
                         textFormat:
@@ -9458,7 +10210,7 @@ scene:
                 traits:
                   name: PanelDivider2
                   x: 1081
-                  y: 490
+                  y: 526
                   data:
                     commands:
                       - beginFill
@@ -9482,7 +10234,7 @@ scene:
                     traits:
                       name: AlignHeaderBg
                       x: 1081
-                      y: 491
+                      y: 527
                       data:
                         commands:
                           - beginFill
@@ -9502,7 +10254,7 @@ scene:
                     traits:
                       name: AlignCollapseTriangle
                       x: 1086
-                      y: 497
+                      y: 533
                       data:
                         commands:
                           - beginFill
@@ -9532,7 +10284,7 @@ scene:
                     traits:
                       name: AlignHeaderLabel
                       x: 1096
-                      y: 493
+                      y: 529
                       data:
                         text: "Align"
                         textFormat:
@@ -9549,7 +10301,7 @@ scene:
                     traits:
                       name: AlignContentBg
                       x: 1081
-                      y: 511
+                      y: 547
                       data:
                         commands:
                           - beginFill
@@ -9561,7 +10313,7 @@ scene:
                           - 0
                           - 0
                           - 199
-                          - 139
+                          - 103
                           - endFill
                           - 0
                     children: []
@@ -9569,7 +10321,7 @@ scene:
                     traits:
                       name: Align_SectionLabel
                       x: 1088
-                      y: 513
+                      y: 549
                       data:
                         text: "Align:"
                         textFormat:
@@ -9585,7 +10337,7 @@ scene:
                     traits:
                       name: Align_Left_Bg
                       x: 1090
-                      y: 526
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -9597,7 +10349,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -9605,7 +10357,7 @@ scene:
                     traits:
                       name: Align_Left_Icon
                       x: 1092
-                      y: 527
+                      y: 563
                       data:
                         commands:
                           - beginFill
@@ -9649,7 +10401,7 @@ scene:
                     traits:
                       name: Align_CenterH_Bg
                       x: 1118
-                      y: 526
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -9661,7 +10413,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -9669,7 +10421,7 @@ scene:
                     traits:
                       name: Align_CenterH_Icon
                       x: 1120
-                      y: 527
+                      y: 563
                       data:
                         commands:
                           - beginFill
@@ -9713,7 +10465,7 @@ scene:
                     traits:
                       name: Align_Right_Bg
                       x: 1146
-                      y: 526
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -9725,7 +10477,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -9733,7 +10485,7 @@ scene:
                     traits:
                       name: Align_Right_Icon
                       x: 1148
-                      y: 527
+                      y: 563
                       data:
                         commands:
                           - beginFill
@@ -9777,7 +10529,7 @@ scene:
                     traits:
                       name: Align_Top_Bg
                       x: 1174
-                      y: 526
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -9789,7 +10541,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -9797,7 +10549,7 @@ scene:
                     traits:
                       name: Align_Top_Icon
                       x: 1176
-                      y: 527
+                      y: 563
                       data:
                         commands:
                           - beginFill
@@ -9841,7 +10593,7 @@ scene:
                     traits:
                       name: Align_CenterV_Bg
                       x: 1202
-                      y: 526
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -9853,7 +10605,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -9861,7 +10613,7 @@ scene:
                     traits:
                       name: Align_CenterV_Icon
                       x: 1204
-                      y: 527
+                      y: 563
                       data:
                         commands:
                           - beginFill
@@ -9905,7 +10657,7 @@ scene:
                     traits:
                       name: Align_Bottom_Bg
                       x: 1230
-                      y: 526
+                      y: 562
                       data:
                         commands:
                           - beginFill
@@ -9917,7 +10669,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -9925,7 +10677,7 @@ scene:
                     traits:
                       name: Align_Bottom_Icon
                       x: 1232
-                      y: 527
+                      y: 563
                       data:
                         commands:
                           - beginFill
@@ -9969,7 +10721,7 @@ scene:
                     traits:
                       name: Align_DistLabel
                       x: 1088
-                      y: 549
+                      y: 583
                       data:
                         text: "Distribute:"
                         textFormat:
@@ -9985,7 +10737,7 @@ scene:
                     traits:
                       name: Align_DLeft_Bg
                       x: 1090
-                      y: 561
+                      y: 595
                       data:
                         commands:
                           - beginFill
@@ -9997,7 +10749,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -10005,7 +10757,7 @@ scene:
                     traits:
                       name: Align_DLeft_Icon
                       x: 1092
-                      y: 562
+                      y: 596
                       data:
                         commands:
                           - beginFill
@@ -10073,7 +10825,7 @@ scene:
                     traits:
                       name: Align_DCenterH_Bg
                       x: 1118
-                      y: 561
+                      y: 595
                       data:
                         commands:
                           - beginFill
@@ -10085,7 +10837,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -10093,7 +10845,7 @@ scene:
                     traits:
                       name: Align_DCenterH_Icon
                       x: 1120
-                      y: 562
+                      y: 596
                       data:
                         commands:
                           - beginFill
@@ -10197,7 +10949,7 @@ scene:
                     traits:
                       name: Align_DRight_Bg
                       x: 1146
-                      y: 561
+                      y: 595
                       data:
                         commands:
                           - beginFill
@@ -10209,7 +10961,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -10217,7 +10969,7 @@ scene:
                     traits:
                       name: Align_DRight_Icon
                       x: 1148
-                      y: 562
+                      y: 596
                       data:
                         commands:
                           - beginFill
@@ -10297,7 +11049,7 @@ scene:
                     traits:
                       name: Align_DTop_Bg
                       x: 1174
-                      y: 561
+                      y: 595
                       data:
                         commands:
                           - beginFill
@@ -10309,7 +11061,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -10317,7 +11069,7 @@ scene:
                     traits:
                       name: Align_DTop_Icon
                       x: 1176
-                      y: 562
+                      y: 596
                       data:
                         commands:
                           - beginFill
@@ -10385,7 +11137,7 @@ scene:
                     traits:
                       name: Align_DCenterV_Bg
                       x: 1202
-                      y: 561
+                      y: 595
                       data:
                         commands:
                           - beginFill
@@ -10397,7 +11149,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -10405,7 +11157,7 @@ scene:
                     traits:
                       name: Align_DCenterV_Icon
                       x: 1204
-                      y: 562
+                      y: 596
                       data:
                         commands:
                           - beginFill
@@ -10509,7 +11261,7 @@ scene:
                     traits:
                       name: Align_DBottom_Bg
                       x: 1230
-                      y: 561
+                      y: 595
                       data:
                         commands:
                           - beginFill
@@ -10521,7 +11273,7 @@ scene:
                           - 0
                           - 0
                           - 24
-                          - 20
+                          - 18
                           - endFill
                           - 0
                     children: []
@@ -10529,7 +11281,7 @@ scene:
                     traits:
                       name: Align_DBottom_Icon
                       x: 1232
-                      y: 562
+                      y: 596
                       data:
                         commands:
                           - beginFill
@@ -10609,7 +11361,7 @@ scene:
                     traits:
                       name: Align_MatchLabel
                       x: 1088
-                      y: 585
+                      y: 617
                       data:
                         text: "Match size:"
                         textFormat:
@@ -10625,7 +11377,7 @@ scene:
                     traits:
                       name: Align_MatchW_Bg
                       x: 1090
-                      y: 597
+                      y: 629
                       data:
                         commands:
                           - beginFill
@@ -10637,7 +11389,7 @@ scene:
                           - 0
                           - 0
                           - 38
-                          - 18
+                          - 16
                           - endFill
                           - 0
                     children: []
@@ -10645,16 +11397,16 @@ scene:
                     traits:
                       name: Align_MatchW_Label
                       x: 1096
-                      y: 599
+                      y: 630
                       data:
                         text: "W"
                         textFormat:
                           font: Arial
-                          size: 10
+                          size: 9
                           color: 3705462015
                           bold: true
                         width: 24
-                        height: 16
+                        height: 15
                         autoSize: left
                         verticalAlign: top
                     children: []
@@ -10662,7 +11414,7 @@ scene:
                     traits:
                       name: Align_MatchH_Bg
                       x: 1134
-                      y: 597
+                      y: 629
                       data:
                         commands:
                           - beginFill
@@ -10674,7 +11426,7 @@ scene:
                           - 0
                           - 0
                           - 38
-                          - 18
+                          - 16
                           - endFill
                           - 0
                     children: []
@@ -10682,16 +11434,16 @@ scene:
                     traits:
                       name: Align_MatchH_Label
                       x: 1140
-                      y: 599
+                      y: 630
                       data:
                         text: "H"
                         textFormat:
                           font: Arial
-                          size: 10
+                          size: 9
                           color: 3705462015
                           bold: true
                         width: 24
-                        height: 16
+                        height: 15
                         autoSize: left
                         verticalAlign: top
                     children: []
@@ -10699,7 +11451,7 @@ scene:
                     traits:
                       name: Align_MatchWH_Bg
                       x: 1178
-                      y: 597
+                      y: 629
                       data:
                         commands:
                           - beginFill
@@ -10711,7 +11463,7 @@ scene:
                           - 0
                           - 0
                           - 38
-                          - 18
+                          - 16
                           - endFill
                           - 0
                     children: []
@@ -10719,162 +11471,18 @@ scene:
                     traits:
                       name: Align_MatchWH_Label
                       x: 1184
-                      y: 599
+                      y: 630
                       data:
                         text: "WH"
                         textFormat:
                           font: Arial
-                          size: 10
+                          size: 9
                           color: 3705462015
                           bold: true
                         width: 24
-                        height: 16
-                        autoSize: left
-                        verticalAlign: top
-                    children: []
-                  - kind: TextLabel
-                    traits:
-                      name: Align_SpaceLabel
-                      x: 1088
-                      y: 619
-                      data:
-                        text: "Space:"
-                        textFormat:
-                          font: Arial
-                          size: 9
-                          color: 2576980479
-                        width: 40
                         height: 15
                         autoSize: left
                         verticalAlign: top
-                    children: []
-                  - kind: Shape
-                    traits:
-                      name: Align_SpaceH_Bg
-                      x: 1090
-                      y: 631
-                      data:
-                        commands:
-                          - beginFill
-                          - 2
-                          - 1515870975
-                          - 1
-                          - drawRectangle
-                          - 4
-                          - 0
-                          - 0
-                          - 38
-                          - 16
-                          - endFill
-                          - 0
-                    children: []
-                  - kind: Shape
-                    traits:
-                      name: Align_SpaceH_Icon
-                      x: 1098
-                      y: 633
-                      data:
-                        commands:
-                          - beginFill
-                          - 2
-                          - 2358021375
-                          - 1
-                          - drawRectangle
-                          - 4
-                          - 0
-                          - 0
-                          - 3
-                          - 10
-                          - endFill
-                          - 0
-                          - beginFill
-                          - 2
-                          - 2358021375
-                          - 1
-                          - drawRectangle
-                          - 4
-                          - 9
-                          - 2
-                          - 3
-                          - 6
-                          - endFill
-                          - 0
-                          - beginFill
-                          - 2
-                          - 2358021375
-                          - 1
-                          - drawRectangle
-                          - 4
-                          - 18
-                          - 0
-                          - 3
-                          - 10
-                          - endFill
-                          - 0
-                    children: []
-                  - kind: Shape
-                    traits:
-                      name: Align_SpaceV_Bg
-                      x: 1134
-                      y: 631
-                      data:
-                        commands:
-                          - beginFill
-                          - 2
-                          - 1515870975
-                          - 1
-                          - drawRectangle
-                          - 4
-                          - 0
-                          - 0
-                          - 38
-                          - 16
-                          - endFill
-                          - 0
-                    children: []
-                  - kind: Shape
-                    traits:
-                      name: Align_SpaceV_Icon
-                      x: 1142
-                      y: 633
-                      data:
-                        commands:
-                          - beginFill
-                          - 2
-                          - 2358021375
-                          - 1
-                          - drawRectangle
-                          - 4
-                          - 0
-                          - 0
-                          - 10
-                          - 3
-                          - endFill
-                          - 0
-                          - beginFill
-                          - 2
-                          - 2358021375
-                          - 1
-                          - drawRectangle
-                          - 4
-                          - 2
-                          - 5
-                          - 6
-                          - 3
-                          - endFill
-                          - 0
-                          - beginFill
-                          - 2
-                          - 2358021375
-                          - 1
-                          - drawRectangle
-                          - 4
-                          - 0
-                          - 10
-                          - 10
-                          - 3
-                          - endFill
-                          - 0
                     children: []
       - kind: DisplayObject
         traits:
@@ -10916,6 +11524,69 @@ scene:
                   - 0
                   - 0
                   - 1280
+                  - 1
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: PropDragGrip
+              x: 600
+              y: 651
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 0
+                  - 1
+                  - 1
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 6
+                  - 1
+                  - 1
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 12
+                  - 1
+                  - 1
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 18
+                  - 1
+                  - 1
+                  - endFill
+                  - 0
+                  - beginFill
+                  - 2
+                  - 1515870975
+                  - 1
+                  - drawCircle
+                  - 3
+                  - 24
+                  - 1
                   - 1
                   - endFill
                   - 0
@@ -11069,99 +11740,71 @@ scene:
                   - endFill
                   - 0
             children: []
+          - kind: Shape
+            traits:
+              name: Prop_TypeIcon
+              x: 10
+              y: 676
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 862375167
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRoundRectangle
+                  - 6
+                  - 0
+                  - 0
+                  - 12
+                  - 10
+                  - 3
+                  - 3
+                  - endFill
+                  - 0
+            children: []
           - kind: TextLabel
             traits:
               name: Prop_TypeLabel
-              x: 12
+              x: 26
               y: 676
               data:
-                text: "Document"
+                text: "Button"
                 textFormat:
                   font: Arial
                   size: 11
                   color: 4042322175
                   bold: true
-                width: 80
+                width: 60
                 height: 17
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_SizeLabel
+              name: Prop_InstanceLabel
               x: 12
               y: 698
               data:
-                text: "Size:"
+                text: "Instance name:"
                 textFormat:
                   font: Arial
-                  size: 10
+                  size: 9
                   color: 2576980479
-                width: 40
-                height: 16
+                width: 80
+                height: 15
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: Shape
             traits:
-              name: Prop_SizeField_Border
-              x: 52
-              y: 696
-              data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 1347440895
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 130
-                  - 18
-                  - endFill
-                  - 0
-            children: []
-          - kind: Shape
-            traits:
-              name: Prop_SizeField_Bg
-              x: 53
-              y: 697
-              data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 774778623
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 128
-                  - 16
-                  - endFill
-                  - 0
-            children: []
-          - kind: TextLabel
-            traits:
-              name: Prop_SizeValue
-              x: 58
-              y: 698
-              data:
-                text: "550 x 400 pixels"
-                textFormat:
-                  font: Arial
-                  size: 10
-                  color: 3368601855
-                width: 118
-                height: 16
-                autoSize: left
-                verticalAlign: top
-            children: []
-          - kind: Shape
-            traits:
-              name: Prop_PublishField_Border
-              x: 190
+              name: Prop_InstanceField_Border
+              x: 96
               y: 696
               data:
                 commands:
@@ -11180,8 +11823,8 @@ scene:
             children: []
           - kind: Shape
             traits:
-              name: Prop_PublishField_Bg
-              x: 191
+              name: Prop_InstanceField_Bg
+              x: 97
               y: 697
               data:
                 commands:
@@ -11200,112 +11843,296 @@ scene:
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_PublishBtn
-              x: 198
+              name: Prop_InstanceValue
+              x: 102
               y: 698
               data:
-                text: "Publish Settings..."
+                text: "submitBtn"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3368601855
+                width: 108
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_SwapField_Border
+              x: 224
+              y: 696
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1347440895
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 62
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_SwapField_Bg
+              x: 225
+              y: 697
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 774778623
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 60
+                  - 16
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_SwapBtn
+              x: 232
+              y: 698
+              data:
+                text: "Swap..."
                 textFormat:
                   font: Arial
                   size: 9
                   color: 3368601855
-                width: 108
+                width: 50
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_DupField_Border
+              x: 294
+              y: 696
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1347440895
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 72
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_DupField_Bg
+              x: 295
+              y: 697
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 774778623
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 70
+                  - 16
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_DupBtn
+              x: 300
+              y: 698
+              data:
+                text: "Duplicate..."
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 3368601855
+                width: 64
                 height: 15
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_BgLabel
+              name: Prop_XLabel
               x: 12
               y: 720
               data:
-                text: "Background:"
+                text: "X:"
                 textFormat:
                   font: Arial
                   size: 10
                   color: 2576980479
-                width: 78
+                width: 16
                 height: 16
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: Shape
             traits:
-              name: Prop_BgSwatchBorder
-              x: 94
+              name: Prop_XField_Border
+              x: 28
               y: 718
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 255
+                  - 1347440895
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
-                  - 18
+                  - 60
                   - 18
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: Prop_BgSwatch
-              x: 95
+              name: Prop_XField_Bg
+              x: 29
               y: 719
               data:
                 commands:
                   - beginFill
                   - 2
-                  - 4294967295
+                  - 774778623
                   - 1
                   - drawRectangle
                   - 4
                   - 0
                   - 0
-                  - 16
+                  - 58
                   - 16
                   - endFill
                   - 0
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_BgHex
-              x: 116
+              name: Prop_XValue
+              x: 34
               y: 720
               data:
-                text: "#FFFFFF"
+                text: "175.0"
                 textFormat:
                   font: Arial
                   size: 10
                   color: 3368601855
-                width: 54
+                width: 48
                 height: 16
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_FpsLabel
-              x: 12
-              y: 742
+              name: Prop_YLabel
+              x: 100
+              y: 720
               data:
-                text: "Frame rate:"
+                text: "Y:"
                 textFormat:
                   font: Arial
                   size: 10
                   color: 2576980479
-                width: 72
+                width: 16
                 height: 16
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: Shape
             traits:
-              name: Prop_FpsField_Border
-              x: 88
+              name: Prop_YField_Border
+              x: 116
+              y: 718
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1347440895
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 60
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_YField_Bg
+              x: 117
+              y: 719
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 774778623
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 58
+                  - 16
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_YValue
+              x: 122
+              y: 720
+              data:
+                text: "179.0"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3368601855
+                width: 48
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_WLabel
+              x: 12
+              y: 742
+              data:
+                text: "W:"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 18
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_WField_Border
+              x: 30
               y: 740
               data:
                 commands:
@@ -11317,15 +12144,15 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 46
+                  - 60
                   - 18
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: Prop_FpsField_Bg
-              x: 89
+              name: Prop_WField_Bg
+              x: 31
               y: 741
               data:
                 commands:
@@ -11337,63 +12164,119 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 44
+                  - 58
                   - 16
                   - endFill
                   - 0
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_FpsValue
-              x: 94
+              name: Prop_WValue
+              x: 36
               y: 742
               data:
-                text: "24"
+                text: "200.0"
                 textFormat:
                   font: Arial
                   size: 10
                   color: 3368601855
-                width: 30
+                width: 48
                 height: 16
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_FpsUnit
-              x: 138
+              name: Prop_HLabel
+              x: 100
               y: 742
               data:
-                text: "fps"
+                text: "H:"
                 textFormat:
                   font: Arial
                   size: 10
                   color: 2576980479
-                width: 24
-                height: 16
-                autoSize: left
-                verticalAlign: top
-            children: []
-          - kind: TextLabel
-            traits:
-              name: Prop_PlayerLabel
-              x: 340
-              y: 676
-              data:
-                text: "Player:"
-                textFormat:
-                  font: Arial
-                  size: 10
-                  color: 2576980479
-                width: 48
+                width: 16
                 height: 16
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: Shape
             traits:
-              name: Prop_PlayerField_Border
-              x: 392
+              name: Prop_HField_Border
+              x: 116
+              y: 740
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 1347440895
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 60
+                  - 18
+                  - endFill
+                  - 0
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_HField_Bg
+              x: 117
+              y: 741
+              data:
+                commands:
+                  - beginFill
+                  - 2
+                  - 774778623
+                  - 1
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 58
+                  - 16
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_HValue
+              x: 122
+              y: 742
+              data:
+                text: "44.0"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 3368601855
+                width: 48
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_BehaviorLabel
+              x: 340
+              y: 676
+              data:
+                text: "Behavior:"
+                textFormat:
+                  font: Arial
+                  size: 10
+                  color: 2576980479
+                width: 58
+                height: 16
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
+              name: Prop_BehaviorField_Border
+              x: 402
               y: 674
               data:
                 commands:
@@ -11405,15 +12288,15 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 150
+                  - 120
                   - 18
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: Prop_PlayerField_Bg
-              x: 393
+              name: Prop_BehaviorField_Bg
+              x: 403
               y: 675
               data:
                 commands:
@@ -11425,31 +12308,31 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 148
+                  - 118
                   - 16
                   - endFill
                   - 0
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_PlayerValue
-              x: 398
+              name: Prop_BehaviorValue
+              x: 408
               y: 676
               data:
-                text: "Flash Player 8"
+                text: "Button"
                 textFormat:
                   font: Arial
                   size: 10
                   color: 3368601855
-                width: 120
+                width: 80
                 height: 16
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: Shape
             traits:
-              name: Prop_PlayerArrow
-              x: 530
+              name: Prop_BehaviorArrow
+              x: 510
               y: 681
               data:
                 commands:
@@ -11478,24 +12361,24 @@ scene:
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_ASLabel
+              name: Prop_ColorLabel
               x: 340
               y: 698
               data:
-                text: "Script:"
+                text: "Color:"
                 textFormat:
                   font: Arial
                   size: 10
                   color: 2576980479
-                width: 48
+                width: 42
                 height: 16
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: Shape
             traits:
-              name: Prop_ASField_Border
-              x: 392
+              name: Prop_ColorField_Border
+              x: 402
               y: 696
               data:
                 commands:
@@ -11507,15 +12390,15 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 150
+                  - 120
                   - 18
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: Prop_ASField_Bg
-              x: 393
+              name: Prop_ColorField_Bg
+              x: 403
               y: 697
               data:
                 commands:
@@ -11527,31 +12410,31 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 148
+                  - 118
                   - 16
                   - endFill
                   - 0
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_ASValue
-              x: 398
+              name: Prop_ColorValue
+              x: 408
               y: 698
               data:
-                text: "ActionScript 2.0"
+                text: "None"
                 textFormat:
                   font: Arial
                   size: 10
                   color: 3368601855
-                width: 120
+                width: 80
                 height: 16
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: Shape
             traits:
-              name: Prop_ASArrow
-              x: 530
+              name: Prop_ColorArrow
+              x: 510
               y: 703
               data:
                 commands:
@@ -11580,11 +12463,11 @@ scene:
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_ClassLabel
+              name: Prop_BlendLabel
               x: 340
               y: 720
               data:
-                text: "Class:"
+                text: "Blend:"
                 textFormat:
                   font: Arial
                   size: 10
@@ -11596,8 +12479,8 @@ scene:
             children: []
           - kind: Shape
             traits:
-              name: Prop_ClassField_Border
-              x: 392
+              name: Prop_BlendField_Border
+              x: 402
               y: 718
               data:
                 commands:
@@ -11609,15 +12492,15 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 150
+                  - 120
                   - 18
                   - endFill
                   - 0
             children: []
           - kind: Shape
             traits:
-              name: Prop_ClassField_Bg
-              x: 393
+              name: Prop_BlendField_Bg
+              x: 403
               y: 719
               data:
                 commands:
@@ -11629,88 +12512,32 @@ scene:
                   - 4
                   - 0
                   - 0
-                  - 148
+                  - 118
                   - 16
                   - endFill
                   - 0
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_ProfileLabel
-              x: 340
-              y: 742
+              name: Prop_BlendValue
+              x: 408
+              y: 720
               data:
-                text: "Profile:"
-                textFormat:
-                  font: Arial
-                  size: 10
-                  color: 2576980479
-                width: 48
-                height: 16
-                autoSize: left
-                verticalAlign: top
-            children: []
-          - kind: Shape
-            traits:
-              name: Prop_ProfileField_Border
-              x: 392
-              y: 740
-              data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 1347440895
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 150
-                  - 18
-                  - endFill
-                  - 0
-            children: []
-          - kind: Shape
-            traits:
-              name: Prop_ProfileField_Bg
-              x: 393
-              y: 741
-              data:
-                commands:
-                  - beginFill
-                  - 2
-                  - 774778623
-                  - 1
-                  - drawRectangle
-                  - 4
-                  - 0
-                  - 0
-                  - 148
-                  - 16
-                  - endFill
-                  - 0
-            children: []
-          - kind: TextLabel
-            traits:
-              name: Prop_ProfileValue
-              x: 398
-              y: 742
-              data:
-                text: "Default"
+                text: "Normal"
                 textFormat:
                   font: Arial
                   size: 10
                   color: 3368601855
-                width: 100
+                width: 80
                 height: 16
                 autoSize: left
                 verticalAlign: top
             children: []
           - kind: Shape
             traits:
-              name: Prop_ProfileArrow
-              x: 530
-              y: 747
+              name: Prop_BlendArrow
+              x: 510
+              y: 725
               data:
                 commands:
                   - beginFill
@@ -11738,6 +12565,48 @@ scene:
             children: []
           - kind: Shape
             traits:
+              name: Prop_CacheCheck
+              x: 340
+              y: 742
+              data:
+                commands:
+                  - lineStyle
+                  - 8
+                  - 1
+                  - 2576980479
+                  - 1
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 4
+                  - drawRectangle
+                  - 4
+                  - 0
+                  - 0
+                  - 12
+                  - 12
+                  - endFill
+                  - 0
+            children: []
+          - kind: TextLabel
+            traits:
+              name: Prop_CacheLabel
+              x: 358
+              y: 742
+              data:
+                text: "Use runtime bitmap caching"
+                textFormat:
+                  font: Arial
+                  size: 9
+                  color: 2576980479
+                width: 170
+                height: 15
+                autoSize: left
+                verticalAlign: top
+            children: []
+          - kind: Shape
+            traits:
               name: PropVertDivider
               x: 560
               y: 672
@@ -11758,7 +12627,7 @@ scene:
             children: []
           - kind: TextLabel
             traits:
-              name: Prop_AccessLabel
+              name: Prop_TransformLabel
               x: 576
               y: 676
               data:
