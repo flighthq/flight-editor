@@ -5,12 +5,17 @@ describe('@flighthq/editor-animation exports', () => {
     expect(Object.keys(animation).sort()).toEqual([
       'addKeyframe',
       'createAnimationState',
+      'deleteTime',
+      'findKeyframeAt',
+      'getAnimationSessionVersion',
       'getAnimationVersion',
       'getDuration',
       'getKeyframe',
       'getKeyframeCount',
       'getKeyframesForNode',
+      'getKeyframesForTrack',
       'getPlayheadTime',
+      'insertTime',
       'isLooping',
       'isPlaying',
       'removeKeyframe',
@@ -18,6 +23,8 @@ describe('@flighthq/editor-animation exports', () => {
       'setLooping',
       'setPlayheadTime',
       'setPlaying',
+      'updateKeyframe',
+      'validateAnimationState',
     ]);
   });
 });

@@ -3,12 +3,17 @@ import { describe, expect, it } from 'vitest';
 import {
   addKeyframe,
   createAnimationState,
+  deleteTime,
+  findKeyframeAt,
+  getAnimationSessionVersion,
   getAnimationVersion,
   getDuration,
   getKeyframe,
   getKeyframeCount,
   getKeyframesForNode,
+  getKeyframesForTrack,
   getPlayheadTime,
+  insertTime,
   isLooping,
   isPlaying,
   removeKeyframe,
@@ -16,6 +21,8 @@ import {
   setLooping,
   setPlaying,
   setPlayheadTime,
+  updateKeyframe,
+  validateAnimationState,
 } from './animationState';
 
 import type { Keyframe } from './animationState';
@@ -43,6 +50,7 @@ describe('addKeyframe', () => {
     expect(getKeyframeCount(state)).toBe(1);
     expect(getKeyframe(state, 'kf-1')).toEqual(kfA);
     expect(getAnimationVersion(state)).toBe(1);
+    expect(getAnimationSessionVersion(state)).toBe(0);
   });
 });
 
@@ -99,7 +107,8 @@ describe('setPlayheadTime', () => {
     const state = createAnimationState();
     setPlayheadTime(state, 500);
     expect(getPlayheadTime(state)).toBe(500);
-    expect(getAnimationVersion(state)).toBe(1);
+    expect(getAnimationVersion(state)).toBe(0);
+    expect(getAnimationSessionVersion(state)).toBe(1);
   });
 
   it('clamps to duration', () => {
@@ -131,6 +140,7 @@ describe('setDuration', () => {
     setDuration(state, 2000);
     expect(getDuration(state)).toBe(2000);
     expect(getAnimationVersion(state)).toBe(1);
+    expect(getAnimationSessionVersion(state)).toBe(0);
   });
 
   it('clamps to zero', () => {
@@ -162,7 +172,8 @@ describe('setPlaying', () => {
     const state = createAnimationState();
     setPlaying(state, true);
     expect(isPlaying(state)).toBe(true);
-    expect(getAnimationVersion(state)).toBe(1);
+    expect(getAnimationVersion(state)).toBe(0);
+    expect(getAnimationSessionVersion(state)).toBe(1);
   });
 
   it('does not bump version when unchanged', () => {
@@ -193,4 +204,76 @@ describe('setLooping', () => {
 
 describe('getAnimationVersion', () => {
   it('is exported', () => expect(getAnimationVersion).toBeTypeOf('function'));
+});
+
+describe('findKeyframeAt', () => {
+  it('finds a stable target and property slot', () => {
+    const state = createAnimationState();
+    addKeyframe(state, kfA);
+    expect(findKeyframeAt(state, 'n1', 'x', 0)?.id).toBe('kf-1');
+  });
+});
+
+describe('getKeyframesForTrack', () => {
+  it('returns deterministic timeline order', () => {
+    const state = createAnimationState();
+    addKeyframe(state, kfB);
+    addKeyframe(state, kfA);
+    addKeyframe(state, kfC);
+    expect(getKeyframesForTrack(state, 'n1', 'x').map(({ id }) => id)).toEqual(['kf-1', 'kf-2']);
+  });
+});
+
+describe('updateKeyframe', () => {
+  it('updates without replacing identity and rejects occupied slots', () => {
+    const state = createAnimationState();
+    addKeyframe(state, kfA);
+    addKeyframe(state, kfB);
+    expect(updateKeyframe(state, 'kf-2', { value: 200 })).toBe(true);
+    expect(getKeyframe(state, 'kf-2')?.value).toBe(200);
+    expect(() => updateKeyframe(state, 'kf-2', { time: 0 })).toThrow('occupied');
+    expect(updateKeyframe(state, 'missing', { time: 2 })).toBe(false);
+  });
+});
+
+describe('insertTime', () => {
+  it('ripples keyframes and duration from the insertion point', () => {
+    const state = createAnimationState();
+    addKeyframe(state, kfA);
+    addKeyframe(state, kfB);
+    expect(insertTime(state, 500, 250)).toBe(1);
+    expect(getKeyframe(state, 'kf-2')?.time).toBe(750);
+    expect(getDuration(state)).toBe(1250);
+  });
+});
+
+describe('deleteTime', () => {
+  it('removes the span and ripples later keyframes', () => {
+    const state = createAnimationState();
+    addKeyframe(state, kfA);
+    addKeyframe(state, kfB);
+    expect(deleteTime(state, 0, 250)).toBe(1);
+    expect(getKeyframe(state, 'kf-2')?.time).toBe(250);
+    expect(getDuration(state)).toBe(750);
+  });
+});
+
+describe('getAnimationSessionVersion', () => {
+  it('separates transient playback state from document dirtiness', () => {
+    const state = createAnimationState();
+    setPlayheadTime(state, 20);
+    setPlaying(state, true);
+    expect(getAnimationVersion(state)).toBe(0);
+    expect(getAnimationSessionVersion(state)).toBe(2);
+  });
+});
+
+describe('validateAnimationState', () => {
+  it('reports malformed hydrated state deterministically', () => {
+    const state = createAnimationState(100);
+    state.keyframes.set('late', { ...kfA, id: 'late', time: 200 });
+    state.keyframes.set('same', { ...kfA, id: 'same' });
+    state.keyframes.set('same-2', { ...kfA, id: 'same-2' });
+    expect(validateAnimationState(state).map(({ code }) => code)).toEqual(['duplicate-slot', 'out-of-range']);
+  });
 });

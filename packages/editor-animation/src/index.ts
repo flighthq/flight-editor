@@ -1,12 +1,17 @@
 export {
   addKeyframe,
   createAnimationState,
+  deleteTime,
+  findKeyframeAt,
+  getAnimationSessionVersion,
   getAnimationVersion,
   getDuration,
   getKeyframe,
   getKeyframeCount,
   getKeyframesForNode,
+  getKeyframesForTrack,
   getPlayheadTime,
+  insertTime,
   isLooping,
   isPlaying,
   removeKeyframe,
@@ -14,6 +19,8 @@ export {
   setLooping,
   setPlaying,
   setPlayheadTime,
+  updateKeyframe,
+  validateAnimationState,
 } from './animationState';
 
-export type { AnimationState, EasingFunction, Keyframe } from './animationState';
+export type { AnimationDiagnostic, AnimationState, EasingFunction, Keyframe } from './animationState';
