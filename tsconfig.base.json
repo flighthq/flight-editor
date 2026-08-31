@@ -34,6 +34,8 @@
       "@flighthq/editor-editing-scope/*": ["./packages/editor-editing-scope/src/*"],
       "@flighthq/editor-export-settings": ["./packages/editor-export-settings/src/index.ts"],
       "@flighthq/editor-export-settings/*": ["./packages/editor-export-settings/src/*"],
+      "@flighthq/editor-export-pipeline": ["./packages/editor-export-pipeline/src/index.ts"],
+      "@flighthq/editor-export-pipeline/*": ["./packages/editor-export-pipeline/src/*"],
       "@flighthq/editor-file": ["./packages/editor-file/src/index.ts"],
       "@flighthq/editor-file/*": ["./packages/editor-file/src/*"],
       "@flighthq/editor-guides": ["./packages/editor-guides/src/index.ts"],

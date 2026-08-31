@@ -20,6 +20,7 @@
     { "path": "./packages/editor-drag-drop" },
     { "path": "./packages/editor-editing-scope" },
     { "path": "./packages/editor-export-settings" },
+    { "path": "./packages/editor-export-pipeline" },
     { "path": "./packages/editor-file" },
     { "path": "./packages/editor-grid" },
     { "path": "./packages/editor-guides" },
