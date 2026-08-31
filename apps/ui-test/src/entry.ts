@@ -21,7 +21,7 @@ import {
 import { createGlApplicationRenderView } from '@flighthq/application-gl';
 import { addNodeChild, computeScene2DFitTransform } from '@flighthq/node';
 import { prepareScene2DRender, registerRenderer } from '@flighthq/render';
-import { createEmptyGlRegistries, createGlPipeline, renderGlBackground } from '@flighthq/render-gl';
+import { renderGlBackground } from '@flighthq/render-gl';
 import { parseFlightScene } from '@flighthq/scene-format';
 import { createDisplayObject, createScene2D, createSprite } from '@flighthq/scene2d';
 import {
@@ -64,9 +64,7 @@ win.devicePixelRatio = globalThis.devicePixelRatio ?? 1;
 registerApplicationWindow(app, win);
 setApplicationMainWindow(app, win);
 const renderView: GlApplicationRenderView = createGlApplicationRenderView(win, canvas, {
-  context: { antialias: true, powerPreference: 'high-performance' },
-  pipeline: createGlPipeline(createEmptyGlRegistries()),
-  render: { imageSmoothingEnabled: true },
+  render: { antialias: true, powerPreference: 'high-performance', imageSmoothingEnabled: true },
 });
 attachApplicationRenderView(renderView);
 
