@@ -1,26 +1,469 @@
 format: flight-scene
 version: 1
-name: VS Code Sample
-backgroundColor: 4294967295
+name: Flash 8 Workspace Mockup
+backgroundColor: 1397969919
 scene:
   align: center
   color: null
   scaleMode: showAll
-  width: 800
-  height: 600
+  width: 1280
+  height: 800
   root:
     kind: DisplayObject
     traits:
       name: Scene
     children:
-      - kind: Sprite
+      - kind: DisplayObject
         traits:
-          name: Welcome
-          x: 160
-          y: 140
-          width: 320
-          height: 180
-          color: 983055615
-          alpha: 1
-          visible: true
-        children: []
+          name: MenuBar
+        children:
+          - kind: Sprite
+            traits:
+              name: MenuBarBg
+              x: 0
+              y: 0
+              width: 1280
+              height: 24
+              color: 993737727
+              alpha: 1
+              visible: true
+            children: []
+      - kind: DisplayObject
+        traits:
+          name: EditBar
+        children:
+          - kind: Sprite
+            traits:
+              name: EditBarBg
+              x: 0
+              y: 24
+              width: 1280
+              height: 28
+              color: 1246382847
+              alpha: 1
+              visible: true
+            children: []
+      - kind: DisplayObject
+        traits:
+          name: Timeline
+        children:
+          - kind: Sprite
+            traits:
+              name: TimelineLayersBg
+              x: 0
+              y: 53
+              width: 200
+              height: 138
+              color: 1212696831
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: TimelineFramesBg
+              x: 201
+              y: 53
+              width: 1079
+              height: 138
+              color: 976894719
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: TimelineDivider
+              x: 200
+              y: 53
+              width: 1
+              height: 138
+              color: 707406591
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: LayerRow1
+              x: 4
+              y: 57
+              width: 192
+              height: 22
+              color: 1347440895
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: LayerRow2
+              x: 4
+              y: 81
+              width: 192
+              height: 22
+              color: 1431655935
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: LayerRow3
+              x: 4
+              y: 105
+              width: 192
+              height: 22
+              color: 1347440895
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: PlayheadLine
+              x: 260
+              y: 53
+              width: 2
+              height: 138
+              color: 4283782655
+              alpha: 1
+              visible: true
+            children: []
+      - kind: DisplayObject
+        traits:
+          name: DocumentArea
+        children:
+          - kind: DisplayObject
+            traits:
+              name: ToolsPanel
+            children:
+              - kind: Sprite
+                traits:
+                  name: ToolsPanelBg
+                  x: 0
+                  y: 192
+                  width: 44
+                  height: 458
+                  color: 1145324799
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ToolIcon1
+                  x: 6
+                  y: 200
+                  width: 32
+                  height: 32
+                  color: 2290649343
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ToolIcon2
+                  x: 6
+                  y: 236
+                  width: 32
+                  height: 32
+                  color: 2290649343
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ToolIcon3
+                  x: 6
+                  y: 272
+                  width: 32
+                  height: 32
+                  color: 2290649343
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ToolIcon4
+                  x: 6
+                  y: 308
+                  width: 32
+                  height: 32
+                  color: 2290649343
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ToolIcon5
+                  x: 6
+                  y: 344
+                  width: 32
+                  height: 32
+                  color: 2290649343
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ToolIcon6
+                  x: 6
+                  y: 380
+                  width: 32
+                  height: 32
+                  color: 2290649343
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ToolsDivider
+                  x: 6
+                  y: 430
+                  width: 32
+                  height: 1
+                  color: 707406591
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ViewTool1
+                  x: 6
+                  y: 440
+                  width: 32
+                  height: 32
+                  color: 2290649343
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ViewTool2
+                  x: 6
+                  y: 476
+                  width: 32
+                  height: 32
+                  color: 2290649343
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ColorsDivider
+                  x: 6
+                  y: 520
+                  width: 32
+                  height: 1
+                  color: 707406591
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: StrokeColor
+                  x: 8
+                  y: 530
+                  width: 20
+                  height: 20
+                  color: 4294967295
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: FillColor
+                  x: 16
+                  y: 538
+                  width: 20
+                  height: 20
+                  color: 255
+                  alpha: 1
+                  visible: true
+                children: []
+          - kind: DisplayObject
+            traits:
+              name: StageArea
+            children:
+              - kind: Sprite
+                traits:
+                  name: Pasteboard
+                  x: 44
+                  y: 192
+                  width: 1036
+                  height: 458
+                  color: 1717987071
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: Stage
+                  x: 287
+                  y: 221
+                  width: 550
+                  height: 400
+                  color: 4294967295
+                  alpha: 1
+                  visible: true
+                children: []
+          - kind: DisplayObject
+            traits:
+              name: SidePanels
+            children:
+              - kind: Sprite
+                traits:
+                  name: SidePanelsBg
+                  x: 1080
+                  y: 192
+                  width: 200
+                  height: 458
+                  color: 1077952767
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: LibraryHeader
+                  x: 1080
+                  y: 192
+                  width: 200
+                  height: 22
+                  color: 1431655935
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: LibraryContent
+                  x: 1080
+                  y: 214
+                  width: 200
+                  height: 130
+                  color: 1212696831
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ColorMixerHeader
+                  x: 1080
+                  y: 348
+                  width: 200
+                  height: 22
+                  color: 1431655935
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: ColorMixerContent
+                  x: 1080
+                  y: 370
+                  width: 200
+                  height: 100
+                  color: 1212696831
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: AlignInfoHeader
+                  x: 1080
+                  y: 474
+                  width: 200
+                  height: 22
+                  color: 1431655935
+                  alpha: 1
+                  visible: true
+                children: []
+              - kind: Sprite
+                traits:
+                  name: AlignInfoContent
+                  x: 1080
+                  y: 496
+                  width: 200
+                  height: 154
+                  color: 1212696831
+                  alpha: 1
+                  visible: true
+                children: []
+      - kind: DisplayObject
+        traits:
+          name: PropertiesPanel
+        children:
+          - kind: Sprite
+            traits:
+              name: PropertiesBg
+              x: 0
+              y: 650
+              width: 1280
+              height: 130
+              color: 993737727
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: PropertiesHeader
+              x: 0
+              y: 650
+              width: 1280
+              height: 22
+              color: 1431655935
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: PropertiesField1
+              x: 10
+              y: 680
+              width: 180
+              height: 20
+              color: 1212696831
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: PropertiesField2
+              x: 200
+              y: 680
+              width: 180
+              height: 20
+              color: 1212696831
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: PropertiesField3
+              x: 10
+              y: 710
+              width: 180
+              height: 20
+              color: 1212696831
+              alpha: 1
+              visible: true
+            children: []
+          - kind: Sprite
+            traits:
+              name: PropertiesField4
+              x: 200
+              y: 710
+              width: 180
+              height: 20
+              color: 1212696831
+              alpha: 1
+              visible: true
+            children: []
+      - kind: DisplayObject
+        traits:
+          name: StatusBar
+        children:
+          - kind: Sprite
+            traits:
+              name: StatusBarBg
+              x: 0
+              y: 780
+              width: 1280
+              height: 20
+              color: 858993663
+              alpha: 1
+              visible: true
+            children: []
