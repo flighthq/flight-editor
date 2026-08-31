@@ -51,6 +51,7 @@ export function getLastAlignAxis(state: Readonly<AlignState>): AlignAxis | null 
 }
 
 export function setLastAlignAxis(state: AlignState, axis: AlignAxis): void {
+  if (state.lastAlignAxis === axis) return;
   state.lastAlignAxis = axis;
   state.version++;
 }
@@ -60,6 +61,7 @@ export function getLastDistributeAxis(state: Readonly<AlignState>): DistributeAx
 }
 
 export function setLastDistributeAxis(state: AlignState, axis: DistributeAxis): void {
+  if (state.lastDistributeAxis === axis) return;
   state.lastDistributeAxis = axis;
   state.version++;
 }
@@ -69,6 +71,7 @@ export function getKeyObjectId(state: Readonly<AlignState>): string | null {
 }
 
 export function setKeyObjectId(state: AlignState, id: string | null): void {
+  if (id !== null && id.trim() === '') throw new TypeError('Key object identity must not be empty');
   if (state.keyObjectId === id) return;
   state.keyObjectId = id;
   if (id !== null) {

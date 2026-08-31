@@ -31,7 +31,13 @@ export function getActiveSmartGuideCount(state: Readonly<SmartGuideState>): numb
 }
 
 export function setActiveSmartGuides(state: SmartGuideState, guides: readonly SmartGuide[]): void {
-  state.guides = guides.slice();
+  const next = guides.map((guide) => ({ ...guide }));
+  if (
+    next.length === state.guides.length &&
+    next.every((guide, index) => JSON.stringify(guide) === JSON.stringify(state.guides[index]))
+  )
+    return;
+  state.guides = next;
   state.version++;
 }
 

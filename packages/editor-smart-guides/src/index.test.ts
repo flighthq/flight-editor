@@ -10,9 +10,11 @@ describe('@flighthq/editor-smart-guides exports', () => {
       'getSmartGuideVersion',
       'isSmartGuidesEnabled',
       'isSpacingGuidesEnabled',
+      'matchSmartGuides',
       'setActiveSmartGuides',
       'setSmartGuidesEnabled',
       'setSpacingGuidesEnabled',
+      'validateSmartGuides',
     ]);
   });
 });

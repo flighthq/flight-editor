@@ -77,6 +77,13 @@ describe('setLastAlignAxis', () => {
     expect(getLastAlignAxis(state)).toBe('left');
     expect(getAlignVersion(state)).toBe(1);
   });
+
+  it('does not bump version for a repeated axis', () => {
+    const state = createAlignState();
+    setLastAlignAxis(state, 'left');
+    setLastAlignAxis(state, 'left');
+    expect(getAlignVersion(state)).toBe(1);
+  });
 });
 
 describe('getLastDistributeAxis', () => {
@@ -88,6 +95,13 @@ describe('setLastDistributeAxis', () => {
     const state = createAlignState();
     setLastDistributeAxis(state, 'vertical');
     expect(getLastDistributeAxis(state)).toBe('vertical');
+    expect(getAlignVersion(state)).toBe(1);
+  });
+
+  it('does not bump version for a repeated axis', () => {
+    const state = createAlignState();
+    setLastDistributeAxis(state, 'vertical');
+    setLastDistributeAxis(state, 'vertical');
     expect(getAlignVersion(state)).toBe(1);
   });
 });
@@ -103,6 +117,10 @@ describe('setKeyObjectId', () => {
     expect(getKeyObjectId(state)).toBe('node-42');
     expect(getAlignTarget(state)).toBe('key-object');
     expect(getAlignVersion(state)).toBe(1);
+  });
+
+  it('rejects an empty stable identity', () => {
+    expect(() => setKeyObjectId(createAlignState(), '')).toThrow('must not be empty');
   });
 
   it('does not bump version when id unchanged', () => {

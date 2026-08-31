@@ -11,6 +11,8 @@ describe('@flighthq/editor-align exports', () => {
       'getKeyObjectId',
       'getLastAlignAxis',
       'getLastDistributeAxis',
+      'planAlignment',
+      'planDistribution',
       'setAlignTarget',
       'setDistributeMode',
       'setKeyObjectId',

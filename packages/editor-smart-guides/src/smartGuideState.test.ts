@@ -70,6 +70,13 @@ describe('setActiveSmartGuides', () => {
     input.length = 0;
     expect(getActiveSmartGuideCount(state)).toBe(1);
   });
+
+  it('does not bump version for an identical guide set', () => {
+    const state = createSmartGuideState();
+    setActiveSmartGuides(state, [edgeGuide]);
+    setActiveSmartGuides(state, [{ ...edgeGuide }]);
+    expect(getSmartGuideVersion(state)).toBe(1);
+  });
 });
 
 describe('clearActiveSmartGuides', () => {

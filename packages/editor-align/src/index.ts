@@ -15,3 +15,5 @@ export {
 } from './alignState';
 
 export type { AlignAxis, AlignState, AlignTarget, DistributeAxis, DistributeMode } from './alignState';
+export { planAlignment, planDistribution } from './alignGeometry';
+export type { AlignBounds, AlignItem, AlignMutation } from './alignGeometry';
