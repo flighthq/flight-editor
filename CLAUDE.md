@@ -42,6 +42,8 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-command` — command history: `Command` interface, execute/undo/redo, clean tracking
 - `editor-component` — component/symbol instance state: definitions, instances, overrides
 - `editor-component-inspector` — pluggable typed component schemas, mixed-value inspection, migrations, and command mutations
+- `editor-collaboration` — optimistic operations, permissions, revisions, reconnect rebasing, and ephemeral presence
+- `editor-comments` — review threads, stable anchors, drafts, resolution, and service-neutral synchronization
 - `editor-conformance` — reusable mandatory, capability-gated, and target-specific behavioral host scenarios
 - `editor-context-menu` — hierarchical context-menu registry with enabled state, open position, and active item selection
 - `editor-cursor` — cursor display state: tool default, override stack with source-based push/pop
@@ -57,6 +59,7 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-grid` — grid configuration state: cell size, subdivisions, visibility, opacity
 - `editor-guides` — guide state: horizontal/vertical ruler guides with add/remove/lock/move and snap positions
 - `editor-gesture` — cancellable begin/preview/commit transactions shared by tools and inspector scrubbing
+- `editor-gizmo3d` — transactional 3D transforms, constraints, snapping, cancellation, and stable handle sizing
 - `editor-hierarchy` — hierarchy tree state: expand/collapse tracking, flattened visible rows for tree views
 - `editor-host` — host adapter interface: abstract contract between editor core and GUI embedding layer
 - `editor-history-state` — user-facing history panel checkpoints: labeled snapshot data, browsing, removal, version tracking
@@ -65,15 +68,19 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-library` — reusable asset/component library: items, categories, search filtering
 - `editor-lock` — lock state: tracks which nodes are locked to prevent editing
 - `editor-menu` — menu bar state: hierarchical menu definitions with command bindings and shortcut display
+- `editor-material` — material assets, properties, slots, textures, previews, usage, and diagnostics
+- `editor-physics-authoring` — bodies, colliders, joints, validation, debug state, and isolated play inspection
 - `editor-node-factory` — node kind registry: register creation functions by category, create nodes from registered kinds
 - `editor-page` — ordered page/artboard definitions with active-page tracking
 - `editor-properties` — property panel state: property definitions, categories, edit state, mixed-value detection
 - `editor-preview` — host-neutral runtime preview lifecycle, revision coordination, and runtime override inspection
 - `editor-plugin` — versioned contribution lifecycle, capabilities, disposal, document data, and migrations
 - `editor-prototype` — prototype/interaction wiring state: triggers, actions, transitions, flows, preview mode
+- `editor-repeat-grid` — parametric repetition, gaps, per-item overrides, deterministic expansion, and detach
 - `editor-rulers` — ruler display state: visibility, units (pixels/inches/cm), origin, tick spacing, subdivisions
 - `editor-responsive-layout` — host-neutral responsive/auto-layout declarations, inference, validation, ordering, and command authoring
 - `editor-scene-state` — scene metadata: name, dimensions, background color, dirty/version tracking
+- `editor-scene-environment` — authored environment contributions, renderer capabilities, and viewport-only settings
 - `editor-session` — multi-document session state: activation, dirty-close policy, external revisions, last-known-good tracking
 - `editor-selection` — selection state: multi-select, filters by kind/hierarchy, version tracking
 - `editor-smart-guides` — ephemeral alignment guides during drag: edge, center, spacing, dimension, parent-bounds
@@ -86,6 +93,8 @@ The editor core is host-agnostic. A desktop app renders GUI inside the Flight sc
 - `editor-transform-origin` — transform-origin mode and scene-space origin computation for node bounds
 - `editor-viewport` — viewport management: Camera2D wrapper with zoom limits, pan, fit-to-rect, coordinate conversion
 - `editor-version-history` — immutable canonical revision storage, preview, comparison, duplication, and restore orchestration
+- `editor-vector-authoring` — subpaths, vertices, handles, paint, topology validation, and authoring selection
+- `editor-viewport3d` — host-neutral 3D camera navigation, framing, projections, and bookmarks
 - `editor-zoom-presets` — named viewport zoom levels and scene-fit calculations
 
 **Composition:**

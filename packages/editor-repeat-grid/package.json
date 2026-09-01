@@ -1,0 +1,39 @@
+{
+  "name": "@flighthq/editor-repeat-grid",
+  "version": "0.1.0",
+  "author": "Joshua Granick and other contributors",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flighthq/flight-editor.git",
+    "directory": "packages/editor-repeat-grid"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src/**/*.test.ts",
+    "!dist/**/*.test.js",
+    "!dist/**/*.test.d.ts",
+    "!dist/**/*.test.js.map",
+    "!dist/**/*.test.d.ts.map"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "test": "vitest run --config ../../vitest.config.ts"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "description": "Parametric repeat-grid definitions, overrides, expansion, and detach authoring"
+}
